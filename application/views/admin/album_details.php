@@ -49,7 +49,7 @@
 <div class="adminMain">
 	<div class="section">
 		<h1 class="pageHading">Album details</h1>
-		<?php echo form_open('admin/album_control/add_album', 'class="formAddAlbum" id="formAddAlbum"'); ?>
+		<?php echo form_open('admin/album_control/add_album', 'class="formAddSubAlbum" id="formAddSubAlbum"'); ?>
 		<table>
 			<tr>
 				<td>Album name:</td>
@@ -82,9 +82,9 @@
 		<?php echo form_close(); ?>
 	</div>
 	<div class="section">
-		<h1 class="pageHading">Album List</h1>
+		<h1 class="pageHading">Sub-album List</h1>
 		<?php
-		if (count($parent_albums)) {
+		if ($album_details->parentId!=NULL) {
 			echo form_open('admin/album_control/update_album_list', 'class="formAlbumList" id="formAlbumList"');
 		?>
 		<table class="albumList listing">
@@ -117,10 +117,46 @@
 		}
 		else
 		{?>
-		There is no album
+		There is no subm-album
 		<?php } ?>
 		<div class="clear"></div>
 	</div>
+	<div class="section">
+		<h1 class="pageHading">Add a sub-album under <em><?php echo $album_details->name; ?></em></h1>
+		<?php echo form_open('admin/album_control/add_subalbum', 'class="formAddAlbum" id="formAddAlbum"'); ?>
+		<table>
+			<tr>
+				<td>Album name:</td>
+				<td>
+					<input name="name" type="text" placeholder="Enter the album name">
+					<div class="error"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>Album Label:</td>
+				<td>
+					<input name="label" type="text" placeholder="The url slug (letters, numbers and hyphens only)">
+					<div class="error"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>Album Intro:</td>
+				<td>
+					<textarea name="intro" placeholder="Type something to describe this album"></textarea>
+					<div class="error"></div>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<input name="submit" type="submit" value="Add">
+				</td>
+			</tr>
+		</table>
+		<input name="parentId" value="<?php echo $album_details->id; ?>" type="hidden">
+		<?php echo form_close(); ?>
+	</div>
+
 </div>
 </body>
 </html>

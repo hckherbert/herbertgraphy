@@ -71,10 +71,29 @@ class Album_model extends CI_Model
 		return $this->db->insert_id();
 	}
 
+	public  function add_subalbum($data)
+	{
+		$order = 0;
+		$this->db->select_max('order');
+		$this->db->where('parentId', $data["parentId"]);
+		$query = $this->db->get('album');
+
+		if ($query->num_rows())
+		{
+			$order = $query->row()->order;
+		}
+
+
+		$data = array_merge($data, array("order" => $order+1));
+		unset($data["submit"]);
+		$this->db->insert("album", $data);
+		return $this->db->insert_id();
+	}
+
 	public function get_album_details($pAlbum_id)
 	{
 		$data = array();
-		$this->db->select("name, label, intro");
+		$this->db->select("id, parentId, name, label, intro");
 		$this->db->where("id", $pAlbum_id);
 		$query = $this->db->get("album");
 

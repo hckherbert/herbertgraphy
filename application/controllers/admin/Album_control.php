@@ -95,6 +95,46 @@ class Album_control extends CI_Controller
 	}
 
 
+	public function add_subalbum()
+	{
+		$config_validation = array(
+				array(
+						'field'   => 'name',
+						'label'   => 'Album name',
+						'rules'   => 'trim|required|is_unique[album.name]'
+				),
+				array(
+						'field'   => 'label',
+						'label'   => 'Album label',
+						'rules'   => 'trim|required|is_unique[album.label]|callback_is_validate_album_label'
+				)
+		);
+
+		$this->form_validation->set_rules($config_validation);
+
+		if ($this->form_validation->run() == FALSE)
+		{
+			$data_error = array(
+					"validation_error" => true
+			);
+			$data_error = array_merge($data_error, $this->form_validation->error_array());
+
+			JSONAPI::echo_json_error_response($data_error);
+		}
+		else
+		{
+			$post_data = $this->input->post(NULL, TRUE);
+			$insert_id  = $this->album_model->add_subalbum($post_data);
+
+			$data= array(
+					"insert_id" => $insert_id
+			);
+
+			JSONAPI::echo_json_successful_response($data, TRUE);
+		}
+	}
+
+
 	public function is_validate_album_label($pInput)
 	{
 		if (!preg_match("/^[a-zA-Z0-9-]+$/", $pInput))
@@ -111,7 +151,6 @@ class Album_control extends CI_Controller
 	public function album_details($pAlbum_id)
 	{
 		$data = $this->album_model->get_album_details($pAlbum_id);
-		$data["x"]= "y";
 		$this->load->view("admin/album_details", $data);
 	}
 

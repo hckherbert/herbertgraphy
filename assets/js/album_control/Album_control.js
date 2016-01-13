@@ -19,35 +19,35 @@ Album_control.prototype.submit_handler = function()
     $("#formAlbumList").on
     (
         "submit",
-        function(pEvent)
-        {
+        function(pEvent) {
             pEvent.preventDefault();
 
-            var _postData = $(this).serializeArray();
+            if (confirm("Confirm delete the selected album(s)?"))
+            {
 
-            $.ajax(
-                {
-                    url: "album_control/update_album_list",
-                    data : _postData,
-                    type: "POST",
-                    dataType: "json",
-                    success: function(pData)
-                    {
-                       if (pData["successcode"] && pData["successcode"] == 1)
-                       {
-                            _self.refresh_album_list_on_updated();
-                       }
-                    },
-                    error: function(jqxhr, status)
-                    {
+                var _postData = $(this).serializeArray();
 
+                $.ajax(
+                    {
+                        url: "album_control/update_album_list",
+                        data: _postData,
+                        type: "POST",
+                        dataType: "json",
+                        success: function (pData) {
+                            if (pData["successcode"] && pData["successcode"] == 1) {
+                                _self.refresh_album_list_on_updated();
+                            }
+                        },
+                        error: function (jqxhr, status) {
+
+                        }
                     }
-                }
-            );
+                );
+            }
         }
     );
 
-    $("#formAddAlbum").on
+    $("#formAddAlbum, #formAddSubAlbum").on
     (
         "submit",
         function(pEvent)
@@ -55,6 +55,7 @@ Album_control.prototype.submit_handler = function()
             pEvent.preventDefault();
 
             var _postData = $(this).serializeArray();
+            var _formInstnace = $(this);
 
             $.ajax(
                 {
@@ -64,7 +65,7 @@ Album_control.prototype.submit_handler = function()
                     dataType: "json",
                     success: function(pData)
                     {
-                        $("#formAddAlbum .error").empty();
+                        _formInstnace.find(".error").empty();
 
                         if (pData["successcode"] && pData["successcode"] == 1)
                         {
@@ -76,7 +77,9 @@ Album_control.prototype.submit_handler = function()
 
                         console.log(pData);
 
-                        $("#formAddAlbum .error").empty();
+                        console.log($(this));
+
+                        _formInstnace.find(".error").empty();
 
                         if (pData["responseJSON"]["error_messages"]["validation_error"])
                         {
@@ -85,7 +88,7 @@ Album_control.prototype.submit_handler = function()
                                 if (err_label != "validation_error")
                                 {
                                     console.log(pData["responseJSON"]["error_messages"][err_label]);
-                                    $("#formAddAlbum input[name='" + err_label + "']").next(".error").text(pData["responseJSON"]["error_messages"][err_label]);
+                                    _formInstnace.find("input[name='" + err_label + "']").next(".error").text(pData["responseJSON"]["error_messages"][err_label]);
                                 }
                             }
                         }
@@ -128,7 +131,6 @@ Album_control.prototype.append_added_parent_album_record = function(pInsert_id)
 
     var _new_album_html = "";
 
-
     _new_album_html += "<tr class='ui-sortable-handle'>"
     _new_album_html += "<td>" + _album_name +  "</td>";
     _new_album_html += "<td>" + _album_label +  "</td>";
@@ -138,7 +140,7 @@ Album_control.prototype.append_added_parent_album_record = function(pInsert_id)
     _new_album_html += "<input name='del_id[]' type='checkbox' value='" + pInsert_id + "'>";
     _new_album_html += "<input name='order[]' type='hidden' value='" + _total_rows_before_added + "'>";
     _new_album_html += "</td>";
-    _new_album_html += "<td align='center'><input name='edit[]' type='button' value='Edit'></td>";
+    _new_album_html += "<td align='center'><input name='edit' type='button' value='Edit' onclick='location.href=&#39;album_control/album_details/" + pInsert_id + "&#39;'></td>";
     _new_album_html += "</tr>";
 
     $("#formAlbumList table tbody").append(_new_album_html);
