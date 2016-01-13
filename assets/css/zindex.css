@@ -1,0 +1,19 @@
+.sMobile .infoPanel
+{
+	z-index:1;
+}
+
+.sMobile .infoPanel .menu
+{
+	z-index:2;
+}
+
+.sMobile .infoPanel h1
+{
+	z-index:3;
+}
+
+.sMobile .infoPanel .btnMenuToggle
+{
+	z-index:4;
+}

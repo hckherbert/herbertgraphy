@@ -1,0 +1,100 @@
+html, body
+{
+	font-family: 'Catamaran', sans-serif;
+}
+
+textarea
+{
+	font-family: Arial;
+}
+
+
+.clear
+{
+	clear:both;
+}
+
+.adminMain
+{
+	padding:10px;
+	width:1000px;
+}
+
+.error
+{
+	color:#ff6666;
+	font-size:14px;
+	font-style:italic;
+}
+
+.section
+{
+	background:#eeeeee;
+	padding:15px;
+	border-radius:10px;
+	margin:0 0 20px;
+}
+
+h1.pageHading
+{
+	font-size:16px;
+	margin:0 0 10px;
+	font-weight:bold;
+}
+
+.listing
+{
+	font-size:14px;
+}
+
+.listing td, .listing th
+{
+	border:1px solid #000;
+}
+
+.listing td
+{
+	padding:2px;
+}
+
+.listing th
+{
+	padding:8px 2px;
+	background:#d5d5d5;
+}
+
+.albumList
+{
+	width:100%;
+	margin:0 0 10px;
+	background:#fff;
+}
+
+input[type='submit']
+{
+	float:right;
+}
+
+#formAddAlbum td
+{
+	vertical-align:top;
+	padding:2px;
+}
+
+#formAddAlbum input[type='text']
+{
+	width:350px;
+	box-sizing:border-box;
+}
+
+#formAddAlbum textarea
+{
+	width:350px;
+	height:100px;
+	box-sizing:border-box;
+}
+
+#formAddAlbum .error
+{
+	margin:4px 0 0;
+}

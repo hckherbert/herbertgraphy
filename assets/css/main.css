@@ -1,0 +1,801 @@
+/******** COMMON **********/
+html 
+{
+	overflow-y: hidden;
+	overflow-x:hidden;
+}
+
+.vScrollOff
+{
+	overflow-y: hidden;
+}
+
+.vScrollOn
+{
+	overflow-y: auto;
+}
+
+html, body
+{
+	font-family: 'Catamaran', sans-serif;
+}
+
+.hide
+{
+	display:none !important;
+}
+
+.show
+{
+	-webkit-opacity: 1 !important;
+	-moz-opacity: 1 !important;
+	opacity:1 !important;
+	display:block !important;
+}
+
+@media only screen and (min-width: 1920px) 
+{
+	.wrapper
+	{
+		width:1920px;
+		margin:0 auto;
+	}
+}
+
+/********** COLOR SCHEMES **********/
+.bgBrown
+{
+	background:#bcae85;
+}
+
+/********** HOME ***************/
+.wrapperHome
+{	
+	width:100%;
+}
+
+.wrapperHome .header
+{
+	width:100%;
+}
+
+.wrapperHome .header .banner
+{
+	width:100%;
+	display:block;
+}
+
+
+.wrapperHome .homeGridContainer
+{
+	width:100%;
+}
+
+.wrapperHome .homeGridContainer .grid
+{
+	width:100%;
+}
+
+.wrapperHome .homeGridContainer .gridCover
+{
+	width:100%;
+	display:block;
+}
+
+.sMobile .wrapperHome .homeGridContainer #grid0
+{
+	width:100%;
+}
+
+.sMobile .wrapperHome .homeGridContainer #grid1
+{
+	width:100%;
+}
+
+.sMobile .wrapperHome .homeGridContainer #grid2
+{
+	width:100%;
+}
+
+.sMobile .wrapperHome .homeGridContainer #grid3
+{
+	width:100%;
+}
+
+.sMobile .wrapperHome .homeGridContainer #grid3a
+{
+	width:50%;
+	height:250px;
+	background:#ffeecc;
+	float:left;
+}
+
+.sMobile .wrapperHome .homeGridContainer #grid3b
+{
+	width:50%;
+	height:250px;
+	background:#eeffdd;
+	float:left;
+}
+
+.sMobile .wrapperHome .homeGridContainer #grid3c
+{
+	width:50%;
+	height:180px;
+	background:#ddccee;
+	float:left;
+}
+
+.sMobile .wrapperHome .homeGridContainer #grid3d
+{
+	width:50%;
+	height:180px;
+	background:#ccddbb;
+	float:left;
+}
+
+.sDesktop .wrapperHome .homeGridContainer #grid0
+{
+	width:50%;
+	float:left;
+}
+
+.sDesktop .wrapperHome .homeGridContainer #grid1
+{
+	width:50%;
+	float:left;
+}
+
+.sDesktop .wrapperHome .homeGridContainer #grid2
+{
+	width:50%;
+	float:left;
+	height: 430px;
+    background-color: #eee;
+}
+
+.sDesktop .wrapperHome .homeGridContainer #grid3
+{
+	width:50%;
+	float:left;
+}
+
+.sDesktop .wrapperHome .homeGridContainer #grid3a
+{
+	width:50%;
+	height:250px;
+	background:#ffeecc;
+	float:left;
+}
+
+.sDesktop .wrapperHome .homeGridContainer #grid3b
+{
+	width:50%;
+	height:250px;
+	background:#eeffdd;
+	float:left;
+}
+
+.sDesktop .wrapperHome .homeGridContainer #grid3c
+{
+	width:50%;
+	height:180px;
+	background:#ddccee;
+	float:left;
+}
+
+.sDesktop .wrapperHome .homeGridContainer #grid3d
+{
+	width:50%;
+	height:180px;
+	background:#ccddbb;
+	float:left;
+}
+
+.sMobile .wrapperHome .sectionInfoTop
+{
+	float:left;
+	width:100%;
+}
+
+.sMobile .wrapperHome .sectionInfoTop .boxAbout
+{
+	width:100%;
+	background:#eeccaa;
+	height:140px;
+}
+
+.sMobile .wrapperHome .sectionInfoTop .boxBlog
+{
+	width:100%;
+	background:#aaccdd;
+	height:200px;
+}
+
+.sMobile .wrapperHome .sectionInfoTop .boxEvents
+{
+	width:100%;
+	background:#eebbcc;
+	height:160px;
+}
+
+.sDesktop .wrapperHome .sectionInfoTop
+{
+	float:left;
+	width:100%;
+	margin:10px 0;
+	text-align:center;
+}
+
+.sDesktop .wrapperHome .sectionInfoTop .boxAbout
+{
+	width: 33%;
+	background: #eeccaa;
+	height: 200px;
+	display: inline-block;
+}
+
+.sDesktop .wrapperHome .sectionInfoTop .boxBlog
+{
+	width: 33%;
+	background:#aaccdd;
+	height:200px;
+	display: inline-block;
+}
+
+.sDesktop .wrapperHome .sectionInfoTop .boxEvents
+{
+	width: 33%;
+	background:#eebbcc;
+	height:200px;
+	display: inline-block;
+}
+
+.sMobile .wrapperHome .sectionInfoBottom
+{
+	float:left;
+	width:100%;
+}
+
+.sMobile .wrapperHome .sectionInfoBottom .boxFeaturedPhoto
+{
+	width:100%;
+	background:#ddeeff;
+	height:160px;
+}
+
+.sMobile .wrapperHome .sectionInfoBottom .boxContact
+{
+	width:100%;
+	background:#cceedd;
+	height:160px;
+}
+
+.sDesktop .wrapperHome .sectionInfoBottom
+{
+	float:left;
+	width:100%;
+	margin:0 0 10px;
+	text-align:center;
+}
+
+.sDesktop .wrapperHome .sectionInfoBottom .boxFeaturedPhoto
+{
+	width:65%;
+	background:#ddeeff;
+	height:160px;
+	display:inline-block;
+}
+
+.sDesktop .wrapperHome .sectionInfoBottom .boxContact
+{
+	width:34%;
+	background:#cceedd;
+	height:160px;
+	display:inline-block;
+}
+
+/********** Info Panel *************/
+
+.sMobile .infoPanel
+{
+	display:block;
+	width:100%;
+	min-height:60px;
+	position:relative;
+	text-align:left;
+	background:#bcae85;
+}
+
+.sDesktop .infoPanel
+{
+	float:left;
+	width:35%;
+	text-align:right;
+	background:#bcae85;
+}
+
+.sDesktop .infoPanel .intro p:first-child:first-letter 
+{
+    float: left;
+    margin-top: 20px;
+    font-size: 70px;
+    margin-right: 10px;
+    color: #714b1d;
+}
+
+.sDesktop .infoPanel .intro
+{
+    float: right;
+    width: 80%;
+    margin: 150px 20px 0 0;
+	padding: 20px 0 0 0;
+    border-top: 4px solid #fcf7d8;
+}
+
+.sDesktop .infoPanel .intro p
+{
+    text-align: justify;
+    font-size: 15px;
+    line-height: 1.2em;
+	color:#fcf7d8;
+}
+
+.sMobile .infoPanel .intro
+{
+	display:none;
+}
+
+.sDesktop .infoPanel h1
+{
+	font-size:50px;
+	padding:20px;
+	margin: 100px 0 0 0;
+	font-weight:200;
+}
+
+.sMobile .infoPanel h1
+{
+	font-size:34px;
+	padding:12px;
+	font-weight:200;
+	width:100%;
+	background:#bcae85;
+	position:absolute;
+ 
+}
+
+.sDesktop .infoPanel .subMenus
+{
+	margin:0 20px;
+}
+
+.sMobile .infoPanel .menuContainer 
+{
+	background:#e1f3ff;
+	width:100%;
+	position:absolute;
+	top:58px;
+	-webkit-transition: all .4s  ease-out;
+	-moz-transition: all .4s  ease-out;
+	-ms-transition: all .4s  ease-out;
+	-o-transition: all .4s  ease-out;
+	transition: all .4s  ease-out;
+}
+
+.mainMenuClose
+{
+	top:-360px !important;
+}
+
+
+.sDesktop .infoPanel .subMenus li
+{
+	margin:0 0 5px 0;
+	line-height:1.3em;
+	font-size:16px;
+}
+
+.sMobile .infoPanel .subMenus li
+{
+	padding:8px;
+	line-height:1.3em;
+	font-size:16px;
+}
+
+.infoPanel .subMenus li a
+{
+	color:#4d4d4d;
+}
+
+.infoPanel .subMenus li.active a
+{
+	color:#ff0000;
+}
+
+.sDesktop .infoPanel .menuHeading
+{
+	margin: 30px 20px 10px;
+    font-style: italic;
+    font-size: 14px;
+}
+
+.sMobile .infoPanel .menuHeading
+{
+	padding:8px;
+	font-style:italic;
+	background:#dcdad0;
+	line-height:1.3em;
+	font-size:14px;
+	color:#000;
+	border-top:1px solid #77756a;
+}
+ 
+.sDesktop .infoPanel .otherAlbumMenus
+{
+	margin:0 20px;
+}
+ 
+.sDesktop .infoPanel .otherAlbumMenus li
+{
+	margin:0 0 5px 0;
+	line-height:1.3em;
+	font-size:14px;
+}
+
+.sMobile .infoPanel .otherAlbumMenus li
+{
+	padding:8px;
+	line-height:1.3em;
+	font-size:13px;
+}
+
+.infoPanel .otherAlbumMenus li a
+{
+	color:#4d4d4d;
+}
+
+.sDesktop .infoPanel .menuLinks
+{
+	margin:40px 20px 0;
+}
+ 
+
+.sDesktop .infoPanel .menuLinks li
+{
+	margin:0 0 5px 0;
+	line-height:1.3em;
+	font-size:14px;
+}
+
+.sMobile .infoPanel .menuLinks li
+{
+	padding:8px;
+	line-height:1.3em;
+	font-size:13px;
+}
+
+.infoPanel .menuLinks li a
+{
+	color:#4d4d4d;
+}
+
+.sMobile .infoPanel .menuLinks
+{
+	background:#ebf8f6;
+}
+
+
+
+
+/****** Album *********/
+.wrapperAlbum
+{
+	-webkit-opacity: 0;
+	-moz-opacity: 0;
+	opacity:0;
+	-webkit-transition: all 3s ease;
+	-moz-transition: all 3s ease;
+	-ms-transition: all 3s ease;
+	-o-transition: all 3s ease;
+	transition: all 3s ease;
+}
+
+.sMobile .menuMask
+{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: #000;
+	display:none;
+	-webkit-opacity: 0;
+	-moz-opacity: 0;
+	opacity:0;
+	-webkit-transition: all .3s  ease-out;
+	-moz-transition: all .3s  ease-out;
+	-ms-transition: all .3s  ease-out;
+	-o-transition: all .3s  ease-out;
+	transition: all .3s  ease-out;
+}
+
+.sDesktop .menuMask
+{
+	display:none;
+}
+
+.menuMask.show
+{
+	-webkit-opacity: 0.6 !important;
+	-moz-opacity: 0.6 !important;
+	opacity:0.6 !important;
+	display:block !important;
+}
+
+.sMobile .infoPanel .btnMenuToggle
+{
+	width: 36px;
+    height: 36px;
+    display: block;
+    position: absolute;
+    padding: 12px;
+    right: 0;
+    top: 0;
+}
+
+.sMobile .infoPanel .btnMenuToggle img
+{
+	width:100%;
+	height:100%;
+	display:block;
+}
+
+.sDesktop .infoPanel .btnMenuToggle
+{
+	display:none;
+}
+
+.sMobile .wrapperAlbum .gridPanel
+{
+	display:block;
+	width:100%;
+	position:relative;
+}
+
+.sMobile .wrapperAlbum .gridPanel .grid
+{
+	display:block;
+	position:absolute;
+	overflow:hidden;
+}
+
+.sMobile .wrapperAlbum .gridPanel .grid img
+{
+	width:100%;
+	position:relative;
+	left:0;
+	top:0;
+}
+
+.sDesktop .wrapperAlbum .gridPanel
+{
+	float:left;
+	width:65%;
+	position:relative;
+}
+
+.sDesktop .wrapperAlbum .gridPanel .grid
+{
+	display:block;
+	position:absolute;
+	overflow:hidden;
+}
+
+.sDesktop .wrapperAlbum .gridPanel .grid img
+{
+	width:100%;
+	position:relative;
+	left:0;
+	top:0;
+}
+
+.wrapperAlbum .grid  .titleOverlay
+{
+	position:absolute;
+	left:0;
+	top:100%;
+	width:100%;
+	overflow:hidden;
+	height:100%;
+	opacity:0;
+	-webkit-transition: all 0.2s  ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-ms-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+}
+
+.titleOverlayShow
+{
+	top:0 !important;
+	-webkit-opacity: 1 !important;
+	-moz-opacity: 1 !important;
+	opacity:1 !important;
+}
+
+.wrapperAlbum .grid  .titleOverlay .bg
+{
+	position:absolute;
+	left:0;
+	top:0;
+	width:100%;
+	height:100%;
+	background:#000;
+	opacity: 0.2;
+	filter: alpha(opacity=20); 
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+}
+
+.wrapperAlbum .grid  .titleOverlay .title
+{
+	color:#fff;
+	text-align:center;
+	position:absolute;
+	left:0;
+	bottom:0;
+	margin:10px;
+	text-align:center;
+}
+
+.wrapperAlbum .grid  .titleOverlay .desc
+{
+	display:none;
+}
+
+/****** PHOTO ZOOM OVERLAY *******/
+.photoZoomOverlay
+{
+	position:fixed;
+	width:100%;
+	height:100%;
+	left:0;
+	top:0;
+	display:none;
+	-webkit-opacity: 0;
+	-moz-opacity: 0;
+	opacity:0;
+	-webkit-transition: all 0.5s  ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-ms-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+	
+}
+
+.photoZoomOverlay .bg
+{
+	width:100%;
+	height:100%;
+	background:#000;
+	opacity: 0.6;
+	filter: alpha(opacity=60); 
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
+}
+
+.photoZoomOverlay  .photoContainer
+{
+	position:absolute;
+	left:0;
+	top:0;
+}
+
+.photoZoomOverlay  .photoContainer .photo
+{
+	width:100%;
+}
+
+.photoZoomOverlay  .descContainer 
+{
+	position:absolute;
+	left:0;
+	top:0;
+	width:100%;
+	display:none;
+}
+
+.photoZoomOverlay  .descContainer  .desc
+{
+	padding: 5px;
+    color: #fff;
+    position: absolute;
+    left: 0;
+    top: 0;
+	font-size:14px;
+	line-height:1.1em;
+}
+
+.photoZoomOverlay  .descContainer .bg
+{
+	position:absolute;
+	left:0;
+	top:0;
+	width:100%;
+	height:100%;
+	background:#000;
+	opacity: 0.8;
+	filter: alpha(opacity=80); 
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+}
+
+.photoZoomOverlay .btnClose
+{	
+	font-family:Times New Roman;
+	position:absolute;
+    cursor:pointer;
+    color: #fff;
+    border: 1px solid #aeaeae;
+    border-radius: 30px;
+    background: #605F61;
+    font-size: 31px;
+    font-weight: bold;
+    display: inline-block;
+    line-height: 0px;
+    padding: 14px 5px;
+	right:-10px;
+	top:-10px;	
+}
+
+.photoZoomOverlay .btnClose:hover
+{
+	background:#d4d4d4;
+}
+
+.photoZoomOverlay .btnClose:before 
+{
+    content: "×";
+}
+
+/********* Blog ************/
+.wrapperBlog
+{
+
+}
+
+.sMobile .wrapperBlog .blogContainer
+{
+	display:block;
+	width:100%;
+	position:relative;
+}
+
+
+.sDesktop .wrapperBlog .blogContainer
+{
+	float:left;
+	width:65%;
+	position:relative;
+}
+
+.wrapperBlog .blogEntry
+{
+	padding:20px;
+	line-height:1.2em;
+	text-align:justify;
+}
+
+.wrapperBlog .blogEntry .title
+{
+	font-size:16px;
+	font-weight:700;
+	margin:0 0 5px 0;
+}
+
+.wrapperBlog .blogContainer #btnLoadMore
+{
+	display:block;
+	text-align:center;
+}
+
+
+
