@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-<title>HerbertGraphy Admin</title>
+<title>HerbertGraphy Admin Control - Album List</title>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
@@ -81,12 +81,12 @@
 						<input name="del_id[]" type="checkbox" value="<?php echo $album["id"]; ?>">
 						<input name="order[]" type="hidden" value="<?php echo $album["order"]; ?>">
 					</td>
-					<td align="center"><input name="edit[]" type="button" value="Edit"></td>
+					<td align="center"><input name="edit" type="button" value="Edit" onclick="location.href='<?php echo $this->router->fetch_class()?>/album_details/<?php echo $album["id"]; ?>'";></td>
 				</tr>
 			<?php endforeach;?>
 			</tbody>
 		</table>
-		<input name="submit" type="submit" value="Update">
+		<input name="submit" type="submit" value="Confirm Delete">
 		<?php echo form_close(); ?>
 		<?php
 		}

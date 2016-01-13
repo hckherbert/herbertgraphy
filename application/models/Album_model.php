@@ -12,15 +12,6 @@ class Album_model extends CI_Model
 		$query = $this->db->get("album");
         return $query->result_array();
 	}
-	
-	public function update_album_list()
-	{
-		$del_id = $this->input->post("del_id");
-		
-		$query = $this->db->get("album");
-		$this->db->where_in("id", $del_id);
-		$this->db->delete("album");
-	}
 
 	public function update_album_order($album_id, $order)
 	{
@@ -80,5 +71,14 @@ class Album_model extends CI_Model
 		return $this->db->insert_id();
 	}
 
+	public function get_album_details($pAlbum_id)
+	{
+		$data = array();
+		$this->db->select("name, label, intro");
+		$this->db->where("id", $pAlbum_id);
+		$query = $this->db->get("album");
 
+		$data["album_details"] = $query->row();
+		return $data;
+	}
 }

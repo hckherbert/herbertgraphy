@@ -108,4 +108,11 @@ class Album_control extends CI_Controller
 		}
 	}
 
+	public function album_details($pAlbum_id)
+	{
+		$data = $this->album_model->get_album_details($pAlbum_id);
+		$data["x"]= "y";
+		$this->load->view("admin/album_details", $data);
+	}
+
 }

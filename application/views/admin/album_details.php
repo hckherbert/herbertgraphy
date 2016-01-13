@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-<title>HerbertGraphy Admin</title>
+<title>HerbertGraphy Admin Control - Edit Album</title>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
@@ -48,6 +48,40 @@
 <body>
 <div class="adminMain">
 	<div class="section">
+		<h1 class="pageHading">Album details</h1>
+		<?php echo form_open('admin/album_control/add_album', 'class="formAddAlbum" id="formAddAlbum"'); ?>
+		<table>
+			<tr>
+				<td>Album name:</td>
+				<td>
+					<input name="name" type="text" placeholder="Enter the album name" value="<?php echo $album_details->name; ?>">
+					<div class="error"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>Album Label:</td>
+				<td>
+					<input name="label" type="text" placeholder="The url slug (letters, numbers and hyphens only)" value="<?php echo $album_details->label; ?>">
+					<div class="error"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>Album Intro:</td>
+				<td>
+					<textarea name="intro" placeholder="Type something to describe this album"><?php echo $album_details->intro; ?></textarea>
+					<div class="error"></div>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<input name="submit" type="submit" value="Update">
+				</td>
+			</tr>
+		</table>
+		<?php echo form_close(); ?>
+	</div>
+	<div class="section">
 		<h1 class="pageHading">Album List</h1>
 		<?php
 		if (count($parent_albums)) {
@@ -86,40 +120,6 @@
 		There is no album
 		<?php } ?>
 		<div class="clear"></div>
-	</div>
-	<div class="section">
-		<h1 class="pageHading">Add New Album</h1>
-		<?php echo form_open('admin/album_control/add_album', 'class="formAddAlbum" id="formAddAlbum"'); ?>
-		<table>
-			<tr>
-				<td>Album name:</td>
-				<td>
-					<input name="name" type="text" placeholder="Enter the album name">
-					<div class="error"></div>
-				</td>
-			</tr>
-			<tr>
-				<td>Album Label:</td>
-				<td>
-					<input name="label" type="text" placeholder="The url slug (letters, numbers and hyphens only)">
-					<div class="error"></div>
-				</td>
-			</tr>
-			<tr>
-				<td>Album Intro:</td>
-				<td>
-					<textarea name="intro" placeholder="Type something to describe this album"></textarea>
-					<div class="error"></div>
-				</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td>
-					<input name="submit" type="submit" value="Add">
-				</td>
-			</tr>
-		</table>
-		<?php echo form_close(); ?>
 	</div>
 </div>
 </body>
