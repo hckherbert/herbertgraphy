@@ -55,31 +55,30 @@ Album_control.prototype.submit_handler = function()
             pEvent.preventDefault();
 
             var _postData = $(this).serializeArray();
-            var _formInstnace = $(this);
+            var _formInstance = $(this);
+            var _formId = _formInstance.attr("id");
 
             $.ajax(
                 {
-                    url: "album_control/add_album",
+                    url: _formInstance.attr("action"),
                     data : _postData,
                     type: "POST",
                     dataType: "json",
                     success: function(pData)
                     {
-                        _formInstnace.find(".error").empty();
+
+                        _formInstance.find(".error").empty();
 
                         if (pData["successcode"] && pData["successcode"] == 1)
                         {
-                            _self.append_added_parent_album_record(pData["response"]["insert_id"]);
+                            _self.append_added_parent_album_record(pData["response"]["insert_id"], _formId);
                         }
                     },
                     error: function(pData, jqxhr, status)
                     {
+                       console.log(pData);
 
-                        console.log(pData);
-
-                        console.log($(this));
-
-                        _formInstnace.find(".error").empty();
+                        _formInstance.find(".error").empty();
 
                         if (pData["responseJSON"]["error_messages"]["validation_error"])
                         {
@@ -87,8 +86,8 @@ Album_control.prototype.submit_handler = function()
                             {
                                 if (err_label != "validation_error")
                                 {
-                                    console.log(pData["responseJSON"]["error_messages"][err_label]);
-                                    _formInstnace.find("input[name='" + err_label + "']").next(".error").text(pData["responseJSON"]["error_messages"][err_label]);
+                                    //console.log(pData["responseJSON"]["error_messages"][err_label]);
+                                    _formInstance.find("input[name='" + err_label + "']").next(".error").text(pData["responseJSON"]["error_messages"][err_label]);
                                 }
                             }
                         }
@@ -122,11 +121,11 @@ Album_control.prototype.refresh_album_list_on_updated = function()
 
 }
 
-Album_control.prototype.append_added_parent_album_record = function(pInsert_id)
+Album_control.prototype.append_added_parent_album_record = function(pInsert_id, pFormId)
 {
-    var _album_name = $("#formAddAlbum input[name='name']").val();
-    var _album_label = $("#formAddAlbum input[name='label']").val();
-    var _album_intro = $("#formAddAlbum textarea[name='intro']").val();
+    var _album_name = $("#" + pFormId + " input[name='name']").val();
+    var _album_label = $("#" + pFormId + " input[name='label']").val();
+    var _album_intro = $("#" + pFormId + " textarea[name='intro']").val();
     var _total_rows_before_added = $(".albumList input[name='order[]']").size();
 
     var _new_album_html = "";
@@ -145,5 +144,5 @@ Album_control.prototype.append_added_parent_album_record = function(pInsert_id)
 
     $("#formAlbumList table tbody").append(_new_album_html);
 
-    document.getElementById("formAddAlbum").reset();
+    document.getElementById(pFormId).reset();
 }

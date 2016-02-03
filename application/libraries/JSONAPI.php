@@ -74,22 +74,6 @@ class JSONAPI
 		self::echo_json_error_response($message,404);
 	}
 
-    public static function log_and_echo_api_error_response($e,$message=NULL){
-        $ci_instance =& get_instance();
-        $ci_instance->load->model("log_model");
-        $current_user_id = CurrentUserIDProvider::get_current_user_id();
-        $ci_instance->log_model->create_api_error_exception_log($current_user_id,$e);
-        self::echo_api_error_response($message);
-    }
-
-    public static function echo_api_error_response($message=NULL,$default_header=503){
-        $ci_instance =& get_instance();
-        if($message === NULL){
-            $message = $ci_instance->lang->line("api_server_error");
-        }
-        return self::echo_json_error_response($message,$default_header);
-    }
-
     public static function echo_json_error_response($message = "",$default_header=400)
     {
         $defaultErrorArray = array(JSONAPIEnum::SUCCESSCODE => JSONAPIEnum::SUCCESSCODE_FAIL);

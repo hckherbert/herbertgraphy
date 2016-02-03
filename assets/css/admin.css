@@ -75,26 +75,26 @@ input[type='submit']
 	float:right;
 }
 
-#formAddAlbum td
+.formInfo td
 {
 	vertical-align:top;
 	padding:2px;
 }
 
-#formAddAlbum input[type='text']
+.formInfo input[type='text']
 {
 	width:350px;
 	box-sizing:border-box;
 }
 
-#formAddAlbum textarea
+.formInfo textarea
 {
 	width:350px;
 	height:100px;
 	box-sizing:border-box;
 }
 
-#formAddAlbum .error
+.formInfo .error
 {
 	margin:4px 0 0;
 }

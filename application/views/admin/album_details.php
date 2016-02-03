@@ -49,7 +49,7 @@
 <div class="adminMain">
 	<div class="section">
 		<h1 class="pageHading">Album details</h1>
-		<?php echo form_open('admin/album_control/add_album', 'class="formAddSubAlbum" id="formAddSubAlbum"'); ?>
+		<?php echo form_open('admin/album_control/update_album_info', 'class="formInfo" id="formUpdateAlbumInfo"'); ?>
 		<table>
 			<tr>
 				<td>Album name:</td>
@@ -85,7 +85,7 @@
 		<h1 class="pageHading">Sub-album List</h1>
 		<?php
 		if ($album_details->parentId!=NULL) {
-			echo form_open('admin/album_control/update_album_list', 'class="formAlbumList" id="formAlbumList"');
+			echo form_open('admin/album_control/update_album_list', 'class="formInfo" id="formAlbumList"');
 		?>
 		<table class="albumList listing">
 			<thead>
@@ -118,12 +118,12 @@
 		else
 		{?>
 		There is no subm-album
-		<?php } ?>
+
 		<div class="clear"></div>
 	</div>
 	<div class="section">
 		<h1 class="pageHading">Add a sub-album under <em><?php echo $album_details->name; ?></em></h1>
-		<?php echo form_open('admin/album_control/add_subalbum', 'class="formAddAlbum" id="formAddAlbum"'); ?>
+		<?php echo form_open('admin/album_control/add_subalbum', 'class="formInfo" id="formAddSubAlbum"'); ?>
 		<table>
 			<tr>
 				<td>Album name:</td>
@@ -156,7 +156,7 @@
 		<input name="parentId" value="<?php echo $album_details->id; ?>" type="hidden">
 		<?php echo form_close(); ?>
 	</div>
-
+	<?php } ?>
 </div>
 </body>
 </html>

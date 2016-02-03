@@ -98,7 +98,7 @@
 	</div>
 	<div class="section">
 		<h1 class="pageHading">Add New Album</h1>
-		<?php echo form_open('admin/album_control/add_album', 'class="formAddAlbum" id="formAddAlbum"'); ?>
+		<?php echo form_open('admin/album_control/add_album', 'class="formInfo" id="formAddAlbum"'); ?>
 		<table>
 			<tr>
 				<td>Album name:</td>
