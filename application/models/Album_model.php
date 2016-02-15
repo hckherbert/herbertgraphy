@@ -8,6 +8,7 @@ class Album_model extends CI_Model
 	
 	public function get_all_parent_albums()
 	{
+		$this->db->where("parentId", NULL);
 		$this->db->order_by("order");
 		$query = $this->db->get("album");
         return $query->result_array();

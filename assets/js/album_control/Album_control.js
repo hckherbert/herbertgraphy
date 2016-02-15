@@ -15,14 +15,29 @@ Album_control.prototype.init_ui = function()
 Album_control.prototype.submit_handler = function()
 {
     var _self = this;
+    var _isGoUpdate = false;
 
     $("#formAlbumList").on
     (
         "submit",
-        function(pEvent) {
+        function(pEvent)
+        {
             pEvent.preventDefault();
 
-            if (confirm("Confirm delete the selected album(s)?"))
+            if ($(".albumList input[name='del_id[]']:checked").size())
+            {
+                if (confirm("Confirm delete the selected album(s)?"))
+                {
+                    _isGoUpdate = true;
+                }
+            }
+            else
+            {
+                _isGoUpdate = true;
+            }
+
+
+            if (_isGoUpdate)
             {
 
                 var _postData = $(this).serializeArray();
@@ -66,7 +81,6 @@ Album_control.prototype.submit_handler = function()
                     dataType: "json",
                     success: function(pData)
                     {
-
                         _formInstance.find(".error").empty();
 
                         if (pData["successcode"] && pData["successcode"] == 1)
@@ -76,8 +90,6 @@ Album_control.prototype.submit_handler = function()
                     },
                     error: function(pData, jqxhr, status)
                     {
-                       console.log(pData);
-
                         _formInstance.find(".error").empty();
 
                         if (pData["responseJSON"]["error_messages"]["validation_error"])
@@ -141,6 +153,12 @@ Album_control.prototype.append_added_parent_album_record = function(pInsert_id, 
     _new_album_html += "</td>";
     _new_album_html += "<td align='center'><input name='edit' type='button' value='Edit' onclick='location.href=&#39;album_control/album_details/" + pInsert_id + "&#39;'></td>";
     _new_album_html += "</tr>";
+
+    if ($(".firstAdded").size())
+    {
+        $(".label_no_album").remove();
+        $(".firstAdded").removeClass("hide");
+    }
 
     $("#formAlbumList table tbody").append(_new_album_html);
 

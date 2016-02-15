@@ -86,13 +86,29 @@
 			<?php endforeach;?>
 			</tbody>
 		</table>
-		<input name="submit" type="submit" value="Confirm Delete">
+		<input name="submit" type="submit" value="Update">
 		<?php echo form_close(); ?>
 		<?php
 		}
 		else
 		{?>
-		There is no album
+		<p class="label_no_album">There is no album</p>
+		<div class="hide firstAdded">
+			<?php echo form_open('admin/album_control/update_album_list', 'class="formAlbumList" id="formAlbumList"'); ?>
+			<table class="albumList listing">
+				<thead>
+				<th width="25%">Album name</th>
+				<th width="20%">Album Label</th>
+				<th width="45%">Album Intro</th>
+				<th width="5%">Delete</th>
+				<th width="5%"></th>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+			<input name="submit" type="submit" value="Update">
+			<?php echo form_close(); ?>
+		</div>
 		<?php } ?>
 		<div class="clear"></div>
 	</div>

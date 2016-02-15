@@ -81,6 +81,7 @@
 		</table>
 		<?php echo form_close(); ?>
 	</div>
+	<?php if (isset($parent_albums)) { ?>
 	<div class="section">
 		<h1 class="pageHading">Sub-album List</h1>
 		<?php
@@ -121,6 +122,7 @@
 
 		<div class="clear"></div>
 	</div>
+	<?php } ?>
 	<div class="section">
 		<h1 class="pageHading">Add a sub-album under <em><?php echo $album_details->name; ?></em></h1>
 		<?php echo form_open('admin/album_control/add_subalbum', 'class="formInfo" id="formAddSubAlbum"'); ?>
