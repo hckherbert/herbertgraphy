@@ -81,12 +81,12 @@
 		</table>
 		<?php echo form_close(); ?>
 	</div>
-	<?php if (isset($parent_albums)) { ?>
+
 	<div class="section">
 		<h1 class="pageHading">Sub-album List</h1>
 		<?php
-		if ($album_details->parentId!=NULL) {
-			echo form_open('admin/album_control/update_album_list', 'class="formInfo" id="formAlbumList"');
+		if (count($sub_albums)) {
+			echo form_open('admin/album_control/update_album_list','id="formAlbumList"');
 		?>
 		<table class="albumList listing">
 			<thead>
@@ -97,7 +97,7 @@
 				<th width="5%"></th>
 			</thead>
 			<tbody>
-			<?php foreach ($parent_albums as $album): ?>
+			<?php foreach ($sub_albums as $album): ?>
 				<tr>
 					<td><?php echo $album["name"]; ?></td>
 					<td><?php echo $album["label"]; ?></td>
@@ -122,7 +122,7 @@
 
 		<div class="clear"></div>
 	</div>
-	<?php } ?>
+
 	<div class="section">
 		<h1 class="pageHading">Add a sub-album under <em><?php echo $album_details->name; ?></em></h1>
 		<?php echo form_open('admin/album_control/add_subalbum', 'class="formInfo" id="formAddSubAlbum"'); ?>

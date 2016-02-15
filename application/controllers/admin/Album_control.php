@@ -150,7 +150,8 @@ class Album_control extends CI_Controller
 
 	public function album_details($pAlbum_id)
 	{
-		$data = $this->album_model->get_album_details($pAlbum_id);
+		$data= $this->album_model->get_album_details($pAlbum_id);
+		$data["sub_albums"] = $this->album_model->get_sub_album_by_parent_id($pAlbum_id);
 		$this->load->view("admin/album_details", $data);
 	}
 
