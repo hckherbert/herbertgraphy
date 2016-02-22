@@ -86,7 +86,7 @@
 		<h1 class="pageHading">Sub-album List</h1>
 		<?php
 		if (count($sub_albums)) {
-			echo form_open('admin/album_control/update_album_list','id="formAlbumList"');
+			echo form_open('admin/album_control/update_album_list','id="formSubAlbumList"');
 		?>
 		<table class="albumList listing">
 			<thead>

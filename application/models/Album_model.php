@@ -37,6 +37,7 @@ class Album_model extends CI_Model
 
 	}
 
+
 	public function delete_albums($del_ids, $album_ids)
 	{
 		$this->db->where_in("id", $del_ids);

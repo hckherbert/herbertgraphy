@@ -17,11 +17,16 @@ Album_control.prototype.submit_handler = function()
     var _self = this;
     var _isGoUpdate = false;
 
-    $("#formAlbumList").on
+    $("#formAlbumList, #formSubAlbumList").on
     (
         "submit",
         function(pEvent)
         {
+            console.log($(this).attr("id"));
+
+            var _url = $(this).attr("action");
+            var _formId = $(this).attr("id");
+
             pEvent.preventDefault();
 
             if ($(".albumList input[name='del_id[]']:checked").size())
@@ -44,13 +49,23 @@ Album_control.prototype.submit_handler = function()
 
                 $.ajax(
                     {
-                        url: "album_control/update_album_list",
+                        url: _url,
                         data: _postData,
                         type: "POST",
                         dataType: "json",
                         success: function (pData) {
                             if (pData["successcode"] && pData["successcode"] == 1) {
-                                _self.refresh_album_list_on_updated();
+
+
+                                if (_formId == "formAlbumList")
+                                {
+                                    _self.refresh_album_list_on_updated();
+                                }
+                                else if (_formId == "formSubAlbumList")
+                                {
+                                    console.log("update sub album success!");
+                                }
+
                             }
                         },
                         error: function (jqxhr, status) {
