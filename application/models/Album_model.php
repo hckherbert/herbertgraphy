@@ -75,7 +75,8 @@ class Album_model extends CI_Model
 
 	public  function add_album($data)
 	{
-		$total_rows = $this->db->count_all("album");
+		$this->db->where("parentId", NULL);
+		$total_rows = $this->db->count_all_results("album");
 		$data = array_merge($data, array("order" => $total_rows));
 		$this->db->insert("album", $data);
 		return $this->db->insert_id();

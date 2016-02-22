@@ -119,7 +119,7 @@
 		else
 		{?>
 		There is no subm-album
-
+		<?php } ?>
 		<div class="clear"></div>
 	</div>
 
@@ -158,7 +158,6 @@
 		<input name="parentId" value="<?php echo $album_details->id; ?>" type="hidden">
 		<?php echo form_close(); ?>
 	</div>
-	<?php } ?>
 </div>
 </body>
 </html>
