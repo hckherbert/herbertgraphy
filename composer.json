@@ -1,0 +1,5 @@
+{
+    "require-dev": {
+        "kenjis/codeigniter-cli": "^0.1.0"
+    }
+}
