@@ -18,7 +18,6 @@
 <link href="android-icon-128x128.png" rel="icon" sizes="128x128" />
 <!-- CSS -->
 <link rel="stylesheet" href="<?php echo base_url('assets/css/reset.css'); ?>" type="text/css" />
-<link rel="stylesheet" href="<?php echo base_url('assets/css/main.css'); ?>" type="text/css" />
 <link rel="stylesheet" href="<?php echo base_url('assets/css/admin.css'); ?>" type="text/css" />
 <link rel="stylesheet" href="<?php echo base_url('assets/css/zindex.css'); ?>" type="text/css" />
 <link rel="stylesheet" href="<?php echo base_url('assets/css/jquery.jscrollpane.css'); ?>" type="text/css" />

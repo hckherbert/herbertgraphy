@@ -14,6 +14,15 @@ class Album_model extends CI_Model
         return $query->result_array();
 	}
 
+	public function get_sub_album_by_parent_id($parent_id)
+	{
+		$this->db->where("parentId", $parent_id);
+		$this->db->order_by("order");
+		$query = $this->db->get("album");
+		return $query->result_array();
+	}
+
+
 	public function update_album_order($album_id, $order)
 	{
 		$data = array
@@ -27,6 +36,7 @@ class Album_model extends CI_Model
 		return $result;
 
 	}
+
 
 	public function delete_albums($del_ids, $album_ids)
 	{
@@ -66,7 +76,8 @@ class Album_model extends CI_Model
 
 	public  function add_album($data)
 	{
-		$total_rows = $this->db->count_all("album");
+		$this->db->where("parentId", NULL);
+		$total_rows = $this->db->count_all_results("album");
 		$data = array_merge($data, array("order" => $total_rows));
 		$this->db->insert("album", $data);
 		return $this->db->insert_id();
@@ -75,17 +86,20 @@ class Album_model extends CI_Model
 	public  function add_subalbum($data)
 	{
 		$order = 0;
-		$this->db->select_max('order');
+		$this->db->select("order");
+		$this->db->order_by("order", "desc");
 		$this->db->where('parentId', $data["parentId"]);
+		$this->db->limit(1);
 		$query = $this->db->get('album');
+		$result_get_order = $query->result_array();
 
-		if ($query->num_rows())
+		if (count($result_get_order) > 0)
 		{
-			$order = $query->row()->order;
+			$order = $query->row()->order + 1;
+
 		}
 
-
-		$data = array_merge($data, array("order" => $order+1));
+		$data = array_merge($data, array("order" => $order));
 		unset($data["submit"]);
 		$this->db->insert("album", $data);
 		return $this->db->insert_id();
