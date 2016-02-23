@@ -22,8 +22,6 @@ Album_control.prototype.submit_handler = function()
         "submit",
         function(pEvent)
         {
-            console.log($(this).attr("id"));
-
             var _url = $(this).attr("action");
             var _formId = $(this).attr("id");
 
@@ -87,10 +85,11 @@ Album_control.prototype.submit_handler = function()
             var _postData = $(this).serializeArray();
             var _formInstance = $(this);
             var _formId = _formInstance.attr("id");
+            var _url = _formInstance.attr("action");
 
             $.ajax(
                 {
-                    url: _formInstance.attr("action"),
+                    url: _url,
                     data : _postData,
                     type: "POST",
                     dataType: "json",
@@ -100,7 +99,7 @@ Album_control.prototype.submit_handler = function()
 
                         if (pData["successcode"] && pData["successcode"] == 1)
                         {
-                            _self.append_added_parent_album_record(pData["response"]["insert_id"], _formId);
+                            _self.append_added_album_record(pData["response"]["insert_id"], _formId);
                         }
                     },
                     error: function(pData, jqxhr, status)
@@ -148,13 +147,12 @@ Album_control.prototype.refresh_album_list_on_updated = function()
 
 }
 
-Album_control.prototype.append_added_parent_album_record = function(pInsert_id, pFormId)
+Album_control.prototype.append_added_album_record = function(pInsert_id, pFormId)
 {
     var _album_name = $("#" + pFormId + " input[name='name']").val();
     var _album_label = $("#" + pFormId + " input[name='label']").val();
     var _album_intro = $("#" + pFormId + " textarea[name='intro']").val();
-    var _total_rows_before_added = $(".albumList input[name='order[]']").size();
-
+    var _total_rows_before_added = $(".albumList tbody tr").size();
     var _new_album_html = "";
 
     _new_album_html += "<tr class='ui-sortable-handle'>"
@@ -175,7 +173,7 @@ Album_control.prototype.append_added_parent_album_record = function(pInsert_id, 
         $(".firstAdded").removeClass("hide");
     }
 
-    $("#formAlbumList table tbody").append(_new_album_html);
+    $(".albumList tbody").append(_new_album_html);
 
     document.getElementById(pFormId).reset();
 }
