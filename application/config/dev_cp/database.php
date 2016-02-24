@@ -79,7 +79,6 @@ $db['default'] = array(
 	'username' => 'root',
 	'password' => 'zz363077',
 	'database' => 'hg_main',
-//'database' => 'herbertgra_main',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
