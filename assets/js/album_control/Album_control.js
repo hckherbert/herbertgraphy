@@ -54,7 +54,8 @@ Album_control.prototype.submit_handler = function()
                         data: _postData,
                         type: "POST",
                         dataType: "json",
-                        success: function (pData) {
+                        success: function (pData)
+                        {
                             if (pData["successcode"] && pData["successcode"] == 1) {
                                 _self.refresh_album_list_on_updated();
                                 History.pushState({"album_list_data": $(".albumList tbody").html()}, document.title, null);
@@ -123,6 +124,54 @@ Album_control.prototype.submit_handler = function()
             );
         }
     );
+
+    $("#formUpdateAlbumInfo").on
+    (
+        "submit",
+        function(pEvent)
+        {
+            pEvent.preventDefault();
+
+            var _postData = $(this).serializeArray();
+            var _formInstance = $(this);
+
+            $.ajax(
+                {
+                    url: _formInstance.attr("action"),
+                    data: _postData,
+                    type: "POST",
+                    dataType: "json",
+                    success: function (pData)
+                    {
+                        if (pData["successcode"] && pData["successcode"] == 1) {
+                            console.log("update album info success");
+                            //History.pushState({"album_list_data": $(".albumList tbody").html()}, document.title, null);
+                        }
+
+                    },
+                    error: function (pData, jqxhr, status)
+                    {
+                        _formInstance.find(".error").empty();
+
+                        console.log(pData);
+
+                        if (pData["responseJSON"]["error_messages"]["validation_error"])
+                        {
+                            for (var err_label in pData["responseJSON"]["error_messages"])
+                            {
+                                console.log(err_label);
+
+                                if (err_label != "validation_error")
+                                {
+                                    _formInstance.find("input[name='" + err_label + "']").next(".error").text(pData["responseJSON"]["error_messages"][err_label]);
+                                }
+                            }
+                        }
+                    }
+                }
+            );
+        }
+    )
 }
 
 

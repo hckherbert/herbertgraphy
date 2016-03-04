@@ -1,17 +1,17 @@
 <?php
-class Album_model extends CI_Model 
+class Album_model extends CI_Model
 {
 	public function __construct()
 	{
 		$this->load->database();
 	}
-	
+
 	public function get_all_parent_albums()
 	{
 		$this->db->where("parentId", NULL);
 		$this->db->order_by("order");
 		$query = $this->db->get("album");
-        return $query->result_array();
+		return $query->result_array();
 	}
 
 	public function get_sub_album_by_parent_id($parent_id)
@@ -27,7 +27,7 @@ class Album_model extends CI_Model
 	{
 		$data = array
 		(
-			"order"=>$order
+			"order" => $order
 		);
 
 		$this->db->where("id", $album_id);
@@ -43,18 +43,15 @@ class Album_model extends CI_Model
 		$this->db->where_in("id", $del_ids);
 		$result = $this->db->delete("album");
 
-		if ($result)
-		{
+		if ($result) {
 
 			$order_count = 0;
 
-			for ($i=0; $i<count($album_ids); $i++)
-			{
-				if (!in_array($album_ids[$i],$del_ids))
-				{
+			for ($i = 0; $i < count($album_ids); $i++) {
+				if (!in_array($album_ids[$i], $del_ids)) {
 					$data = array
 					(
-						"order"=>$order_count
+						"order" => $order_count
 					);
 
 					$order_count++;
@@ -62,8 +59,7 @@ class Album_model extends CI_Model
 					$this->db->where("id", $album_ids[$i]);
 					$result_update = $this->db->update("album", $data);
 
-					if (!$result_update)
-					{
+					if (!$result_update) {
 						return;
 					}
 
@@ -74,7 +70,7 @@ class Album_model extends CI_Model
 		return $result;
 	}
 
-	public  function add_album($data)
+	public function add_album($data)
 	{
 		$this->db->where("parentId", NULL);
 		$total_rows = $this->db->count_all_results("album");
@@ -83,7 +79,7 @@ class Album_model extends CI_Model
 		return $this->db->insert_id();
 	}
 
-	public  function add_subalbum($data)
+	public function add_subalbum($data)
 	{
 		$order = 0;
 		$this->db->select("order");
@@ -93,8 +89,7 @@ class Album_model extends CI_Model
 		$query = $this->db->get('album');
 		$result_get_order = $query->result_array();
 
-		if (count($result_get_order) > 0)
-		{
+		if (count($result_get_order) > 0) {
 			$order = $query->row()->order + 1;
 
 		}
@@ -114,5 +109,37 @@ class Album_model extends CI_Model
 
 		$data["album_details"] = $query->row();
 		return $data;
+	}
+
+	public function update_album_info($data)
+	{
+		$this->db->where("id", $data["id"]);
+		$result = $this->db->update("album", $data);
+
+		if ($result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	public function is_current_label_unique_against_others($pAlbum_label, $pAlbum_id)
+	{
+		$this->db->where("label", $pAlbum_label);
+		$this->db->where("id!=$pAlbum_id");
+		$query = $this->db->get("album");
+
+
+		if ($query->num_rows() > 0)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
 	}
 }

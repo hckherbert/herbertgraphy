@@ -29,6 +29,7 @@
 <script src="<?php echo base_url('assets/js/jquery-migrate-1.2.1.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/jquery.jscrollpane.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/jquery.mousewheel.js'); ?>"></script>
+<script src="<?php echo base_url('assets/js/album_control/jquery.history.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/album_control/Album_control.js'); ?>"></script>
 <script>
 
@@ -41,7 +42,7 @@
 		mAlbum_control = new Album_control();
 
 	}
-  );
+ );
 </script>
 </head>
 <body>
@@ -78,6 +79,7 @@
 				</td>
 			</tr>
 		</table>
+		<input name="id" type="hidden" value="<?php echo $album_id; ?>">
 		<?php echo form_close(); ?>
 	</div>
 

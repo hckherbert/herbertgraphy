@@ -61,7 +61,7 @@ class Album_control extends CI_Controller
 			array(
 				'field'   => 'name',
 				'label'   => 'Album name',
-				'rules'   => 'trim|required|is_unique[album.name]'
+				'rules'   => 'trim|required'
 			),
 			array(
 				'field'   => 'label',
@@ -101,7 +101,7 @@ class Album_control extends CI_Controller
 				array(
 						'field'   => 'name',
 						'label'   => 'Album name',
-						'rules'   => 'trim|required|is_unique[album.name]'
+						'rules'   => 'trim|required'
 				),
 				array(
 						'field'   => 'label',
@@ -134,6 +134,47 @@ class Album_control extends CI_Controller
 		}
 	}
 
+	public function update_album_info()
+	{
+		$config_validation = array(
+			array(
+				'field'   => 'name',
+				'label'   => 'Album name',
+				'rules'   => 'trim|required'
+			),
+			array(
+				'field'   => 'label',
+				'label'   => 'Album label',
+				'rules'   => 'trim|required|is_edit_unique|callback_is_validate_album_label'
+			)
+		);
+
+		$this->form_validation->set_rules($config_validation);
+
+		if ($this->form_validation->run() == FALSE)
+		{
+			$data_error = array(
+				"validation_error" => true
+			);
+			$data_error = array_merge($data_error, $this->form_validation->error_array());
+
+			JSONAPI::echo_json_error_response($data_error);
+		}
+		else
+		{
+			$post_data = $this->input->post(NULL, TRUE);
+			$result =  $this->album_model->update_album_info($post_data);
+			if ($result)
+			{
+				JSONAPI::echo_json_successful_response();
+			}
+			else
+			{
+				JSONAPI::echo_json_error_response();
+			}
+		}
+	}
+
 
 	public function is_validate_album_label($pInput)
 	{
@@ -142,6 +183,7 @@ class Album_control extends CI_Controller
 			$this->form_validation->set_message("is_validate_album_label", 'Album label should only contain letters, numbers or hyphens');
 			return FALSE;
 		}
+
 		else
 		{
 			return TRUE;
@@ -151,6 +193,7 @@ class Album_control extends CI_Controller
 	public function album_details($pAlbum_id)
 	{
 		$data= $this->album_model->get_album_details($pAlbum_id);
+		$data["album_id"] = $pAlbum_id;
 		$data["sub_albums"] = $this->album_model->get_sub_album_by_parent_id($pAlbum_id);
 		$this->load->view("admin/album_details", $data);
 	}

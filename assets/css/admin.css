@@ -27,6 +27,11 @@ textarea
 	font-style:italic;
 }
 
+.hide
+{
+	display:none !important;
+}
+
 .section
 {
 	background:#eeeeee;
