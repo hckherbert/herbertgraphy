@@ -114,7 +114,6 @@ Album_control.prototype.submit_handler = function()
                             {
                                 if (err_label != "validation_error")
                                 {
-                                    //console.log(pData["responseJSON"]["error_messages"][err_label]);
                                     _formInstance.find("input[name='" + err_label + "']").next(".error").text(pData["responseJSON"]["error_messages"][err_label]);
                                 }
                             }
@@ -143,6 +142,8 @@ Album_control.prototype.submit_handler = function()
                     dataType: "json",
                     success: function (pData)
                     {
+                        _formInstance.find(".error").empty();
+
                         if (pData["successcode"] && pData["successcode"] == 1) {
                             console.log("update album info success");
                             //History.pushState({"album_list_data": $(".albumList tbody").html()}, document.title, null);

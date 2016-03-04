@@ -23,4 +23,18 @@ class MY_Form_validation extends CI_Form_validation
         $is_unique = $this->CI->album_model->is_current_label_unique_against_others($this->CI->input->post("label"), $this->CI->input->post("id"));
         return $is_unique;
     }
+
+    function label_char_format($pInput)
+    {
+        if (!preg_match("/^[a-zA-Z0-9-]+$/", $pInput))
+        {
+            $this->CI->form_validation->set_message("label_char_format", 'Album label should only contain letters, numbers or hyphens');
+            return FALSE;
+        }
+
+        else
+        {
+            return TRUE;
+        }
+    }
 }

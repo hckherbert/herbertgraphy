@@ -66,7 +66,7 @@ class Album_control extends CI_Controller
 			array(
 				'field'   => 'label',
 				'label'   => 'Album label',
-				'rules'   => 'trim|required|is_unique[album.label]|callback_is_validate_album_label'
+				'rules'   => 'trim|required|is_unique[album.label]|label_char_format'
 			)
 		);
 
@@ -106,7 +106,7 @@ class Album_control extends CI_Controller
 				array(
 						'field'   => 'label',
 						'label'   => 'Album label',
-						'rules'   => 'trim|required|is_unique[album.label]|callback_is_validate_album_label'
+						'rules'   => 'trim|required|is_unique[album.label]|label_char_format'
 				)
 		);
 
@@ -145,7 +145,7 @@ class Album_control extends CI_Controller
 			array(
 				'field'   => 'label',
 				'label'   => 'Album label',
-				'rules'   => 'trim|required|is_edit_unique|callback_is_validate_album_label'
+				'rules'   => 'trim|required|is_edit_unique|label_char_format'
 			)
 		);
 
@@ -175,20 +175,6 @@ class Album_control extends CI_Controller
 		}
 	}
 
-
-	public function is_validate_album_label($pInput)
-	{
-		if (!preg_match("/^[a-zA-Z0-9-]+$/", $pInput))
-		{
-			$this->form_validation->set_message("is_validate_album_label", 'Album label should only contain letters, numbers or hyphens');
-			return FALSE;
-		}
-
-		else
-		{
-			return TRUE;
-		}
-	}
 
 	public function album_details($pAlbum_id)
 	{
