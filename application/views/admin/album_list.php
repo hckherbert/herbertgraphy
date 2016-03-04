@@ -29,10 +29,12 @@
 <script src="<?php echo base_url('assets/js/jquery-migrate-1.2.1.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/jquery.jscrollpane.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/jquery.mousewheel.js'); ?>"></script>
+<script src="<?php echo base_url('assets/js/album_control/jquery.history.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/album_control/Album_control.js'); ?>"></script>
 <script>
 
  var mAlbum_control = null;
+
 
  $(document).ready
  (

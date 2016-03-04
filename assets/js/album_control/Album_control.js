@@ -1,6 +1,27 @@
 function Album_control()
 {
     var _self = this;
+
+    var _state = History.getState();
+
+    if (_state.data)
+    {
+        if (_state.data.album_list_data)
+        {
+            $(".albumList tbody").empty().html(_state.data.album_list_data);
+        }
+    }
+
+
+    History.Adapter.bind(window,'statechange',function(){
+        console.log("why");
+        var State = History.getState();
+        console.log(State);
+        History.log('statechange:', State.data, State.title, State.url);
+    });
+
+
+
     this.init_ui();
     this.submit_handler();
 }
@@ -36,6 +57,7 @@ Album_control.prototype.submit_handler = function()
                         success: function (pData) {
                             if (pData["successcode"] && pData["successcode"] == 1) {
                                 _self.refresh_album_list_on_updated();
+                                History.pushState({"album_list_data": $(".albumList tbody").html()}, document.title, null);
                             }
                         },
                         error: function (jqxhr, status) {
@@ -69,9 +91,14 @@ Album_control.prototype.submit_handler = function()
 
                         _formInstance.find(".error").empty();
 
-                        if (pData["successcode"] && pData["successcode"] == 1)
-                        {
+                        if (pData["successcode"] && pData["successcode"] == 1) {
                             _self.append_added_parent_album_record(pData["response"]["insert_id"], _formId);
+
+                            if (_formId == "formAddAlbum")
+                            {
+                                History.pushState({"album_list_data": $(".albumList tbody").html()}, document.title, null);
+                            }
+
                         }
                     },
                     error: function(pData, jqxhr, status)
