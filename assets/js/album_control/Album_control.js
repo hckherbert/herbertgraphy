@@ -191,7 +191,10 @@ Album_control.prototype.submit_handler = function()
 Album_control.prototype.refresh_album_list_on_updated = function()
 {
 
-    $(".albumList input[name='del_id[]']").each(
+    console.log("a");
+
+    $(".albumList input[name='del_id[]']").each
+    (
         function(i,e)
         {
             if ($(this).is(":checked"))
@@ -199,10 +202,19 @@ Album_control.prototype.refresh_album_list_on_updated = function()
                 $(this).parents("tr").remove();
             }
 
-            if (!$(".albumList tbody tr").size())
-            {
+            if (!$(".albumList tbody tr").size()) {
+
+                console.log("b");
                 $(".firstAdded").addClass("hide");
+                $(".formAlbumList").hide();
                 $(".label_no_album").show();
+
+                if (!$(".firstAdded").size())
+                {
+
+                    console.log($(".formAlbumList").size());
+                    $(".formAlbumList").before("<p class='label_no_album'>There is no album</p>");
+                }
             }
         }
     )
@@ -240,6 +252,7 @@ Album_control.prototype.append_added_parent_album_record = function(pInsert_id, 
 
     $("#formAlbumList table tbody").append(_new_album_html);
 
+    $(".formAlbumList").show();
     $(".label_no_album").hide();
     $(".firstAdded").removeClass("hide");
 
