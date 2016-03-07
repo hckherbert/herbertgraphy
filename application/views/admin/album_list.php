@@ -51,17 +51,8 @@
 	<div class="section">
 		<h1 class="pageHading">Album List</h1>
 		<?php
-		if (isset($result_delete_album))
-		{
-			echo "<p>result delete data flushed</p>";
-		}
-		if (isset($result_delete_album) && $result_delete_album == 1)
-		{
-			echo "<p>Albums deleted successfully</p>";
-		}
 
-		if (count($parent_albums)) {
-			echo form_open('admin/album_control/update_album_list', 'class="formAlbumList" id="formAlbumList"');
+			echo form_open('admin/album_control/update_album_list', 'class="formAlbumList hide" id="formAlbumList"');
 		?>
 		<table class="albumList listing">
 			<thead>
@@ -71,46 +62,11 @@
 				<th width="5%">Delete</th>
 				<th width="5%"></th>
 			</thead>
-			<tbody>
-			<?php foreach ($parent_albums as $album): ?>
-				<tr>
-					<td><?php echo $album["name"]; ?></td>
-					<td><?php echo $album["label"]; ?></td>
-					<td><?php echo $album["intro"]; ?></td>
-					<td align="center">
-						<input name="id[]" type="hidden" value="<?php echo $album["id"]; ?>">
-						<input name="del_id[]" type="checkbox" value="<?php echo $album["id"]; ?>">
-						<input name="order[]" type="hidden" value="<?php echo $album["order"]; ?>">
-					</td>
-					<td align="center"><input name="edit" type="button" value="Edit" onclick="location.href='<?php echo $this->router->fetch_class()?>/album_details/<?php echo $album["id"]; ?>'";></td>
-				</tr>
-			<?php endforeach;?>
-			</tbody>
+			<tbody></tbody>
 		</table>
 		<input name="submit" type="submit" value="Update">
 		<?php echo form_close(); ?>
-		<?php
-		}
-		else
-		{?>
-		<p class="label_no_album">There is no album</p>
-		<div class="hide firstAdded">
-			<?php echo form_open('admin/album_control/update_album_list', 'class="formAlbumList" id="formAlbumList"'); ?>
-			<table class="albumList listing">
-				<thead>
-				<th width="25%">Album name</th>
-				<th width="20%">Album Label</th>
-				<th width="45%">Album Intro</th>
-				<th width="5%">Delete</th>
-				<th width="5%"></th>
-				</thead>
-				<tbody>
-				</tbody>
-			</table>
-			<input name="submit" type="submit" value="Update">
-			<?php echo form_close(); ?>
-		</div>
-		<?php } ?>
+		<p class="hide label_no_album">There is no album</p>
 		<div class="clear"></div>
 	</div>
 	<div class="section">

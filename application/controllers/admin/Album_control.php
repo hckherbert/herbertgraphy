@@ -17,8 +17,7 @@ class Album_control extends CI_Controller
 
 	public function index()
 	{
-		$data["parent_albums"] = $this->album_model->get_all_parent_albums();
-		$this->load->view("admin/album_list", $data);
+		$this->load->view("admin/album_list");
 	}
 
 	public function get_all_parent_albums()
