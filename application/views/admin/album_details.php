@@ -46,7 +46,7 @@
 </script>
 </head>
 <body>
-<div class="adminMain">
+<div class="adminMain" id="page_album_details">
 	<div class="section">
 		<h1 class="pageHading">Album details</h1>
 		<?php echo form_open('admin/album_control/update_album_info', 'class="formInfo" id="formUpdateAlbumInfo"'); ?>

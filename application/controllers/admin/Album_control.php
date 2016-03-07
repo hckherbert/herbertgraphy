@@ -20,6 +20,20 @@ class Album_control extends CI_Controller
 		$data["parent_albums"] = $this->album_model->get_all_parent_albums();
 		$this->load->view("admin/album_list", $data);
 	}
+
+	public function get_all_parent_albums()
+	{
+		$data["parent_albums"] = $this->album_model->get_all_parent_albums();
+
+		if ($data["parent_albums"])
+		{
+			JSONAPI::echo_json_successful_response($data, TRUE);
+		}
+		else
+		{
+			JSONAPI::echo_json_error_response(NULL, FALSE);
+		}
+	}
 	
 	public function update_album_list()
 	{

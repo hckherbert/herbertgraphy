@@ -47,7 +47,7 @@
 </script>
 </head>
 <body>
-<div class="adminMain">
+<div class="adminMain" id="page_album_list">
 	<div class="section">
 		<h1 class="pageHading">Album List</h1>
 		<?php
