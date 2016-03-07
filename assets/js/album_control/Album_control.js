@@ -37,15 +37,35 @@ Album_control.prototype.submit_handler = function()
 {
     var _self = this;
 
-    $("#formAlbumList").on
+    $("#formAlbumList, #formSubAlbumList").on
     (
         "submit",
-        function(pEvent) {
+        function(pEvent)
+        {
             pEvent.preventDefault();
 
-            if (confirm("Confirm delete the selected album(s)?"))
-            {
+            var _formInstance = $(this);
+            var _del_count = $("input[name='del_id[]']:checked", _formInstance).size();
+            console.log(_del_count);
 
+            var _isConfirmUpdate = true;
+
+            if (_del_count > 0)
+            {
+                if (confirm("Confirm delete the selected album(s)?"))
+                {
+                    _isConfirmUpdate = true;
+                }
+                else
+                {
+                    _isConfirmUpdate = false;
+                }
+
+
+            }
+
+            if (_isConfirmUpdate)
+            {
                 var _postData = $(this).serializeArray();
 
                 $.ajax(
@@ -62,7 +82,8 @@ Album_control.prototype.submit_handler = function()
                                 History.pushState({"album_list_data": $(".albumList tbody").html()}, document.title, null);
                             }
                         },
-                        error: function (jqxhr, status) {
+                        error: function (jqxhr, status)
+                        {
 
                         }
                     }
@@ -202,8 +223,7 @@ Album_control.prototype.refresh_album_list_on_updated = function()
 
 Album_control.prototype.append_added_parent_album_record = function(pInsert_id, pFormId)
 {
-    console.log(pFormId);
-
+   
     var _album_name = $("#" + pFormId + " input[name='name']").val();
     var _album_label = $("#" + pFormId + " input[name='label']").val();
     var _album_intro = $("#" + pFormId + " textarea[name='intro']").val();
