@@ -39,6 +39,7 @@ class Album_control extends CI_Controller
 		}
 		else
 		{
+
 			if (!$this->album_model->delete_albums($del_ids, $album_ids))
 			{
 				$is_query_success = false;

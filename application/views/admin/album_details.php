@@ -119,7 +119,7 @@
 		}
 		else
 		{?>
-		<p class="label_no_album">There is no subm-album</p>
+		<p class="label_no_album">There is no sub-album</p>
 			<div class="hide firstAdded">
 				<?php echo form_open('admin/album_control/update_album_list', 'class="formAlbumList" id="formAlbumList"'); ?>
 				<table class="albumList listing">

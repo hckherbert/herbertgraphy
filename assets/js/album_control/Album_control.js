@@ -70,12 +70,14 @@ Album_control.prototype.submit_handler = function()
 
                 $.ajax(
                     {
-                        url: "album_control/update_album_list",
+                        url: _formInstance.attr("action"),
                         data: _postData,
                         type: "POST",
                         dataType: "json",
                         success: function (pData)
                         {
+                            console.log("dawndawn");
+
                             if (pData["successcode"] && pData["successcode"] == 1)
                             {
                                 _self.refresh_album_list_on_updated();
@@ -84,7 +86,7 @@ Album_control.prototype.submit_handler = function()
                         },
                         error: function (jqxhr, status)
                         {
-
+                            console.log("err");
                         }
                     }
                 );
@@ -209,6 +211,12 @@ Album_control.prototype.refresh_album_list_on_updated = function()
             {
                 $(this).parents("tr").remove();
             }
+
+            if (!$(".albumList tbody tr").size())
+            {
+                $(".firstAdded").addClass("hide");
+                $(".label_no_album").show();
+            }
         }
     )
 
@@ -223,7 +231,7 @@ Album_control.prototype.refresh_album_list_on_updated = function()
 
 Album_control.prototype.append_added_parent_album_record = function(pInsert_id, pFormId)
 {
-   
+
     var _album_name = $("#" + pFormId + " input[name='name']").val();
     var _album_label = $("#" + pFormId + " input[name='label']").val();
     var _album_intro = $("#" + pFormId + " textarea[name='intro']").val();
