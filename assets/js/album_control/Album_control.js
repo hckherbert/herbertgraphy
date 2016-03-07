@@ -185,16 +185,16 @@ Album_control.prototype.get_all_parent_albums = function()
     $.ajax
     (
         {
-            url: "album_control/get_all_parent_albums",
+            url: "../album_control/get_all_parent_albums",
             type: "POST",
             dataType: "json",
             success: function (pData)
             {
                 if (pData["successcode"] && pData["successcode"] == 1)
                 {
-                    if (pData["response"]["parent_albums"].length)
+                    if (pData["response"].length)
                     {
-                        _self.render_album_list(pData["response"]["parent_albums"]);
+                        _self.render_album_list(pData["response"]);
                     }
                     else
                     {
@@ -232,9 +232,9 @@ Album_control.prototype.get_sub_album_list = function(pAlbumId)
                 if (pData["successcode"] && pData["successcode"] == 1)
                 {
 
-                    if (pData["response"]["parent_albums"].length)
+                    if (pData["response"].length)
                     {
-                        _self.render_album_list(pData["response"]["parent_albums"]);
+                        _self.render_album_list(pData["response"]);
                     }
                     else
                     {
@@ -331,7 +331,7 @@ Album_control.prototype.render_album_list = function(pData)
         _album_html += "<input name='del_id[]' type='checkbox' value='" + pData[_i]["id"] + "'>";
         _album_html += "<input name='order[]' type='hidden' value='" + pData[_i]["order"] + "'>";
         _album_html += "</td>";
-        _album_html += "<td align='center'><input name='edit' type='button' value='Edit' onclick='location.href=&#39;album_control/album_details/" +  pData[_i]["id"] + "&#39;'></td>";
+        _album_html += "<td align='center'><input name='edit' type='button' value='Edit' onclick='location.href=&#39;../album_control/album_details/" +  pData[_i]["id"] + "&#39;'></td>";
         _album_html += "</tr>";
     }
 

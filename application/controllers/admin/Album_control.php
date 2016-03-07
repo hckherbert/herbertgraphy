@@ -22,15 +22,15 @@ class Album_control extends CI_Controller
 
 	public function get_all_parent_albums()
 	{
-		$data["parent_albums"] = $this->album_model->get_all_parent_albums();
+		$data = $this->album_model->get_all_parent_albums();
 
-		if ($data["parent_albums"])
+		if ($data)
 		{
 			JSONAPI::echo_json_successful_response($data, TRUE);
 		}
 		else
 		{
-			JSONAPI::echo_json_error_response(NULL, FALSE);
+			JSONAPI::echo_json_error_response();
 		}
 	}
 	
@@ -65,7 +65,7 @@ class Album_control extends CI_Controller
 		}
 		else
 		{
-			JSONAPI::echo_json_error_response(NULL, FALSE);
+			JSONAPI::echo_json_error_response();
 		}
 	}
 
@@ -200,16 +200,15 @@ class Album_control extends CI_Controller
 
 	public function get_subalbum_list($pAlbum_id)
 	{
-		$data["sub_albums"] = $this->album_model->get_sub_album_by_parent_id($pAlbum_id);
+		$data= $this->album_model->get_sub_album_by_parent_id($pAlbum_id);
 
-
-		if ($data["sub_albums"] === TRUE)
+		if ($data)
 		{
 			JSONAPI::echo_json_successful_response($data, TRUE);
 		}
 		else
 		{
-			JSONAPI::echo_json_error_response(NULL, FALSE);
+			JSONAPI::echo_json_error_response();
 		}
 	}
 
