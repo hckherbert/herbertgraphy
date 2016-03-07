@@ -12,11 +12,9 @@ function Album_control()
         }
     }
 
-
-    History.Adapter.bind(window,'statechange',function(){
-        console.log("why");
+    History.Adapter.bind(window,'statechange',function()
+    {
         var State = History.getState();
-        console.log(State);
         History.log('statechange:', State.data, State.title, State.url);
     });
 
@@ -46,8 +44,6 @@ Album_control.prototype.submit_handler = function()
 
             var _formInstance = $(this);
             var _del_count = $("input[name='del_id[]']:checked", _formInstance).size();
-            console.log(_del_count);
-
             var _isConfirmUpdate = true;
 
             if (_del_count > 0)
@@ -76,7 +72,6 @@ Album_control.prototype.submit_handler = function()
                         dataType: "json",
                         success: function (pData)
                         {
-                            console.log("dawndawn");
 
                             if (pData["successcode"] && pData["successcode"] == 1)
                             {
@@ -86,7 +81,7 @@ Album_control.prototype.submit_handler = function()
                         },
                         error: function (jqxhr, status)
                         {
-                            console.log("err");
+
                         }
                     }
                 );
@@ -129,8 +124,6 @@ Album_control.prototype.submit_handler = function()
                     },
                     error: function(pData, jqxhr, status)
                     {
-                       console.log(pData);
-
                         _formInstance.find(".error").empty();
 
                         if (pData["responseJSON"]["error_messages"]["validation_error"])
@@ -170,7 +163,6 @@ Album_control.prototype.submit_handler = function()
                         _formInstance.find(".error").empty();
 
                         if (pData["successcode"] && pData["successcode"] == 1) {
-                            console.log("update album info success");
                             //History.pushState({"album_list_data": $(".albumList tbody").html()}, document.title, null);
                         }
 
@@ -178,15 +170,10 @@ Album_control.prototype.submit_handler = function()
                     error: function (pData, jqxhr, status)
                     {
                         _formInstance.find(".error").empty();
-
-                        console.log(pData);
-
                         if (pData["responseJSON"]["error_messages"]["validation_error"])
                         {
                             for (var err_label in pData["responseJSON"]["error_messages"])
                             {
-                                console.log(err_label);
-
                                 if (err_label != "validation_error")
                                 {
                                     _formInstance.find("input[name='" + err_label + "']").next(".error").text(pData["responseJSON"]["error_messages"][err_label]);
