@@ -56,7 +56,8 @@ Album_control.prototype.submit_handler = function()
                         dataType: "json",
                         success: function (pData)
                         {
-                            if (pData["successcode"] && pData["successcode"] == 1) {
+                            if (pData["successcode"] && pData["successcode"] == 1)
+                            {
                                 _self.refresh_album_list_on_updated();
                                 History.pushState({"album_list_data": $(".albumList tbody").html()}, document.title, null);
                             }
@@ -92,7 +93,8 @@ Album_control.prototype.submit_handler = function()
 
                         _formInstance.find(".error").empty();
 
-                        if (pData["successcode"] && pData["successcode"] == 1) {
+                        if (pData["successcode"] && pData["successcode"] == 1)
+                        {
                             _self.append_added_parent_album_record(pData["response"]["insert_id"], _formId);
 
                             if (_formId == "formAddAlbum")
@@ -200,6 +202,8 @@ Album_control.prototype.refresh_album_list_on_updated = function()
 
 Album_control.prototype.append_added_parent_album_record = function(pInsert_id, pFormId)
 {
+    console.log(pFormId);
+
     var _album_name = $("#" + pFormId + " input[name='name']").val();
     var _album_label = $("#" + pFormId + " input[name='label']").val();
     var _album_intro = $("#" + pFormId + " textarea[name='intro']").val();
@@ -220,6 +224,9 @@ Album_control.prototype.append_added_parent_album_record = function(pInsert_id, 
     _new_album_html += "</tr>";
 
     $("#formAlbumList table tbody").append(_new_album_html);
+
+    $(".label_no_album").hide();
+    $(".firstAdded").removeClass("hide");
 
     document.getElementById(pFormId).reset();
 }
