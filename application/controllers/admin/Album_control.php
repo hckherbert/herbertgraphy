@@ -194,8 +194,23 @@ class Album_control extends CI_Controller
 	{
 		$data= $this->album_model->get_album_details($pAlbum_id);
 		$data["album_id"] = $pAlbum_id;
-		$data["sub_albums"] = $this->album_model->get_sub_album_by_parent_id($pAlbum_id);
+		//$data["sub_albums"] = $this->album_model->get_sub_album_by_parent_id($pAlbum_id);
 		$this->load->view("admin/album_details", $data);
+	}
+
+	public function get_subalbum_list($pAlbum_id)
+	{
+		$data["sub_albums"] = $this->album_model->get_sub_album_by_parent_id($pAlbum_id);
+
+
+		if ($data["sub_albums"] === TRUE)
+		{
+			JSONAPI::echo_json_successful_response($data, TRUE);
+		}
+		else
+		{
+			JSONAPI::echo_json_error_response(NULL, FALSE);
+		}
 	}
 
 }

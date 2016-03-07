@@ -34,12 +34,13 @@
 <script>
 
  var mAlbum_control = null;
+ var mAlbum_id = "<?php echo $album_id ?>";
 
  $(document).ready
  (
 	function()
 	{
-		mAlbum_control = new Album_control();
+		mAlbum_control = new Album_control(mAlbum_id);
 
 	}
  );
@@ -86,57 +87,21 @@
 	<div class="section">
 		<h1 class="pageHading">Sub-album List</h1>
 		<?php
-		if (count($sub_albums)) {
-			echo form_open('admin/album_control/update_album_list','id="formSubAlbumList"');
+		echo form_open('admin/album_control/update_album_list', 'class="formAlbumList hide" id="formSubAlbumList"');
 		?>
 		<table class="albumList listing">
 			<thead>
-				<th width="25%">Album name</th>
-				<th width="20%">Album Label</th>
-				<th width="45%">Album Intro</th>
-				<th width="5%">Delete</th>
-				<th width="5%"></th>
+			<th width="25%">Album name</th>
+			<th width="20%">Album Label</th>
+			<th width="45%">Album Intro</th>
+			<th width="5%">Delete</th>
+			<th width="5%"></th>
 			</thead>
-			<tbody>
-			<?php foreach ($sub_albums as $album): ?>
-				<tr>
-					<td><?php echo $album["name"]; ?></td>
-					<td><?php echo $album["label"]; ?></td>
-					<td><?php echo $album["intro"]; ?></td>
-					<td align="center">
-						<input name="id[]" type="hidden" value="<?php echo $album["id"]; ?>">
-						<input name="del_id[]" type="checkbox" value="<?php echo $album["id"]; ?>">
-						<input name="order[]" type="hidden" value="<?php echo $album["order"]; ?>">
-					</td>
-					<td align="center"><input name="edit[]" type="button" value="Edit"></td>
-				</tr>
-			<?php endforeach;?>
-			</tbody>
+			<tbody></tbody>
 		</table>
 		<input name="submit" type="submit" value="Update">
 		<?php echo form_close(); ?>
-		<?php
-		}
-		else
-		{?>
-		<p class="label_no_album">There is no sub-album</p>
-			<div class="hide firstAdded">
-				<?php echo form_open('admin/album_control/update_album_list', 'class="formAlbumList" id="formAlbumList"'); ?>
-				<table class="albumList listing">
-					<thead>
-					<th width="25%">Album name</th>
-					<th width="20%">Album Label</th>
-					<th width="45%">Album Intro</th>
-					<th width="5%">Delete</th>
-					<th width="5%"></th>
-					</thead>
-					<tbody>
-					</tbody>
-				</table>
-				<input name="submit" type="submit" value="Update">
-				<?php echo form_close(); ?>
-			</div>
-		<?php } ?>
+		<p class="hide label_no_album">There is no subalbum</p>
 		<div class="clear"></div>
 	</div>
 

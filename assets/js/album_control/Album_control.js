@@ -1,12 +1,18 @@
-function Album_control()
+function Album_control(pAlbumId)
 {
-    var _self = this;
     this.init_ui();
     this.submit_handler();
 
     if ($("#page_album_list").size())
     {
         this.get_all_parent_albums();
+    }
+    else if ($("#page_album_details").size())
+    {
+        if (mAlbum_id!=undefined && mAlbum_id!=null)
+        {
+            this.get_sub_album_list(pAlbumId);
+        }
     }
 }
 
@@ -58,7 +64,6 @@ Album_control.prototype.submit_handler = function()
                         dataType: "json",
                         success: function (pData)
                         {
-
                             if (pData["successcode"] && pData["successcode"] == 1)
                             {
                                 _self.refresh_album_list_on_updated();
@@ -175,7 +180,6 @@ Album_control.prototype.submit_handler = function()
 
 Album_control.prototype.get_all_parent_albums = function()
 {
-
     var _self = this;
 
     $.ajax
@@ -190,7 +194,7 @@ Album_control.prototype.get_all_parent_albums = function()
                 {
                     if (pData["response"]["parent_albums"].length)
                     {
-                        _self.render_parent_album_list(pData["response"]["parent_albums"]);
+                        _self.render_album_list(pData["response"]["parent_albums"]);
                     }
                     else
                     {
@@ -210,6 +214,45 @@ Album_control.prototype.get_all_parent_albums = function()
     );
 }
 
+
+Album_control.prototype.get_sub_album_list = function(pAlbumId)
+{
+    var _self = this;
+
+    $.ajax
+    (
+        {
+            url: "../get_subalbum_list/" + pAlbumId,
+            type: "POST",
+            dataType: "json",
+            success: function (pData)
+            {
+                console.log("dawn");
+
+                if (pData["successcode"] && pData["successcode"] == 1)
+                {
+
+                    if (pData["response"]["parent_albums"].length)
+                    {
+                        _self.render_album_list(pData["response"]["parent_albums"]);
+                    }
+                    else
+                    {
+                        $(".formAlbumList").addClass("hide");
+                        $(".label_no_album").removeClass("hide");
+                    }
+                }
+                else
+                {
+
+                }
+            },
+            error: function()
+            {
+            }
+        }
+    );
+}
 
 Album_control.prototype.refresh_album_list_on_updated = function()
 {
@@ -271,13 +314,13 @@ Album_control.prototype.append_added_parent_album_record = function(pInsert_id, 
 }
 
 
-Album_control.prototype.render_parent_album_list = function(pData)
+Album_control.prototype.render_album_list = function(pData)
 {
     var _album_html = "";
 
     for (var _i=0; _i< pData.length; _i++)
     {
-        $("#formAlbumList table tbody").empty();
+        $(".formAlbumList table tbody").empty();
 
         _album_html += "<tr class='ui-sortable-handle'>"
         _album_html += "<td>" + pData[_i]["name"] +  "</td>";
@@ -292,7 +335,7 @@ Album_control.prototype.render_parent_album_list = function(pData)
         _album_html += "</tr>";
     }
 
-    $("#formAlbumList table tbody").append(_album_html);
+    $(".formAlbumList table tbody").append(_album_html);
 
     $(".formAlbumList").removeClass("hide");
     $(".label_no_album").addClass("hide");
