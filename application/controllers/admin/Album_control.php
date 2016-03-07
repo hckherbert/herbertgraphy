@@ -202,7 +202,7 @@ class Album_control extends CI_Controller
 	{
 		$data= $this->album_model->get_sub_album_by_parent_id($pAlbum_id);
 
-		if ($data)
+		if ($data!== FALSE)
 		{
 			JSONAPI::echo_json_successful_response($data, TRUE);
 		}

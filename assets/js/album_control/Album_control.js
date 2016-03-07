@@ -231,7 +231,6 @@ Album_control.prototype.get_sub_album_list = function(pAlbumId)
 
                 if (pData["successcode"] && pData["successcode"] == 1)
                 {
-
                     if (pData["response"].length)
                     {
                         _self.render_album_list(pData["response"]);
