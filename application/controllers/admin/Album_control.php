@@ -53,7 +53,7 @@ class Album_control extends CI_Controller
 		else
 		{
 
-			if (!$this->album_model->delete_albums($del_ids, $album_ids))
+			if (!$this->album_model->delete_albums_and_reoder($del_ids, $album_ids))
 			{
 				$is_query_success = false;
 			}
@@ -178,6 +178,7 @@ class Album_control extends CI_Controller
 		{
 			$post_data = $this->input->post(NULL, TRUE);
 			$result =  $this->album_model->update_album_info($post_data);
+
 			if ($result)
 			{
 				JSONAPI::echo_json_successful_response();
@@ -200,8 +201,26 @@ class Album_control extends CI_Controller
 
 		}
 
-		//$data["sub_albums"] = $this->album_model->get_sub_album_by_parent_id($pAlbum_id);
 		$this->load->view("admin/album_details", $data);
+	}
+
+	public function delete_album()
+	{
+
+		$del_id = $this->input->post("id");
+		$album_id =  $this->input->post("order");
+		$parent_id =  $this->input->post("parentId");
+
+		$result =  $this->album_model->delete_single_album($del_id, $album_id, $parent_id);
+
+		if ($result)
+		{
+			JSONAPI::echo_json_successful_response();
+		}
+		else
+		{
+			JSONAPI::echo_json_error_response();
+		}
 	}
 
 	public function get_subalbum_list($pAlbum_id)

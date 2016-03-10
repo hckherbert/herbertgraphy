@@ -40,7 +40,19 @@ Album_control.prototype.submit_handler = function()
 
             if (_del_count > 0)
             {
-                if (confirm("Confirm delete the selected album(s)?"))
+                var _confirmDelMsg = "";
+
+                if (_formInstance.attr("id") == "formAlbumList")
+                {
+                    _confirmDelMsg = "Confirm delete the selected album(s)?";
+                }
+                else if (_formInstance.attr("id") == "formSubAlbumList")
+                {
+                    _confirmDelMsg = "Confirm delete the selected album(s)? Note that sub-album(s) will be deleted also";
+                }
+
+
+                if (confirm(_confirmDelMsg))
                 {
                     _isConfirmUpdate = true;
                 }
@@ -176,6 +188,43 @@ Album_control.prototype.submit_handler = function()
             );
         }
     )
+
+
+    $(".formDeleteAlbum").on
+    (
+        "submit",
+        function(pEvent)
+        {
+            pEvent.preventDefault();
+
+            console.log("a");
+
+            var _postData = $(this).serializeArray();
+            var _formInstance = $(this);
+
+            $.ajax(
+                {
+                    url: _formInstance.attr("action"),
+                    data: _postData,
+                    type: "POST",
+                    dataType: "json",
+                    success: function (pData)
+                    {
+
+                        if (pData["successcode"] && pData["successcode"] == 1)
+                        {
+                            location.href = GLOBAL_SITE_URL + "admin/album_control";
+                        }
+
+                    },
+                    error: function (pData, jqxhr, status)
+                    {
+                        console.log("b");
+                    }
+                }
+            );
+        }
+    )
 }
 
 Album_control.prototype.get_all_parent_albums = function()
@@ -299,7 +348,7 @@ Album_control.prototype.append_added_parent_album_record = function(pInsert_id, 
     _new_album_html += "<input name='del_id[]' type='checkbox' value='" + pInsert_id + "'>";
     _new_album_html += "<input name='order[]' type='hidden' value='" + _total_rows_before_added + "'>";
     _new_album_html += "</td>";
-    _new_album_html += "<td align='center'><input name='edit' type='button' value='Edit' onclick='location.href=&#39;album_control/album_details/" + pInsert_id + "&#39;'></td>";
+    _new_album_html += "<td align='center'><input name='edit' type='button' value='Edit' onclick='location.href=&#39;" + GLOBAL_SITE_URL + "admin/album_control/album_details/" + pInsert_id + "&#39;'></td>";
     _new_album_html += "</tr>";
 
     $(".formAlbumList table tbody").append(_new_album_html);

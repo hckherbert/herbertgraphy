@@ -147,6 +147,18 @@
 		<?php echo form_close(); ?>
 	</div>
 <?php } ?>
+
+	<div class="section">
+		<h1 class="pageHading">Delete album</h1>
+		<?php echo form_open('admin/album_control/delete_album', 'class="formDeleteAlbum" id="formDeleteAlbum"'); ?>
+		<p>Delete this album? <?php if ($album_details->parentId == NULL) { ?> All sub-albums will be removed also.<?php } ?></p>
+		<input name="id" value="<?php echo $album_details->id; ?>" type="hidden">
+		<input name="order" value="<?php echo $album_details->order; ?>" type="hidden">
+		<input name="parentId" value="<?php echo $album_details->parentId; ?>" type="hidden">
+		<input name="submit" type="submit" value="OK">
+		<?php echo form_close(); ?>
+		<div class="clear"></div>
+	</div>
 </div>
 </body>
 </html>

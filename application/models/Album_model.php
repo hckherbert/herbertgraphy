@@ -38,7 +38,7 @@ class Album_model extends CI_Model
 	}
 
 
-	public function delete_albums($del_ids, $album_ids)
+	public function delete_albums_and_reoder($del_ids, $album_ids)
 	{
 		$this->db->where_in("id", $del_ids);
 		$this->db->or_where_in("parentId", $del_ids);
@@ -74,6 +74,57 @@ class Album_model extends CI_Model
 		return $result;
 	}
 
+	public function delete_single_album($id, $order, $parent_id)
+	{
+		$this->db->where_in("id", $id);
+		$this->db->or_where_in("parentId", $id);
+		$result = $this->db->delete("album");
+
+		if ($result) {
+
+			if ($parent_id !== NULL && $parent_id !== "" )
+			{
+				$this->db->where("parentId", $parent_id);
+				$this->db->order_by("order");
+				$query = $this->db->get("album");
+				$sub_album_count = $query->num_rows();
+
+				if ($sub_album_count > 0)
+				{
+
+					for ($i = $order+1; $i <= $sub_album_count; $i++)
+					{
+						$data = array
+						(
+							"order" => $i-1
+						);
+
+						$this->db->where("order", $i);
+						$this->db->where("parentId", $parent_id);
+						$result_update = $this->db->update("album", $data);
+
+
+						if (!$result_update)
+						{
+							return;
+						}
+					}
+
+					return true;
+				}
+				else
+				{
+					return true;
+				}
+
+			}
+			else
+			{
+				return true;
+			}
+		}
+	}
+
 	public function add_album($data)
 	{
 		$this->db->where("parentId", NULL);
@@ -107,7 +158,7 @@ class Album_model extends CI_Model
 	public function get_album_details($pAlbum_id)
 	{
 		$data = array();
-		$this->db->select("id, parentId, name, label, intro");
+		$this->db->select("id, parentId, order, name, label, intro");
 		$this->db->where("id", $pAlbum_id);
 		$query = $this->db->get("album");
 
@@ -130,12 +181,12 @@ class Album_model extends CI_Model
 		}
 	}
 
+
 	public function is_current_label_unique_against_others($pAlbum_label, $pAlbum_id)
 	{
 		$this->db->where("label", $pAlbum_label);
 		$this->db->where("id!=$pAlbum_id");
 		$query = $this->db->get("album");
-
 
 		if ($query->num_rows() > 0)
 		{
