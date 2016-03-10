@@ -1,15 +1,15 @@
-function Album_control(pAlbumId)
+function Album_control(pAlbumId, pParentId)
 {
     this.init_ui();
     this.submit_handler();
 
-    if ($("#page_album_list").size())
+    if (pAlbumId==undefined && pParentId==undefined)
     {
         this.get_all_parent_albums();
     }
-    else if ($("#page_album_details").size())
+    else
     {
-        if (mAlbum_id!=undefined && mAlbum_id!=null)
+        if (pParentId==undefined ||pParentId=="")
         {
             this.get_sub_album_list(pAlbumId);
         }
@@ -302,8 +302,7 @@ Album_control.prototype.append_added_parent_album_record = function(pInsert_id, 
     _new_album_html += "<td align='center'><input name='edit' type='button' value='Edit' onclick='location.href=&#39;album_control/album_details/" + pInsert_id + "&#39;'></td>";
     _new_album_html += "</tr>";
 
-    $("#formAlbumList table tbody").append(_new_album_html);
-
+    $(".formAlbumList table tbody").append(_new_album_html);
     $(".formAlbumList").removeClass("hide");
     $(".label_no_album").addClass("hide");
 

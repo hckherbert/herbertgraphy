@@ -37,13 +37,14 @@
 <script>
 
  var mAlbum_control = null;
- var mAlbum_id = "<?php echo $album_id ?>";
+ var mAlbum_id = "<?php echo $album_details->id ?>";
+ var mParent_id = "<?php echo $album_details->parentId; ?>";
 
  $(document).ready
  (
 	function()
 	{
-		mAlbum_control = new Album_control(mAlbum_id);
+		mAlbum_control = new Album_control(mAlbum_id, mParent_id);
 
 	}
  );
@@ -83,9 +84,11 @@
 				</td>
 			</tr>
 		</table>
-		<input name="id" type="hidden" value="<?php echo $album_id; ?>">
+		<input name="id" type="hidden" value="<?php echo $album_details->id; ?>">
 		<?php echo form_close(); ?>
 	</div>
+
+<?php if ($album_details->parentId == NULL) { ?>
 
 	<div class="section">
 		<h1 class="pageHading">Sub-album List</h1>
@@ -143,6 +146,7 @@
 		<input name="parentId" value="<?php echo $album_details->id; ?>" type="hidden">
 		<?php echo form_close(); ?>
 	</div>
+<?php } ?>
 </div>
 </body>
 </html>
