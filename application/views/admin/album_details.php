@@ -24,6 +24,9 @@
 <!-- FONT -->
 <link href='https://fonts.googleapis.com/css?family=Catamaran:400,700,300,200' rel='stylesheet' type='text/css'>
 <!-- Javascript -->
+<script>
+	GLOBAL_SITE_URL = "<?php echo site_url(); ?>";
+</script>
 <script src="<?php echo base_url('assets/js/jquery-1.11.3.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/jquery-ui-1.11.4/jquery-ui.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/jquery-migrate-1.2.1.min.js'); ?>"></script>

@@ -197,7 +197,7 @@ class Album_control extends CI_Controller
 		if ($data["album_details"]=== NULL)
 		{
 			show_404();
-			
+
 		}
 
 		$data["album_id"] = $pAlbum_id;

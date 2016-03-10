@@ -41,14 +41,17 @@ class Album_model extends CI_Model
 	public function delete_albums($del_ids, $album_ids)
 	{
 		$this->db->where_in("id", $del_ids);
+		$this->db->or_where_in("parentId", $del_ids);
 		$result = $this->db->delete("album");
 
 		if ($result) {
 
 			$order_count = 0;
 
-			for ($i = 0; $i < count($album_ids); $i++) {
-				if (!in_array($album_ids[$i], $del_ids)) {
+			for ($i = 0; $i < count($album_ids); $i++)
+			{
+				if (!in_array($album_ids[$i], $del_ids))
+				{
 					$data = array
 					(
 						"order" => $order_count
@@ -59,7 +62,8 @@ class Album_model extends CI_Model
 					$this->db->where("id", $album_ids[$i]);
 					$result_update = $this->db->update("album", $data);
 
-					if (!$result_update) {
+					if (!$result_update)
+					{
 						return;
 					}
 

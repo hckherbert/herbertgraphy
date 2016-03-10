@@ -328,7 +328,7 @@ Album_control.prototype.render_album_list = function(pData)
         _album_html += "<input name='del_id[]' type='checkbox' value='" + pData[_i]["id"] + "'>";
         _album_html += "<input name='order[]' type='hidden' value='" + pData[_i]["order"] + "'>";
         _album_html += "</td>";
-        _album_html += "<td align='center'><input name='edit' type='button' value='Edit' onclick='location.href=&#39;../admin/album_control/album_details/" +  pData[_i]["id"] + "&#39;'></td>";
+        _album_html += "<td align='center'><input name='edit' type='button' value='Edit' onclick='location.href=&#39;" + GLOBAL_SITE_URL + "admin/album_control/album_details/" +  pData[_i]["id"] + "&#39;'></td>";
         _album_html += "</tr>";
     }
 
