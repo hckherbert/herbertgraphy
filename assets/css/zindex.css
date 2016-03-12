@@ -1,3 +1,4 @@
+/*client side */
 .sMobile .infoPanel
 {
 	z-index:1;
@@ -17,3 +18,11 @@
 {
 	z-index:4;
 }
+
+/*admin side */
+.ajaxSuccessDisplay,
+.ajaxFailDisplay
+{
+	z-index:1;
+}
+

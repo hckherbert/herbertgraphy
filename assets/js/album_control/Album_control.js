@@ -3,7 +3,6 @@ Album_control.prototype.mParentId = null;
 function Album_control(pAlbumId, pParentId)
 {
     this.init_ui();
-    this.submit_handler();
 
     if (pAlbumId==undefined && pParentId==undefined)
     {
@@ -20,6 +19,9 @@ function Album_control(pAlbumId, pParentId)
             this.mParentId = pParentId;
         }
     }
+
+    this.prepare_listeners();
+    this.submit_handler();
 }
 
 
@@ -116,17 +118,29 @@ Album_control.prototype.submit_handler = function()
                     dataType: "json",
                     success: function(pData)
                     {
-
-                        _formInstance.find(".error").empty();
-
                         if (pData["successcode"] && pData["successcode"] == 1)
                         {
-                            _self.append_added_parent_album_record(pData["response"]["insert_id"], _formId);
+                            $(".ajaxSuccessDisplay").removeClass("hide");
 
-                            if (_formId == "formAddAlbum")
+                            setTimeout(function()
                             {
 
-                            }
+                                $(".ajaxSuccessDisplay").addClass("fadeIn");
+
+                                /*
+                                setTimeout(function()
+                                {
+                                    $(".ajaxSuccessDisplay").removeClass("fadeIn");
+
+                                }, 1200);
+                                */
+
+                            }, 200);
+
+
+                            _formInstance.find(".error").empty();
+                            _self.append_added_parent_album_record(pData["response"]["insert_id"], _formId);
+
 
                         }
                     },
@@ -240,6 +254,19 @@ Album_control.prototype.submit_handler = function()
         }
     )
 }
+
+
+Album_control.prototype.prepare_listeners = function()
+{
+    var _self = this;
+
+    $(".ajaxSuccessDisplay").on("transitionend", function()
+    {
+        _self.onAjaxSuccessDisplayTransEnd();
+    });
+
+}
+
 
 Album_control.prototype.get_all_parent_albums = function()
 {
@@ -398,5 +425,26 @@ Album_control.prototype.render_album_list = function(pData)
 
     $(".formAlbumList").removeClass("hide");
     $(".label_no_album").addClass("hide");
+
+}
+
+Album_control.prototype.onAjaxSuccessDisplayTransEnd = function()
+{
+    if ($(".ajaxSuccessDisplay").hasClass("fadeIn"))
+    {
+        setTimeout(
+            function()
+            {
+                $(".ajaxSuccessDisplay").removeClass("fadeIn");
+                return;
+            },
+            1000
+        )
+
+    }
+    else
+    {
+        $(".ajaxSuccessDisplay").addClass("hide");
+    }
 
 }

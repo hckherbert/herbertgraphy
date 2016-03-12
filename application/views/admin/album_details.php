@@ -51,6 +51,14 @@
 </script>
 </head>
 <body>
+<div class="ajaxSuccessDisplay hide">
+	<div class="bg"></div>
+	<p>Ajax Response success</p>
+</div>
+<div class="ajaxFailDisplay hide">
+	<div class="bg"></div>
+	<p>Ajax Response Failed</p>
+</div>
 <div class="adminMain" id="page_album_details">
 	<div class="section">
 		<h1 class="pageHading">Album details</h1>
