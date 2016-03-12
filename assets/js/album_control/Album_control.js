@@ -120,27 +120,9 @@ Album_control.prototype.submit_handler = function()
                     {
                         if (pData["successcode"] && pData["successcode"] == 1)
                         {
-                            $(".ajaxSuccessDisplay").removeClass("hide");
-
-                            setTimeout(function()
-                            {
-
-                                $(".ajaxSuccessDisplay").addClass("fadeIn");
-
-                                /*
-                                setTimeout(function()
-                                {
-                                    $(".ajaxSuccessDisplay").removeClass("fadeIn");
-
-                                }, 1200);
-                                */
-
-                            }, 200);
-
-
+                            _self.displaySuccess("Album is added successfully.");
                             _formInstance.find(".error").empty();
                             _self.append_added_parent_album_record(pData["response"]["insert_id"], _formId);
-
 
                         }
                     },
@@ -425,6 +407,19 @@ Album_control.prototype.render_album_list = function(pData)
 
     $(".formAlbumList").removeClass("hide");
     $(".label_no_album").addClass("hide");
+
+}
+
+Album_control.prototype.displaySuccess = function(pMessage)
+{
+    $(".ajaxSuccessDisplay p").empty().text(pMessage);
+    $(".ajaxSuccessDisplay").removeClass("hide");
+
+    setTimeout(function()
+    {
+        $(".ajaxSuccessDisplay").addClass("fadeIn");
+
+    }, 200);
 
 }
 
