@@ -1,3 +1,5 @@
+Album_control.prototype.mParentId = null;
+
 function Album_control(pAlbumId, pParentId)
 {
     this.init_ui();
@@ -12,6 +14,10 @@ function Album_control(pAlbumId, pParentId)
         if (pParentId==undefined ||pParentId=="")
         {
             this.get_sub_album_list(pAlbumId);
+        }
+        else
+        {
+            this.mParentId = pParentId;
         }
     }
 }
@@ -213,7 +219,15 @@ Album_control.prototype.submit_handler = function()
 
                         if (pData["successcode"] && pData["successcode"] == 1)
                         {
-                            location.href = GLOBAL_SITE_URL + "admin/album_control";
+                            if (_self.mParentId == null)
+                            {
+                                location.href = GLOBAL_SITE_URL + "admin/album_control";
+                            }
+                            else
+                            {
+                                location.href = GLOBAL_SITE_URL + "admin/album_control/album_details/" + _self.mParentId;
+                            }
+
                         }
 
                     },
