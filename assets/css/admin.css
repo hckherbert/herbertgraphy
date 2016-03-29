@@ -32,6 +32,19 @@ textarea
 	display:none !important;
 }
 
+.menu_link
+{
+	color:#333333;
+	display:block;
+	margin:0 0 10px 0;
+	text-decoration:underline;
+}
+
+.menu_link:hover
+{
+	color: #aaaaaa;;
+}
+
 .ajaxSuccessDisplay, .ajaxFailDisplay
 {
 	width:100%;

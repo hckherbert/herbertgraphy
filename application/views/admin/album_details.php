@@ -59,6 +59,7 @@
 	<p>Ajax Response Failed</p>
 </div>
 <div class="adminMain" id="page_album_details">
+	<a class="menu_link" href="<?php echo site_url("admin/album_control"); ?>">Back to album list</a>
 	<div class="section">
 		<h1 class="pageHading">Album details</h1>
 		<?php echo form_open('admin/album_control/update_album_info', 'class="formInfo" id="formUpdateAlbumInfo"'); ?>
