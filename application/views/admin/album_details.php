@@ -63,6 +63,14 @@
 		<h1 class="pageHading">Album details</h1>
 		<?php echo form_open('admin/album_control/update_album_info', 'class="formInfo" id="formUpdateAlbumInfo"'); ?>
 		<table>
+			<?php if (isset($album_details->parentName)) { ?>
+			<tr>
+				<td>Parent album:</td>
+				<td>
+					<div class="album_details_parent_album_name"><?php echo $album_details->parentName; ?></div>
+				</td>
+			</tr>
+			<?php } ?>
 			<tr>
 				<td>Album name:</td>
 				<td>

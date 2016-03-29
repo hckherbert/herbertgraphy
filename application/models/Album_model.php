@@ -163,6 +163,19 @@ class Album_model extends CI_Model
 		$query = $this->db->get("album");
 
 		$data["album_details"] = $query->row();
+
+		if ($data["album_details"]->parentId !== NULL)
+		{
+			$this->db->select("name AS parentName");
+			$this->db->where("id", $query->row()->parentId);
+			$query = $this->db->get("album");
+
+			if ($query->row())
+			{
+				$data["album_details"]->parentName = $query->row()->parentName;
+			}
+		}
+
 		return $data;
 	}
 

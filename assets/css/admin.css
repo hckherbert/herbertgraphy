@@ -128,6 +128,15 @@ h1.pageHading
 	background:#d5d5d5;
 }
 
+
+.album_details_parent_album_name
+{
+	padding: 0 0 8px 0;
+	color:#999999;
+	font-style:italic;
+	font-weight:bold;
+}
+
 .albumList
 {
 	width:100%;
