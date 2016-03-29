@@ -76,6 +76,8 @@ Album_control.prototype.submit_handler = function()
             {
                 var _postData = $(this).serializeArray();
 
+                console.log(_postData);
+
                 $.ajax(
                     {
                         url: _formInstance.attr("action"),
@@ -88,6 +90,8 @@ Album_control.prototype.submit_handler = function()
                             {
                                 _self.refresh_album_list_on_updated();
                             }
+
+                            _self.displaySuccess("Operation is executed successfully.");
                         },
                         error: function (jqxhr, status)
                         {
@@ -174,7 +178,7 @@ Album_control.prototype.submit_handler = function()
 
                         if (pData["successcode"] && pData["successcode"] == 1)
                         {
-
+                            _self.displaySuccess("Album info is updated successfully.");
                         }
 
                     },
