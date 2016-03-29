@@ -91,7 +91,7 @@ Album_control.prototype.submit_handler = function()
                         },
                         error: function (jqxhr, status)
                         {
-
+                            _self.displayFail();
                         }
                     }
                 );
@@ -130,6 +130,8 @@ Album_control.prototype.submit_handler = function()
                     {
                         _formInstance.find(".error").empty();
 
+                        console.log(pData);
+
                         if (pData["responseJSON"]["error_messages"]["validation_error"])
                         {
                             for (var err_label in pData["responseJSON"]["error_messages"])
@@ -139,6 +141,10 @@ Album_control.prototype.submit_handler = function()
                                     _formInstance.find("input[name='" + err_label + "']").next(".error").text(pData["responseJSON"]["error_messages"][err_label]);
                                 }
                             }
+                        }
+                        else
+                        {
+                            _self.displayFail();
                         }
                     }
                 }
@@ -185,6 +191,11 @@ Album_control.prototype.submit_handler = function()
                                 }
                             }
                         }
+                        else
+                        {
+                            _self.displayFail();
+                        }
+
                     }
                 }
             );
@@ -229,7 +240,7 @@ Album_control.prototype.submit_handler = function()
                     },
                     error: function (pData, jqxhr, status)
                     {
-                        console.log("b");
+                        _self.displayFail();
                     }
                 }
             );
@@ -245,6 +256,11 @@ Album_control.prototype.prepare_listeners = function()
     $(".ajaxSuccessDisplay").on("transitionend", function()
     {
         _self.onAjaxSuccessDisplayTransEnd();
+    });
+
+    $(".ajaxFailDisplay").on("transitionend", function()
+    {
+        _self.onAjaxFailDisplayTransEnd();
     });
 
 }
@@ -281,6 +297,7 @@ Album_control.prototype.get_all_parent_albums = function()
             },
             error: function()
             {
+                _self.displayFail();
             }
         }
     );
@@ -318,6 +335,7 @@ Album_control.prototype.get_sub_album_list = function(pAlbumId)
             },
             error: function()
             {
+                _self.displayFail();
             }
         }
     );
@@ -420,7 +438,6 @@ Album_control.prototype.displaySuccess = function(pMessage)
         $(".ajaxSuccessDisplay").addClass("fadeIn");
 
     }, 200);
-
 }
 
 Album_control.prototype.onAjaxSuccessDisplayTransEnd = function()
@@ -435,11 +452,42 @@ Album_control.prototype.onAjaxSuccessDisplayTransEnd = function()
             },
             1000
         )
-
     }
     else
     {
         $(".ajaxSuccessDisplay").addClass("hide");
     }
+}
 
+Album_control.prototype.displayFail = function()
+{
+    $(".ajaxFailDisplay p").empty().text("Oops. Something went wrong. Please try again later.");
+    $(".ajaxFailDisplay").removeClass("hide");
+
+    setTimeout(function()
+    {
+        $(".ajaxFailDisplay").addClass("fadeIn");
+
+    }, 200);
+}
+
+
+
+Album_control.prototype.onAjaxFailDisplayTransEnd = function()
+{
+    if ($(".ajaxFailDisplay").hasClass("fadeIn"))
+    {
+        setTimeout(
+            function()
+            {
+                $(".ajaxFailDisplay").removeClass("fadeIn");
+                return;
+            },
+            1000
+        )
+    }
+    else
+    {
+        $(".ajaxFailDisplay").addClass("hide");
+    }
 }

@@ -104,7 +104,14 @@ class Album_control extends CI_Controller
 				"insert_id" => $insert_id
 			);
 
-			JSONAPI::echo_json_successful_response($data, TRUE);
+			if ($insert_id)
+			{
+				JSONAPI::echo_json_successful_response($data, TRUE);
+			}
+			else
+			{
+				JSONAPI::echo_json_error_response();
+			}
 		}
 	}
 
@@ -144,7 +151,14 @@ class Album_control extends CI_Controller
 					"insert_id" => $insert_id
 			);
 
-			JSONAPI::echo_json_successful_response($data, TRUE);
+			if ($insert_id)
+			{
+				JSONAPI::echo_json_successful_response($data, TRUE);
+			}
+			else
+			{
+				JSONAPI::echo_json_error_response();
+			}
 		}
 	}
 
