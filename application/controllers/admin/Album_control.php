@@ -253,7 +253,7 @@ class Album_control extends CI_Controller
 
 	public function check_exist()
 	{
-		if (file_exists($_SERVER['DOCUMENT_ROOT'] . '/dev/hg/assets/photos/' . $_POST['filename'])) {
+		if (file_exists(FCPATH .'/assets/photos/' . $_POST['filename'])) {
 			echo 1;
 		} else {
 			echo 0;
@@ -272,7 +272,7 @@ class Album_control extends CI_Controller
 
 		if (!empty($_FILES) && $_POST['token'] == $verifyToken) {
 			$tempFile   = $_FILES['Filedata']['tmp_name'];
-			$uploadDir  = $_SERVER['DOCUMENT_ROOT'] . '/dev/hg/assets'.$uploadDir;
+			$uploadDir  = FCPATH . 'assets/'.$uploadDir;
 			$targetFile = $uploadDir . $_FILES['Filedata']['name'];
 
 			// Validate the filetype
