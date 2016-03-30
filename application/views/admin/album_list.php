@@ -21,6 +21,7 @@
 <link rel="stylesheet" href="<?php echo base_url('assets/css/admin.css'); ?>" type="text/css" />
 <link rel="stylesheet" href="<?php echo base_url('assets/css/zindex.css'); ?>" type="text/css" />
 <link rel="stylesheet" href="<?php echo base_url('assets/css/jquery.jscrollpane.css'); ?>" type="text/css" />
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/uploadifive.css'); ?>">
 <!-- FONT -->
 <link href='https://fonts.googleapis.com/css?family=Catamaran:400,700,300,200' rel='stylesheet' type='text/css'>
 <!-- Javascript -->
@@ -32,6 +33,7 @@
 <script src="<?php echo base_url('assets/js/jquery-migrate-1.2.1.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/jquery.jscrollpane.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/jquery.mousewheel.js'); ?>"></script>
+<script src="<?php echo base_url('assets/js/album_control/jquery.uploadifive.min.js'); ?>" type="text/javascript"></script>
 <script src="<?php echo base_url('assets/js/album_control/Album_control.js'); ?>"></script>
 <script>
 
@@ -111,7 +113,33 @@
 				</td>
 			</tr>
 		</table>
-		<div class="dropzone" id="dropzone_new_album"></div>
+
+		<form>
+			<div id="queue"></div>
+			<input id="file_upload" name="file_upload" type="file" multiple="true">
+			<a style="position: relative; top: 8px;" href="javascript:$('#file_upload').uploadifive('upload')">Upload Files</a>
+		</form>
+
+		<script type="text/javascript">
+			<?php $timestamp = time();?>
+			$(function() {
+				$('#file_upload').uploadifive({
+					'auto'             : false,
+					//'checkScript'      : 'check-exists.php',
+					'checkScript'      : '<?php echo site_url(); ?>admin/album_control/check_exist',
+					'formData'         : {
+						'timestamp' : '<?php echo $timestamp;?>',
+						'token'     : '<?php echo md5('unique_salt' . $timestamp);?>'
+					},
+					'queueID'          : 'queue',
+					//'uploadScript'     : 'uploadifive.php',
+					'uploadScript'     : '<?php echo site_url(); ?>admin/album_control/upload',
+					'onUploadComplete' : function(file, data) { console.log(data); }
+				});
+			});
+		</script>
+
+
 		<?php echo form_close(); ?>
 	</div>
 </div>

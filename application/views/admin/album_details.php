@@ -21,6 +21,23 @@
 <link rel="stylesheet" href="<?php echo base_url('assets/css/admin.css'); ?>" type="text/css" />
 <link rel="stylesheet" href="<?php echo base_url('assets/css/zindex.css'); ?>" type="text/css" />
 <link rel="stylesheet" href="<?php echo base_url('assets/css/jquery.jscrollpane.css'); ?>" type="text/css" />
+	<style type="text/css">
+		body {
+			font: 13px Arial, Helvetica, Sans-serif;
+		}
+		.uploadifive-button {
+			float: left;
+			margin-right: 10px;
+		}
+		#queue {
+			border: 1px solid #E5E5E5;
+			height: 177px;
+			overflow: auto;
+			margin-bottom: 10px;
+			padding: 0 3px 3px;
+			width: 300px;
+		}
+	</style>
 <!-- FONT -->
 <link href='https://fonts.googleapis.com/css?family=Catamaran:400,700,300,200' rel='stylesheet' type='text/css'>
 <!-- Javascript -->
