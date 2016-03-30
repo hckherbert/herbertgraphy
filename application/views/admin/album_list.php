@@ -20,7 +20,6 @@
 <link rel="stylesheet" href="<?php echo base_url('assets/css/reset.css'); ?>" type="text/css" />
 <link rel="stylesheet" href="<?php echo base_url('assets/css/admin.css'); ?>" type="text/css" />
 <link rel="stylesheet" href="<?php echo base_url('assets/css/zindex.css'); ?>" type="text/css" />
-<link rel="stylesheet" href="<?php echo base_url('assets/css/dropzone.css'); ?>" type="text/css" />
 <link rel="stylesheet" href="<?php echo base_url('assets/css/jquery.jscrollpane.css'); ?>" type="text/css" />
 <!-- FONT -->
 <link href='https://fonts.googleapis.com/css?family=Catamaran:400,700,300,200' rel='stylesheet' type='text/css'>
@@ -33,7 +32,6 @@
 <script src="<?php echo base_url('assets/js/jquery-migrate-1.2.1.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/jquery.jscrollpane.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/jquery.mousewheel.js'); ?>"></script>
-<script src="<?php echo base_url('assets/js/album_control/dropzone.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/album_control/Album_control.js'); ?>"></script>
 <script>
 

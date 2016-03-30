@@ -3,7 +3,6 @@ Album_control.prototype.mParentId = null;
 function Album_control(pAlbumId, pParentId)
 {
     this.init_ui();
-    this.init_upload();
 
     if (pAlbumId==undefined && pParentId==undefined)
     {
@@ -31,21 +30,6 @@ Album_control.prototype.init_ui = function()
     $(".albumList tbody").sortable();
 
 }
-
-
-Album_control.prototype.init_upload = function()
-{
-    Dropzone.autoDiscover = false;
-
-    $("#dropzone_new_album").dropzone
-    (
-        {
-            url: "admin/album_control/upload/"
-        }
-    );
-
-}
-
 
 Album_control.prototype.submit_handler = function()
 {
