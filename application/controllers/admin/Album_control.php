@@ -266,6 +266,9 @@ class Album_control extends CI_Controller
 		$uploadDir = '/photos/';
 
 // Set the allowed file extensions
+
+
+
 		$fileTypes = array('jpg', 'jpeg', 'gif', 'png'); // Allowed file extensions
 
 		$verifyToken = md5('unique_salt' . $_POST['timestamp']);
@@ -281,6 +284,37 @@ class Album_control extends CI_Controller
 
 				// Save the file
 				move_uploaded_file($tempFile, $targetFile);
+
+
+				$this->load->library('image_lib');
+
+				$config['image_library'] = 'gd2';
+				$config['source_image']	= $targetFile;
+				$config['create_thumb'] = TRUE;
+				$config['maintain_ratio'] = TRUE;
+				$config['thumb_marker'] = "1024";
+				$config['width']	= 1024;
+				$config['height']	= 1024;
+				$config['quality'] = '100%';
+
+				$this->image_lib->initialize($config);
+				$this->image_lib->resize();
+				$this->image_lib->clear();
+
+
+				$config['image_library'] = 'gd2';
+				$config['source_image']	= $targetFile;
+				$config['create_thumb'] = TRUE;
+				$config['maintain_ratio'] = TRUE;
+				$config['thumb_marker'] = "768";
+				$config['width']	= 768;
+				$config['height']	= 768;
+				$config['quality'] = '100%';
+
+				$this->image_lib->initialize($config);
+				$this->image_lib->resize();
+				$this->image_lib->clear();
+
 				echo 1;
 
 			} else {
