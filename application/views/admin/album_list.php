@@ -134,6 +134,18 @@
 					'queueID'          : 'queue',
 					//'uploadScript'     : 'uploadifive.php',
 					'uploadScript'     : '<?php echo site_url(); ?>admin/album_control/upload',
+					'dnd': true,
+					'onAddQueueItem'       : function(file) {
+						var reader = new FileReader();
+						reader.onload = function(e) {
+							$("body").append(
+								"<p><strong>" + file.name + ":</strong><br />" +
+								'<img src="' + e.target.result + '" /></p>'
+							);
+						}
+						reader.readAsDataURL(file);
+
+					},
 					'onUploadComplete' : function(file, data) { console.log(data); }
 				});
 			});
