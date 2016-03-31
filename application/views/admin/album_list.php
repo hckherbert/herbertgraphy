@@ -125,13 +125,14 @@
 
 		<script type="text/javascript">
 
-			var mQueueItemIndex = -1;
+			var mQueueItemCount = 0;
+			var mUploadedCount = 0;
 
 			<?php $timestamp = time();?>
 			$(function() {
 				$('#file_upload').uploadifive({
 					'auto'             : false,
-					'buttonText'		: "drop files to me and see what's next",
+					'buttonText'		: "drop files to me or click me",
 					'buttonClass'		:  "dropButton",
 					//'checkScript'      : 'check-exists.php',
 					//'checkScript'      : '<?php echo site_url(); ?>admin/album_control/check_exist',
@@ -146,10 +147,9 @@
 					'itemTemplate'	   : "<div class='uploadifive-queue-item'><span class='filename'></span><span class='fileinfo'></span><div class='close'></div><div class='progress'><div class='progress-bar'></div></div></div>",
 					'onAddQueueItem'       : function(file)
 					{
+						$("#uploadifive-file_upload-file-" + mQueueItemCount).attr("data-filename", file.name);
 
-						mQueueItemIndex++;
-
-						$("#uploadifive-file_upload-file-" + mQueueItemIndex).attr("data-filename", file.name);
+						mQueueItemCount++;
 
 						var reader = new FileReader();
 						reader.onload = function(e)
@@ -161,7 +161,18 @@
 						reader.readAsDataURL(file);
 
 					},
-					'onUploadComplete' : function(file, data) { console.log(data); }
+					'onUploadComplete' : function(file, data)
+					{
+						mUploadedCount++;
+
+						if (mQueueItemCount == mUploadedCount)
+						{
+							$('#file_upload').uploadifive('clearQueue');
+
+							mUploadedCount = 0;
+							mQueueItemCount = 0;
+						};
+					}
 				});
 			});
 		</script>
