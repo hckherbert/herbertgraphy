@@ -114,11 +114,14 @@
 			</tr>
 		</table>
 
-		<form>
-			<div id="queue"></div>
-			<input id="file_upload" name="file_upload" type="file" multiple="true">
-			<a style="position: relative; top: 8px;" href="javascript:$('#file_upload').uploadifive('upload')">Upload Files</a>
-		</form>
+		<div id="uploaderWrapper">
+			<form>
+				<div id="queue"></div>
+				<input id="file_upload" name="file_upload" type="file" multiple="true">
+				<a style="position: relative; top: 8px;" href="javascript:$('#file_upload').uploadifive('upload')">Upload Files</a>
+				<div class="clear"></div>
+			</form>
+		</div>
 
 		<script type="text/javascript">
 
@@ -128,6 +131,8 @@
 			$(function() {
 				$('#file_upload').uploadifive({
 					'auto'             : false,
+					'buttonText'		: "drop files to me and see what's next",
+					'buttonClass'		:  "dropButton",
 					//'checkScript'      : 'check-exists.php',
 					//'checkScript'      : '<?php echo site_url(); ?>admin/album_control/check_exist',
 					'formData'         : {
