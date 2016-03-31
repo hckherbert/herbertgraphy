@@ -17,11 +17,11 @@
 <link href="android-icon-192x192.png" rel="icon" sizes="192x192" />
 <link href="android-icon-128x128.png" rel="icon" sizes="128x128" />
 <!-- CSS -->
+<link rel="stylesheet" href="<?php echo base_url('assets/css/jquery.jscrollpane.css'); ?>" type="text/css" />
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/uploadifive.css'); ?>">
 <link rel="stylesheet" href="<?php echo base_url('assets/css/reset.css'); ?>" type="text/css" />
 <link rel="stylesheet" href="<?php echo base_url('assets/css/admin.css'); ?>" type="text/css" />
 <link rel="stylesheet" href="<?php echo base_url('assets/css/zindex.css'); ?>" type="text/css" />
-<link rel="stylesheet" href="<?php echo base_url('assets/css/jquery.jscrollpane.css'); ?>" type="text/css" />
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/uploadifive.css'); ?>">
 <!-- FONT -->
 <link href='https://fonts.googleapis.com/css?family=Catamaran:400,700,300,200' rel='stylesheet' type='text/css'>
 <!-- Javascript -->
@@ -121,12 +121,15 @@
 		</form>
 
 		<script type="text/javascript">
+
+			var mQueueItemIndex = -1;
+
 			<?php $timestamp = time();?>
 			$(function() {
 				$('#file_upload').uploadifive({
 					'auto'             : false,
 					//'checkScript'      : 'check-exists.php',
-					'checkScript'      : '<?php echo site_url(); ?>admin/album_control/check_exist',
+					//'checkScript'      : '<?php echo site_url(); ?>admin/album_control/check_exist',
 					'formData'         : {
 						'timestamp' : '<?php echo $timestamp;?>',
 						'token'     : '<?php echo md5('unique_salt' . $timestamp);?>'
@@ -135,14 +138,21 @@
 					//'uploadScript'     : 'uploadifive.php',
 					'uploadScript'     : '<?php echo site_url(); ?>admin/album_control/upload',
 					'dnd': true,
-					'onAddQueueItem'       : function(file) {
+					'itemTemplate'	   : "<div class='uploadifive-queue-item'><span class='filename'></span><span class='fileinfo'></span><div class='close'></div><div class='progress'><div class='progress-bar'></div></div></div>",
+					'onAddQueueItem'       : function(file)
+					{
+
+						mQueueItemIndex++;
+
+						$("#uploadifive-file_upload-file-" + mQueueItemIndex).attr("data-filename", file.name);
+
 						var reader = new FileReader();
-						reader.onload = function(e) {
-							$("body").append(
-								"<p><strong>" + file.name + ":</strong><br />" +
-								'<img src="' + e.target.result + '" /></p>'
-							);
+						reader.onload = function(e)
+						{
+							$(".uploadifive-queue-item[data-filename='" + e.target.filename + "']").append("<img class='uploadImgPreview' src='" + e.target.result + "' /></p>");
 						}
+
+						reader.filename = file.name
 						reader.readAsDataURL(file);
 
 					},
