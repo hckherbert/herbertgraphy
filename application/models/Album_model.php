@@ -210,4 +210,10 @@ class Album_model extends CI_Model
 			return true;
 		}
 	}
+
+	public function add_uploaded_file_records($data)
+	{
+		$this->db->insert("photos", $data);
+		return $this->db->insert_id();
+	}
 }

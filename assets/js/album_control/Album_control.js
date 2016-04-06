@@ -1,4 +1,5 @@
 Album_control.prototype.mParentId = null;
+Album_control.prototype.mLastInsertId = null;
 
 function Album_control(pAlbumId, pParentId)
 {
@@ -47,7 +48,8 @@ Album_control.prototype.initUpload = function()
             //'checkScript'      : '<?php echo site_url(); ?>admin/album_control/check_exist',
             'formData'         : {
                 'timestamp' :  mTimeStamp,
-                'token'     : mToken
+                'token'     : mToken,
+                'albumId'   : _self.mLastInsertId
             },
             'queueID'          : 'queue',
             'uploadScript'     : GLOBAL_SITE_URL + "admin/album_control/upload",
@@ -234,6 +236,7 @@ Album_control.prototype.submit_handler = function()
                             if ($(".uploadifive-queue-item").size())
                             {
                                 $('#file_upload').uploadifive('upload');
+                                _self.mLastInsertId = pData["response"]["insert_id"];
                             }
                             else
                             {

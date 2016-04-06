@@ -386,6 +386,15 @@ class Album_control extends CI_Controller
 					echo "can't move file";
 				}
 
+				$data = array(
+					"albumId" => $_POST['albumId'],
+					"filename" =>  $_FILES['Filedata']['name'],
+					"create_date" => date('Y-m-d H:i:s')
+				);
+
+				$this->album_model->add_uploaded_file_records($data);
+
+
 			} else {
 
 				// The file type wasn't allowed
