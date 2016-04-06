@@ -157,7 +157,8 @@ h1.pageHading
 	background:#fff;
 }
 
-input[type='submit']
+input[type='submit'],
+input[type='button']
 {
 	float:right;
 }

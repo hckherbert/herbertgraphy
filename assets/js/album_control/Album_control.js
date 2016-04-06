@@ -35,6 +35,51 @@ Album_control.prototype.submit_handler = function()
 {
     var _self = this;
 
+    $("#sectionAddAlbum input[name='submit']").on("click", function()
+    {
+        //$("#formAddAlbum").submit();
+
+        $.ajax(
+            {
+                url: GLOBAL_SITE_URL + "admin/album_control/validate_add_album",
+                data : $("#formAddAlbum").serializeArray(),
+                type: "POST",
+                dataType: "json",
+                success: function(pData)
+                {
+                    //do upload...
+                    $('#file_upload').uploadifive('upload');
+
+                    $("#formAddAlbum").submit();
+                },
+                error: function(pData, jqxhr, status)
+                {
+                    $("#formAddAlbum").find(".error").empty();
+
+                    console.log(pData);
+
+                    if (pData["responseJSON"]["error_messages"]["validation_error"])
+                    {
+                        for (var err_label in pData["responseJSON"]["error_messages"])
+                        {
+                            if (err_label != "validation_error")
+                            {
+                                $("#formAddAlbum").find("input[name='" + err_label + "']").next(".error").text(pData["responseJSON"]["error_messages"][err_label]);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        _self.displayFail();
+                    }
+                }
+            }
+        );
+
+
+
+    })
+
     $("#formAlbumList, #formSubAlbumList").on
     (
         "submit",

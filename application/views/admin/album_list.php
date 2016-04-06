@@ -81,7 +81,7 @@
 		<p class="hide label_no_album">There is no album</p>
 		<div class="clear"></div>
 	</div>
-	<div class="section">
+	<div class="section" id="sectionAddAlbum">
 		<h1 class="pageHading">Add New Album</h1>
 		<?php echo form_open('admin/album_control/add_album', 'class="formInfo" id="formAddAlbum"'); ?>
 		<table>
@@ -107,6 +107,7 @@
 				</td>
 			</tr>
 		</table>
+		<?php echo form_close(); ?>
 
 		<div id="uploaderWrapper">
 			<form>
@@ -171,9 +172,9 @@
 			});
 		</script>
 
-		<input name="submit" type="submit" value="Add">
+		<input name="submit" type="button" value="Add">
 		<div class="clear"></div>
-		<?php echo form_close(); ?>
+
 	</div>
 </div>
 </body>

@@ -2,6 +2,7 @@
 
 class Album_control extends CI_Controller 
 {
+	private $config_validation_add_album;
 
 	public function __construct()
 	{
@@ -13,6 +14,19 @@ class Album_control extends CI_Controller
 		$this->load->library("JSONAPI");
 		$this->load->library("JSONAPIEnum");
 		$this->load->library("form_validation");
+
+		$this->config_validation_add_album =  array(
+			array(
+				'field'   => 'name',
+				'label'   => 'Album name',
+				'rules'   => 'trim|required'
+			),
+			array(
+				'field'   => 'label',
+				'label'   => 'Album label',
+				'rules'   => 'trim|required|is_unique[album.label]|label_char_format'
+			)
+		);
 	}
 
 	public function index()
@@ -71,20 +85,7 @@ class Album_control extends CI_Controller
 
 	public function add_album()
 	{
-		$config_validation = array(
-			array(
-				'field'   => 'name',
-				'label'   => 'Album name',
-				'rules'   => 'trim|required'
-			),
-			array(
-				'field'   => 'label',
-				'label'   => 'Album label',
-				'rules'   => 'trim|required|is_unique[album.label]|label_char_format'
-			)
-		);
-
-		$this->form_validation->set_rules($config_validation);
+		$this->form_validation->set_rules($this->config_validation_add_album);
 
 		if ($this->form_validation->run() == FALSE)
 		{
@@ -112,6 +113,25 @@ class Album_control extends CI_Controller
 			{
 				JSONAPI::echo_json_error_response();
 			}
+		}
+	}
+
+	public  function validate_add_album()
+	{
+		$this->form_validation->set_rules($this->config_validation_add_album);
+
+		if ($this->form_validation->run() == FALSE)
+		{
+			$data_error = array(
+				"validation_error" => true
+			);
+			$data_error = array_merge($data_error, $this->form_validation->error_array());
+
+			JSONAPI::echo_json_error_response($data_error);
+		}
+		else
+		{
+			JSONAPI::echo_json_successful_response();
 		}
 	}
 
