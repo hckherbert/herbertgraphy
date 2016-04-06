@@ -40,7 +40,7 @@ Album_control.prototype.initUpload = function()
     $(function() {
         $('#file_upload').uploadifive({
             'auto'             : false,
-            'buttonText'		: "drop files to me or click me",
+            'buttonText'		: "drop files to me or click me. You can skip photos and add later.",
             'buttonClass'		:  "dropButton",
             //'checkScript'      : 'check-exists.php',
             //'checkScript'      : '<?php echo site_url(); ?>admin/album_control/check_exist',
@@ -105,7 +105,15 @@ Album_control.prototype.submit_handler = function()
                 success: function(pData)
                 {
                     //do upload...
-                    $('#file_upload').uploadifive('upload');
+
+                    if ($(".uploadifive-queue-item").size())
+                    {
+                        $('#file_upload').uploadifive('upload');
+                    }
+                    else
+                    {
+                        $("#formAddAlbum").submit();
+                    }
 
                 },
                 error: function(pData, jqxhr, status)
