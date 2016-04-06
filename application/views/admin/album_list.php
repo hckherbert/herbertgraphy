@@ -117,7 +117,6 @@
 			<form>
 				<div id="queue"></div>
 				<input id="file_upload" name="file_upload" type="file" multiple="true">
-				<a style="position: relative; top: 8px;" href="javascript:$('#file_upload').uploadifive('upload')">Upload Files</a>
 				<div class="clear"></div>
 			</form>
 		</div>

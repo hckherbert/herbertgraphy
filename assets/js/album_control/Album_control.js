@@ -34,6 +34,7 @@ Album_control.prototype.init_ui = function()
 
 Album_control.prototype.initUpload = function()
 {
+    var _self = this;
     var mQueueItemCount = 0;
     var mUploadedCount = 0;
 
@@ -49,7 +50,6 @@ Album_control.prototype.initUpload = function()
                 'token'     : mToken
             },
             'queueID'          : 'queue',
-            //'uploadScript'     : 'uploadifive.php',
             'uploadScript'     : GLOBAL_SITE_URL + "admin/album_control/upload",
             'dnd': true,
             'itemTemplate'	   : "<div class='uploadifive-queue-item'><span class='filename'></span><span class='fileinfo'></span><div class='close'></div><div class='progress'><div class='progress-bar'></div></div></div>",
@@ -80,7 +80,13 @@ Album_control.prototype.initUpload = function()
                     mUploadedCount = 0;
                     mQueueItemCount = 0;
 
-                    $("#formAddAlbum").submit();
+                    _self.displaySuccess("Album is added successfully.");
+
+                    if ($("#formAddAlbum").size())
+                    {
+                        $("#formAddAlbum").find(".error").empty();
+                        _self.append_added_parent_album_record(pData["response"]["insert_id"], "formAddAlbum");
+                    }
 
                 };
             }
@@ -105,15 +111,7 @@ Album_control.prototype.submit_handler = function()
                 success: function(pData)
                 {
                     //do upload...
-
-                    if ($(".uploadifive-queue-item").size())
-                    {
-                        $('#file_upload').uploadifive('upload');
-                    }
-                    else
-                    {
-                        $("#formAddAlbum").submit();
-                    }
+                    $("#formAddAlbum").submit();
 
                 },
                 error: function(pData, jqxhr, status)
@@ -233,10 +231,16 @@ Album_control.prototype.submit_handler = function()
                     {
                         if (pData["successcode"] && pData["successcode"] == 1)
                         {
-                            _self.displaySuccess("Album is added successfully.");
-                            _formInstance.find(".error").empty();
-                            _self.append_added_parent_album_record(pData["response"]["insert_id"], _formId);
-
+                            if ($(".uploadifive-queue-item").size())
+                            {
+                                $('#file_upload').uploadifive('upload');
+                            }
+                            else
+                            {
+                                _self.displaySuccess("Album is added successfully.");
+                                _formInstance.find(".error").empty();
+                                _self.append_added_parent_album_record(pData["response"]["insert_id"], _formId);
+                            }
                         }
                     },
                     error: function(pData, jqxhr, status)

@@ -85,6 +85,8 @@ class Album_control extends CI_Controller
 
 	public function add_album()
 	{
+		//Validation is called once by ajax, before adding album
+		/*
 		$this->form_validation->set_rules($this->config_validation_add_album);
 
 		if ($this->form_validation->run() == FALSE)
@@ -114,6 +116,24 @@ class Album_control extends CI_Controller
 				JSONAPI::echo_json_error_response();
 			}
 		}
+		*/
+
+		$post_data = $this->input->post(NULL, TRUE);
+		$insert_id  = $this->album_model->add_album($post_data);
+
+		$data= array(
+			"insert_id" => $insert_id
+		);
+
+		if ($insert_id)
+		{
+			JSONAPI::echo_json_successful_response($data, TRUE);
+		}
+		else
+		{
+			JSONAPI::echo_json_error_response();
+		}
+
 	}
 
 	public  function validate_add_album()
