@@ -283,39 +283,68 @@ class Album_control extends CI_Controller
 			if (in_array(strtolower($fileParts['extension']), $fileTypes)) {
 
 				// Save the file
-				move_uploaded_file($tempFile, $targetFile);
+				if (move_uploaded_file($tempFile, $targetFile))
+				{
+
+					list($width, $height) = getimagesize($targetFile);
+
+					$this->load->library('image_lib');
+
+					if ($width >= 1680 || $height >= 1680)
+					{
+						$config['image_library'] = 'gd2';
+						$config['source_image'] = $targetFile;
+						$config['create_thumb'] = TRUE;
+						$config['maintain_ratio'] = TRUE;
+						$config['thumb_marker'] = "1680";
+						$config['width'] = 1680;
+						$config['height'] = 1680;
+						$config['quality'] = '100%';
+
+						$this->image_lib->initialize($config);
+						$this->image_lib->resize();
+						$this->image_lib->clear();
+					}
+
+					if ($width >= 1280 || $height >= 1280)
+					{
+						$config['image_library'] = 'gd2';
+						$config['source_image'] = $targetFile;
+						$config['create_thumb'] = TRUE;
+						$config['maintain_ratio'] = TRUE;
+						$config['thumb_marker'] = "1280";
+						$config['width'] = 1280;
+						$config['height'] = 1280;
+						$config['quality'] = '100%';
+
+						$this->image_lib->initialize($config);
+						$this->image_lib->resize();
+						$this->image_lib->clear();
+					}
 
 
-				$this->load->library('image_lib');
+					if ($width >= 800 || $height >= 800)
+					{
+						$config['image_library'] = 'gd2';
+						$config['source_image'] = $targetFile;
+						$config['create_thumb'] = TRUE;
+						$config['maintain_ratio'] = TRUE;
+						$config['thumb_marker'] = "800";
+						$config['width'] = 800;
+						$config['height'] = 800;
+						$config['quality'] = '100%';
 
-				$config['image_library'] = 'gd2';
-				$config['source_image']	= $targetFile;
-				$config['create_thumb'] = TRUE;
-				$config['maintain_ratio'] = TRUE;
-				$config['thumb_marker'] = "1024";
-				$config['width']	= 1024;
-				$config['height']	= 1024;
-				$config['quality'] = '100%';
+						$this->image_lib->initialize($config);
+						$this->image_lib->resize();
+						$this->image_lib->clear();
+					}
 
-				$this->image_lib->initialize($config);
-				$this->image_lib->resize();
-				$this->image_lib->clear();
-
-
-				$config['image_library'] = 'gd2';
-				$config['source_image']	= $targetFile;
-				$config['create_thumb'] = TRUE;
-				$config['maintain_ratio'] = TRUE;
-				$config['thumb_marker'] = "768";
-				$config['width']	= 768;
-				$config['height']	= 768;
-				$config['quality'] = '100%';
-
-				$this->image_lib->initialize($config);
-				$this->image_lib->resize();
-				$this->image_lib->clear();
-
-				echo 1;
+					echo 1;
+				}
+				else
+				{
+					echo "can't move file";
+				}
 
 			} else {
 

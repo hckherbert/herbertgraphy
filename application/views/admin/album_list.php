@@ -106,12 +106,6 @@
 					<div class="error"></div>
 				</td>
 			</tr>
-			<tr>
-				<td></td>
-				<td>
-					<input name="submit" type="submit" value="Add">
-				</td>
-			</tr>
 		</table>
 
 		<div id="uploaderWrapper">
@@ -177,7 +171,8 @@
 			});
 		</script>
 
-
+		<input name="submit" type="submit" value="Add">
+		<div class="clear"></div>
 		<?php echo form_close(); ?>
 	</div>
 </div>
