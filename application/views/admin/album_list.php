@@ -1,3 +1,5 @@
+<?php $timestamp = time();?>
+<?php $token = md5('unique_salt' . $timestamp);?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <title>HerbertGraphy Admin Control - Album List</title>
@@ -27,6 +29,8 @@
 <!-- Javascript -->
 <script>
 	GLOBAL_SITE_URL = "<?php echo site_url(); ?>";
+	var mTimeStamp = "<?php echo $timestamp;?>";
+	var mToken = "<?php echo md5('unique_salt' . $timestamp);?>";
 </script>
 <script src="<?php echo base_url('assets/js/jquery-1.11.3.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/jquery-ui-1.11.4/jquery-ui.js'); ?>"></script>
@@ -117,60 +121,6 @@
 				<div class="clear"></div>
 			</form>
 		</div>
-
-		<script type="text/javascript">
-
-			var mQueueItemCount = 0;
-			var mUploadedCount = 0;
-
-			<?php $timestamp = time();?>
-			$(function() {
-				$('#file_upload').uploadifive({
-					'auto'             : false,
-					'buttonText'		: "drop files to me or click me",
-					'buttonClass'		:  "dropButton",
-					//'checkScript'      : 'check-exists.php',
-					//'checkScript'      : '<?php echo site_url(); ?>admin/album_control/check_exist',
-					'formData'         : {
-						'timestamp' : '<?php echo $timestamp;?>',
-						'token'     : '<?php echo md5('unique_salt' . $timestamp);?>'
-					},
-					'queueID'          : 'queue',
-					//'uploadScript'     : 'uploadifive.php',
-					'uploadScript'     : '<?php echo site_url(); ?>admin/album_control/upload',
-					'dnd': true,
-					'itemTemplate'	   : "<div class='uploadifive-queue-item'><span class='filename'></span><span class='fileinfo'></span><div class='close'></div><div class='progress'><div class='progress-bar'></div></div></div>",
-					'onAddQueueItem'       : function(file)
-					{
-						$("#uploadifive-file_upload-file-" + mQueueItemCount).attr("data-filename", file.name);
-
-						mQueueItemCount++;
-
-						var reader = new FileReader();
-						reader.onload = function(e)
-						{
-							$(".uploadifive-queue-item[data-filename='" + e.target.filename + "']").append("<img class='uploadImgPreview' src='" + e.target.result + "' /></p>");
-						}
-
-						reader.filename = file.name
-						reader.readAsDataURL(file);
-
-					},
-					'onUploadComplete' : function(file, data)
-					{
-						mUploadedCount++;
-
-						if (mQueueItemCount == mUploadedCount)
-						{
-							$('#file_upload').uploadifive('clearQueue');
-
-							mUploadedCount = 0;
-							mQueueItemCount = 0;
-						};
-					}
-				});
-			});
-		</script>
 
 		<input name="submit" type="button" value="Add">
 		<div class="clear"></div>

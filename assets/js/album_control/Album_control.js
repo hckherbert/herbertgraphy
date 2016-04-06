@@ -22,6 +22,7 @@ function Album_control(pAlbumId, pParentId)
 
     this.prepare_listeners();
     this.submit_handler();
+    this.initUpload();
 }
 
 
@@ -29,6 +30,62 @@ Album_control.prototype.init_ui = function()
 {
     $(".albumList tbody").sortable();
 
+}
+
+Album_control.prototype.initUpload = function()
+{
+    var mQueueItemCount = 0;
+    var mUploadedCount = 0;
+
+    $(function() {
+        $('#file_upload').uploadifive({
+            'auto'             : false,
+            'buttonText'		: "drop files to me or click me",
+            'buttonClass'		:  "dropButton",
+            //'checkScript'      : 'check-exists.php',
+            //'checkScript'      : '<?php echo site_url(); ?>admin/album_control/check_exist',
+            'formData'         : {
+                'timestamp' :  mTimeStamp,
+                'token'     : mToken
+            },
+            'queueID'          : 'queue',
+            //'uploadScript'     : 'uploadifive.php',
+            'uploadScript'     : GLOBAL_SITE_URL + "admin/album_control/upload",
+            'dnd': true,
+            'itemTemplate'	   : "<div class='uploadifive-queue-item'><span class='filename'></span><span class='fileinfo'></span><div class='close'></div><div class='progress'><div class='progress-bar'></div></div></div>",
+            'onAddQueueItem'       : function(file)
+            {
+                $("#uploadifive-file_upload-file-" + mQueueItemCount).attr("data-filename", file.name);
+
+                mQueueItemCount++;
+
+                var reader = new FileReader();
+                reader.onload = function(e)
+                {
+                    $(".uploadifive-queue-item[data-filename='" + e.target.filename + "']").append("<img class='uploadImgPreview' src='" + e.target.result + "' /></p>");
+                }
+
+                reader.filename = file.name
+                reader.readAsDataURL(file);
+
+            },
+            'onUploadComplete' : function(file, data)
+            {
+                mUploadedCount++;
+
+                if (mQueueItemCount == mUploadedCount)
+                {
+                    $('#file_upload').uploadifive('clearQueue');
+
+                    mUploadedCount = 0;
+                    mQueueItemCount = 0;
+
+                    $("#formAddAlbum").submit();
+
+                };
+            }
+        });
+    });
 }
 
 Album_control.prototype.submit_handler = function()
@@ -50,7 +107,6 @@ Album_control.prototype.submit_handler = function()
                     //do upload...
                     $('#file_upload').uploadifive('upload');
 
-                    $("#formAddAlbum").submit();
                 },
                 error: function(pData, jqxhr, status)
                 {
