@@ -75,7 +75,7 @@ Album_control.prototype.initUpload = function()
             if (_self.mQueueItemCount == mUploadedCount)
             {
                 _self.displaySuccess("Album is added successfully.");
-                $('#file_upload').uploadifive('clearQueue');
+
 
                 mUploadedCount = 0;
                 _self.mQueueItemCount = 0;
@@ -88,7 +88,13 @@ Album_control.prototype.initUpload = function()
 
                 $("#uploaderWrapper input[name='albumId']").val("");
 
+                $('#file_upload').uploadifive('clearQueue');
+
             };
+        },
+        'onQueueComplete':function(uploads)
+        {
+            $('#file_upload').uploadifive('clearQueue');
         }
     });
 
