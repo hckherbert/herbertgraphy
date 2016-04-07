@@ -1,5 +1,6 @@
 Album_control.prototype.mParentId = null;
 Album_control.prototype.mLastInsertId = null;
+Album_control.prototype.mQueueItemCount = 0;
 
 function Album_control(pAlbumId, pParentId)
 {
@@ -11,7 +12,7 @@ function Album_control(pAlbumId, pParentId)
     }
     else
     {
-        if (pParentId==undefined ||pParentId=="")
+        if (pParentId==undefined || pParentId=="")
         {
             this.get_sub_album_list(pAlbumId);
         }
@@ -36,64 +37,78 @@ Album_control.prototype.init_ui = function()
 Album_control.prototype.initUpload = function()
 {
     var _self = this;
-    var mQueueItemCount = 0;
     var mUploadedCount = 0;
 
-    $(function() {
-        $('#file_upload').uploadifive({
-            'auto'             : false,
-            'buttonText'		: "drop files to me or click me. You can skip photos and add later.",
-            'buttonClass'		:  "dropButton",
-            //'checkScript'      : 'check-exists.php',
-            //'checkScript'      : '<?php echo site_url(); ?>admin/album_control/check_exist',
-            'formData'         : {
-                'timestamp' :  mTimeStamp,
-                'token'     : mToken,
-                'albumId'   : _self.mLastInsertId
-            },
-            'queueID'          : 'queue',
-            'uploadScript'     : GLOBAL_SITE_URL + "admin/album_control/upload",
-            'dnd': true,
-            'itemTemplate'	   : "<div class='uploadifive-queue-item'><span class='filename'></span><span class='fileinfo'></span><div class='close'></div><div class='progress'><div class='progress-bar'></div></div></div>",
-            'onAddQueueItem'       : function(file)
+
+    $('#file_upload').uploadifive({
+        'auto'             : false,
+        'buttonText'		: "drop files to me or click me. You can skip photos and add later.",
+        'buttonClass'		:  "dropButton",
+        //'checkScript'      : 'check-exists.php',
+        //'checkScript'      : '<?php echo site_url(); ?>admin/album_control/check_exist',
+        'formData'         : {
+            'timestamp' :  mTimeStamp,
+            'token'     : mToken,
+            'albumId'   : $("#uploaderWrapper input[name='albumId']").val()
+        },
+        'queueID'          : 'queue',
+        'uploadScript'     : GLOBAL_SITE_URL + "admin/album_control/upload",
+        'dnd': true,
+        'itemTemplate'	   : "<div class='uploadifive-queue-item'><span class='filename'></span><span class='fileinfo'></span><div class='close'></div><div class='progress'><div class='progress-bar'></div></div></div>",
+        'onAddQueueItem'       : function(file)
+        {
+            $("#uploadifive-file_upload-file-" + _self.mQueueItemCount).attr("data-filename", file.name);
+
+            _self.mQueueItemCount++;
+
+            console.log("mQueueItemCount: " + _self.mQueueItemCount);
+
+            var reader = new FileReader();
+            reader.onload = function(e)
             {
-                $("#uploadifive-file_upload-file-" + mQueueItemCount).attr("data-filename", file.name);
+                $(".uploadifive-queue-item[data-filename='" + e.target.filename + "']").append("<img class='uploadImgPreview' src='" + e.target.result + "' /></p>");
+            }
 
-                mQueueItemCount++;
+            reader.filename = file.name
+            reader.readAsDataURL(file);
 
-                var reader = new FileReader();
-                reader.onload = function(e)
+        },
+        'onUploadFile': function(file)
+        {
+            //$("#uploaderWrapper input[name='albumId']").val(this.mLastInsertId);
+            //$("#file_upload").uploadifive("settings", "formData", {"albumId" : $("#uploaderWrapper input[name='albumId']").val()});
+        },
+        'onUploadComplete' : function(file, data)
+        {
+            mUploadedCount++;
+
+
+
+            console.log("onupladcomplete: " + mUploadedCount + " ; " + _self.mQueueItemCount);
+
+            if (_self.mQueueItemCount == mUploadedCount)
+            {
+                _self.displaySuccess("Album is added successfully.");
+
+                console.log("yaaaaaaaaaaa");
+
+                $('#file_upload').uploadifive('clearQueue');
+
+                mUploadedCount = 0;
+                _self.mQueueItemCount = 0;
+
+                if ($("#formAddAlbum").size())
                 {
-                    $(".uploadifive-queue-item[data-filename='" + e.target.filename + "']").append("<img class='uploadImgPreview' src='" + e.target.result + "' /></p>");
+                    $("#formAddAlbum").find(".error").empty();
+
+                    console.log("Onuploadcompletd: " + $("#uploaderWrapper input[name='albumId']").val());
+                    _self.append_added_parent_album_record(_self.mLastInsertId, "formAddAlbum");
                 }
 
-                reader.filename = file.name
-                reader.readAsDataURL(file);
-
-            },
-            'onUploadComplete' : function(file, data)
-            {
-                mUploadedCount++;
-
-                if (mQueueItemCount == mUploadedCount)
-                {
-                    $('#file_upload').uploadifive('clearQueue');
-
-                    mUploadedCount = 0;
-                    mQueueItemCount = 0;
-
-                    _self.displaySuccess("Album is added successfully.");
-
-                    if ($("#formAddAlbum").size())
-                    {
-                        $("#formAddAlbum").find(".error").empty();
-                        _self.append_added_parent_album_record(pData["response"]["insert_id"], "formAddAlbum");
-                    }
-
-                };
-            }
-        });
+            };
+        }
     });
+
 }
 
 Album_control.prototype.submit_handler = function()
@@ -235,8 +250,13 @@ Album_control.prototype.submit_handler = function()
                         {
                             if ($(".uploadifive-queue-item").size())
                             {
+                                $("#uploaderWrapper input[name='albumId']").val(pData["response"]["insert_id"]);
+                                //console.log("before uploadifive: " + $("#uploaderWrapper input[name='albumId']").val());
+                                _self.mLastInsertId = $("#uploaderWrapper input[name='albumId']").val();
+
+                                _self.initUpload();
+
                                 $('#file_upload').uploadifive('upload');
-                                _self.mLastInsertId = pData["response"]["insert_id"];
                             }
                             else
                             {
@@ -329,8 +349,6 @@ Album_control.prototype.submit_handler = function()
         function(pEvent)
         {
             pEvent.preventDefault();
-
-            console.log("a");
 
             var _postData = $(this).serializeArray();
             var _formInstance = $(this);

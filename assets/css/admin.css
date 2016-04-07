@@ -242,6 +242,7 @@ input[type='button']
 	color:#999999;
 	text-transform: none;
 	text-shadow: none;
+	font-size:24px;
 }
 
 .dropButton:hover {

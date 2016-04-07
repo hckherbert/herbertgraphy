@@ -116,6 +116,7 @@
 		<div id="uploaderWrapper">
 			<form>
 				<div id="queue"></div>
+				<input type="hidden" name="albumId" value="">
 				<input id="file_upload" name="file_upload" type="file" multiple="true">
 				<div class="clear"></div>
 			</form>
