@@ -1,5 +1,4 @@
 Album_control.prototype.mParentId = null;
-Album_control.prototype.mLastInsertId = null;
 Album_control.prototype.mQueueItemCount = 0;
 
 function Album_control(pAlbumId, pParentId)
@@ -22,9 +21,9 @@ function Album_control(pAlbumId, pParentId)
         }
     }
 
+    this.initUpload();
     this.prepare_listeners();
     this.submit_handler();
-    this.initUpload();
 }
 
 
@@ -58,10 +57,7 @@ Album_control.prototype.initUpload = function()
         'onAddQueueItem'       : function(file)
         {
             $("#uploadifive-file_upload-file-" + _self.mQueueItemCount).attr("data-filename", file.name);
-
             _self.mQueueItemCount++;
-
-            console.log("mQueueItemCount: " + _self.mQueueItemCount);
 
             var reader = new FileReader();
             reader.onload = function(e)
@@ -73,25 +69,12 @@ Album_control.prototype.initUpload = function()
             reader.readAsDataURL(file);
 
         },
-        'onUploadFile': function(file)
-        {
-            //$("#uploaderWrapper input[name='albumId']").val(this.mLastInsertId);
-            //$("#file_upload").uploadifive("settings", "formData", {"albumId" : $("#uploaderWrapper input[name='albumId']").val()});
-        },
         'onUploadComplete' : function(file, data)
         {
             mUploadedCount++;
-
-
-
-            console.log("onupladcomplete: " + mUploadedCount + " ; " + _self.mQueueItemCount);
-
             if (_self.mQueueItemCount == mUploadedCount)
             {
                 _self.displaySuccess("Album is added successfully.");
-
-                console.log("yaaaaaaaaaaa");
-
                 $('#file_upload').uploadifive('clearQueue');
 
                 mUploadedCount = 0;
@@ -100,14 +83,15 @@ Album_control.prototype.initUpload = function()
                 if ($("#formAddAlbum").size())
                 {
                     $("#formAddAlbum").find(".error").empty();
-
-                    console.log("Onuploadcompletd: " + $("#uploaderWrapper input[name='albumId']").val());
-                    _self.append_added_parent_album_record(_self.mLastInsertId, "formAddAlbum");
+                    _self.append_added_parent_album_record( $("#uploaderWrapper input[name='albumId']").val(), "formAddAlbum");
                 }
+
+                $("#uploaderWrapper input[name='albumId']").val("");
 
             };
         }
     });
+
 
 }
 
@@ -251,12 +235,9 @@ Album_control.prototype.submit_handler = function()
                             if ($(".uploadifive-queue-item").size())
                             {
                                 $("#uploaderWrapper input[name='albumId']").val(pData["response"]["insert_id"]);
-                                //console.log("before uploadifive: " + $("#uploaderWrapper input[name='albumId']").val());
-                                _self.mLastInsertId = $("#uploaderWrapper input[name='albumId']").val();
-
                                 _self.initUpload();
-
                                 $('#file_upload').uploadifive('upload');
+
                             }
                             else
                             {
