@@ -42,6 +42,16 @@ Album_control.prototype.initUpload = function()
 {
     var _self = this;
     var mUploadedCount = 0;
+    var _itemTemplate = "";
+
+    _itemTemplate += "<div class='uploadifive-queue-item'>";
+    _itemTemplate += "<span class='filename'></span>";
+    _itemTemplate += "<span class='fileinfo'></span>";
+    _itemTemplate += "<div class='close'></div><div class='progress'><div class='progress-bar'></div></div>";
+    _itemTemplate += "<div class='imgPreview'></div>";
+    _itemTemplate += "<input name='title' value='' type='text' placeholder='Give me a title if you wish'>";
+    _itemTemplate += "<textarea name='desc' value='' placeholder='Say something about me if you wish'></textarea>";
+    _itemTemplate += "</div>";
 
     this.mErrorMsgUpload = "Upload cannot be started. Please check that: <br> - Each file is under " + _self.mFileSizeLimit + ".<br> - Each time only " + _self.mSimUploadLimit + " photos can be selected.<br>- Files are image type.";
 
@@ -57,7 +67,7 @@ Album_control.prototype.initUpload = function()
             'timestamp' :  mTimeStamp,
             'token'     : mToken
         },
-        'itemTemplate'	   : "<div class='uploadifive-queue-item'><span class='filename'></span><span class='fileinfo'></span><div class='close'></div><div class='progress'><div class='progress-bar'></div></div></div>",
+        'itemTemplate'	   : _itemTemplate,
         'queueID'          : 'queue',
         'uploadScript'     : GLOBAL_SITE_URL + "admin/album_control/upload",
         'simUploadLimit'      : _self.mSimUploadLimit,
@@ -67,6 +77,8 @@ Album_control.prototype.initUpload = function()
             $("#uploadifive-file_upload-file-" + _self.mQueueItemCount).attr("data-filename", file.name);
             _self.mQueueItemCount++;
 
+            console.log(_self.mQueueItemCount);
+
             if (!_self.isValidUploadFileExtension(file["name"]))
             {
                 _self.mIsValidatedUpload = false;
@@ -75,7 +87,7 @@ Album_control.prototype.initUpload = function()
             var reader = new FileReader();
             reader.onload = function(e)
             {
-                $(".uploadifive-queue-item[data-filename='" + e.target.filename + "']").append("<img class='uploadImgPreview' src='" + e.target.result + "' /></p>");
+                $(".uploadifive-queue-item[data-filename='" + e.target.filename + "'] .imgPreview").append("<img class='uploadImgPreview' src='" + e.target.result + "' /></p>");
             }
 
             reader.filename = file.name
