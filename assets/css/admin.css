@@ -216,6 +216,11 @@ input[type='button']
 	height:150px !important;
 }
 
+.uploadifive-queue-item .close
+{
+	background:url('../../assets/images/uploadifive-cancel.png') 0 0 no-repeat
+}
+
 
 .uploadifive-button input
 {
