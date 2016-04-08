@@ -49,6 +49,7 @@ Album_control.prototype.initUpload = function()
     _itemTemplate += "<span class='fileinfo'></span>";
     _itemTemplate += "<div class='close'></div><div class='progress'><div class='progress-bar'></div></div>";
     _itemTemplate += "<div class='imgPreview'></div>";
+    _itemTemplate += "<input name='filename' value='' type='text' placeholder='Rename me if possible'>";
     _itemTemplate += "<input name='title' value='' type='text' placeholder='Give me a title if you wish'>";
     _itemTemplate += "<textarea name='desc' value='' placeholder='Say something about me if you wish'></textarea>";
     _itemTemplate += "</div>";

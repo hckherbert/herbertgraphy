@@ -217,6 +217,11 @@ input[type='button']
 	margin:5px 0;
 }
 
+.uploadifive-queue-item  .filename
+{
+	word-break: break-all;
+}
+
 .uploadifive-queue-item textarea
 {
 	width: 100%;
