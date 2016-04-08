@@ -1,7 +1,7 @@
 Album_control.prototype.mParentId = null;
 Album_control.prototype.mQueueItemCount = 0;
 Album_control.prototype.mIsValidatedUpload = true;
-Album_control.prototype.mSimUploadLimit = 30;
+Album_control.prototype.mSimUploadLimit = 10;
 Album_control.prototype.mFileSizeLimit = "2MB";
 Album_control.prototype.mErrorMsgUpload = "";
 
@@ -152,7 +152,7 @@ Album_control.prototype.submit_handler = function()
     //Click the Add button, upload photos if any, or add direct album
     $("#sectionAddAlbum input[name='submit']").on("click", function()
     {
-        if (_self.mIsValidatedUpload == false || $(".uploadifive-queue-item").size())
+        if (_self.mIsValidatedUpload == false)
         {
             _self.displayFail(_self.mErrorMsgUpload);
             return;
