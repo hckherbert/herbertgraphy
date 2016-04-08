@@ -1,8 +1,9 @@
 Album_control.prototype.mParentId = null;
 Album_control.prototype.mQueueItemCount = 0;
 Album_control.prototype.mIsValidatedUpload = true;
-Album_control.prototype.mUploadCountLimit = 10;
+Album_control.prototype.mSimUploadLimit = 30;
 Album_control.prototype.mFileSizeLimit = "2MB";
+Album_control.prototype.mErrorMsgUpload = "";
 
 
 function Album_control(pAlbumId, pParentId)
@@ -42,6 +43,7 @@ Album_control.prototype.initUpload = function()
     var _self = this;
     var mUploadedCount = 0;
 
+    this.mErrorMsgUpload = "Upload cannot be started. Please check that: <br> - Each file is under " + _self.mFileSizeLimit + ".<br> - Each time only " + _self.mSimUploadLimit + " photos can be selected.<br>- Files are image type.";
 
     $('#file_upload').uploadifive({
         'auto'             : false,
@@ -58,7 +60,7 @@ Album_control.prototype.initUpload = function()
         'itemTemplate'	   : "<div class='uploadifive-queue-item'><span class='filename'></span><span class='fileinfo'></span><div class='close'></div><div class='progress'><div class='progress-bar'></div></div></div>",
         'queueID'          : 'queue',
         'uploadScript'     : GLOBAL_SITE_URL + "admin/album_control/upload",
-        'uploadLimit'      : _self.mUploadCountLimit,
+        'simUploadLimit'      : _self.mSimUploadLimit,
         'fileType'         : "image/png, image/gif, image/jpg",
         'onAddQueueItem'       : function(file)
         {
@@ -67,10 +69,8 @@ Album_control.prototype.initUpload = function()
 
             if (!_self.isValidUploadFileExtension(file["name"]))
             {
-
                 _self.mIsValidatedUpload = false;
             }
-
 
             var reader = new FileReader();
             reader.onload = function(e)
@@ -84,13 +84,10 @@ Album_control.prototype.initUpload = function()
         },
         'onUploadComplete' : function(file, data)
         {
-            console.log(data);
+
         },
         'onError': function(errorType, files)
         {
-            console.log(errorType);
-            console.log(files);
-
             _self.mIsValidatedUpload = false;
         },
         'onQueueComplete':function(pUploads)
@@ -105,7 +102,7 @@ Album_control.prototype.initUpload = function()
             }
             else
             {
-                _self.displayFail("Upload cannot be started. Please check that: <br> - Each file is under " + _self.mFileSizeLimit + ".<br> - Each time only " + _self.mUploadCountLimit + " photos can be selected.<br>- Files are image type.");
+                _self.displayFail(_self.mErrorMsgUpload);
             }
         }
     });
@@ -122,7 +119,7 @@ Album_control.prototype.isValidUploadFileExtension = function(pFileName)
 
     var _extension = pFileName.substr(_lastDotIndex+1).toLowerCase();
 
-    if (_extension!= "jpg" || _extension !="gif" || _extension !="png")
+    if (_extension!= "jpg" &&  _extension !="gif" && _extension !="png")
     {
         return;
     }
@@ -155,11 +152,9 @@ Album_control.prototype.submit_handler = function()
     //Click the Add button, upload photos if any, or add direct album
     $("#sectionAddAlbum input[name='submit']").on("click", function()
     {
-        console.log($(".uploadifive-queue-item").size() + " ; " + _self.mUploadCountLimit);
-
-        if (_self.mIsValidatedUpload == false || $(".uploadifive-queue-item").size() > _self.mUploadCountLimit)
+        if (_self.mIsValidatedUpload == false || $(".uploadifive-queue-item").size())
         {
-            _self.displayFail("<p>Upload cannot be started. Please check that: </p><p> - Each file is under " + _self.mFileSizeLimit + ".</p><p> - Each time only " + _self.mUploadCountLimit + " photos can be selected.</p><p>- Files are image type. </p>");
+            _self.displayFail(_self.mErrorMsgUpload);
             return;
         }
 
@@ -185,8 +180,6 @@ Album_control.prototype.submit_handler = function()
                 error: function(pData, jqxhr, status)
                 {
                     $("#formAddAlbum").find(".error").empty();
-
-                    console.log(pData);
 
                     if (pData["responseJSON"]["error_messages"]["validation_error"])
                     {
@@ -243,15 +236,11 @@ Album_control.prototype.submit_handler = function()
                 {
                     _isConfirmUpdate = false;
                 }
-
-
             }
 
             if (_isConfirmUpdate)
             {
                 var _postData = $(this).serializeArray();
-
-                console.log(_postData);
 
                 $.ajax(
                     {
@@ -308,8 +297,6 @@ Album_control.prototype.submit_handler = function()
                     error: function(pData, jqxhr, status)
                     {
                         _formInstance.find(".error").empty();
-
-                        console.log(pData);
 
                         if (pData["responseJSON"]["error_messages"]["validation_error"])
                         {
