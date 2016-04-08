@@ -307,7 +307,7 @@ class Album_control extends CI_Controller
 
 // Set the allowed file extensions
 
-		$fileTypes = array('jpg', 'jpeg', 'gif', 'png'); // Allowed file extensions
+		$fileTypes = array('jpg', 'gif', 'png'); // Allowed file extensions
 
 		$verifyToken = md5('unique_salt' . $_POST['timestamp']);
 
@@ -377,11 +377,12 @@ class Album_control extends CI_Controller
 						$this->image_lib->clear();
 					}
 
-					echo 1;
+					JSONAPI::echo_json_successful_response();
 				}
 				else
 				{
-					echo "can't move file";
+
+					JSONAPI::echo_json_error_response("CANNOT_MOVE_FILE");
 				}
 
 				$data = array(
@@ -395,11 +396,16 @@ class Album_control extends CI_Controller
 
 			} else {
 
-				// The file type wasn't allowed
-				echo 'Invalid file type.';
+
+				JSONAPI::echo_json_error_response("INVALID_FILE_TYPE");
 
 			}
 		}
+	}
+
+	public  function remove_failed_uploads()
+	{
+
 	}
 
 }

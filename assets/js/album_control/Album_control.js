@@ -1,5 +1,9 @@
 Album_control.prototype.mParentId = null;
 Album_control.prototype.mQueueItemCount = 0;
+Album_control.prototype.mIsValidatedUpload = true;
+Album_control.prototype.mUploadCountLimit = 10;
+Album_control.prototype.mFileSizeLimit = "2MB";
+
 
 function Album_control(pAlbumId, pParentId)
 {
@@ -45,18 +49,28 @@ Album_control.prototype.initUpload = function()
         'buttonClass'		:  "dropButton",
         //'checkScript'      : 'check-exists.php',
         //'checkScript'      : '<?php echo site_url(); ?>admin/album_control/check_exist',
+        'dnd': true,
+        'fileSizeLimit': _self.mFileSizeLimit,
         'formData'         : {
             'timestamp' :  mTimeStamp,
             'token'     : mToken
         },
+        'itemTemplate'	   : "<div class='uploadifive-queue-item'><span class='filename'></span><span class='fileinfo'></span><div class='close'></div><div class='progress'><div class='progress-bar'></div></div></div>",
         'queueID'          : 'queue',
         'uploadScript'     : GLOBAL_SITE_URL + "admin/album_control/upload",
-        'dnd': true,
-        'itemTemplate'	   : "<div class='uploadifive-queue-item'><span class='filename'></span><span class='fileinfo'></span><div class='close'></div><div class='progress'><div class='progress-bar'></div></div></div>",
+        'uploadLimit'      : _self.mUploadCountLimit,
+        'fileType'         : "image/png, image/gif, image/jpg",
         'onAddQueueItem'       : function(file)
         {
             $("#uploadifive-file_upload-file-" + _self.mQueueItemCount).attr("data-filename", file.name);
             _self.mQueueItemCount++;
+
+            if (!_self.isValidUploadFileExtension(file["name"]))
+            {
+
+                _self.mIsValidatedUpload = false;
+            }
+
 
             var reader = new FileReader();
             reader.onload = function(e)
@@ -70,7 +84,14 @@ Album_control.prototype.initUpload = function()
         },
         'onUploadComplete' : function(file, data)
         {
+            console.log(data);
+        },
+        'onError': function(errorType, files)
+        {
+            console.log(errorType);
+            console.log(files);
 
+            _self.mIsValidatedUpload = false;
         },
         'onQueueComplete':function(pUploads)
         {
@@ -78,18 +99,53 @@ Album_control.prototype.initUpload = function()
 
             if (pUploads["attempted"] == pUploads["successful"])
             {
+                _self.mIsValidatedUpload == true;
                 $("#formAddAlbum").submit();
+                $('#file_upload').uploadifive('clearQueue');
             }
             else
             {
-                _self.displayFail("Oops, some photos are not uploaded. Please try again.");
+                _self.displayFail("Upload cannot be started. Please check that: <br> - Each file is under " + _self.mFileSizeLimit + ".<br> - Each time only " + _self.mUploadCountLimit + " photos can be selected.<br>- Files are image type.");
             }
-
-            $('#file_upload').uploadifive('clearQueue')
         }
     });
+}
 
+Album_control.prototype.isValidUploadFileExtension = function(pFileName)
+{
+    var _lastDotIndex = pFileName.lastIndexOf(".");
 
+    if (!_lastDotIndex)
+    {
+        return;
+    }
+
+    var _extension = pFileName.substr(_lastDotIndex+1).toLowerCase();
+
+    if (_extension!= "jpg" || _extension !="gif" || _extension !="png")
+    {
+        return;
+    }
+
+    return true;
+}
+
+Album_control.prototype.removeFailedUploads = function()
+{
+    var _self = this;
+
+    $.ajax
+    (
+        {
+            url: GLOBAL_SITE_URL + "admin/album_control/remove_failed_uploads",
+            type: "POST",
+            dataType: "json",
+            complete: function ()
+            {
+                _self.displayFail("Oops, some photos are not uploaded. Please try again.");
+            }
+        }
+    );
 }
 
 Album_control.prototype.submit_handler = function()
@@ -99,6 +155,14 @@ Album_control.prototype.submit_handler = function()
     //Click the Add button, upload photos if any, or add direct album
     $("#sectionAddAlbum input[name='submit']").on("click", function()
     {
+        console.log($(".uploadifive-queue-item").size() + " ; " + _self.mUploadCountLimit);
+
+        if (_self.mIsValidatedUpload == false || $(".uploadifive-queue-item").size() > _self.mUploadCountLimit)
+        {
+            _self.displayFail("<p>Upload cannot be started. Please check that: </p><p> - Each file is under " + _self.mFileSizeLimit + ".</p><p> - Each time only " + _self.mUploadCountLimit + " photos can be selected.</p><p>- Files are image type. </p>");
+            return;
+        }
+
         $.ajax(
             {
                 url: GLOBAL_SITE_URL + "admin/album_control/validate_add_album",
@@ -117,8 +181,6 @@ Album_control.prototype.submit_handler = function()
                     {
                         $("#formAddAlbum").submit();
                     }
-
-
                 },
                 error: function(pData, jqxhr, status)
                 {
@@ -545,7 +607,7 @@ Album_control.prototype.render_album_list = function(pData)
 
 Album_control.prototype.displaySuccess = function(pMessage)
 {
-    $(".ajaxSuccessDisplay p").empty().text(pMessage);
+    $(".ajaxSuccessDisplay p").empty().html(pMessage);
     $(".ajaxSuccessDisplay").removeClass("hide");
 
     setTimeout(function()
@@ -578,11 +640,11 @@ Album_control.prototype.displayFail = function(pMsg)
 {
     if (!pMsg)
     {
-        $(".ajaxFailDisplay p").empty().text("Oops. Something went wrong. Please try again later.");
+        $(".ajaxFailDisplay p").empty().html("Oops. Something went wrong. Please try again later.");
     }
     else
     {
-        $(".ajaxFailDisplay p").empty().text(pMsg);
+        $(".ajaxFailDisplay p").empty().html(pMsg);
     }
     $(".ajaxFailDisplay").removeClass("hide");
 
@@ -597,6 +659,17 @@ Album_control.prototype.displayFail = function(pMsg)
 
 Album_control.prototype.onAjaxFailDisplayTransEnd = function()
 {
+    var _time;
+
+    if (!this.mIsValidatedUpload)
+    {
+        _time = 3000;
+    }
+    else
+    {
+        _time = 1000;
+    }
+
     if ($(".ajaxFailDisplay").hasClass("fadeIn"))
     {
         setTimeout(
@@ -605,7 +678,7 @@ Album_control.prototype.onAjaxFailDisplayTransEnd = function()
                 $(".ajaxFailDisplay").removeClass("fadeIn");
                 return;
             },
-            1000
+            _time
         )
     }
     else
