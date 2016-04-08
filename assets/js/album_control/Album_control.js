@@ -74,8 +74,7 @@ Album_control.prototype.initUpload = function()
         },
         'onQueueComplete':function(pUploads)
         {
-
-            console.log(pUploads);
+            _self.mQueueItemCount = 0;
 
             if (pUploads["attempted"] == pUploads["successful"])
             {
@@ -85,6 +84,8 @@ Album_control.prototype.initUpload = function()
             {
                 _self.displayFail("Oops, some photos are not uploaded. Please try again.");
             }
+
+            $('#file_upload').uploadifive('clearQueue')
         }
     });
 
@@ -109,7 +110,7 @@ Album_control.prototype.submit_handler = function()
                     //add album or start upload...
                     if ($(".uploadifive-queue-item").size())
                     {
-                        _self.initUpload();
+                        //_self.initUpload();
                         $('#file_upload').uploadifive('upload');
                     }
                     else
