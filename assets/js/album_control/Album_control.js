@@ -47,8 +47,7 @@ Album_control.prototype.initUpload = function()
         //'checkScript'      : '<?php echo site_url(); ?>admin/album_control/check_exist',
         'formData'         : {
             'timestamp' :  mTimeStamp,
-            'token'     : mToken,
-            'albumId'   : $("#uploaderWrapper input[name='albumId']").val()
+            'token'     : mToken
         },
         'queueID'          : 'queue',
         'uploadScript'     : GLOBAL_SITE_URL + "admin/album_control/upload",
@@ -71,30 +70,21 @@ Album_control.prototype.initUpload = function()
         },
         'onUploadComplete' : function(file, data)
         {
-            mUploadedCount++;
-            if (_self.mQueueItemCount == mUploadedCount)
-            {
-                _self.displaySuccess("Album is added successfully.");
 
-
-                mUploadedCount = 0;
-                _self.mQueueItemCount = 0;
-
-                if ($("#formAddAlbum").size())
-                {
-                    $("#formAddAlbum").find(".error").empty();
-                    _self.append_added_parent_album_record( $("#uploaderWrapper input[name='albumId']").val(), "formAddAlbum");
-                }
-
-                $("#uploaderWrapper input[name='albumId']").val("");
-
-                $('#file_upload').uploadifive('clearQueue');
-
-            };
         },
-        'onQueueComplete':function(uploads)
+        'onQueueComplete':function(pUploads)
         {
-            $('#file_upload').uploadifive('clearQueue');
+
+            console.log(pUploads);
+
+            if (pUploads["attempted"] == pUploads["successful"])
+            {
+                $("#formAddAlbum").submit();
+            }
+            else
+            {
+                _self.displayFail("Oops, some photos are not uploaded. Please try again.");
+            }
         }
     });
 
@@ -105,10 +95,9 @@ Album_control.prototype.submit_handler = function()
 {
     var _self = this;
 
+    //Click the Add button, upload photos if any, or add direct album
     $("#sectionAddAlbum input[name='submit']").on("click", function()
     {
-        //$("#formAddAlbum").submit();
-
         $.ajax(
             {
                 url: GLOBAL_SITE_URL + "admin/album_control/validate_add_album",
@@ -117,8 +106,17 @@ Album_control.prototype.submit_handler = function()
                 dataType: "json",
                 success: function(pData)
                 {
-                    //do upload...
-                    $("#formAddAlbum").submit();
+                    //add album or start upload...
+                    if ($(".uploadifive-queue-item").size())
+                    {
+                        _self.initUpload();
+                        $('#file_upload').uploadifive('upload');
+                    }
+                    else
+                    {
+                        $("#formAddAlbum").submit();
+                    }
+
 
                 },
                 error: function(pData, jqxhr, status)
@@ -238,19 +236,10 @@ Album_control.prototype.submit_handler = function()
                     {
                         if (pData["successcode"] && pData["successcode"] == 1)
                         {
-                            if ($(".uploadifive-queue-item").size())
-                            {
-                                $("#uploaderWrapper input[name='albumId']").val(pData["response"]["insert_id"]);
-                                _self.initUpload();
-                                $('#file_upload').uploadifive('upload');
+                            _self.displaySuccess("Album is added successfully.");
+                            _formInstance.find(".error").empty();
+                            _self.append_added_parent_album_record(pData["response"]["insert_id"], _formId);
 
-                            }
-                            else
-                            {
-                                _self.displaySuccess("Album is added successfully.");
-                                _formInstance.find(".error").empty();
-                                _self.append_added_parent_album_record(pData["response"]["insert_id"], _formId);
-                            }
                         }
                     },
                     error: function(pData, jqxhr, status)
@@ -584,9 +573,16 @@ Album_control.prototype.onAjaxSuccessDisplayTransEnd = function()
     }
 }
 
-Album_control.prototype.displayFail = function()
+Album_control.prototype.displayFail = function(pMsg)
 {
-    $(".ajaxFailDisplay p").empty().text("Oops. Something went wrong. Please try again later.");
+    if (!pMsg)
+    {
+        $(".ajaxFailDisplay p").empty().text("Oops. Something went wrong. Please try again later.");
+    }
+    else
+    {
+        $(".ajaxFailDisplay p").empty().text(pMsg);
+    }
     $(".ajaxFailDisplay").removeClass("hide");
 
     setTimeout(function()

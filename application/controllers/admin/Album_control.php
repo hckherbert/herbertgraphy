@@ -307,8 +307,6 @@ class Album_control extends CI_Controller
 
 // Set the allowed file extensions
 
-
-
 		$fileTypes = array('jpg', 'jpeg', 'gif', 'png'); // Allowed file extensions
 
 		$verifyToken = md5('unique_salt' . $_POST['timestamp']);
@@ -387,7 +385,7 @@ class Album_control extends CI_Controller
 				}
 
 				$data = array(
-					"albumId" => $_POST['albumId'],
+					"albumId" => 0,
 					"filename" =>  $_FILES['Filedata']['name'],
 					"create_date" => date('Y-m-d H:i:s')
 				);

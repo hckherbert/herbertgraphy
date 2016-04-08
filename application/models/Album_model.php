@@ -127,11 +127,30 @@ class Album_model extends CI_Model
 
 	public function add_album($data)
 	{
+
+		$this->db->trans_start();
+
 		$this->db->where("parentId", NULL);
 		$total_rows = $this->db->count_all_results("album");
 		$data = array_merge($data, array("order" => $total_rows));
 		$this->db->insert("album", $data);
-		return $this->db->insert_id();
+
+		$insert_id = $this->db->insert_id();
+		$data = array
+		(
+			"albumId"=>$insert_id
+		);
+		$this->db->where("albumId", 0);
+		$this->db->update("photos", $data);
+		$this->db->trans_complete();
+
+		if ($this->db->trans_status() === FALSE)
+		{
+			return;
+		}
+
+		return $insert_id;
+
 	}
 
 	public function add_subalbum($data)

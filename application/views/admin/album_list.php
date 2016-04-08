@@ -1,5 +1,5 @@
 <?php $timestamp = time();?>
-<?php $token = md5('unique_salt' . $timestamp);?>
+<?php $token = md5("unique_salt" . $timestamp);?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <title>HerbertGraphy Admin Control - Album List</title>
