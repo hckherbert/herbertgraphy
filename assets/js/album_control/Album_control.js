@@ -72,6 +72,7 @@ Album_control.prototype.initUpload = function()
         'uploadScript'     : GLOBAL_SITE_URL + "admin/album_control/upload",
         'simUploadLimit'      : _self.mSimUploadLimit,
         'fileType'         : "image/png, image/gif, image/jpg",
+        'removeCompleted': true,
         'onAddQueueItem'       : function(file)
         {
             $("#uploadifive-file_upload-file-" + _self.mQueueItemCount).attr("data-filename", file.name);
@@ -238,7 +239,7 @@ Album_control.prototype.submit_handler = function()
                             {
                                 _self.mUploadFormData["filename"].push($(e).find("input[name='filename']").val());
                                 _self.mUploadFormData["title"].push($(e).find("input[name='title']").val());
-                                _self.mUploadFormData["desc"].push($(e).find("input[name='desc']").val());
+                                _self.mUploadFormData["desc"].push($(e).find("textarea[name='desc']").val());
                             }
                         );
 
