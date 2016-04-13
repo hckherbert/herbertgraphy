@@ -311,8 +311,6 @@ class Album_control extends CI_Controller
 
 		$verifyToken = md5('unique_salt' . $_POST['timestamp']);
 
-		var_dump($_POST);
-
 		if (!empty($_FILES) && $_POST['token'] == $verifyToken) {
 			$tempFile   = $_FILES['Filedata']['tmp_name'];
 			$uploadDir  = FCPATH . 'assets/'.$uploadDir;
@@ -389,7 +387,10 @@ class Album_control extends CI_Controller
 
 				$data = array(
 					"albumId" => 0,
-					"filename" =>  $_FILES['Filedata']['name'],
+					//"filename" =>  $_FILES['Filedata']['name']
+					"filename" => $this->input->post('filename'),
+					"title" => $this->input->post('title'),
+					"desc" => $this->input->post('desc'),
 					"create_date" => date('Y-m-d H:i:s')
 				);
 
