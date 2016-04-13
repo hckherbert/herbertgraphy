@@ -4,6 +4,7 @@ Album_control.prototype.mIsValidatedUpload = true;
 Album_control.prototype.mSimUploadLimit = 10;
 Album_control.prototype.mFileSizeLimit = "2MB";
 Album_control.prototype.mErrorMsgUpload = "";
+Album_control.prototype.mUploadFormData = null;
 
 
 function Album_control(pAlbumId, pParentId)
@@ -65,10 +66,7 @@ Album_control.prototype.initUpload = function()
         //'checkScript'      : '<?php echo site_url(); ?>admin/album_control/check_exist',
         'dnd': true,
         'fileSizeLimit': _self.mFileSizeLimit,
-        'formData'         : {
-            'timestamp' :  mTimeStamp,
-            'token'     : mToken
-        },
+        'formData'         : _self.getUploadFormData(),
         'itemTemplate'	   : _itemTemplate,
         'queueID'          : 'queue',
         'uploadScript'     : GLOBAL_SITE_URL + "admin/album_control/upload",
@@ -79,7 +77,7 @@ Album_control.prototype.initUpload = function()
             $("#uploadifive-file_upload-file-" + _self.mQueueItemCount).attr("data-filename", file.name);
             _self.mQueueItemCount++;
 
-            console.log(_self.mQueueItemCount);
+            //console.log(_self.mQueueItemCount);
 
             if (!_self.isValidUploadFileExtension(file["name"]))
             {
@@ -118,6 +116,10 @@ Album_control.prototype.initUpload = function()
             {
                 _self.displayFail(_self.mErrorMsgUpload);
             }
+        },
+        'onUpload': function()
+        {
+            //$("#file_upload").uploadifive("settings", 'formData', {'title' : "aaa"});
         }
     });
 
@@ -139,6 +141,12 @@ Album_control.prototype.initUpload = function()
             }
         }
     )
+}
+
+Album_control.prototype.getUploadFormData = function()
+{
+    return this.mUploadFormData;
+
 }
 
 Album_control.prototype.isValidUploadFileExtension = function(pFileName)
@@ -203,6 +211,7 @@ Album_control.prototype.submit_handler = function()
             return;
         }
 
+
         $.ajax(
             {
                 url: GLOBAL_SITE_URL + "admin/album_control/validate_add_album",
@@ -214,7 +223,30 @@ Album_control.prototype.submit_handler = function()
                     //add album or start upload...
                     if ($(".uploadifive-queue-item").size())
                     {
-                        //_self.initUpload();
+                        _self.mUploadFormData =
+                        {
+                            'timestamp': mTimeStamp,
+                            'token': mToken,
+                            'filename':[],
+                            'title':[],
+                            'desc':[]
+
+                        };
+
+                        $(".uploadifive-queue-item").each(
+                            function(i,e)
+                            {
+                                _self.mUploadFormData["filename"].push($(e).find("input[name='filename']").val());
+                                _self.mUploadFormData["title"].push($(e).find("input[name='title']").val());
+                                _self.mUploadFormData["desc"].push($(e).find("input[name='desc']").val());
+                            }
+                        );
+
+
+                        console.log(_self.mUploadFormData);
+
+                        _self.initUpload();
+
                         $('#file_upload').uploadifive('upload');
                     }
                     else

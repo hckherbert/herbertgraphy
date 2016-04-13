@@ -311,6 +311,8 @@ class Album_control extends CI_Controller
 
 		$verifyToken = md5('unique_salt' . $_POST['timestamp']);
 
+		var_dump($_POST);
+
 		if (!empty($_FILES) && $_POST['token'] == $verifyToken) {
 			$tempFile   = $_FILES['Filedata']['tmp_name'];
 			$uploadDir  = FCPATH . 'assets/'.$uploadDir;
