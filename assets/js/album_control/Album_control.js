@@ -49,12 +49,13 @@ Album_control.prototype.initUpload = function()
     _itemTemplate += "<span class='fileinfo'></span>";
     _itemTemplate += "<div class='close'></div><div class='progress'><div class='progress-bar'></div></div>";
     _itemTemplate += "<div class='imgPreview'></div>";
-    _itemTemplate += "<input name='filename' value='' type='text' placeholder='Rename me if possible'>";
+    _itemTemplate += "<input name='filename' value='' type='text' placeholder='Rename me if possible' pattern='^[a-zA-Z0-9-]+$'>";
+    _itemTemplate += "<span class='error hide'>Number, letters and hyphens only</span>";
     _itemTemplate += "<input name='title' value='' type='text' placeholder='Give me a title if you wish'>";
     _itemTemplate += "<textarea name='desc' value='' placeholder='Say something about me if you wish'></textarea>";
     _itemTemplate += "</div>";
 
-    this.mErrorMsgUpload = "Upload cannot be started. Please check that: <br> - Each file is under " + _self.mFileSizeLimit + ".<br> - Each time only " + _self.mSimUploadLimit + " photos can be selected.<br>- Files are image type.";
+    this.mErrorMsgUpload = "Upload cannot be started. Please check that: <br> - Each file is under " + _self.mFileSizeLimit + ".<br> - Each time only " + _self.mSimUploadLimit + " photos can be selected.<br>- Files are image type.<br>Also check the error notices (if any) near input fields.";
 
     $('#file_upload').uploadifive({
         'auto'             : false,
@@ -109,7 +110,7 @@ Album_control.prototype.initUpload = function()
 
             if (pUploads["attempted"] == pUploads["successful"])
             {
-                _self.mIsValidatedUpload == true;
+                _self.mIsValidatedUpload = true;
                 $("#formAddAlbum").submit();
                 $('#file_upload').uploadifive('clearQueue');
             }
@@ -119,6 +120,25 @@ Album_control.prototype.initUpload = function()
             }
         }
     });
+
+    $(document).on(
+        "keyup",
+        ".uploadifive-queue-item input[name='filename']",
+        function()
+        {
+            var _pattern = $(this).attr('pattern');
+            var _value =$(this).val();
+
+            if (_value.match( new RegExp(_pattern) ))
+            {
+                $(this).next(".error").addClass("hide");
+            }
+            else
+            {
+                $(this).next(".error").removeClass("hide");
+            }
+        }
+    )
 }
 
 Album_control.prototype.isValidUploadFileExtension = function(pFileName)
@@ -165,6 +185,18 @@ Album_control.prototype.submit_handler = function()
     //Click the Add button, upload photos if any, or add direct album
     $("#sectionAddAlbum input[name='submit']").on("click", function()
     {
+
+        $(".uploadifive-queue-item .error").each(
+            function(i,e)
+            {
+                if (!$(e).hasClass("hide"))
+                {
+                    _self.displayFail(_self.mErrorMsgUpload);
+                    return;
+                }
+            }
+        )
+
         if (_self.mIsValidatedUpload == false)
         {
             _self.displayFail(_self.mErrorMsgUpload);
@@ -203,6 +235,8 @@ Album_control.prototype.submit_handler = function()
                                 $("#formAddAlbum").find("input[name='" + err_label + "']").next(".error").text(pData["responseJSON"]["error_messages"][err_label]);
                             }
                         }
+
+                        _self.displayFail(_self.mErrorMsgUpload);
                     }
                     else
                     {
@@ -659,17 +693,6 @@ Album_control.prototype.displayFail = function(pMsg)
 
 Album_control.prototype.onAjaxFailDisplayTransEnd = function()
 {
-    var _time;
-
-    if (!this.mIsValidatedUpload)
-    {
-        _time = 3000;
-    }
-    else
-    {
-        _time = 1000;
-    }
-
     if ($(".ajaxFailDisplay").hasClass("fadeIn"))
     {
         setTimeout(
@@ -678,7 +701,7 @@ Album_control.prototype.onAjaxFailDisplayTransEnd = function()
                 $(".ajaxFailDisplay").removeClass("fadeIn");
                 return;
             },
-            _time
+            2500
         )
     }
     else

@@ -204,7 +204,7 @@ input[type='button']
 {
 	background-color:transparent;
 	border-bottom:none;
-	width:180px;
+	width:210px;
 	display:inline-block;
 	vertical-align:top;
 	margin:0 0 20px 0;
@@ -238,6 +238,11 @@ input[type='button']
 .uploadifive-queue-item .close
 {
 	background:url('../../assets/images/uploadifive-cancel.png') 0 0 no-repeat
+}
+
+.uploadifive-queue-item .error
+{
+	font-size:12px;
 }
 
 
