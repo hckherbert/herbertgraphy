@@ -123,7 +123,8 @@ Album_control.prototype.initUpload = function()
         },
         'onUpload': function()
         {
-
+			console.log("onupload");
+			 _self.mUploadCounter++;
         }
     });
 
@@ -231,14 +232,22 @@ Album_control.prototype.submit_handler = function()
                         {
                             'timestamp': mTimeStamp,
                             'token': mToken,
-                            'filename': $(".uploadifive-queue-item").eq(_self.mUploadCounter).find("input[name='filename[]']").val(),
-                            'title': $(".uploadifive-queue-item").eq(_self.mUploadCounter).find("input[name='title[]']").val(),
-                            'desc': $(".uploadifive-queue-item").eq(_self.mUploadCounter).find("textarea[name='desc[]']").val()
-
+                            'filename': [],
+                            'title': [],
+                            'desc': [],
+							'total':$(".uploadifive-queue-item").size()
                         };
-
-                        console.log(_self.mUploadFormData);
-
+						
+						$(".uploadifive-queue-item").each
+						(
+							function(i,e)
+							{
+								_self.mUploadFormData["filename"].push($(e).find("input[name='filename[]']").val());
+								_self.mUploadFormData["title"].push($(e).find("input[name='title[]']").val());
+								_self.mUploadFormData["desc"].push($(e).find("textarea[name='desc[]']").val());
+							}
+						);
+			
                         _self.initUpload();
                         $('#file_upload').uploadifive('upload');
 
