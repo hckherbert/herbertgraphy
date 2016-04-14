@@ -305,6 +305,7 @@ class Album_control extends CI_Controller
 	{
 		$uploadDir = '/photos/';
 
+
 // Set the allowed file extensions
 
 		$fileTypes = array('jpg', 'gif', 'png'); // Allowed file extensions
