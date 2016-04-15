@@ -386,16 +386,12 @@ class Album_control extends CI_Controller
 					JSONAPI::echo_json_error_response("CANNOT_MOVE_FILE");
 				}
 
-				list($filename) = $this->input->post('filename');
-				list($title) = $this->input->post('title');
-				list($desc) = $this->input->post('desc');
-			
 				$data = array(
 					"albumId" => 0,
 					//"filename" =>  $_FILES['Filedata']['name']
-					"filename" => $filename[0],
-					"title" => $title[0],
-					"desc" => $desc[0],
+					"filename" => $this->input->post("filename"),
+					"title" => $this->input->post("title"),
+					"desc" => $this->input->post("desc"),
 					"create_date" => date('Y-m-d H:i:s')
 				);
 

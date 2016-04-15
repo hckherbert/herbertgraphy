@@ -98,11 +98,33 @@ Album_control.prototype.initUpload = function()
         },
         'onUploadComplete' : function(file, data)
         {
+            console.log("onuploadcomplete");
+
+            _self.mUploadCounter++;
+
+            if (_self.mUploadCounter == 1)
+            {
+
+                _self.mUploadFormData =
+                {
+                    'timestamp': mTimeStamp,
+                    'token': mToken,
+                    'filename': 'bbbb',
+                    'title': '2222',
+                    'desc': 'world',
+                    'total':$(".uploadifive-queue-item").size()
+                };
+
+                $('#file_upload').data('uploadifive').settings.formData = _self.getUploadFormData();
+            }
+
 
         },
         'onError': function(errorType, files)
         {
             _self.mIsValidatedUpload = false;
+
+            _self.mUploadCounter++;
         },
         'onQueueComplete':function(pUploads)
         {
@@ -123,8 +145,24 @@ Album_control.prototype.initUpload = function()
         },
         'onUpload': function()
         {
-			console.log("onupload");
-			 _self.mUploadCounter++;
+			console.log("onuploadFile");
+
+            if (_self.mUploadCounter == 0)
+            {
+
+                _self.mUploadFormData =
+                {
+                    'timestamp': mTimeStamp,
+                    'token': mToken,
+                    'filename': 'aaaa',
+                    'title': '11111',
+                    'desc': 'hello',
+                    'total':$(".uploadifive-queue-item").size()
+                };
+
+                $('#file_upload').data('uploadifive').settings.formData = _self.getUploadFormData();
+            }
+
         }
     });
 
@@ -228,6 +266,7 @@ Album_control.prototype.submit_handler = function()
                     //add album or start upload...
                     if ($(".uploadifive-queue-item").size())
                     {
+                        /*
                         _self.mUploadFormData =
                         {
                             'timestamp': mTimeStamp,
@@ -249,9 +288,10 @@ Album_control.prototype.submit_handler = function()
 						);
 			
                         _self.initUpload();
+                        */
                         $('#file_upload').uploadifive('upload');
 
-                        _self.mUploadCounter++;
+                        //_self.mUploadCounter++;
                     }
                     else
                     {
