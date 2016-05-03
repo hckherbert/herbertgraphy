@@ -352,27 +352,27 @@ class Album_control extends CI_Controller
 			$title = $photo_user_data["title"][$post_data_index];
 			$hash = hash("sha256", $slug_filename .time()."herbertgraphyalbumadmin");
 			$hash_filename = $slug_filename_only ."-".$hash.".".$extension;
-			$targetFile = $uploadDir .$hash_filename.".".$extension ;
+			$target_file = $uploadDir .$hash_filename;
 
 			// Validate the filetype
 
 			if (in_array($extension, $fileTypes)) {
 
 				// Save the file
-				if (move_uploaded_file($tempFile, $targetFile))
+				if (move_uploaded_file($tempFile, $target_file))
 				{
 
-					list($width, $height) = getimagesize($targetFile);
+					list($width, $height) = getimagesize($target_file);
 
 					$this->load->library('image_lib');
 
 					if ($width >= 1680 || $height >= 1680)
 					{
 						$config['image_library'] = 'gd2';
-						$config['source_image'] = $targetFile;
+						$config['source_image'] = $target_file;
 						$config['create_thumb'] = TRUE;
 						$config['maintain_ratio'] = TRUE;
-						$config['thumb_marker'] = "1680";
+						$config['thumb_marker'] = "_1680";
 						$config['width'] = 1680;
 						$config['height'] = 1680;
 						$config['quality'] = '100%';
@@ -385,10 +385,10 @@ class Album_control extends CI_Controller
 					if ($width >= 1280 || $height >= 1280)
 					{
 						$config['image_library'] = 'gd2';
-						$config['source_image'] = $targetFile;
+						$config['source_image'] = $target_file;
 						$config['create_thumb'] = TRUE;
 						$config['maintain_ratio'] = TRUE;
-						$config['thumb_marker'] = "1280";
+						$config['thumb_marker'] = "_1280";
 						$config['width'] = 1280;
 						$config['height'] = 1280;
 						$config['quality'] = '100%';
@@ -402,10 +402,10 @@ class Album_control extends CI_Controller
 					if ($width >= 800 || $height >= 800)
 					{
 						$config['image_library'] = 'gd2';
-						$config['source_image'] = $targetFile;
+						$config['source_image'] = $target_file;
 						$config['create_thumb'] = TRUE;
 						$config['maintain_ratio'] = TRUE;
-						$config['thumb_marker'] = "800";
+						$config['thumb_marker'] = "_800";
 						$config['width'] = 800;
 						$config['height'] = 800;
 						$config['quality'] = '100%';
