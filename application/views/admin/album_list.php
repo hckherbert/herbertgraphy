@@ -118,6 +118,7 @@
 				<div id="queue"></div>
 				<input type="hidden" name="albumId" value="">
 				<input id="file_upload" name="file_upload" type="file" multiple="true" accept="image/png, image/gif, image/jpg">
+				<input name="photo_user_data" type="hidden" value="">
 				<div class="clear"></div>
 			</form>
 		</div>

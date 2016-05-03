@@ -6,6 +6,7 @@ class AlbumSeeder extends Seeder
     public function run()
     {
         $this->db->truncate('album');
+        $this->db->truncate('photos');
 
         $data = ["order" => 0, "name" => "hkep", "label" => "hkep", "intro" => strip_tags(file_get_contents("http://loripsum.net/api/2/short/headers"))];
         $this->db->insert("album", $data);

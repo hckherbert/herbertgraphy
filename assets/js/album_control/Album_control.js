@@ -51,13 +51,13 @@ Album_control.prototype.initUpload = function()
     _itemTemplate += "<span class='fileinfo'></span>";
     _itemTemplate += "<div class='close'></div><div class='progress'><div class='progress-bar'></div></div>";
     _itemTemplate += "<div class='imgPreview'></div>";
-    _itemTemplate += "<input name='filename[]' value='' type='text' placeholder='Rename me if possible' pattern='^[a-zA-Z0-9-]+$'>";
+    _itemTemplate += "<input name='new_filename' value='' type='text' placeholder='Rename me if possible' pattern='^[a-zA-Z0-9-]+$'>";
     _itemTemplate += "<span class='error hide'>Number, letters and hyphens only</span>";
-    _itemTemplate += "<input name='title[]' value='' type='text' placeholder='Give me a title if you wish'>";
-    _itemTemplate += "<textarea name='desc[]' value='' placeholder='Say something about me if you wish'></textarea>";
+    _itemTemplate += "<input name='title' value='' type='text' placeholder='Give me a title if you wish'>";
+    _itemTemplate += "<textarea name='desc' value='' placeholder='Say something about me if you wish'></textarea>";
     _itemTemplate += "</div>";
 
-    this.mErrorMsgUpload = "Upload cannot be started. Please check that: <br> - Each file is under " + _self.mFileSizeLimit + ".<br> - Each time only " + _self.mSimUploadLimit + " photos can be selected.<br>- Files are image type.<br>Also check the error notices (if any) near input fields.";
+    this.mErrorMsgUpload = "Upload cannot be started. Please check that: <br> - Each file is under " + _self.mFileSizeLimit + ".<br> - Each time only " + _self.mSimUploadLimit + " photos can be selected.<br>- Files are image type.<br>Also check the error notices (if any) about the input fields.";
 
     $('#file_upload').uploadifive({
         'auto'             : false,
@@ -102,23 +102,6 @@ Album_control.prototype.initUpload = function()
 
             _self.mUploadCounter++;
 
-            if (_self.mUploadCounter == 1)
-            {
-
-                _self.mUploadFormData =
-                {
-                    'timestamp': mTimeStamp,
-                    'token': mToken,
-                    'filename': 'bbbb',
-                    'title': '2222',
-                    'desc': 'world',
-                    'total':$(".uploadifive-queue-item").size()
-                };
-
-                $('#file_upload').data('uploadifive').settings.formData = _self.getUploadFormData();
-            }
-
-
         },
         'onError': function(errorType, files)
         {
@@ -147,17 +130,32 @@ Album_control.prototype.initUpload = function()
         {
 			console.log("onuploadFile");
 
+            var _photo_user_data = {};
+            _photo_user_data["new_filename"] = [];
+            _photo_user_data["original_filename"] = [];
+            _photo_user_data["desc"] = [];
+            _photo_user_data["title"] = [];
+
+            $(".uploadifive-queue-item").each(
+                function(i,e)
+                {
+                    _photo_user_data["new_filename"].push($(e).find("input[name='new_filename']").val());
+                    _photo_user_data["original_filename"].push($(e).find(".filename").text());
+                    _photo_user_data["desc"].push($(e).find("textarea[name='desc']").val());
+                    _photo_user_data["title"].push($(e).find("input[name='title']").val());
+                }
+            );
+
+            _photo_user_data = JSON.stringify(_photo_user_data);
+
             if (_self.mUploadCounter == 0)
             {
 
                 _self.mUploadFormData =
                 {
-                    'timestamp': mTimeStamp,
-                    'token': mToken,
-                    'filename': 'aaaa',
-                    'title': '11111',
-                    'desc': 'hello',
-                    'total':$(".uploadifive-queue-item").size()
+                    "timestamp": mTimeStamp,
+                    "token": mToken,
+                    "photo_user_data": _photo_user_data
                 };
 
                 $('#file_upload').data('uploadifive').settings.formData = _self.getUploadFormData();

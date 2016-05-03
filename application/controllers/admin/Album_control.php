@@ -304,7 +304,7 @@ class Album_control extends CI_Controller
 	public function upload()
 	{
 		$uploadDir = '/photos/';
-
+		$photo_user_data = json_decode($_POST["photo_user_data"], true);
 
 // Set the allowed file extensions
 
@@ -312,10 +312,34 @@ class Album_control extends CI_Controller
 
 		$verifyToken = md5('unique_salt' . $_POST['timestamp']);
 
-		if (!empty($_FILES) && $_POST['token'] == $verifyToken) {
+		if (!empty($_FILES) && $_POST['token'] == $verifyToken &&$photo_user_data )
+		{
+			$post_data_index = -1;
+			$new_filename = "";
+			$desc = "";
+			$title = "";
 			$tempFile   = $_FILES['Filedata']['tmp_name'];
 			$uploadDir  = FCPATH . 'assets/'.$uploadDir;
 			$targetFile = $uploadDir . $_FILES['Filedata']['name'];
+
+			foreach($photo_user_data["original_filename"] as $index=>$value)
+			{
+				if ($value ==  $_FILES['Filedata']['name'])
+				{
+					$post_data_index = $index;
+				}
+			}
+
+			$new_filename = $photo_user_data["new_filename"][$post_data_index];
+
+			if ($new_filename == "")
+			{
+				$new_filename =  $_FILES['Filedata']['name'];
+			}
+
+			$desc = $photo_user_data["desc"][$post_data_index];
+			$title = $photo_user_data["title"][$post_data_index];
+
 
 			// Validate the filetype
 			$fileParts = pathinfo($_FILES['Filedata']['name']);
@@ -388,10 +412,9 @@ class Album_control extends CI_Controller
 
 				$data = array(
 					"albumId" => 0,
-					//"filename" =>  $_FILES['Filedata']['name']
-					"filename" => $this->input->post("filename"),
-					"title" => $this->input->post("title"),
-					"desc" => $this->input->post("desc"),
+					"filename" => $new_filename,
+					"title" => $title,
+					"desc" => $desc,
 					"create_date" => date('Y-m-d H:i:s')
 				);
 
