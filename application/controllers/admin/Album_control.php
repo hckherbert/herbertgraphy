@@ -315,12 +315,15 @@ class Album_control extends CI_Controller
 		if (!empty($_FILES) && $_POST['token'] == $verifyToken &&$photo_user_data )
 		{
 			$post_data_index = -1;
-			$new_filename = "";
+			$slug_filename = "";
 			$desc = "";
 			$title = "";
+
+			$fileParts = pathinfo($_FILES['Filedata']['name']);
+			$extension = strtolower($fileParts['extension']);
 			$tempFile   = $_FILES['Filedata']['tmp_name'];
 			$uploadDir  = FCPATH . 'assets/'.$uploadDir;
-			$targetFile = $uploadDir . $_FILES['Filedata']['name'];
+
 
 			foreach($photo_user_data["original_filename"] as $index=>$value)
 			{
@@ -330,20 +333,30 @@ class Album_control extends CI_Controller
 				}
 			}
 
-			$new_filename = $photo_user_data["new_filename"][$post_data_index];
 
-			if ($new_filename == "")
+			if ($photo_user_data["new_filename"][$post_data_index] == "")
 			{
-				$new_filename =  $_FILES['Filedata']['name'];
+				$slug_filename_only =  pathinfo($_FILES['Filedata']['name'], PATHINFO_FILENAME);
+				$slug_filename_only = preg_replace('/\s+/', '-', $slug_filename_only);
+				$slug_filename_only = strtolower($slug_filename_only);
+				$slug_filename = $slug_filename_only.".".$extension;
+			}
+			else
+			{
+				$slug_filename_only = $photo_user_data["new_filename"][$post_data_index];
+				$slug_filename_only = strtolower($slug_filename_only);
+				$slug_filename = $slug_filename_only.".".$extension;
 			}
 
 			$desc = $photo_user_data["desc"][$post_data_index];
 			$title = $photo_user_data["title"][$post_data_index];
-
+			$hash = hash("sha256", $slug_filename .time()."herbertgraphyalbumadmin");
+			$hash_filename = $slug_filename_only ."-".$hash.".".$extension;
+			$targetFile = $uploadDir .$hash_filename.".".$extension ;
 
 			// Validate the filetype
-			$fileParts = pathinfo($_FILES['Filedata']['name']);
-			if (in_array(strtolower($fileParts['extension']), $fileTypes)) {
+
+			if (in_array($extension, $fileTypes)) {
 
 				// Save the file
 				if (move_uploaded_file($tempFile, $targetFile))
@@ -412,7 +425,8 @@ class Album_control extends CI_Controller
 
 				$data = array(
 					"albumId" => 0,
-					"filename" => $new_filename,
+					"slug_filename" => $slug_filename,
+					"hash_filename" => $hash_filename,
 					"title" => $title,
 					"desc" => $desc,
 					"create_date" => date('Y-m-d H:i:s')

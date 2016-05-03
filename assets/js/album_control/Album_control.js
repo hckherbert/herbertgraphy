@@ -51,10 +51,10 @@ Album_control.prototype.initUpload = function()
     _itemTemplate += "<span class='fileinfo'></span>";
     _itemTemplate += "<div class='close'></div><div class='progress'><div class='progress-bar'></div></div>";
     _itemTemplate += "<div class='imgPreview'></div>";
-    _itemTemplate += "<input name='new_filename' value='' type='text' placeholder='Rename me if possible' pattern='^[a-zA-Z0-9-]+$'>";
+    _itemTemplate += "<input name='new_filename' value='' type='text' placeholder='Rename me if possible' pattern='^[a-zA-Z0-9-]+$' maxlength='50'>";
     _itemTemplate += "<span class='error hide'>Number, letters and hyphens only</span>";
-    _itemTemplate += "<input name='title' value='' type='text' placeholder='Give me a title if you wish'>";
-    _itemTemplate += "<textarea name='desc' value='' placeholder='Say something about me if you wish'></textarea>";
+    _itemTemplate += "<input name='title' value='' type='text' placeholder='Give me a title if you wish' maxlength='100'>";
+    _itemTemplate += "<textarea name='desc' value='' placeholder='Say something about me if you wish' maxlength='500'></textarea>";
     _itemTemplate += "</div>";
 
     this.mErrorMsgUpload = "Upload cannot be started. Please check that: <br> - Each file is under " + _self.mFileSizeLimit + ".<br> - Each time only " + _self.mSimUploadLimit + " photos can be selected.<br>- Files are image type.<br>Also check the error notices (if any) about the input fields.";
@@ -73,7 +73,7 @@ Album_control.prototype.initUpload = function()
         'uploadScript'     : GLOBAL_SITE_URL + "admin/album_control/upload/",
         'simUploadLimit'      : _self.mSimUploadLimit,
         'fileType'         : "image/png, image/gif, image/jpg",
-        'removeCompleted': true,
+        'removeCompleted': false,
         'onAddQueueItem'       : function(file)
         {
             $("#uploadifive-file_upload-file-" + _self.mQueueItemCount).attr("data-filename", file.name);
