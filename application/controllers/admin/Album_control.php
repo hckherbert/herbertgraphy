@@ -86,7 +86,7 @@ class Album_control extends CI_Controller
 	public function add_album()
 	{
 		$post_data = $this->input->post(NULL, TRUE);
-		$post_data["label"] =  strtolower($post_data["label"]);
+		$post_data["label"] =  trim(trtolower($post_data["label"]));
 		$insert_id  = $this->album_model->add_album($post_data);
 
 		$data= array(
@@ -153,7 +153,7 @@ class Album_control extends CI_Controller
 		else
 		{
 			$post_data = $this->input->post(NULL, TRUE);
-			$post_data["label"] =  strtolower($post_data["label"]);
+			$post_data["label"] =  trim(strtolower($post_data["label"]));
 			$insert_id  = $this->album_model->add_subalbum($post_data);
 
 			$data= array(
@@ -200,7 +200,7 @@ class Album_control extends CI_Controller
 		else
 		{
 			$post_data = $this->input->post(NULL, TRUE);
-			$post_data["label"] =  strtolower($post_data["label"]);
+			$post_data["label"] =  trim(strtolower($post_data["label"]));
 			$result =  $this->album_model->update_album_info($post_data);
 
 			if ($result)
