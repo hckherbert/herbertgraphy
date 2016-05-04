@@ -368,8 +368,9 @@ class Album_control extends CI_Controller
 
 				$this->album_model->add_uploaded_file_records($data);
 
-			} else {
-
+			}
+			else
+			{
 				JSONAPI::echo_json_error_response("INVALID_FILE_TYPE");
 
 			}
@@ -400,7 +401,10 @@ class Album_control extends CI_Controller
 			$config['width'] = $long_side;
 			$config['height'] = $long_side;
 			$this->image_lib->initialize($config);
-			$this->image_lib->resize();
+			if (!($this->image_lib->resize()))
+			{
+				JSONAPI::echo_json_error_response("RESIZE_PHOTO_ERROR");
+			}
 			$this->image_lib->clear();
 		}
 

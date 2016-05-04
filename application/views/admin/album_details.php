@@ -110,6 +110,13 @@
 		<?php echo form_close(); ?>
 	</div>
 
+	<div class="section">
+		<h1 class="pageHading">Photo list</h1>
+
+
+	</div>
+
+
 <?php if ($album_details->parentId == NULL) { ?>
 
 	<div class="section">
