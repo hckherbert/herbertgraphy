@@ -119,6 +119,8 @@ Album_control.prototype.initUpload = function()
 
             if (pUploads["attempted"] == pUploads["successful"])
             {
+                //reset isvalidateUpload
+                _self.mIsValidatedUpload = true;
                 $("#formAddAlbum").submit();
                 $('#file_upload').uploadifive('clearQueue');
             }
@@ -127,8 +129,7 @@ Album_control.prototype.initUpload = function()
                 _self.displayFail(_self.mErrorMsgUpload);
             }
 
-            //reset isvalidateUpload
-            _self.mIsValidatedUpload = true;
+
 
         },
         'onUpload': function()
@@ -362,6 +363,7 @@ Album_control.prototype.submit_handler = function()
                         },
                         error: function (jqxhr, status)
                         {
+                            _self.displayFail();
                             _self.displayFail();
                         }
                     }
