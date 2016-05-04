@@ -433,7 +433,7 @@ Album_control.prototype.submit_handler = function()
 
             var _postData = $(this).serializeArray();
             var _formInstance = $(this);
-            
+
             $.ajax(
                 {
                     url: _formInstance.attr("action"),

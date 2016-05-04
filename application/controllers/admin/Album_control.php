@@ -341,63 +341,13 @@ class Album_control extends CI_Controller
 			$hash_filename = $slug_filename_only ."-".$hash.".".$extension;
 			$target_file = $uploadDir.$hash_filename;
 
-			if (in_array($extension, $fileTypes)) {
-
-				// Save the file
+			if (in_array($extension, $fileTypes))
+			{
 				if (move_uploaded_file($tempFile, $target_file))
 				{
-					list($width, $height) = getimagesize($target_file);
-
-					$this->load->library('image_lib');
-
-					if ($width >= 1680 || $height >= 1680)
-					{
-						$config['image_library'] = 'gd2';
-						$config['source_image'] = $target_file;
-						$config['create_thumb'] = TRUE;
-						$config['maintain_ratio'] = TRUE;
-						$config['thumb_marker'] = "_1680";
-						$config['width'] = 1680;
-						$config['height'] = 1680;
-						$config['quality'] = '100%';
-
-						$this->image_lib->initialize($config);
-						$this->image_lib->resize();
-						$this->image_lib->clear();
-					}
-
-					if ($width >= 1280 || $height >= 1280)
-					{
-						$config['image_library'] = 'gd2';
-						$config['source_image'] = $target_file;
-						$config['create_thumb'] = TRUE;
-						$config['maintain_ratio'] = TRUE;
-						$config['thumb_marker'] = "_1280";
-						$config['width'] = 1280;
-						$config['height'] = 1280;
-						$config['quality'] = '100%';
-
-						$this->image_lib->initialize($config);
-						$this->image_lib->resize();
-						$this->image_lib->clear();
-					}
-
-
-					if ($width >= 800 || $height >= 800)
-					{
-						$config['image_library'] = 'gd2';
-						$config['source_image'] = $target_file;
-						$config['create_thumb'] = TRUE;
-						$config['maintain_ratio'] = TRUE;
-						$config['thumb_marker'] = "_800";
-						$config['width'] = 800;
-						$config['height'] = 800;
-						$config['quality'] = '100%';
-
-						$this->image_lib->initialize($config);
-						$this->image_lib->resize();
-						$this->image_lib->clear();
-					}
+					$this->resize_photo(1680, $target_file);
+					$this->resize_photo(1280, $target_file);
+					$this->resize_photo(800, $target_file);
 
 					JSONAPI::echo_json_successful_response();
 				}
@@ -426,8 +376,33 @@ class Album_control extends CI_Controller
 		}
 	}
 
+
 	public  function remove_failed_uploads()
 	{
+
+	}
+
+	private function resize_photo($long_side, $target_file)
+	{
+		$this->load->library('image_lib');
+
+		list($width, $height) = getimagesize($target_file);
+
+		$config['image_library'] = 'gd2';
+		$config['source_image'] = $target_file;
+		$config['create_thumb'] = TRUE;
+		$config['maintain_ratio'] = TRUE;
+		$config['quality'] = '100%';
+
+		if ($width >= $long_side || $height >= $long_side)
+		{
+			$config['thumb_marker'] = "_".$long_side;
+			$config['width'] = $long_side;
+			$config['height'] = $long_side;
+			$this->image_lib->initialize($config);
+			$this->image_lib->resize();
+			$this->image_lib->clear();
+		}
 
 	}
 
