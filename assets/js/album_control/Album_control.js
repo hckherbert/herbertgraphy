@@ -71,18 +71,22 @@ Album_control.prototype.initUpload = function()
         'uploadScript'     : GLOBAL_SITE_URL + "admin/album_control/upload/",
         'simUploadLimit'      : _self.mSimUploadLimit,
         'fileType'         : "image/png, image/gif, image/jpg",
-        'removeCompleted': false,
+        'removeCompleted': true,
         'onAddQueueItem'       : function(file)
         {
-            $("#uploadifive-file_upload-file-" + _self.mQueueItemCount).attr("data-filename", file.name);
-            _self.mQueueItemCount++;
+            console.log("onAddQueueItem");
 
-            //console.log(_self.mQueueItemCount);
+            $("#uploadifive-file_upload-file-" + _self.mQueueItemCount).attr("data-filename", file.name);
 
             if (!_self.isValidUploadFileExtension(file["name"]))
             {
+                $("#uploadifive-file_upload-file-" + _self.mQueueItemCount).find(".fileinfo").text(" - File type not allowed");
+                $("#uploadifive-file_upload-file-" + _self.mQueueItemCount).addClass("error");
                 _self.mIsValidatedUpload = false;
             }
+
+            //note that mQueueItemCount will KEEP accmulating for every batch upload
+            _self.mQueueItemCount++;
 
             var reader = new FileReader();
             reader.onload = function(e)
@@ -101,15 +105,20 @@ Album_control.prototype.initUpload = function()
         },
         'onError': function(errorType, files)
         {
+            console.log("onError");
             _self.mIsValidatedUpload = false;
+        },
+        'onCancel': function(file)
+        {
+            console.log("onCancel: " + file.name);
+
         },
         'onQueueComplete':function(pUploads)
         {
-            _self.mQueueItemCount = 0;
+            console.log("onQueueComplete");
 
             if (pUploads["attempted"] == pUploads["successful"])
             {
-                _self.mIsValidatedUpload = true;
                 $("#formAddAlbum").submit();
                 $('#file_upload').uploadifive('clearQueue');
             }
@@ -117,6 +126,9 @@ Album_control.prototype.initUpload = function()
             {
                 _self.displayFail(_self.mErrorMsgUpload);
             }
+
+            //reset isvalidateUpload
+            _self.mIsValidatedUpload = true;
 
         },
         'onUpload': function()
@@ -226,6 +238,7 @@ Album_control.prototype.submit_handler = function()
     $("#sectionAddAlbum input[name='submit']").on("click", function()
     {
 
+        //these errors are regarding the photo input fields;
         $(".uploadifive-queue-item .error").each(
             function(i,e)
             {
@@ -235,7 +248,13 @@ Album_control.prototype.submit_handler = function()
                     return;
                 }
             }
-        )
+        );
+
+        //these errors are those attached to photo queue item directly
+        if (!$(".uploadifive-queue-item.error").size())
+        {
+            _self.mIsValidatedUpload = true;
+        }
 
         if (_self.mIsValidatedUpload == false)
         {
