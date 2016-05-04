@@ -86,7 +86,7 @@ class Album_control extends CI_Controller
 	public function add_album()
 	{
 		$post_data = $this->input->post(NULL, TRUE);
-		$post_data["label"] =  trim(trtolower($post_data["label"]));
+		$post_data["label"] =  trim(strtolower($post_data["label"]));
 		$insert_id  = $this->album_model->add_album($post_data);
 
 		$data= array(
