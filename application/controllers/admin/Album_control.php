@@ -85,40 +85,8 @@ class Album_control extends CI_Controller
 
 	public function add_album()
 	{
-		//Validation is called once by ajax, before adding album
-		/*
-		$this->form_validation->set_rules($this->config_validation_add_album);
-
-		if ($this->form_validation->run() == FALSE)
-		{
-			$data_error = array(
-				"validation_error" => true
-			);
-			$data_error = array_merge($data_error, $this->form_validation->error_array());
-
-			JSONAPI::echo_json_error_response($data_error);
-		}
-		else
-		{
-			$post_data = $this->input->post(NULL, TRUE);
-			$insert_id  = $this->album_model->add_album($post_data);
-
-			$data= array(
-				"insert_id" => $insert_id
-			);
-
-			if ($insert_id)
-			{
-				JSONAPI::echo_json_successful_response($data, TRUE);
-			}
-			else
-			{
-				JSONAPI::echo_json_error_response();
-			}
-		}
-		*/
-
 		$post_data = $this->input->post(NULL, TRUE);
+		$post_data["label"] =  strtolower($post_data["label"]);
 		$insert_id  = $this->album_model->add_album($post_data);
 
 		$data= array(
@@ -136,7 +104,7 @@ class Album_control extends CI_Controller
 
 	}
 
-	public  function validate_add_album()
+	public function validate_add_album()
 	{
 		$this->form_validation->set_rules($this->config_validation_add_album);
 
@@ -185,10 +153,11 @@ class Album_control extends CI_Controller
 		else
 		{
 			$post_data = $this->input->post(NULL, TRUE);
+			$post_data["label"] =  strtolower($post_data["label"]);
 			$insert_id  = $this->album_model->add_subalbum($post_data);
 
 			$data= array(
-					"insert_id" => $insert_id
+				"insert_id" => $insert_id
 			);
 
 			if ($insert_id)
@@ -231,6 +200,7 @@ class Album_control extends CI_Controller
 		else
 		{
 			$post_data = $this->input->post(NULL, TRUE);
+			$post_data["label"] =  strtolower($post_data["label"]);
 			$result =  $this->album_model->update_album_info($post_data);
 
 			if ($result)
