@@ -166,7 +166,7 @@ Album_control.prototype.initUpload = function()
 
     $(document).on(
         "keyup",
-        ".uploadifive-queue-item input[name='filename']",
+        ".uploadifive-queue-item input[name='new_filename']",
         function()
         {
             var _pattern = $(this).attr('pattern');
