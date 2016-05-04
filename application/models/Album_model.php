@@ -235,4 +235,13 @@ class Album_model extends CI_Model
 		$this->db->insert("photos", $data);
 		return $this->db->insert_id();
 	}
+
+	public function get_photo_details($album_id)
+	{
+		$this->db->select("slug_filename", "hash_filename", "title", "desc");
+		$this->db->where("albumId", $album_id);
+		$query = $this->db->get("photos");
+
+		return $query->result_array();
+	}
 }

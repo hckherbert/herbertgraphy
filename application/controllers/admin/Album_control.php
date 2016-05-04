@@ -383,6 +383,12 @@ class Album_control extends CI_Controller
 
 	}
 
+	public function get_photo_details($album_id)
+	{
+		$data = $this->album_model->get_photo_details($album_id);
+		return $data;
+	}
+
 	private function resize_photo($long_side, $target_file)
 	{
 		$this->load->library('image_lib');
