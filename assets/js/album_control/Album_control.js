@@ -5,8 +5,6 @@ Album_control.prototype.mSimUploadLimit = 10;
 Album_control.prototype.mFileSizeLimit = "2MB";
 Album_control.prototype.mErrorMsgUpload = "";
 Album_control.prototype.mUploadFormData = null;
-Album_control.prototype.mUploadCounter = 0;
-
 
 function Album_control(pAlbumId, pParentId)
 {
@@ -67,7 +65,7 @@ Album_control.prototype.initUpload = function()
         //'checkScript'      : '<?php echo site_url(); ?>admin/album_control/check_exist',
         'dnd': true,
         'fileSizeLimit': _self.mFileSizeLimit,
-        'formData'         : _self.getUploadFormData(),
+        'formData'         : _self.mUploadFormData,
         'itemTemplate'	   : _itemTemplate,
         'queueID'          : 'queue',
         'uploadScript'     : GLOBAL_SITE_URL + "admin/album_control/upload/",
@@ -100,14 +98,10 @@ Album_control.prototype.initUpload = function()
         {
             console.log("onuploadcomplete");
 
-            _self.mUploadCounter++;
-
         },
         'onError': function(errorType, files)
         {
             _self.mIsValidatedUpload = false;
-
-            _self.mUploadCounter++;
         },
         'onQueueComplete':function(pUploads)
         {
@@ -124,7 +118,6 @@ Album_control.prototype.initUpload = function()
                 _self.displayFail(_self.mErrorMsgUpload);
             }
 
-            _self.mUploadCounter = 0;
         },
         'onUpload': function()
         {
@@ -148,18 +141,21 @@ Album_control.prototype.initUpload = function()
 
             _photo_user_data = JSON.stringify(_photo_user_data);
 
-            if (_self.mUploadCounter == 0)
+
+            if ($("#formAddAlbum").size())
             {
-
-                _self.mUploadFormData =
-                {
-                    "timestamp": mTimeStamp,
-                    "token": mToken,
-                    "photo_user_data": _photo_user_data
-                };
-
-                $('#file_upload').data('uploadifive').settings.formData = _self.getUploadFormData();
+                _album_label = $("#formAddAlbum").find("input[name='label']").val();
             }
+
+            _self.mUploadFormData =
+            {
+                "timestamp": mTimeStamp,
+                "token": mToken,
+                "photo_user_data": _photo_user_data,
+                "album_label":_album_label
+            };
+
+            $("#file_upload").data("uploadifive").settings.formData = _self.mUploadFormData;
 
         }
     });
@@ -184,11 +180,6 @@ Album_control.prototype.initUpload = function()
     )
 }
 
-Album_control.prototype.getUploadFormData = function()
-{
-    return this.mUploadFormData;
-
-}
 
 Album_control.prototype.isValidUploadFileExtension = function(pFileName)
 {
@@ -264,32 +255,7 @@ Album_control.prototype.submit_handler = function()
                     //add album or start upload...
                     if ($(".uploadifive-queue-item").size())
                     {
-                        /*
-                        _self.mUploadFormData =
-                        {
-                            'timestamp': mTimeStamp,
-                            'token': mToken,
-                            'filename': [],
-                            'title': [],
-                            'desc': [],
-							'total':$(".uploadifive-queue-item").size()
-                        };
-						
-						$(".uploadifive-queue-item").each
-						(
-							function(i,e)
-							{
-								_self.mUploadFormData["filename"].push($(e).find("input[name='filename[]']").val());
-								_self.mUploadFormData["title"].push($(e).find("input[name='title[]']").val());
-								_self.mUploadFormData["desc"].push($(e).find("textarea[name='desc[]']").val());
-							}
-						);
-			
-                        _self.initUpload();
-                        */
                         $('#file_upload').uploadifive('upload');
-
-                        //_self.mUploadCounter++;
                     }
                     else
                     {
@@ -316,14 +282,9 @@ Album_control.prototype.submit_handler = function()
                     {
                         _self.displayFail();
                     }
-
-                    _self.mUploadCounter++;
                 }
             }
         );
-
-
-
     })
 
     $("#formAlbumList, #formSubAlbumList").on

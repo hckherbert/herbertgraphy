@@ -303,13 +303,30 @@ class Album_control extends CI_Controller
 
 	public function upload()
 	{
-		$uploadDir = '/photos/';
+
+		$upload_base_dir = FCPATH."/assets/photos/";
+
+		if ($_POST["album_label"])
+		{
+			$uploadDir = $upload_base_dir.strtolower($_POST["album_label"]);
+
+			if (!is_dir($uploadDir))
+			{
+				if (!mkdir($uploadDir, 0777, true))
+				{
+					JSONAPI::echo_json_error_response("CANNOT_CREATE_UPLOAD_DIRECTORY");
+				}
+			}
+
+			$uploadDir.="/";
+		}
+		else
+		{
+			JSONAPI::echo_json_error_response("NO_UPLOAD_DIRECTORY_SPECIFIED");
+		}
+
 		$photo_user_data = json_decode($_POST["photo_user_data"], true);
-
-// Set the allowed file extensions
-
-		$fileTypes = array('jpg', 'gif', 'png'); // Allowed file extensions
-
+		$fileTypes = array('jpg', 'gif', 'png');
 		$verifyToken = md5('unique_salt' . $_POST['timestamp']);
 
 		if (!empty($_FILES) && $_POST['token'] == $verifyToken &&$photo_user_data )
@@ -322,7 +339,6 @@ class Album_control extends CI_Controller
 			$fileParts = pathinfo($_FILES['Filedata']['name']);
 			$extension = strtolower($fileParts['extension']);
 			$tempFile   = $_FILES['Filedata']['tmp_name'];
-			$uploadDir  = FCPATH . 'assets/'.$uploadDir;
 
 
 			foreach($photo_user_data["original_filename"] as $index=>$value)
@@ -352,16 +368,13 @@ class Album_control extends CI_Controller
 			$title = $photo_user_data["title"][$post_data_index];
 			$hash = hash("sha256", $slug_filename .time()."herbertgraphyalbumadmin");
 			$hash_filename = $slug_filename_only ."-".$hash.".".$extension;
-			$target_file = $uploadDir .$hash_filename;
-
-			// Validate the filetype
+			$target_file = $uploadDir.$hash_filename;
 
 			if (in_array($extension, $fileTypes)) {
 
 				// Save the file
 				if (move_uploaded_file($tempFile, $target_file))
 				{
-
 					list($width, $height) = getimagesize($target_file);
 
 					$this->load->library('image_lib');
@@ -434,9 +447,7 @@ class Album_control extends CI_Controller
 
 				$this->album_model->add_uploaded_file_records($data);
 
-
 			} else {
-
 
 				JSONAPI::echo_json_error_response("INVALID_FILE_TYPE");
 
