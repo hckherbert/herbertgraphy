@@ -5,6 +5,7 @@ Album_control.prototype.mSimUploadLimit = 10;
 Album_control.prototype.mFileSizeLimit = "2MB";
 Album_control.prototype.mErrorMsgUpload = "";
 Album_control.prototype.mUploadFormData = null;
+Album_control.prototype.mQueueSize= 0;
 
 function Album_control(pAlbumId, pParentId)
 {
@@ -115,9 +116,11 @@ Album_control.prototype.initUpload = function()
         },
         'onQueueComplete':function(pUploads)
         {
-            console.log("onQueueComplete");
+            console.log("onQueueComplete; " + pUploads["attempted"] + "; " +  pUploads["successful"]);
 
-            if (pUploads["attempted"] == pUploads["successful"])
+            console.log(pUploads);
+
+            if (pUploads["errors"] == 0)
             {
                 //reset isvalidateUpload
                 _self.mIsValidatedUpload = true;
@@ -128,8 +131,6 @@ Album_control.prototype.initUpload = function()
             {
                 _self.displayFail(_self.mErrorMsgUpload);
             }
-
-
 
         },
         'onUpload': function()

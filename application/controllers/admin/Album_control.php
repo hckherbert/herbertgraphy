@@ -278,7 +278,7 @@ class Album_control extends CI_Controller
 
 		if ($_POST["album_label"])
 		{
-			$uploadDir = $upload_base_dir.strtolower($_POST["album_label"]."/");
+			$uploadDir = $upload_base_dir.strtolower($_POST["album_label"]);
 
 			if (!file_exists($uploadDir))
 			{
@@ -287,6 +287,8 @@ class Album_control extends CI_Controller
 					JSONAPI::echo_json_error_response("CANNOT_CREATE_UPLOAD_DIRECTORY");
 				}
 			}
+
+			$uploadDir.="/";
 
 		}
 		else
