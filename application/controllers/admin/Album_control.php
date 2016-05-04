@@ -278,9 +278,9 @@ class Album_control extends CI_Controller
 
 		if ($_POST["album_label"])
 		{
-			$uploadDir = $upload_base_dir.strtolower($_POST["album_label"]);
+			$uploadDir = $upload_base_dir.strtolower($_POST["album_label"]."/");
 
-			if (!is_dir($uploadDir))
+			if (!file_exists($uploadDir))
 			{
 				if (!mkdir($uploadDir, 0777, true))
 				{
@@ -288,7 +288,6 @@ class Album_control extends CI_Controller
 				}
 			}
 
-			$uploadDir.="/";
 		}
 		else
 		{
