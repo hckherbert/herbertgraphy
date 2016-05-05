@@ -116,10 +116,12 @@
 		<?php foreach ($photo_data as $row) { ?>
 		<div class="photo_data">
 			<img class="uploadImgPreview" src="<?php echo  base_url("assets/photos/". $album_details->label."/".$row["hash_filename"]); ?>">
-			<input name="new_filename" value="<?php echo $row["slug_filename"]; ?>" type="text" placeholder="Rename me if possible" pattern="^[a-zA-Z0-9-]+$" maxlength="50">
+			<input name="new_filename[]" value="<?php echo $row["slug_filename"]; ?>" type="text" placeholder="Rename me if possible" pattern="^[a-zA-Z0-9-]+$" maxlength="50">
 			<span class="error hide">Number, letters and hyphens only</span>
-			<input name="title" value="<?php echo $row["title"]; ?>" type="text" placeholder="Give me a title if you wish" maxlength="100">
-			<textarea name="desc" value="<?php echo $row["desc"]; ?>" placeholder="Say something about me if you wish" maxlength="500"></textarea>
+			<input name="title[]" value="<?php echo $row["title"]; ?>" type="text" placeholder="Give me a title if you wish" maxlength="100">
+			<textarea name="desc[]"  placeholder="Say something about me if you wish" maxlength="500"><?php echo $row["desc"]; ?></textarea>
+			<input name="del_id[]" type="checkbox" value="<?php echo $row["photoId"]; ?>">Remove
+			<input name="photo_id[]" type="hidden" value="<?php echo $row["photoId"]; ?>">
 		</div>
 		<?php } ?>
 	</div>

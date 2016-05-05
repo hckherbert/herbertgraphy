@@ -326,18 +326,16 @@ class Album_control extends CI_Controller
 				$slug_filename_only =  pathinfo($_FILES['Filedata']['name'], PATHINFO_FILENAME);
 				$slug_filename_only = preg_replace('/\s+/', '-', $slug_filename_only);
 				$slug_filename_only = strtolower($slug_filename_only);
-				$slug_filename = $slug_filename_only.".".$extension;
 			}
 			else
 			{
 				$slug_filename_only = $photo_user_data["new_filename"][$post_data_index];
 				$slug_filename_only = strtolower($slug_filename_only);
-				$slug_filename = $slug_filename_only.".".$extension;
 			}
 
 			$desc = $photo_user_data["desc"][$post_data_index];
 			$title = $photo_user_data["title"][$post_data_index];
-			$hash = hash("sha256", $slug_filename .time()."herbertgraphyalbumadmin");
+			$hash = hash("sha256", $slug_filename_only .time()."herbertgraphyalbumadmin");
 			$hash_filename = $slug_filename_only ."-".$hash.".".$extension;
 			$target_file = $uploadDir.$hash_filename;
 
@@ -359,7 +357,7 @@ class Album_control extends CI_Controller
 
 				$data = array(
 					"albumId" => 0,
-					"slug_filename" => $slug_filename,
+					"slug_filename" => $slug_filename_only,
 					"hash_filename" => $hash_filename,
 					"title" => $title,
 					"desc" => $desc,

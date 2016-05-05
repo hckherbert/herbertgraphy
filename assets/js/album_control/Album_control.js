@@ -239,6 +239,8 @@ Album_control.prototype.submit_handler = function()
     //Click the Add button, upload photos if any, or add direct album
     $("#sectionAddAlbum input[name='submit']").on("click", function()
     {
+        var _new_filenames_array = [];
+        var _filtered_filenames_array = [];
 
         //these errors are regarding the photo input fields;
         $(".uploadifive-queue-item .error").each(
@@ -251,6 +253,30 @@ Album_control.prototype.submit_handler = function()
                 }
             }
         );
+
+        //these errors are reagarding slug filename uniqueness
+        $(".uploadifive-queue-item input[name='new_filename']").each(
+            function(i,e)
+            {
+                _new_filenames_array.push($.trim($(e).val()).toLowerCase());
+            }
+        )
+
+
+        for (var _i = 0; _i < _new_filenames_array.length; _i++)
+        {
+            if (($.inArray(_new_filenames_array[_i], _filtered_filenames_array)) == -1)
+            {
+                _filtered_filenames_array.push(_new_filenames_array[_i]);
+            }
+        }
+
+        if (_new_filenames_array.length != _filtered_filenames_array)
+        {
+            _self.displayFail(_self.mErrorMsgUpload);
+            return;
+        }
+
 
         //these errors are those attached to photo queue item directly
         if (!$(".uploadifive-queue-item.error").size())
