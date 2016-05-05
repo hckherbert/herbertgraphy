@@ -188,7 +188,7 @@ input[type='button']
 }
 
 
-/***** upload *****/
+/***** upload and photo data*****/
 #uploaderWrapper
 {
 	border: 1px solid #d0d0d0;
@@ -200,6 +200,12 @@ input[type='button']
 	width:100%;
 }
 
+.photo_data
+{
+	padding:10px;
+}
+
+.photo_data,
 .uploadifive-queue-item
 {
 	background-color:transparent;
@@ -210,11 +216,12 @@ input[type='button']
 	margin:0 0 20px 0;
 }
 
+.photo_data input[type="text"],
 .uploadifive-queue-item input[type=text]
 {
 	width: 100%;
 	box-sizing: border-box;
-	margin:5px 0;
+	margin:0 0 5px;
 }
 
 .uploadifive-queue-item  .filename
@@ -222,6 +229,7 @@ input[type='button']
 	word-break: break-all;
 }
 
+.photo_data textarea,
 .uploadifive-queue-item textarea
 {
 	width: 100%;
@@ -243,6 +251,8 @@ input[type='button']
 .uploadifive-queue-item .error
 {
 	font-size:12px;
+	margin: 0 0 3px 0;
+	display: inline-block;
 }
 
 

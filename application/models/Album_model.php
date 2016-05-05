@@ -181,9 +181,9 @@ class Album_model extends CI_Model
 		$this->db->where("id", $pAlbum_id);
 		$query = $this->db->get("album");
 
-		$data["album_details"] = $query->row();
+		$album_details = $query->row();
 
-		if ($data["album_details"]->parentId !== NULL)
+		if ($album_details->parentId !== NULL)
 		{
 			$this->db->select("name AS parentName");
 			$this->db->where("id", $query->row()->parentId);
@@ -191,9 +191,12 @@ class Album_model extends CI_Model
 
 			if ($query->row())
 			{
-				$data["album_details"]->parentName = $query->row()->parentName;
+				$album_details->parentName = $query->row()->parentName;
 			}
 		}
+
+		$data["photo_data"] = $this->get_photo_data($pAlbum_id);
+		$data["album_details"] = $album_details;
 
 		return $data;
 	}
@@ -236,9 +239,9 @@ class Album_model extends CI_Model
 		return $this->db->insert_id();
 	}
 
-	public function get_photo_details($album_id)
+	private function get_photo_data($album_id)
 	{
-		$this->db->select("slug_filename", "hash_filename", "title", "desc");
+		$this->db->select("photoId,slug_filename,hash_filename,title,desc");
 		$this->db->where("albumId", $album_id);
 		$query = $this->db->get("photos");
 
