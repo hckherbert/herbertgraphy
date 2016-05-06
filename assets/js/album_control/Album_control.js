@@ -182,7 +182,7 @@ Album_control.prototype.initUpload = function()
             var _pattern = $(this).attr('pattern');
             var _value =$(this).val();
 
-            if (_value.match( new RegExp(_pattern) ))
+            if (_value.match( new RegExp(_pattern)) || _value=="")
             {
                 $(this).next(".error").addClass("hide");
             }
@@ -240,7 +240,7 @@ Album_control.prototype.submit_handler = function()
     $("#sectionAddAlbum input[name='submit']").on("click", function()
     {
         var _new_filenames_array = [];
-        var _filtered_filenames_array = [];
+        var _duplicated_filenames_found = false;
 
         //these errors are regarding the photo input fields;
         $(".uploadifive-queue-item .error").each(
@@ -260,22 +260,28 @@ Album_control.prototype.submit_handler = function()
             {
                 _new_filenames_array.push($.trim($(e).val()).toLowerCase());
             }
-        )
+        );
 
-
-        for (var _i = 0; _i < _new_filenames_array.length; _i++)
-        {
-            if (($.inArray(_new_filenames_array[_i], _filtered_filenames_array)) == -1)
+        $(".uploadifive-queue-item input[name='new_filename']").each(
+            function(i,e)
             {
-                _filtered_filenames_array.push(_new_filenames_array[_i]);
+                if ($.inArray($.trim($(e).val()).toLowerCase(), _new_filenames_array) && $(e).val()!="")
+                {
+                    $(e).next(".error").removeClass("hide").text("Filename duplicated");
+                    _duplicated_filenames_found = true;
+                    console.log("dup!");
+                }
             }
-        }
+        );
 
-        if (_new_filenames_array.length != _filtered_filenames_array)
+        if (_duplicated_filenames_found)
         {
             _self.displayFail(_self.mErrorMsgUpload);
             return;
         }
+
+        //REMARK: TO BE REMOVED
+        return;
 
 
         //these errors are those attached to photo queue item directly
