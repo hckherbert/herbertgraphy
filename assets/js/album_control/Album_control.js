@@ -289,10 +289,6 @@ Album_control.prototype.submit_handler = function()
             return;
         }
 
-        //REMARK: TO BE REMOVED
-        return;
-
-
         //these errors are those attached to photo queue item directly
         if (!$(".uploadifive-queue-item.error").size())
         {
