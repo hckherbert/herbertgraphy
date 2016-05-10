@@ -239,7 +239,7 @@ Album_control.prototype.submit_handler = function()
     //Click the Add button, upload photos if any, or add direct album
     $("#sectionAddAlbum input[name='submit']").on("click", function()
     {
-        var _new_filenames_array = [];
+		var _new_filenames_occurances = {};
         var _duplicated_filenames_found = false;
 
         //these errors are regarding the photo input fields;
@@ -258,18 +258,27 @@ Album_control.prototype.submit_handler = function()
         $(".uploadifive-queue-item input[name='new_filename']").each(
             function(i,e)
             {
-                _new_filenames_array.push($.trim($(e).val()).toLowerCase());
+				var _key = $.trim($(e).val()).toLowerCase();
+				if (!_new_filenames_occurances[_key])
+				{
+					_new_filenames_occurances[_key] = 1;
+				}
+				else
+				{
+					_new_filenames_occurances[_key]++;
+				}
             }
         );
-
+		
         $(".uploadifive-queue-item input[name='new_filename']").each(
             function(i,e)
             {
-                if ($.inArray($.trim($(e).val()).toLowerCase(), _new_filenames_array) && $(e).val()!="")
+				var _filename = $.trim($(e).val()).toLowerCase();
+			
+				if (_new_filenames_occurances[_filename] > 1 && _filename!="")
                 {
                     $(e).next(".error").removeClass("hide").text("Filename duplicated");
                     _duplicated_filenames_found = true;
-                    console.log("dup!");
                 }
             }
         );
