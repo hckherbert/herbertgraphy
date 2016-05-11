@@ -5,7 +5,7 @@ Album_control.prototype.mSimUploadLimit = 10;
 Album_control.prototype.mFileSizeLimit = "2MB";
 Album_control.prototype.mErrorMsgUpload = "";
 Album_control.prototype.mUploadFormData = null;
-Album_control.prototype.mQueueSize= 0;
+Album_control.prototype.mOriginalPhotoData = null;
 
 function Album_control(pAlbumId, pParentId)
 {
@@ -27,7 +27,13 @@ function Album_control(pAlbumId, pParentId)
         }
     }
 
-    this.initUpload();
+    if ($(".formUploadPhotoData").size())
+    {
+        this.mOriginalPhotoData = new OriginalPhotoData($(".formUploadPhotoData"));
+    }
+
+
+    this.init_upload();
     this.prepare_listeners();
     this.submit_handler();
 }
@@ -39,7 +45,7 @@ Album_control.prototype.init_ui = function()
 
 }
 
-Album_control.prototype.initUpload = function()
+Album_control.prototype.init_upload = function()
 {
     var _self = this;
     var mUploadedCount = 0;
@@ -50,7 +56,7 @@ Album_control.prototype.initUpload = function()
     _itemTemplate += "<span class='fileinfo'></span>";
     _itemTemplate += "<div class='close'></div><div class='progress'><div class='progress-bar'></div></div>";
     _itemTemplate += "<div class='imgPreview'></div>";
-    _itemTemplate += "<input name='new_filename' value='' type='text' placeholder='Rename me if possible' pattern='^[a-zA-Z0-9-]+$' maxlength='50'>";
+    _itemTemplate += "<input name='new_filename' value='' type='text' placeholder='Rename me if possible' pattern='^[a-zA-Z0-9-_]+$' maxlength='50'>";
     _itemTemplate += "<span class='error hide'>Number, letters and hyphens only</span>";
     _itemTemplate += "<input name='title' value='' type='text' placeholder='Give me a title if you wish' maxlength='100'>";
     _itemTemplate += "<textarea name='desc' value='' placeholder='Say something about me if you wish' maxlength='500'></textarea>";
@@ -551,6 +557,40 @@ Album_control.prototype.submit_handler = function()
                     }
                 }
             );
+        }
+    );
+
+    $(".formUploadPhotoData").on
+    (
+        "submit",
+        function(pEvent)
+        {
+            pEvent.preventDefault();
+
+            var _i = 0;
+            var _new_file_names_array = [];
+
+            $("input[name='new_filename[]']", $(".formUploadPhotoData")).each(
+                function(i,e)
+                {
+                    _new_file_names_array.push($.trim($(e).val()).toLowerCase());
+                }
+            )
+
+            console.log(_self.mOriginalPhotoData.check_unique_with_new_filenames(_new_file_names_array));
+
+            var _duplicated_index_array = _self.mOriginalPhotoData.check_unique_with_new_filenames(_new_file_names_array);
+
+            if (_duplicated_index_array.length)
+            {
+                for (_i = 0; _i < _duplicated_index_array.length; _i++)
+                {
+                    $("input[name='new_filename[]']:eq(" + _duplicated_index_array[_i] + ")", $(".formUploadPhotoData")).next(".error").removeClass("hide").text("Filename existed. Please use others.");
+                }
+
+            }
+
+            return;
         }
     )
 }

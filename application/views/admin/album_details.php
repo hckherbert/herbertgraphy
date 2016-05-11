@@ -38,6 +38,7 @@
 	<script src="<?php echo base_url('assets/js/jquery.jscrollpane.min.js'); ?>"></script>
 	<script src="<?php echo base_url('assets/js/jquery.mousewheel.js'); ?>"></script>
 	<script src="<?php echo base_url('assets/js/album_control/jquery.uploadifive.min.js'); ?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('assets/js/album_control/OriginalPhotoData.js'); ?>"></script>
 	<script src="<?php echo base_url('assets/js/album_control/Album_control.js'); ?>"></script>
 	<script>
 
@@ -117,8 +118,9 @@
 		<?php foreach ($photo_data as $row) { ?>
 		<div class="photo_data">
 			<img class="uploadImgPreview" src="<?php echo  base_url("assets/photos/". $album_details->label."/".$row["hash_filename"]); ?>">
+			<p class="original_filename"><?php echo $row["slug_filename"]; ?></p>
 			<input name="original_filename[]" value="<?php echo $row["slug_filename"]; ?>" type="hidden">
-			<input name="new_filename[]" value="<?php echo $row["slug_filename"]; ?>" type="text" placeholder="Rename me if possible" pattern="^[a-zA-Z0-9-]+$" maxlength="50">
+			<input name="new_filename[]" value="<?php echo $row["slug_filename"]; ?>" type="text" placeholder="Rename me if possible" pattern="^[a-zA-Z0-9-_]+$" maxlength="50">
 			<span class="error hide">Number, letters and hyphens only</span>
 			<input name="title[]" value="<?php echo $row["title"]; ?>" type="text" placeholder="Give me a title if you wish" maxlength="100">
 			<textarea name="desc[]"  placeholder="Say something about me if you wish" maxlength="500"><?php echo $row["desc"]; ?></textarea>

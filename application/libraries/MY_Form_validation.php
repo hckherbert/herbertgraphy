@@ -26,7 +26,7 @@ class MY_Form_validation extends CI_Form_validation
 
     function label_char_format($pInput)
     {
-        if (!preg_match("/^[a-zA-Z0-9-]+$/", $pInput))
+        if (!preg_match("/^[a-zA-Z0-9-_]+$/", $pInput))
         {
             $this->CI->form_validation->set_message("label_char_format", 'Album label should only contain letters, numbers or hyphens');
             return FALSE;
