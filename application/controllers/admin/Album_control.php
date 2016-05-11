@@ -214,7 +214,6 @@ class Album_control extends CI_Controller
 		}
 	}
 
-
 	public function album_details($pAlbum_id)
 	{
 		$data= $this->album_model->get_album_details($pAlbum_id);
@@ -336,7 +335,7 @@ class Album_control extends CI_Controller
 			$desc = $photo_user_data["desc"][$post_data_index];
 			$title = $photo_user_data["title"][$post_data_index];
 			$hash = hash("sha256", $slug_filename_only .time()."herbertgraphyalbumadmin");
-			$hash_filename = $hash.".".$extension;
+			$hash_filename = $slug_filename_only."-".$hash.".".$extension;
 			$target_file = $uploadDir.$hash_filename;
 
 			if (in_array($extension, $fileTypes))

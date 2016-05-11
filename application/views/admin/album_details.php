@@ -113,9 +113,11 @@
 	<?php if ($photo_data != NULL) { ?>
 	<div class="section">
 		<h1 class="pageHading">Photo list</h1>
+		<?php echo form_open('admin/album_control/update_photo_data', 'class="formUploadPhotoData" id="formUploadPhotoData"'); ?>
 		<?php foreach ($photo_data as $row) { ?>
 		<div class="photo_data">
 			<img class="uploadImgPreview" src="<?php echo  base_url("assets/photos/". $album_details->label."/".$row["hash_filename"]); ?>">
+			<input name="original_filename[]" value="<?php echo $row["slug_filename"]; ?>" type="hidden">
 			<input name="new_filename[]" value="<?php echo $row["slug_filename"]; ?>" type="text" placeholder="Rename me if possible" pattern="^[a-zA-Z0-9-]+$" maxlength="50">
 			<span class="error hide">Number, letters and hyphens only</span>
 			<input name="title[]" value="<?php echo $row["title"]; ?>" type="text" placeholder="Give me a title if you wish" maxlength="100">
@@ -124,9 +126,12 @@
 			<input name="photo_id[]" type="hidden" value="<?php echo $row["photoId"]; ?>">
 		</div>
 		<?php } ?>
+		<div class="clear"></div>
+		<input name="submit" type="submit" value="Update">
+		<?php echo form_close(); ?>
+		<div class="clear"></div>
 	</div>
 	<?php } ?>
-
 	<?php if ($album_details->parentId == NULL) { ?>
 	<div class="section">
 		<h1 class="pageHading">Sub-album List</h1>
