@@ -240,7 +240,7 @@ Album_control.prototype.removeFailedUploads = function()
 
 Album_control.prototype.check_is_unique_new_photo_filenames = function(pSelectorString)
 {
-    var _new_filenames_occurances = {};
+    var _new_filenames_occurances = [];
     var _duplicated_filenames_found = false;
 
     $(pSelectorString).each
@@ -256,8 +256,13 @@ Album_control.prototype.check_is_unique_new_photo_filenames = function(pSelector
             {
                 _new_filenames_occurances[_key]++;
             }
+
+            console.log(_key);
         }
-    )
+    );
+
+
+    console.log(_new_filenames_occurances);
 
     $(pSelectorString).each
     (
@@ -267,7 +272,10 @@ Album_control.prototype.check_is_unique_new_photo_filenames = function(pSelector
 
             if (_new_filenames_occurances[_filename] > 1 && _filename!="")
             {
-                $(e).next(".error").removeClass("hide").text("Filename duplicated");
+                if ($(e).next(".error").hasClass("hide"))
+                {
+                    $(e).next(".error").removeClass("hide").text("Filename duplicated");
+                }
                 _duplicated_filenames_found = true;
             }
         }
@@ -284,7 +292,8 @@ Album_control.prototype.submit_handler = function()
     $("#sectionAddAlbum input[name='submit']").on("click", function()
     {
 		var _new_filenames_occurances = {};
-        var _is_unique_filenames;
+        var _is_unique_filenames = true;
+        var _is_photo_input_validated = true;
 
         //these errors are regarding the photo input fields;
         $(".uploadifive-queue-item .error").each(
@@ -292,8 +301,9 @@ Album_control.prototype.submit_handler = function()
             {
                 if (!$(e).hasClass("hide"))
                 {
-                    _self.displayFail(_self.mErrorMsgUpload);
-                    return;
+                    //_self.displayFail(_self.mErrorMsgUpload);
+                    //return;
+                    _is_photo_input_validated = false;
                 }
             }
         );
@@ -302,8 +312,9 @@ Album_control.prototype.submit_handler = function()
 
         if (!_is_unique_filenames)
         {
-            _self.displayFail(_self.mErrorMsgUpload);
-            return;
+           // _self.displayFail(_self.mErrorMsgUpload);
+           // return;
+            _is_photo_input_validated = false;
         }
 
         //these errors are those attached to photo queue item directly
@@ -312,7 +323,7 @@ Album_control.prototype.submit_handler = function()
             _self.mIsValidatedUpload = true;
         }
 
-        if (_self.mIsValidatedUpload == false)
+        if (_self.mIsValidatedUpload == false || _is_photo_input_validated == false)
         {
             _self.displayFail(_self.mErrorMsgUpload);
             return;
@@ -580,7 +591,8 @@ Album_control.prototype.submit_handler = function()
 
             var _i = 0;
             var _new_file_names_array = [];
-            var _is_unique_filenames;
+            var _is_unique_filenames = true;
+            var _is_photo_input_validated = true;
 
             $("input[name='new_filename[]']", $(".formUploadPhotoData")).each(
                 function(i,e)
@@ -598,13 +610,14 @@ Album_control.prototype.submit_handler = function()
                     $("input[name='new_filename[]']:eq(" + _duplicated_index_array[_i] + ")", $(".formUploadPhotoData")).next(".error").removeClass("hide").text("Filename existed. Please use others.");
                 }
 
-                _self.displayFail(_self.mErrorMsgUpload);
-                return;
+                _is_photo_input_validated = false;
+
+
             }
 
             _is_unique_filenames = _self.check_is_unique_new_photo_filenames(".photo_data input[name='new_filename[]']");
 
-            if (!_is_unique_filenames)
+            if ( _is_photo_input_validated == false)
             {
                 _self.displayFail(_self.mErrorMsgUpload);
                 return;
