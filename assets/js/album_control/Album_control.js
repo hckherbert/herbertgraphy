@@ -261,9 +261,6 @@ Album_control.prototype.check_is_unique_new_photo_filenames = function(pSelector
         }
     );
 
-
-    console.log(_new_filenames_occurances);
-
     $(pSelectorString).each
     (
         function(i,e)
@@ -272,10 +269,18 @@ Album_control.prototype.check_is_unique_new_photo_filenames = function(pSelector
 
             if (_new_filenames_occurances[_filename] > 1 && _filename!="")
             {
-                if ($(e).next(".error").hasClass("hide"))
+                if ($('.formUploadPhotoData').size())
+                {
+                    if ($(e).next(".error").hasClass("hide") && $(e).closest(".photo_data").find(".original_filename").text() != _filename)
+                    {
+                        $(e).next(".error").removeClass("hide").text("Filename duplicated");
+                    }
+                }
+                else
                 {
                     $(e).next(".error").removeClass("hide").text("Filename duplicated");
                 }
+
                 _duplicated_filenames_found = true;
             }
         }

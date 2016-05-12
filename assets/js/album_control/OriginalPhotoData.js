@@ -49,7 +49,7 @@ OriginalPhotoData.prototype.check_unique_with_new_filenames = function(pNew_file
          {
              for (_j = 0; _j < _totalPhoto; _j++)
              {
-                 if (this.mData_array[_j]["original_file_name"] == pNew_file_name_array[_i])
+                 if (this.mData_array[_j]["original_file_name"] == pNew_file_name_array[_i] &&  pNew_file_name_array[_i]!= this.mData_array[_i]["original_file_name"] )
                  {
                      _duplicated_index_array.push(_i);
                  }
