@@ -435,7 +435,6 @@ Album_control.prototype.submit_handler = function()
                         error: function (jqxhr, status)
                         {
                             _self.displayFail();
-                            _self.displayFail();
                         }
                     }
                 );
@@ -598,6 +597,8 @@ Album_control.prototype.submit_handler = function()
             var _new_file_names_array = [];
             var _is_unique_filenames = true;
             var _is_photo_input_validated = true;
+            var _formInstance = $(this);
+            var _postData = $(this).serializeArray();
 
             $("input[name='new_filename[]']", $(".formUploadPhotoData")).each(
                 function(i,e)
@@ -616,8 +617,6 @@ Album_control.prototype.submit_handler = function()
                 }
 
                 _is_photo_input_validated = false;
-
-
             }
 
             _is_unique_filenames = _self.check_is_unique_new_photo_filenames(".photo_data input[name='new_filename[]']");
@@ -628,7 +627,23 @@ Album_control.prototype.submit_handler = function()
                 return;
             }
 
-            return;
+            $.ajax(
+                {
+                    url: _formInstance.attr("action"),
+                    data: _postData,
+                    type: "POST",
+                    dataType: "json",
+                    success: function (pData)
+                    {
+
+                        _self.displaySuccess("Photo infos are updated successfully.", true);
+                    },
+                    error: function (jqxhr, status)
+                    {
+                        _self.displayFail();
+                    }
+                }
+            );
         }
     )
 }
@@ -813,7 +828,7 @@ Album_control.prototype.render_album_list = function(pData)
 
 }
 
-Album_control.prototype.displaySuccess = function(pMessage)
+Album_control.prototype.displaySuccess = function(pMessage, pIsRefresh)
 {
     $(".ajaxSuccessDisplay p").empty().html(pMessage);
     $(".ajaxSuccessDisplay").removeClass("hide");
@@ -821,6 +836,15 @@ Album_control.prototype.displaySuccess = function(pMessage)
     setTimeout(function()
     {
         $(".ajaxSuccessDisplay").addClass("fadeIn");
+
+        if (pIsRefresh == true)
+        {
+            setTimeout(function()
+            {
+                location.reload();
+
+            },1200);
+        }
 
     }, 200);
 }

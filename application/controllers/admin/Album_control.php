@@ -260,6 +260,11 @@ class Album_control extends CI_Controller
 		}
 	}
 
+	public function update_photo_data()
+	{
+		JSONAPI::echo_json_successful_response();
+	}
+
 	public function check_exist()
 	{
 		if (file_exists(FCPATH .'/assets/photos/' . $_POST['filename'])) {
