@@ -266,7 +266,8 @@ class Album_control extends CI_Controller
 		$del_data = array();
 		$update_data = array();
 		$update_data["slug_filename"] = array();
-		$update_data["hash_filenamne"] = array();
+		$update_data["original_filename"] = array();
+		$update_data["original_slug"] = array();
 		$update_data["title"] = array();
 		$update_data["desc"] = array();
 		$update_data["photoId"] = array();
@@ -293,14 +294,22 @@ class Album_control extends CI_Controller
 			{
 				array_push($update_data["photoId"], $value);
 			}
+			else if ($key == "original_filename")
+			{
+				array_push($update_data["original_filename"], $value);
+			}
+			else if ($key == "original_slug")
+			{
+				array_push($update_data["original_slug"], $value);
+			}
 		}
 
-		//var_dump($del_data);
-		//var_dump($update_data);
+		if (count($del_data))
+		{
+			$this->photo_model->delete_photo($del_data[0], $album_id);
+		}
 
-		$this->photo_model->delete_photo($del_data[0], $album_id);
-
-		//$this->photo_model->update_photo_data($data);
+		$this->photo_model->update_photo_data($update_data, $album_id);
 
 		//JSONAPI::echo_json_successful_response($this->input->post(), TRUE);
 	}
