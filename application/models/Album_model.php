@@ -180,6 +180,7 @@ class Album_model extends CI_Model
 		$this->db->select("id, parentId, order, name, label, intro");
 		$this->db->where("id", $pAlbum_id);
 		$query = $this->db->get("album");
+		$this->load->model("photo_model");
 
 		$album_details = $query->row();
 
@@ -195,7 +196,7 @@ class Album_model extends CI_Model
 			}
 		}
 
-		$data["photo_data"] = $this->get_photo_data($pAlbum_id);
+		$data["photo_data"] = $this->photo_model->get_photo_data($pAlbum_id);
 		$data["album_details"] = $album_details;
 
 		return $data;
@@ -216,7 +217,6 @@ class Album_model extends CI_Model
 		}
 	}
 
-
 	public function is_current_label_unique_against_others($pAlbum_label, $pAlbum_id)
 	{
 		$this->db->where("label", $pAlbum_label);
@@ -233,18 +233,4 @@ class Album_model extends CI_Model
 		}
 	}
 
-	public function add_uploaded_file_records($data)
-	{
-		$this->db->insert("photos", $data);
-		return $this->db->insert_id();
-	}
-
-	private function get_photo_data($album_id)
-	{
-		$this->db->select("photoId,slug_filename,hash_filename,title,desc");
-		$this->db->where("albumId", $album_id);
-		$query = $this->db->get("photos");
-
-		return $query->result_array();
-	}
 }

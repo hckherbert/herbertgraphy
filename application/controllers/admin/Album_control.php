@@ -8,6 +8,7 @@ class Album_control extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model("album_model");
+		$this->load->model("photo_model");
 		$this->load->helper("url_helper");
 		$this->load->helper('security');
 		$this->load->helper('form');
@@ -262,7 +263,7 @@ class Album_control extends CI_Controller
 
 	public function update_photo_data()
 	{
-		JSONAPI::echo_json_successful_response();
+		JSONAPI::echo_json_successful_response($this->input->post(), TRUE);
 	}
 
 	public function check_exist()
@@ -368,7 +369,7 @@ class Album_control extends CI_Controller
 					"create_date" => date('Y-m-d H:i:s')
 				);
 
-				$this->album_model->add_uploaded_file_records($data);
+				$this->photo_model->add_uploaded_file_records($data);
 
 			}
 			else

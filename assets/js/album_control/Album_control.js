@@ -286,7 +286,51 @@ Album_control.prototype.check_is_unique_new_photo_filenames = function(pSelector
         }
     );
 
-    return _duplicated_filenames_found;
+    return !_duplicated_filenames_found;
+}
+
+
+Album_control.prototype.is_validate_upload_new_photo_data = function()
+{
+    var _self = this;
+    var _is_unique_filenames = true;
+    var _is_photo_input_validated = true;
+
+    //these errors are regarding the photo input fields;
+    $(".uploadifive-queue-item .error").each(
+        function(i,e)
+        {
+            if (!$(e).hasClass("hide"))
+            {
+                //_self.displayFail(_self.mErrorMsgUpload);
+                //return;
+                _is_photo_input_validated = false;
+            }
+        }
+    );
+
+    _is_unique_filenames = _self.check_is_unique_new_photo_filenames(".uploadifive-queue-item input[name='new_filename']");
+
+    if (!_is_unique_filenames)
+    {
+        // _self.displayFail(_self.mErrorMsgUpload);
+        // return;
+        _is_photo_input_validated = false;
+    }
+
+    //these errors are those attached to photo queue item directly
+    if (!$(".uploadifive-queue-item.error").size())
+    {
+        _self.mIsValidatedUpload = true;
+    }
+
+    if (_self.mIsValidatedUpload == false || _is_photo_input_validated == false)
+    {
+        _self.displayFail(_self.mErrorMsgUpload);
+        return;
+    }
+
+    return true;
 }
 
 Album_control.prototype.submit_handler = function()
@@ -296,45 +340,6 @@ Album_control.prototype.submit_handler = function()
     //Click the Add button, upload photos if any, or add direct album
     $("#sectionAddAlbum input[name='submit']").on("click", function()
     {
-		var _new_filenames_occurances = {};
-        var _is_unique_filenames = true;
-        var _is_photo_input_validated = true;
-
-        //these errors are regarding the photo input fields;
-        $(".uploadifive-queue-item .error").each(
-            function(i,e)
-            {
-                if (!$(e).hasClass("hide"))
-                {
-                    //_self.displayFail(_self.mErrorMsgUpload);
-                    //return;
-                    _is_photo_input_validated = false;
-                }
-            }
-        );
-
-        _is_unique_filenames = _self.check_is_unique_new_photo_filenames(".uploadifive-queue-item input[name='new_filename']");
-
-        if (!_is_unique_filenames)
-        {
-           // _self.displayFail(_self.mErrorMsgUpload);
-           // return;
-            _is_photo_input_validated = false;
-        }
-
-        //these errors are those attached to photo queue item directly
-        if (!$(".uploadifive-queue-item.error").size())
-        {
-            _self.mIsValidatedUpload = true;
-        }
-
-        if (_self.mIsValidatedUpload == false || _is_photo_input_validated == false)
-        {
-            _self.displayFail(_self.mErrorMsgUpload);
-            return;
-        }
-
-
         $.ajax(
             {
                 url: GLOBAL_SITE_URL + "admin/album_control/validate_add_album",
@@ -344,14 +349,19 @@ Album_control.prototype.submit_handler = function()
                 success: function(pData)
                 {
                     //add album or start upload...
-                    if ($(".uploadifive-queue-item").size())
-                    {
-                        $('#file_upload').uploadifive('upload');
-                    }
-                    else
-                    {
-                        $("#formAddAlbum").submit();
-                    }
+
+                   if ( _self.is_validate_upload_new_photo_data())
+                   {
+
+                       if ($(".uploadifive-queue-item").size())
+                       {
+                           $('#file_upload').uploadifive('upload');
+                       }
+                       else
+                       {
+                           $("#formAddAlbum").submit();
+                       }
+                   }
                 },
                 error: function(pData, jqxhr, status)
                 {
@@ -593,6 +603,7 @@ Album_control.prototype.submit_handler = function()
         {
             pEvent.preventDefault();
 
+
             var _i = 0;
             var _new_file_names_array = [];
             var _is_unique_filenames = true;
@@ -635,8 +646,8 @@ Album_control.prototype.submit_handler = function()
                     dataType: "json",
                     success: function (pData)
                     {
-
-                        _self.displaySuccess("Photo infos are updated successfully.", true);
+                        console.log(_postData);
+                        _self.displaySuccess("Photo infos are updated successfully.", false);
                     },
                     error: function (jqxhr, status)
                     {
