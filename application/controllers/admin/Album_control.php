@@ -263,7 +263,46 @@ class Album_control extends CI_Controller
 
 	public function update_photo_data()
 	{
-		JSONAPI::echo_json_successful_response($this->input->post(), TRUE);
+
+		$update_data = array();
+		$update_data["slug_filename"] = array();
+		$update_data["hash_filenamne"] = array();
+		$update_data["title"] = array();
+		$update_data["desc"] = array();
+		$update_data["photoId"] = array();
+
+		$del_data = array();
+
+		foreach($this->input->post() as $key=>$value)
+		{
+			if ($key == "del_id")
+			{
+				$update_data.push($value);
+			}
+			else if ($key == "new_filename")
+			{
+				array_push($update_data["slug_filename"], $value);
+			}
+			else if ($key == "title")
+			{
+				array_push($update_data["title"], $value);
+			}
+			else if ($key == "desc")
+			{
+				array_push($update_data["desc"], $value);
+			}
+			else if ($key == "photo_id")
+			{
+				array_push($update_data["photoId"], $value);
+			}
+		}
+
+		var_dump($del_data);
+		var_dump($update_data);
+
+		//$this->photo_model->update_photo_data($data);
+
+		//JSONAPI::echo_json_successful_response($this->input->post(), TRUE);
 	}
 
 	public function check_exist()

@@ -32,7 +32,6 @@ function Album_control(pAlbumId, pParentId)
         this.mOriginalPhotoData = new OriginalPhotoData($(".formUploadPhotoData"));
     }
 
-
     this.init_upload();
     this.prepare_listeners();
     this.submit_handler();
@@ -693,8 +692,6 @@ Album_control.prototype.onFormInfoFieldOnKeyDown = function(pEvent)
         }
     }
 }
-
-
 
 Album_control.prototype.get_all_parent_albums = function()
 {
