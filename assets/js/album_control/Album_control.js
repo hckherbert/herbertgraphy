@@ -674,7 +674,26 @@ Album_control.prototype.prepare_listeners = function()
         _self.onAjaxFailDisplayTransEnd();
     });
 
+    $(".formInfo input[type='text'], .formInfo textarea").on("keydown", function(pEvent)
+    {
+        _self.onFormInfoFieldOnKeyDown(pEvent);
+    });
+
 }
+
+Album_control.prototype.onFormInfoFieldOnKeyDown = function(pEvent)
+{
+    var _currentTarget = $(pEvent.currentTarget);
+
+    if (_currentTarget.next(".error").text()!= "")
+    {
+        if (_currentTarget.val() != "")
+        {
+            _currentTarget.next(".error").text("");
+        }
+    }
+}
+
 
 
 Album_control.prototype.get_all_parent_albums = function()
