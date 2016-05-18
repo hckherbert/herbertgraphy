@@ -52,48 +52,38 @@ class Photo_model extends CI_Model
             if (strtolower(trim($new_file_names_array[$i]))!= strtolower(trim($original_slug_array[$i])) && trim($new_file_names_array[$i])!="" )
             {
                 $last_dot_pos = strrpos($original_file_names_array[$i], ".");
+                $original_filename_without_ext = substr($original_file_names_array[$i],0, $last_dot_pos);
                 $extension = substr($original_file_names_array[$i], $last_dot_pos+1);
                 $hash = hash("sha256", $new_file_names_array[$i] .time()."herbertgraphyalbumadmin");
                 $new_filename = $new_file_names_array[$i]."-".$hash.".".$extension;
                 $data["hash_filename"][0][$i] = $new_filename;
+
+                $original_file_path =  $photo_base_dir.$album_label."/".$original_file_names_array[$i];
+                $new_filename_path =  $photo_base_dir.$album_label."/".$new_filename;
+
+                rename($original_file_path, $new_filename_path);
+
+                $resize_value = array("800", "1280", "1680");
+
+                foreach ($resize_value as $value)
+                {
+                    $original_resize_filename = $original_filename_without_ext."_".$value.".jpg";
+                    $new_resize_filename = $new_file_names_array[$i]."-".$hash."_".$value.".jpg";
+
+                    $original_resize_file_path = $photo_base_dir.$album_label."/".$original_resize_filename;
+                    $new_resize_filename = $photo_base_dir.$album_label."/".$new_resize_filename;
+
+                    if (file_exists($original_resize_file_path))
+                    {
+                        rename($original_resize_file_path, $new_resize_filename);
+                    }
+                }
             }
             else
             {
                 $data["hash_filename"][0][$i] = $original_file_names_array[$i];
             }
         }
-
-
-        var_dump($data["hash_filename"][0]);
-
-        /*
-        foreach($files_to_update_array as $row)
-        {
-            $file_name = $row["hash_filename"];
-            $last_dot_pos = strrpos($file_name, ".");
-            $file_name_without_ext = substr($file_name,0, $last_dot_pos);
-            $extension = sbustr($file_name, $last_dot_pos+1);
-
-            $resize_value = array("800", "1280", "1680");
-
-            foreach ($resize_value as $value)
-            {
-                $resize_file_path = $photo_base_dir.$album_label."/".$file_name_without_ext."_".$value.".jpg";
-
-                if (file_exists($resize_file_path))
-                {
-                    $hash = hash("sha256", $file_name_without_ext .time()."herbertgraphyalbumadmin");
-                    $new_file_path = $photo_base_dir.$album_label."/".$hash."_".$value.".jpg";
-                    rename($resize_file_path,$new_file_path, $new_file_path);
-                }
-            }
-
-           $original_file_path = $photo_base_dir.$file_name;
-
-           rename($original_file_path, )
-
-        }
-        */
 
        // $this->db->update_batch("photos", $data, "photoId");
     }
