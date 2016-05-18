@@ -261,9 +261,9 @@ class Album_control extends CI_Controller
 		}
 	}
 
-	public function update_photo_data()
+	public function update_photo_data($album_id)
 	{
-
+		$del_data = array();
 		$update_data = array();
 		$update_data["slug_filename"] = array();
 		$update_data["hash_filenamne"] = array();
@@ -271,13 +271,11 @@ class Album_control extends CI_Controller
 		$update_data["desc"] = array();
 		$update_data["photoId"] = array();
 
-		$del_data = array();
-
 		foreach($this->input->post() as $key=>$value)
 		{
 			if ($key == "del_id")
 			{
-				$update_data.push($value);
+				$del_data[] = $value;
 			}
 			else if ($key == "new_filename")
 			{
@@ -297,8 +295,10 @@ class Album_control extends CI_Controller
 			}
 		}
 
-		var_dump($del_data);
-		var_dump($update_data);
+		//var_dump($del_data);
+		//var_dump($update_data);
+
+		$this->photo_model->delete_photo($del_data[0], $album_id);
 
 		//$this->photo_model->update_photo_data($data);
 
@@ -355,7 +355,6 @@ class Album_control extends CI_Controller
 			$extension = strtolower($fileParts['extension']);
 			$tempFile   = $_FILES['Filedata']['tmp_name'];
 
-
 			foreach($photo_user_data["original_filename"] as $index=>$value)
 			{
 				if ($value ==  $_FILES['Filedata']['name'])
@@ -363,7 +362,6 @@ class Album_control extends CI_Controller
 					$post_data_index = $index;
 				}
 			}
-
 
 			if ($photo_user_data["new_filename"][$post_data_index] == "")
 			{

@@ -639,7 +639,7 @@ Album_control.prototype.submit_handler = function()
 
             $.ajax(
                 {
-                    url: _formInstance.attr("action"),
+                    url: _formInstance.attr("action") + "/" + mAlbum_id,
                     data: _postData,
                     type: "POST",
                     dataType: "json",
