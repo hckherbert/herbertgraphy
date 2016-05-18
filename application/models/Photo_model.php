@@ -29,25 +29,15 @@ class Photo_model extends CI_Model
 
     public function update_photo_data($data, $album_id)
     {
-       $photo_base_dir = FCPATH."/assets/photos/";
-       $album_label = $this->get_photo_folder($album_id);
-
-       //var_dump($data["photoId"]);
-
-        /*
-        $this->db->select("hash_filename");
-        $this->db->from("photos");
-        $this->db->where_in("photoId", $data["photoId"]);
-        $query = $this->db->get();
-        */
-
-       // $files_to_update_array = $query->result_array();
-
+        $photo_base_dir = FCPATH."/assets/photos/";
+        $album_label = $this->get_photo_folder($album_id);
+        $batch_update_data_array = array();
         $original_file_names_array = $data["original_filename"][0];
         $original_slug_array = $data["original_slug"][0];
         $new_file_names_array = $data["slug_filename"][0];
+        $record_count =  count($original_file_names_array);
 
-        for ($i = 0; $i < count($original_file_names_array); $i++ )
+        for ($i = 0; $i < $record_count; $i++ )
         {
             if (strtolower(trim($new_file_names_array[$i]))!= strtolower(trim($original_slug_array[$i])) && trim($new_file_names_array[$i])!="" )
             {
@@ -85,7 +75,20 @@ class Photo_model extends CI_Model
             }
         }
 
-       // $this->db->update_batch("photos", $data, "photoId");
+        for ($i=0; $i< $record_count; $i++)
+        {
+            $batch_update_data_array[] = array(
+                "photoId"=> $data["photoId"][0][$i],
+                "slug_filename"=> $data["slug_filename"][0][$i],
+                "hash_filename"=>  $data["hash_filename"][0][$i],
+                "title"=> $data["title"][0][$i],
+                "desc"=> $data["desc"][0][$i]
+            );
+        }
+
+        unset($data);
+
+        $this->db->update_batch("photos", $batch_update_data_array, "photoId");
     }
 
     public function delete_photo($data, $album_id)
