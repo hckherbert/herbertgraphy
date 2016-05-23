@@ -479,11 +479,15 @@ class Album_control extends CI_Controller
 		foreach ($album_labels as $value)
 		{
 			$folder =  FCPATH."/assets/photos/".$value["label"]."/";
-			foreach(glob($folder.'*.*') as $obj)
+
+			if (file_exists($folder))
 			{
-				unlink($obj);
+				foreach (glob($folder . '*.*') as $obj)
+				{
+					unlink($obj);
+				}
+				rmdir($folder);
 			}
-			rmdir($folder);
 		}
 	}
 

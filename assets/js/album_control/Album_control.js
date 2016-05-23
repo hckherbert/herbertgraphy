@@ -524,7 +524,7 @@ Album_control.prototype.submit_handler = function()
 
                         if (pData["successcode"] && pData["successcode"] == 1)
                         {
-                            _self.displaySuccess("Album info is updated successfully.", true);
+                            _self.displaySuccess("Album info is updated successfully.", "_self");
                         }
 
                     },
@@ -559,7 +559,6 @@ Album_control.prototype.submit_handler = function()
         function(pEvent)
         {
             pEvent.preventDefault();
-
             var _postData = $(this).serializeArray();
             var _formInstance = $(this);
 
@@ -574,14 +573,18 @@ Album_control.prototype.submit_handler = function()
 
                         if (pData["successcode"] && pData["successcode"] == 1)
                         {
+                            var _location;
+
                             if (_self.mParentId == null)
                             {
-                                location.href = GLOBAL_SITE_URL + "admin/album_control";
+                                 _location =  GLOBAL_SITE_URL + "admin/album_control";
                             }
                             else
                             {
-                                location.href = GLOBAL_SITE_URL + "admin/album_control/album_details/" + _self.mParentId;
+                                 _location = GLOBAL_SITE_URL + "admin/album_control/album_details/" + _self.mParentId;
                             }
+
+                            _self.displaySuccess("Album is deleted succesfully.", _location);
 
                         }
 
@@ -646,7 +649,7 @@ Album_control.prototype.submit_handler = function()
                     success: function (pData)
                     {
                         console.log(_postData);
-                        _self.displaySuccess("Photo infos are updated successfully.", false);
+                        _self.displaySuccess("Photo infos are updated successfully.");
                     },
                     error: function (jqxhr, status)
                     {
@@ -855,7 +858,7 @@ Album_control.prototype.render_album_list = function(pData)
 
 }
 
-Album_control.prototype.displaySuccess = function(pMessage, pIsRefresh)
+Album_control.prototype.displaySuccess = function(pMessage, pRedirectLocation)
 {
     $(".ajaxSuccessDisplay p").empty().html(pMessage);
     $(".ajaxSuccessDisplay").removeClass("hide");
@@ -864,13 +867,24 @@ Album_control.prototype.displaySuccess = function(pMessage, pIsRefresh)
     {
         $(".ajaxSuccessDisplay").addClass("fadeIn");
 
-        if (pIsRefresh == true)
+        if (pRedirectLocation)
         {
-            setTimeout(function()
+            if (pRedirectLocation == "_self")
             {
-                location.reload();
+                setTimeout(function ()
+                {
+                    location.reload();
 
-            },1200);
+                }, 1200);
+            }
+            else
+            {
+                setTimeout(function ()
+                {
+                    location.href = pRedirectLocation;
+
+                }, 1200);
+            }
         }
 
     }, 200);
