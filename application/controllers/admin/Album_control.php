@@ -68,7 +68,9 @@ class Album_control extends CI_Controller
 		else
 		{
 
-			if (!$this->album_model->delete_albums_and_reoder($del_ids, $album_ids))
+			$this->delete_photo_folders($del_ids);
+
+			if (!$this->album_model->delete_albums_and_reorder($del_ids, $album_ids))
 			{
 				$is_query_success = false;
 			}
@@ -76,6 +78,7 @@ class Album_control extends CI_Controller
 
 		if ($is_query_success)
 		{
+
 			JSONAPI::echo_json_successful_response(NULL, FALSE);
 		}
 		else
@@ -244,6 +247,7 @@ class Album_control extends CI_Controller
 		$album_id =  $this->input->post("order");
 		$parent_id =  $this->input->post("parentId");
 
+		$this->delete_photo_folders(array($album_id));
 		$result =  $this->album_model->delete_single_album($del_id, $album_id, $parent_id);
 
 		if ($result)
@@ -466,6 +470,21 @@ class Album_control extends CI_Controller
 			$this->image_lib->clear();
 		}
 
+	}
+
+	private function delete_photo_folders($album_ids)
+	{
+		$album_labels = $this->album_model->get_all_albums_and_subalbums_labels($album_ids);
+
+		foreach ($album_labels as $value)
+		{
+			$folder =  FCPATH."/assets/photos/".$value["label"]."/";
+			foreach(glob($folder.'*.*') as $obj)
+			{
+				unlink($obj);
+			}
+			rmdir($folder);
+		}
 	}
 
 }

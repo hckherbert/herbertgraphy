@@ -38,7 +38,7 @@ class Album_model extends CI_Model
 	}
 
 
-	public function delete_albums_and_reoder($del_ids, $album_ids)
+	public function delete_albums_and_reorder($del_ids, $album_ids)
 	{
 		$this->db->where_in("id", $del_ids);
 		$this->db->or_where_in("parentId", $del_ids);
@@ -210,7 +210,16 @@ class Album_model extends CI_Model
 
 		$result = $query->row();
 		return $result->label;
+	}
 
+	public function get_all_albums_and_subalbums_labels($pAlbum_ids)
+	{
+		$this->db->select("label");
+		$this->db->where_in("id", $pAlbum_ids);
+		$this->db->or_where_in("parentId", $pAlbum_ids);
+		$query = $this->db->get("album");
+
+		return $query->result_array();
 	}
 
 	public function update_album_info($data)
