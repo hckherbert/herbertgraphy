@@ -200,8 +200,17 @@ class Album_control extends CI_Controller
 		}
 		else
 		{
+			$album_id = $this->input->post("id");
 			$post_data = $this->input->post(NULL, TRUE);
 			$post_data["label"] =  trim(strtolower($post_data["label"]));
+			$original_label = $this->album_model->get_album_label($album_id);
+			$original_folder =  FCPATH."/assets/photos/".$original_label;
+			$new_folder =  FCPATH."/assets/photos/".$post_data["label"];
+
+			if ($original_label!=$new_folder)
+			{
+				rename($original_folder, $new_folder);
+			}
 			$result =  $this->album_model->update_album_info($post_data);
 
 			if ($result)

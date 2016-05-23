@@ -524,7 +524,7 @@ Album_control.prototype.submit_handler = function()
 
                         if (pData["successcode"] && pData["successcode"] == 1)
                         {
-                            _self.displaySuccess("Album info is updated successfully.");
+                            _self.displaySuccess("Album info is updated successfully.", true);
                         }
 
                     },

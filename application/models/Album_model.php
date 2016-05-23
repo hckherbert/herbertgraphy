@@ -202,6 +202,17 @@ class Album_model extends CI_Model
 		return $data;
 	}
 
+	public function get_album_label($pAlbum_id)
+	{
+		$this->db->select("label");
+		$this->db->where("id",$pAlbum_id);
+		$query = $this->db->get("album");
+
+		$result = $query->row();
+		return $result->label;
+
+	}
+
 	public function update_album_info($data)
 	{
 		$this->db->where("id", $data["id"]);
