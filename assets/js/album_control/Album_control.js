@@ -47,9 +47,11 @@ Album_control.prototype.init_ui = function()
 Album_control.prototype.init_upload = function()
 {
     var _self = this;
-    var mUploadedCount = 0;
+    var _itemToUploadCount = 0;
     var _itemTemplate = "";
     var _uploadButtonText = "";
+    var _isQueueCleared = false;
+    var _onCancelCount = 0;
 
     _itemTemplate += "<div class='uploadifive-queue-item'>";
     _itemTemplate += "<span class='filename'></span>";
@@ -119,6 +121,11 @@ Album_control.prototype.init_upload = function()
             console.log("onuploadcomplete");
 
         },
+        'onClearQueue': function(queue)
+        {
+            console.log("cleared");
+            _isQueueCleared = true;
+        },
         'onError': function(errorType, files)
         {
             console.log("onError");
@@ -127,6 +134,16 @@ Album_control.prototype.init_upload = function()
         'onCancel': function(file)
         {
             console.log("onCancel: " + file.name);
+
+            if (_isQueueCleared)
+            {
+                _onCancelCount++;
+
+                if (_onCancelCount == _itemToUploadCount)
+                {
+                    _self.displaySuccess("Photos are uploaded successfully.", "_self");
+                }
+            }
 
         },
         'onQueueComplete':function(pUploads)
@@ -197,6 +214,8 @@ Album_control.prototype.init_upload = function()
             };
 
             $("#file_upload").data("uploadifive").settings.formData = _self.mUploadFormData;
+
+            _itemToUploadCount =  $(".uploadifive-queue-item").size();
 
         }
     });
