@@ -366,7 +366,7 @@ class Album_control extends CI_Controller
 		$fileTypes = array('jpg', 'gif', 'png');
 		$verifyToken = md5('unique_salt' . $_POST['timestamp']);
 
-		if (!empty($_FILES) && $_POST['token'] == $verifyToken &&$photo_user_data )
+		if (!empty($_FILES) && $_POST['token'] == $verifyToken && $photo_user_data )
 		{
 			$post_data_index = -1;
 			$slug_filename = "";
@@ -419,8 +419,9 @@ class Album_control extends CI_Controller
 					JSONAPI::echo_json_error_response("CANNOT_MOVE_FILE");
 				}
 
+
 				$data = array(
-					"albumId" => 0,
+					"albumId" => $_POST["albumId"],
 					"slug_filename" => $slug_filename_only,
 					"hash_filename" => $hash_filename,
 					"title" => $title,

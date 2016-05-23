@@ -68,7 +68,7 @@
 <div class="adminMain" id="page_album_details">
 	<a class="menu_link" href="<?php echo site_url("admin/album_control"); ?>">Back to album list</a>
 	<div class="section">
-		<h1 class="pageHading">Album details</h1>
+		<h1 class="pageHeading">Album details</h1>
 		<?php echo form_open('admin/album_control/update_album_info', 'class="formInfo" id="formUpdateAlbumInfo"'); ?>
 		<table>
 			<?php if (isset($album_details->parentName)) { ?>
@@ -113,7 +113,7 @@
 
 	<?php if ($photo_data != NULL) { ?>
 	<div class="section">
-		<h1 class="pageHading">Photo list</h1>
+		<h1 class="pageHeading">Photo list</h1>
 		<?php echo form_open('admin/album_control/update_photo_data', 'class="formUploadPhotoData" id="formUploadPhotoData"'); ?>
 		<?php foreach ($photo_data as $row) { ?>
 		<div class="photo_data">
@@ -134,10 +134,25 @@
 		<?php echo form_close(); ?>
 		<div class="clear"></div>
 	</div>
+	<div class="section" id="sectionAddAlbum">
+		<h1 class="pageHeading">Add more photos</h1>
+		<div id="uploaderWrapper">
+			<form>
+				<div id="queue"></div>
+				<input type="hidden" name="existing_label" value="<?php echo $album_details->label; ?>">
+				<input type="hidden" name="albumId" value="<?php echo $album_details->id; ?>">
+				<input id="file_upload" name="file_upload" type="file" multiple="true" accept="image/png, image/gif, image/jpg">
+				<input name="photo_user_data" type="hidden" value="">
+				<div class="clear"></div>
+			</form>
+		</div>
+		<input name="submit" type="button" value="Add">
+		<div class="clear"></div>
+	</div>
 	<?php } ?>
 	<?php if ($album_details->parentId == NULL) { ?>
 	<div class="section">
-		<h1 class="pageHading">Sub-album List</h1>
+		<h1 class="pageHeading">Sub-album List</h1>
 		<?php
 		echo form_open('admin/album_control/update_album_list', 'class="formAlbumList hide" id="formSubAlbumList"');
 		?>
@@ -158,7 +173,7 @@
 	</div>
 
 	<div class="section">
-		<h1 class="pageHading">Add a sub-album under <em><?php echo $album_details->name; ?></em></h1>
+		<h1 class="pageHeading">Add a sub-album under <em><?php echo $album_details->name; ?></em></h1>
 		<?php echo form_open('admin/album_control/add_subalbum', 'class="formInfo" id="formAddSubAlbum"'); ?>
 		<table>
 			<tr>
@@ -195,7 +210,7 @@
 <?php } ?>
 
 	<div class="section">
-		<h1 class="pageHading">Delete album</h1>
+		<h1 class="pageHeading">Delete album</h1>
 		<?php echo form_open('admin/album_control/delete_album', 'class="formDeleteAlbum" id="formDeleteAlbum"'); ?>
 		<p>Delete this album? <?php if ($album_details->parentId == NULL) { ?> All sub-albums will be removed also.<?php } ?></p>
 		<input name="id" value="<?php echo $album_details->id; ?>" type="hidden">

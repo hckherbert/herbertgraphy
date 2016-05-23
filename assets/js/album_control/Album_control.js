@@ -49,6 +49,7 @@ Album_control.prototype.init_upload = function()
     var _self = this;
     var mUploadedCount = 0;
     var _itemTemplate = "";
+    var _uploadButtonText = "";
 
     _itemTemplate += "<div class='uploadifive-queue-item'>";
     _itemTemplate += "<span class='filename'></span>";
@@ -63,9 +64,18 @@ Album_control.prototype.init_upload = function()
 
     this.mErrorMsgUpload = "Upload cannot be started. Please check that: <br> - Each file is under " + _self.mFileSizeLimit + ".<br> - Each time only " + _self.mSimUploadLimit + " photos can be selected.<br>- Files are image type.<br>Also check the error notices (if any) about the input fields.";
 
+    if ($("#page_album_list").size())
+    {
+        _uploadButtonText = "Drop files to me or click me. You can skip photos and add later.";
+    }
+    else if ($("#page_album_details").size())
+    {
+        _uploadButtonText = "Drop files to me or click me to make me richer.";
+    }
+
     $('#file_upload').uploadifive({
         'auto'             : false,
-        'buttonText'		: "drop files to me or click me. You can skip photos and add later.",
+        'buttonText'		: _uploadButtonText,
         'buttonClass'		:  "dropButton",
         //'checkScript'      : 'check-exists.php',
         //'checkScript'      : '<?php echo site_url(); ?>admin/album_control/check_exist',
@@ -129,7 +139,12 @@ Album_control.prototype.init_upload = function()
             {
                 //reset isvalidateUpload
                 _self.mIsValidatedUpload = true;
-                $("#formAddAlbum").submit();
+
+                if ($("#page_album_list").size())
+                {
+                    $("#formAddAlbum").submit();
+                }
+
                 $('#file_upload').uploadifive('clearQueue');
             }
             else
@@ -142,6 +157,8 @@ Album_control.prototype.init_upload = function()
         {
 			console.log("onuploadFile");
 
+            var _albumId = 0;
+            var _album_label = "";
             var _photo_user_data = {};
             _photo_user_data["new_filename"] = [];
             _photo_user_data["original_filename"] = [];
@@ -160,14 +177,19 @@ Album_control.prototype.init_upload = function()
 
             _photo_user_data = JSON.stringify(_photo_user_data);
 
-
-            if ($("#formAddAlbum").size())
+            if ($("#page_album_list").size())
             {
                 _album_label = $("#formAddAlbum").find("input[name='label']").val();
+            }
+            else if ($("#page_album_details").size())
+            {
+                _album_label = $("#uploaderWrapper input[name='existing_label']").val();
+                _albumId = $("#uploaderWrapper input[name='albumId']").val();
             }
 
             _self.mUploadFormData =
             {
+                "albumId":_albumId,
                 "timestamp": mTimeStamp,
                 "token": mToken,
                 "photo_user_data": _photo_user_data,
@@ -339,52 +361,66 @@ Album_control.prototype.submit_handler = function()
     //Click the Add button, upload photos if any, or add direct album
     $("#sectionAddAlbum input[name='submit']").on("click", function()
     {
-        $.ajax(
-            {
-                url: GLOBAL_SITE_URL + "admin/album_control/validate_add_album",
-                data : $("#formAddAlbum").serializeArray(),
-                type: "POST",
-                dataType: "json",
-                success: function(pData)
+        if ($("#page_album_list").size())
+        {
+            $.ajax(
                 {
-                    //add album or start upload...
-
-                   if ( _self.is_validate_upload_new_photo_data())
-                   {
-
-                       if ($(".uploadifive-queue-item").size())
-                       {
-                           $('#file_upload').uploadifive('upload');
-                       }
-                       else
-                       {
-                           $("#formAddAlbum").submit();
-                       }
-                   }
-                },
-                error: function(pData, jqxhr, status)
-                {
-                    $("#formAddAlbum").find(".error").empty();
-
-                    if (pData["responseJSON"]["error_messages"]["validation_error"])
+                    url: GLOBAL_SITE_URL + "admin/album_control/validate_add_album",
+                    data : $("#formAddAlbum").serializeArray(),
+                    type: "POST",
+                    dataType: "json",
+                    success: function(pData)
                     {
-                        for (var err_label in pData["responseJSON"]["error_messages"])
+                        //add album or start upload...
+
+                       if ( _self.is_validate_upload_new_photo_data())
+                       {
+
+                           if ($(".uploadifive-queue-item").size())
+                           {
+                               $('#file_upload').uploadifive('upload');
+                           }
+                           else
+                           {
+
+                               $("#formAddAlbum").submit();
+                           }
+                       }
+                    },
+                    error: function(pData, jqxhr, status)
+                    {
+                        $("#formAddAlbum").find(".error").empty();
+
+                        if (pData["responseJSON"]["error_messages"]["validation_error"])
                         {
-                            if (err_label != "validation_error")
+                            for (var err_label in pData["responseJSON"]["error_messages"])
                             {
-                                $("#formAddAlbum").find("input[name='" + err_label + "']").next(".error").text(pData["responseJSON"]["error_messages"][err_label]);
+                                if (err_label != "validation_error")
+                                {
+                                    $("#formAddAlbum").find("input[name='" + err_label + "']").next(".error").text(pData["responseJSON"]["error_messages"][err_label]);
+                                }
                             }
-                        }
 
-                        _self.displayFail(_self.mErrorMsgUpload);
-                    }
-                    else
-                    {
-                        _self.displayFail();
+                            _self.displayFail(_self.mErrorMsgUpload);
+                        }
+                        else
+                        {
+                            _self.displayFail();
+                        }
                     }
                 }
+            );
+        }
+        else if ($("#page_album_details").size())
+        {
+            if ( _self.is_validate_upload_new_photo_data())
+            {
+                if ($(".uploadifive-queue-item").size())
+                {
+                    $('#file_upload').uploadifive('upload');
+                }
             }
-        );
+        }
     })
 
     $("#formAlbumList, #formSubAlbumList").on
@@ -676,7 +712,7 @@ Album_control.prototype.prepare_listeners = function()
         _self.onAjaxFailDisplayTransEnd();
     });
 
-    $(".formInfo input[type='text'], .formInfo textarea").on("keydown", function(pEvent)
+    $(".formInfo input[type='text'], .formInfo textarea").on("keydown, keyup", function(pEvent)
     {
         _self.onFormInfoFieldOnKeyDown(pEvent);
     });

@@ -65,7 +65,7 @@
 </div>
 <div class="adminMain" id="page_album_list">
 	<div class="section">
-		<h1 class="pageHading">Album List</h1>
+		<h1 class="pageHeading">Album List</h1>
 		<?php
 
 			echo form_open('admin/album_control/update_album_list', 'class="formAlbumList hide" id="formAlbumList"');
@@ -86,7 +86,7 @@
 		<div class="clear"></div>
 	</div>
 	<div class="section" id="sectionAddAlbum">
-		<h1 class="pageHading">Add New Album</h1>
+		<h1 class="pageHeading">Add New Album</h1>
 		<?php echo form_open('admin/album_control/add_album', 'class="formInfo" id="formAddAlbum"'); ?>
 		<table>
 			<tr>
