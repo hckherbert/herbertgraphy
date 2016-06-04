@@ -42,13 +42,13 @@
 <script>
 
  var mAlbum_control = null;
-
+ var mParent_id = "<?php echo $album_details->id; ?>";
 
  $(document).ready
  (
 	function()
 	{
-		mAlbum_control = new Album_control();
+		mAlbum_control = new Album_control(null, mParent_id);
 
 	}
   );
@@ -64,31 +64,18 @@
 	<p>Ajax Response Failed</p>
 </div>
 <div class="adminMain" id="page_album_list">
-	<div class="section">
-		<h1 class="pageHeading">Album List</h1>
-		<?php
-
-			echo form_open('admin/album_control/update_album_list', 'class="formAlbumList hide" id="formAlbumList"');
-		?>
-		<table class="albumList listing">
-			<thead>
-				<th width="25%">Album name</th>
-				<th width="20%">Album Label</th>
-				<th width="45%">Album Intro</th>
-				<th width="5%">Delete</th>
-				<th width="5%"></th>
-			</thead>
-			<tbody></tbody>
-		</table>
-		<input name="submit" type="submit" value="Update">
-		<?php echo form_close(); ?>
-		<p class="hide label_no_album">There is no album</p>
-		<div class="clear"></div>
-	</div>
+	<a class="menu_link" href="<?php echo site_url("admin/album_control"); ?>">Back to album list</a>
+	<a class="menu_link" href="<?php echo site_url("admin/album_control/album_details/$album_details->id"); ?>">Back to parent album (<?php echo $album_details->name; ?>)</a>
 	<div class="section" id="sectionAddAlbum">
 		<h1 class="pageHeading">Add New Album</h1>
-		<?php echo form_open('admin/album_control/add_album', 'class="formInfo" id="formAddAlbum"'); ?>
+		<?php echo form_open('admin/album_control/do_add_subalbum', 'class="formInfo" id="formAddAlbum"'); ?>
 		<table>
+			<tr>
+				<td>Parent album:</td>
+				<td>
+					<div class="album_details_parent_album_name"><?php echo $album_details->name; ?></div>
+				</td>
+			</tr>
 			<tr>
 				<td>Album name:</td>
 				<td>
@@ -111,13 +98,13 @@
 				</td>
 			</tr>
 		</table>
+		<input type="hidden" name="parentId" value="<?php echo $album_details->id; ?>">
 		<?php echo form_close(); ?>
-
 		<div id="uploaderWrapper">
 			<form>
 				<div id="queue"></div>
 				<input type="hidden" name="albumId" value="">
-				<input id="file_upload_current_album" name="file_upload" type="file" multiple="true" accept="image/png, image/gif, image/jpg">
+				<input id="file_upload" name="file_upload" type="file" multiple="true" accept="image/png, image/gif, image/jpg">
 				<input name="photo_user_data" type="hidden" value="">
 				<div class="clear"></div>
 			</form>

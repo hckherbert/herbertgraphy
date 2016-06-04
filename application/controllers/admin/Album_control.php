@@ -128,19 +128,26 @@ class Album_control extends CI_Controller
 	}
 
 
-	public function add_subalbum()
+	public function go_add_subalbum()
+	{
+		$album_id = $this->input->post("albumId");
+		$data = $this->album_model->get_album_details($album_id);
+		$this->load->view("admin/add_subalbum", $data);
+	}
+
+	public function do_add_subalbum()
 	{
 		$config_validation = array(
-				array(
-						'field'   => 'name',
-						'label'   => 'Album name',
-						'rules'   => 'trim|required'
-				),
-				array(
-						'field'   => 'label',
-						'label'   => 'Album label',
-						'rules'   => 'trim|required|is_unique[album.label]|label_char_format'
-				)
+			array(
+				'field'   => 'name',
+				'label'   => 'Album name',
+				'rules'   => 'trim|required'
+			),
+			array(
+				'field'   => 'label',
+				'label'   => 'Album label',
+				'rules'   => 'trim|required|is_unique[album.label]|label_char_format'
+			)
 		);
 
 		$this->form_validation->set_rules($config_validation);
@@ -148,7 +155,7 @@ class Album_control extends CI_Controller
 		if ($this->form_validation->run() == FALSE)
 		{
 			$data_error = array(
-					"validation_error" => true
+				"validation_error" => true
 			);
 			$data_error = array_merge($data_error, $this->form_validation->error_array());
 

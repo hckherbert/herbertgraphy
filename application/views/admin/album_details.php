@@ -173,39 +173,12 @@
 	</div>
 
 	<div class="section">
+		<?php echo form_open('admin/album_control/go_add_subalbum', 'class="formInfo" id="formGoAddSubAlbum"'); ?>
 		<h1 class="pageHeading">Add a sub-album under <em><?php echo $album_details->name; ?></em></h1>
-		<?php echo form_open('admin/album_control/add_subalbum', 'class="formInfo" id="formAddSubAlbum"'); ?>
-		<table>
-			<tr>
-				<td>Album name:</td>
-				<td>
-					<input name="name" type="text" placeholder="Enter the album name">
-					<div class="error"></div>
-				</td>
-			</tr>
-			<tr>
-				<td>Album Label:</td>
-				<td>
-					<input name="label" type="text" placeholder="The url slug (letters, numbers and hyphens only)">
-					<div class="error"></div>
-				</td>
-			</tr>
-			<tr>
-				<td>Album Intro:</td>
-				<td>
-					<textarea name="intro" placeholder="Type something to describe this album"></textarea>
-					<div class="error"></div>
-				</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td>
-					<input name="submit" type="submit" value="Add">
-				</td>
-			</tr>
-		</table>
-		<input name="parentId" value="<?php echo $album_details->id; ?>" type="hidden">
+		<input type="hidden" name="albumId" value="<?php echo $album_details->id; ?>">
+		<input name="submit" type="submit" value="Go">
 		<?php echo form_close(); ?>
+		<div class="clear"></div>
 	</div>
 <?php } ?>
 

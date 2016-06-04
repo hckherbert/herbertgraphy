@@ -11,19 +11,22 @@ function Album_control(pAlbumId, pParentId)
 {
     this.init_ui();
 
+    //Case for all album listings
     if (pAlbumId==undefined && pParentId==undefined)
     {
         this.get_all_parent_albums();
     }
     else
     {
-        if (pParentId==undefined || pParentId=="")
+        if (pParentId != null && pParentId != "" && pParentId != undefined)
         {
-            this.get_sub_album_list(pAlbumId);
+            this.mParentId = pParentId;
+            console.log("case2");
         }
         else
         {
-            this.mParentId = pParentId;
+            console.log("case3");
+            this.get_sub_album_list(pAlbumId);
         }
     }
 
