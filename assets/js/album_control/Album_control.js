@@ -18,14 +18,14 @@ function Album_control(pAlbumId, pParentId)
     }
     else
     {
+        //case for adding sub album page or getting sub album details page
         if (pParentId != null && pParentId != "" && pParentId != undefined)
         {
             this.mParentId = pParentId;
-            console.log("case2");
         }
+        //case for parent album details
         else
         {
-            console.log("case3");
             this.get_sub_album_list(pAlbumId);
         }
     }
@@ -69,7 +69,7 @@ Album_control.prototype.init_upload = function()
 
     this.mErrorMsgUpload = "Upload cannot be started. Please check that: <br> - Each file is under " + _self.mFileSizeLimit + ".<br> - Each time only " + _self.mSimUploadLimit + " photos can be selected.<br>- Files are image type.<br>Also check the error notices (if any) about the input fields.";
 
-    if ($("#page_album_list").size())
+    if ($("#page_album_list").size() || $("#page_add_subalbum").size())
     {
         _uploadButtonText = "Drop files to me or click me. You can skip photos and add later.";
     }
@@ -115,7 +115,7 @@ Album_control.prototype.init_upload = function()
                 $(".uploadifive-queue-item[data-filename='" + e.target.filename + "'] .imgPreview").append("<img class='uploadImgPreview' src='" + e.target.result + "' /></p>");
             }
 
-            reader.filename = file.name
+            reader.filename = file.name;
             reader.readAsDataURL(file);
 
         },
@@ -160,7 +160,7 @@ Album_control.prototype.init_upload = function()
                 //reset isvalidateUpload
                 _self.mIsValidatedUpload = true;
 
-                if ($("#page_album_list").size())
+                if ($("#page_album_list").size() || $("#page_add_subalbum").size())
                 {
                     $("#formAddAlbum").submit();
                 }
@@ -197,7 +197,7 @@ Album_control.prototype.init_upload = function()
 
             _photo_user_data = JSON.stringify(_photo_user_data);
 
-            if ($("#page_album_list").size())
+            if ($("#page_album_list").size() || $("#page_add_subalbum").size())
             {
                 _album_label = $("#formAddAlbum").find("input[name='label']").val();
             }
@@ -243,7 +243,6 @@ Album_control.prototype.init_upload = function()
     )
 }
 
-
 Album_control.prototype.isValidUploadFileExtension = function(pFileName)
 {
     var _lastDotIndex = pFileName.lastIndexOf(".");
@@ -261,24 +260,6 @@ Album_control.prototype.isValidUploadFileExtension = function(pFileName)
     }
 
     return true;
-}
-
-Album_control.prototype.removeFailedUploads = function()
-{
-    var _self = this;
-
-    $.ajax
-    (
-        {
-            url: GLOBAL_SITE_URL + "admin/album_control/remove_failed_uploads",
-            type: "POST",
-            dataType: "json",
-            complete: function ()
-            {
-                _self.displayFail("Oops, some photos are not uploaded. Please try again.");
-            }
-        }
-    );
 }
 
 Album_control.prototype.check_is_unique_new_photo_filenames = function(pSelectorString)
@@ -383,7 +364,7 @@ Album_control.prototype.submit_handler = function()
     //Click the Add button, upload photos if any, or add direct album
     $("#sectionAddAlbum input[name='submit']").on("click", function()
     {
-        if ($("#page_album_list").size())
+        if ($("#page_album_list").size() || $("#page_add_subalbum").size())
         {
             $.ajax(
                 {
@@ -469,7 +450,6 @@ Album_control.prototype.submit_handler = function()
                     _confirmDelMsg = "Confirm delete the selected album(s)? Note that sub-album(s) will be deleted also";
                 }
 
-
                 if (confirm(_confirmDelMsg))
                 {
                     _isConfirmUpdate = true;
@@ -496,8 +476,7 @@ Album_control.prototype.submit_handler = function()
                             {
                                 _self.refresh_album_list_on_updated();
                             }
-
-                            _self.displaySuccess("Operation is executed successfully.");
+                            _self.displaySuccess("Operation is executed successfully.", "_self");
                         },
                         error: function (jqxhr, status)
                         {
@@ -509,7 +488,7 @@ Album_control.prototype.submit_handler = function()
         }
     );
 
-    $("#formAddAlbum, #formAddSubAlbum").on
+    $("#formAddAlbum").on
     (
         "submit",
         function(pEvent)
@@ -530,9 +509,17 @@ Album_control.prototype.submit_handler = function()
                     {
                         if (pData["successcode"] && pData["successcode"] == 1)
                         {
-                            _self.displaySuccess("Album is added successfully.");
-                            _formInstance.find(".error").empty();
-                            _self.append_added_parent_album_record(pData["response"]["insert_id"], _formId);
+                            if ($("#page_album_list").size())
+                            {
+                                _self.displaySuccess("Album is added successfully.");
+                                _formInstance.find(".error").empty();
+                                _self.append_added_parent_album_record(pData["response"]["insert_id"], _formId);
+                            }
+                            else if ($("#page_add_subalbum").size())
+                            {
+                                var _location = GLOBAL_SITE_URL + "admin/album_control/album_details/" + pData["response"]["insert_id"];
+                                _self.displaySuccess("Album is added successfully.", _location);
+                            }
 
                         }
                     },
@@ -985,8 +972,6 @@ Album_control.prototype.displayFail = function(pMsg)
 
     }, 200);
 }
-
-
 
 Album_control.prototype.onAjaxFailDisplayTransEnd = function()
 {

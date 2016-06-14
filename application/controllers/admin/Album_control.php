@@ -241,7 +241,6 @@ class Album_control extends CI_Controller
 		if ($data["album_details"]=== NULL)
 		{
 			show_404();
-
 		}
 
 		$this->load->view("admin/album_details", $data);
@@ -376,7 +375,7 @@ class Album_control extends CI_Controller
 		if (!empty($_FILES) && $_POST['token'] == $verifyToken && $photo_user_data )
 		{
 			$post_data_index = -1;
-			$slug_filename = "";
+			$slug_filename_only = "";
 			$desc = "";
 			$title = "";
 

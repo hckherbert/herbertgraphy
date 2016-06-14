@@ -63,11 +63,11 @@
 	<div class="bg"></div>
 	<p>Ajax Response Failed</p>
 </div>
-<div class="adminMain" id="page_album_list">
+<div class="adminMain" id="page_add_subalbum">
 	<a class="menu_link" href="<?php echo site_url("admin/album_control"); ?>">Back to album list</a>
 	<a class="menu_link" href="<?php echo site_url("admin/album_control/album_details/$album_details->id"); ?>">Back to parent album (<?php echo $album_details->name; ?>)</a>
 	<div class="section" id="sectionAddAlbum">
-		<h1 class="pageHeading">Add New Album</h1>
+		<h1 class="pageHeading">Add a sub-album</h1>
 		<?php echo form_open('admin/album_control/do_add_subalbum', 'class="formInfo" id="formAddAlbum"'); ?>
 		<table>
 			<tr>

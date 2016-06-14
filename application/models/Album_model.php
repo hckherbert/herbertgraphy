@@ -163,15 +163,25 @@ class Album_model extends CI_Model
 		$query = $this->db->get('album');
 		$result_get_order = $query->result_array();
 
-		if (count($result_get_order) > 0) {
+		if (count($result_get_order) > 0)
+		{
 			$order = $query->row()->order + 1;
-
 		}
 
 		$data = array_merge($data, array("order" => $order));
 		unset($data["submit"]);
 		$this->db->insert("album", $data);
-		return $this->db->insert_id();
+
+		$insert_id = $this->db->insert_id();
+		$data = array
+		(
+			"albumId"=>$insert_id
+		);
+		$this->db->where("albumId", 0);
+		$this->db->update("photos", $data);
+
+		return $insert_id;
+
 	}
 
 	public function get_album_details($pAlbum_id)
