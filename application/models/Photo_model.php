@@ -141,4 +141,10 @@ class Photo_model extends CI_Model
 
         return $album_label;
     }
+
+    public function delete_photo_records_by_album_id($album_id_array)
+    {
+        $this->db->where_in("albumId",$album_id_array);
+        $this->db->delete("photos");
+    }
 }

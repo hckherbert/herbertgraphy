@@ -191,6 +191,12 @@ class Album_model extends CI_Model
 		$this->db->select("id, parentId, order, name, label, intro");
 		$this->db->where("id", $pAlbum_id);
 		$query = $this->db->get("album");
+
+		if ($query->num_rows() == 0)
+		{
+			show_404();
+		}
+
 		$this->load->model("photo_model");
 
 		$album_details = $query->row();

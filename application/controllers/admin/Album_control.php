@@ -252,7 +252,16 @@ class Album_control extends CI_Controller
 		$del_id = $this->input->post("id");
 		$order =  $this->input->post("order");
 		$parent_id =  $this->input->post("parentId");
-		$this->delete_photo_folders(array($del_id));
+		if ($parent_id === "")
+		{
+			$this->delete_photo_folders(array($del_id));
+			$this->photo_model->delete_photo_records_by_album_id(array($del_id));
+		}
+		else
+		{
+			$this->delete_photo_folders(array($del_id, $parent_id));
+			$this->photo_model->delete_photo_records_by_album_id(array($del_id, $parent_id));
+		}
 		$result =  $this->album_model->delete_single_album($del_id, $order, $parent_id);
 
 		if ($result)
