@@ -252,7 +252,7 @@ class Album_control extends CI_Controller
 		$del_id = $this->input->post("id");
 		$order =  $this->input->post("order");
 		$parent_id =  $this->input->post("parentId");
-		if ($parent_id === "")
+		if ($parent_id !== "")
 		{
 			$this->delete_photo_folders(array($del_id));
 			$this->photo_model->delete_photo_records_by_album_id(array($del_id));
@@ -260,7 +260,18 @@ class Album_control extends CI_Controller
 		else
 		{
 			$this->delete_photo_folders(array($del_id, $parent_id));
-			$this->photo_model->delete_photo_records_by_album_id(array($del_id, $parent_id));
+
+			$all_del_ids = array();
+			$sub_album_ids = $this->album_model->get_sub_album_by_parent_id($del_id);
+
+			$all_del_ids = array_map(function($arr)
+			{
+				return $arr["id"];
+			}, $sub_album_ids);
+			
+			$all_del_ids[] = $del_id;
+
+			$this->photo_model->delete_photo_records_by_album_id($all_del_ids);
 		}
 		$result =  $this->album_model->delete_single_album($del_id, $order, $parent_id);
 
