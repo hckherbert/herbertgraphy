@@ -142,7 +142,7 @@ Album_control.prototype.init_upload = function()
             {
                 _onCancelCount++;
 
-                if (_onCancelCount == _itemToUploadCount)
+                if (_onCancelCount == _itemToUploadCount && !$("#page_album_list").size())
                 {
                     _self.displaySuccess("Photos are uploaded successfully.", "_self");
                 }

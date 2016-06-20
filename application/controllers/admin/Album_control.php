@@ -268,7 +268,7 @@ class Album_control extends CI_Controller
 			{
 				return $arr["id"];
 			}, $sub_album_ids);
-			
+
 			$all_del_ids[] = $del_id;
 
 			$this->photo_model->delete_photo_records_by_album_id($all_del_ids);
