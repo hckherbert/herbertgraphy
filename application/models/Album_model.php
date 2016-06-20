@@ -122,6 +122,7 @@ class Album_model extends CI_Model
 			{
 				return true;
 			}
+
 		}
 	}
 

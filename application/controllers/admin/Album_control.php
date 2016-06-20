@@ -250,11 +250,10 @@ class Album_control extends CI_Controller
 	{
 
 		$del_id = $this->input->post("id");
-		$album_id =  $this->input->post("order");
+		$order =  $this->input->post("order");
 		$parent_id =  $this->input->post("parentId");
-
-		$this->delete_photo_folders(array($album_id));
-		$result =  $this->album_model->delete_single_album($del_id, $album_id, $parent_id);
+		$this->delete_photo_folders(array($del_id));
+		$result =  $this->album_model->delete_single_album($del_id, $order, $parent_id);
 
 		if ($result)
 		{
@@ -264,6 +263,7 @@ class Album_control extends CI_Controller
 		{
 			JSONAPI::echo_json_error_response();
 		}
+
 	}
 
 	public function get_subalbum_list($pAlbum_id)
@@ -496,6 +496,7 @@ class Album_control extends CI_Controller
 				rmdir($folder);
 			}
 		}
+
 	}
 
 }
