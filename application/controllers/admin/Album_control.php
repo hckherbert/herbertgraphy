@@ -68,6 +68,7 @@ class Album_control extends CI_Controller
 		else
 		{
 
+			$this->photo_model->delete_photo_records_by_album_id($del_ids);
 			$this->delete_photo_folders($del_ids);
 
 			if (!$this->album_model->delete_albums_and_reorder($del_ids, $album_ids))
