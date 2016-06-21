@@ -1,5 +1,6 @@
 <?php 
-	
+
+	/*
 	$albumLabel = $_GET["label"];
 	
 	$db="herbertgra_main";
@@ -25,6 +26,7 @@
 	
 	$selectAlbumSql = "SELECT * FROM album WHERE parentId IS NULL";
 	$resultSelectAlbum=mysql_query($selectAlbumSql) or die("Insert Error: ".mysql_error());
+	*/
 	
 ?>
 <!DOCTYPE html>
@@ -45,36 +47,30 @@
 <link href="android-icon-192x192.png" rel="icon" sizes="192x192" />
 <link href="android-icon-128x128.png" rel="icon" sizes="128x128" />
 <!-- CSS -->
-<link rel="stylesheet" href="css/reset.css" type="text/css" />
-<link rel="stylesheet" href="css/zindex.css" type="text/css" />
-<link rel="stylesheet" href="css/main.css" type="text/css" />
-<link rel="stylesheet" href="css/jquery.jscrollpane.css" type="text/css" />
+<link rel="stylesheet" href="<?php echo base_url("assets/css/reset.css"); ?>" type="text/css" />
+<link rel="stylesheet" href="<?php echo base_url("assets/css/zindex.css"); ?>" type="text/css" />
+<link rel="stylesheet" href="<?php echo base_url("assets/css/main.css"); ?>" type="text/css" />
+<link rel="stylesheet" href="<?php echo base_url("assets/css/jquery.jscrollpane.css"); ?>" type="text/css" />
 <!-- FONT -->
 <link href='https://fonts.googleapis.com/css?family=Catamaran:400,700,300,200' rel='stylesheet' type='text/css'>
 <!-- Javascript -->
-<script src="js/jquery-1.11.3.min.js"></script>
-<script src="js/jquery-migrate-1.2.1.min.js"></script>
-<script src="js/jquery.jscrollpane.min.js"></script>
-<script src="js/jquery.mousewheel.js"></script>
-<script src="js/greensock-js/TweenMax.min.js"></script>
-<script src="js/greensock-js/TimelineLite.min.js"></script>
-<script src="js/Responsive.js"></script>
-<script src="js/PhotoOverlay.js"></script>
-<script src="js/GridControl.js"></script>
-<script src="js/Grid.js"></script>
+<script src="<?php echo base_url("assets/js/jquery-1.11.3.min.js"); ?>"></script>
+<script src="<?php echo base_url("assets/js/jquery-migrate-1.2.1.min.js"); ?>"></script>
+<script src="<?php echo base_url("assets/js/jquery.jscrollpane.min.js"); ?>"></script>
+<script src="<?php echo base_url("assets/js/jquery.mousewheel.js"); ?>"></script>
+<script src="<?php echo base_url("assets/js/greensock-js/TweenMax.min.js"); ?>"></script>
+<script src="<?php echo base_url("assets/js/greensock-js/TimelineLite.min.js"); ?>"></script>
+<script src="<?php echo base_url("assets/js/Responsive.js"); ?>"></script>
+<script src="<?php echo base_url("assets/js/PhotoOverlay.js"); ?>"></script>
+<script src="<?php echo base_url("assets/js/GridControl.js"); ?>"></script>
+<script src="<?php echo base_url("assets/js/Grid.js"); ?>"></script>
 </head>
 <body class="bgBrown">
 <div class="wrapper wrapperAlbum">
 	 <div class="infoPanel">
 		<div class="menuMask"></div>
-		<h1><?php echo $albmName; ?></h1>
+		<h1>Ebook Test</h1>
 		<div class="menuContainer mainMenuClose">
-			<ul class="subMenus">
-			<?php while ($rowAlbum = mysql_fetch_assoc($resultSelectAlbum)) { ?>
-				<li><a href="javascript:void(0)"><?php echo $rowAlbum['name']; ?></a></li>
-			<?php } ?>
-			</ul>
-			<!--
 			<ul class="subMenus">
 				<li class="active"><a href="javascript:void(0)">Sub-alubm 0</a></li>
 				<li><a href="javascript:void(0)">Sub-alubm 1</a></li>
@@ -93,15 +89,16 @@
 				<li><a href="javascript:void(0)">Links 0</a></li>
 				<li><a href="javascript:void(0)">Links 1</a></li>
 			</ul>
-			-->
 		</div>
-		<a class="btnMenuToggle" href="javascript:void(0)"><img src="images/btnMenuToggle.png"></a>
+		<a class="btnMenuToggle" href="javascript:void(0)"><img src="<?php echo base_url("assets/images/btnMenuToggle.png"); ?>"></a>
 		<div class="intro">
-			<p><?php echo $albumIntro?></p>
+			<p>The LRS is the heart of any Tin Can ecosystem, receiving, storing and returning data about learning experiences, achievements and job performance. You’ll need an LRS in order to do anything with Tin Can</p>
 		</div>
 	 </div>
 	 <div class="gridPanel">
-		<?php 
+
+		<?php
+		/*
 		$rowCount = 0;
 		while ($row = mysql_fetch_assoc($resultSelectPhoto)) { ?>
 			
@@ -115,38 +112,38 @@
 			</div>
 		<?php  
 		$rowCount++;
-		} ?>
-		<!--<div class="grid" data-highlight="true" data-filename="dummyLargeH.jpg"><img src="images/dummyHighlightH.jpg"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
-		<div class="grid" data-filename="dummyLargeH.jpg"><img src="images/dummyThumb1.jpg"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
-		<div class="grid" data-filename="dummyLargeH.jpg"><img src="images/dummyThumb2.jpg"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
-		<div class="grid" data-filename="dummyLargeH.jpg"><img src="images/dummyThumb3.jpg"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
-		<div class="grid" data-filename="dummyLargeV.jpg"><img src="images/dummyThumb4.jpg"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
-		<div class="grid" data-filename="dummyLargeH.jpg"><img src="images/dummyThumb5.jpg"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
-		<div class="grid" data-filename="dummyLargeH.jpg"><img src="images/dummyThumb6.jpg"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
-		<div class="grid" data-filename="dummyLargeH.jpg"><img src="images/dummyThumb7.jpg"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
-		<div class="grid" data-filename="dummyLargeV.jpg"><img src="images/dummyThumb8.jpg"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
-		<div class="grid" data-filename="dummyLargeH.jpg"><img src="images/dummyThumb9.jpg"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
-		<div class="grid" data-filename="dummyLargeH.jpg"><img src="images/dummyThumb10.jpg"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
-		<div class="grid" data-filename="dummyLargeH.jpg"><img src="images/dummyThumb11.jpg"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
-		<div class="grid" data-filename="dummyLargeH.jpg"><img src="images/dummyThumb12.jpg"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
-		<div class="grid" data-filename="dummyLargeH.jpg"><img src="images/dummyThumb13.jpg"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
-		<div class="grid" data-filename="dummyLargeV.jpg"><img src="images/dummyThumb14.jpg"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
-		<div class="grid" data-filename="dummyLargeH.jpg"><img src="images/dummyThumb15.jpg"><div class="titleOverlay"><div class="bg"></div><div class="title">This is a longer title two lines</div><span class="desc">This is description. It is longer. Do you see lines showing and display well?</span></div></div>
-		<div class="grid" data-filename="dummyLargeH.jpg"><img src="images/dummyThumb16.jpg"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
-		<div class="grid" data-filename="dummyLargeH.jpg"><img src="images/dummyThumb17.jpg"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
-		<div class="grid" data-filename="dummyLargeH.jpg"><img src="images/dummyThumb18.jpg"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
-		<div class="grid" data-filename="dummyLargeV.jpg"><img src="images/dummyThumb19.jpg"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">Another lorem ipsum multilines, see it?</span></div></div>
-		<div class="grid" data-filename="dummyLargeV.jpg"><img src="images/dummyThumb20.jpg"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
-		<div class="grid" data-filename="dummyLargeV.jpg"><img src="images/dummyThumb21.jpg"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
-		<div class="grid" data-filename="dummyLargeH.jpg"><img src="images/dummyThumb22.jpg"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
-		<div class="grid" data-filename="dummyLargeH.jpg"><img src="images/dummyThumb23.jpg"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
-		<div class="grid" data-filename="dummyLargeV.jpg"><img src="images/dummyThumb24.jpg"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
-		<div class="grid" data-filename="dummyLargeV.jpg"><img src="images/dummyThumb25.jpg"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
-		<div class="grid" data-filename="dummyLargeH.jpg"><img src="images/dummyThumb26.jpg"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
-		<div class="grid" data-filename="dummyLargeH.jpg"><img src="images/dummyThumb27.jpg"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
-		<div class="grid" data-filename="dummyLargeH.jpg"><img src="images/dummyThumb28.jpg"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
-		<div class="grid" data-filename="dummyLargeH.jpg"><img src="images/dummyThumb29.jpg"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
-		-->
+		}
+		*/?>
+		<div class="grid" data-highlight="true" data-filename="dummyLargeH.jpg"><img src="<?php echo base_url("assets/images/dummyHighlightH.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
+		<div class="grid" data-filename="dummyLargeH.jpg"><img src="<?php echo base_url("assets/images/dummyThumb1.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
+		<div class="grid" data-filename="dummyLargeH.jpg"><img src="<?php echo base_url("assets/images/dummyThumb2.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
+		<div class="grid" data-filename="dummyLargeH.jpg"><img src="<?php echo base_url("assets/images/dummyThumb3.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
+		<div class="grid" data-filename="dummyLargeV.jpg"><img src="<?php echo base_url("assets/images/dummyThumb4.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
+		<div class="grid" data-filename="dummyLargeH.jpg"><img src="<?php echo base_url("assets/images/dummyThumb5.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
+		<div class="grid" data-filename="dummyLargeH.jpg"><img src="<?php echo base_url("assets/images/dummyThumb6.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
+		<div class="grid" data-filename="dummyLargeH.jpg"><img src="<?php echo base_url("assets/images/dummyThumb7.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
+		<div class="grid" data-filename="dummyLargeV.jpg"><img src="<?php echo base_url("assets/images/dummyThumb8.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
+		<div class="grid" data-filename="dummyLargeH.jpg"><img src="<?php echo base_url("assets/images/dummyThumb9.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
+		<div class="grid" data-filename="dummyLargeH.jpg"><img src="<?php echo base_url("assets/images/dummyThumb10.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
+		<div class="grid" data-filename="dummyLargeH.jpg"><img src="<?php echo base_url("assets/images/dummyThumb11.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
+		<div class="grid" data-filename="dummyLargeH.jpg"><img src="<?php echo base_url("assets/images/dummyThumb12.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
+		<div class="grid" data-filename="dummyLargeH.jpg"><img src="<?php echo base_url("assets/images/dummyThumb13.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
+		<div class="grid" data-filename="dummyLargeV.jpg"><img src="<?php echo base_url("assets/images/dummyThumb14.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
+		<div class="grid" data-filename="dummyLargeH.jpg"><img src="<?php echo base_url("assets/images/dummyThumb15.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is a longer title two lines</div><span class="desc">This is description. It is longer. Do you see lines showing and display well?</span></div></div>
+		<div class="grid" data-filename="dummyLargeH.jpg"><img src="<?php echo base_url("assets/images/dummyThumb16.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
+		<div class="grid" data-filename="dummyLargeH.jpg"><img src="<?php echo base_url("assets/images/dummyThumb17.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
+		<div class="grid" data-filename="dummyLargeH.jpg"><img src="<?php echo base_url("assets/images/dummyThumb18.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
+		<div class="grid" data-filename="dummyLargeV.jpg"><img src="<?php echo base_url("assets/images/dummyThumb19.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">Another lorem ipsum multilines, see it?</span></div></div>
+		<div class="grid" data-filename="dummyLargeV.jpg"><img src="<?php echo base_url("assets/images/dummyThumb20.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
+		<div class="grid" data-filename="dummyLargeV.jpg"><img src="<?php echo base_url("assets/images/dummyThumb21.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
+		<div class="grid" data-filename="dummyLargeH.jpg"><img src="<?php echo base_url("assets/images/dummyThumb22.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
+		<div class="grid" data-filename="dummyLargeH.jpg"><img src="<?php echo base_url("assets/images/dummyThumb23.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
+		<div class="grid" data-filename="dummyLargeV.jpg"><img src="<?php echo base_url("assets/images/dummyThumb24.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
+		<div class="grid" data-filename="dummyLargeV.jpg"><img src="<?php echo base_url("assets/images/dummyThumb25.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
+		<div class="grid" data-filename="dummyLargeH.jpg"><img src="<?php echo base_url("assets/images/dummyThumb26.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
+		<div class="grid" data-filename="dummyLargeH.jpg"><img src="<?php echo base_url("assets/images/dummyThumb27.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
+		<div class="grid" data-filename="dummyLargeH.jpg"><img src="<?php echo base_url("assets/images/dummyThumb28.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
+		<div class="grid" data-filename="dummyLargeH.jpg"><img src="<?php echo base_url("assets/images/dummyThumb29.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
 	 </div>
 </div>
 <div class="photoZoomOverlay">

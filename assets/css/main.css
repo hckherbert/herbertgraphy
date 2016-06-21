@@ -330,7 +330,7 @@ html, body
     width: 80%;
     margin: 150px 20px 0 0;
 	padding: 20px 0 0 0;
-    border-top: 4px solid #fcf7d8;
+    border-top: 2px solid #fcf7d8;
 }
 
 .sDesktop .infoPanel .intro p
@@ -594,7 +594,9 @@ html, body
 
 .sDesktop .wrapperAlbum .gridPanel .grid img
 {
-	width:100%;
+	/*add some extra pixels to round up, preventing borders*/
+	width:102%;
+	height:102%;
 	position:relative;
 	left:0;
 	top:0;
