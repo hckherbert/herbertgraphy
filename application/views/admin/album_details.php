@@ -137,8 +137,14 @@
 		<?php echo form_close(); ?>
 		<div class="clear"></div>
 	</div>
+	<?php } ?>
 	<div class="section" id="sectionAddAlbum">
+		<?php if ($photo_data != NULL) { ?>
 		<h1 class="pageHeading">Add more photos</h1>
+		<?php } else ?>
+		<?php { ?>
+		<h1 class="pageHeading">Upload photos</h1>
+		<?php } ?>
 		<div id="uploaderWrapper">
 			<form>
 				<div id="queue"></div>
@@ -152,7 +158,7 @@
 		<input name="submit" type="button" value="Add">
 		<div class="clear"></div>
 	</div>
-	<?php } ?>
+
 	<?php if ($album_details->parentId == NULL) { ?>
 	<div class="section">
 		<h1 class="pageHeading">Sub-album List</h1>

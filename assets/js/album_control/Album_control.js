@@ -75,7 +75,14 @@ Album_control.prototype.init_upload = function()
     }
     else if ($("#page_album_details").size())
     {
-        _uploadButtonText = "Drop files to me or click me to make me richer.";
+        if ($(".photo_data").size())
+        {
+            _uploadButtonText = "Drop files to me or click me to make me richer.";
+        }
+        else
+        {
+            _uploadButtonText = "Drop files to me or click me. You can skip photos and add later.";
+        }
     }
 
     $('#file_upload').uploadifive({
@@ -873,7 +880,6 @@ Album_control.prototype.append_added_parent_album_record = function(pInsert_id, 
 
     document.getElementById(pFormId).reset();
 }
-
 
 Album_control.prototype.render_album_list = function(pData)
 {
