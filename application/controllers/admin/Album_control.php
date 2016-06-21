@@ -28,6 +28,20 @@ class Album_control extends CI_Controller
 				'rules'   => 'trim|required|is_unique[album.label]|label_char_format'
 			)
 		);
+
+		$this->config_validation_edit_album= array(
+			array(
+				'field'   => 'name',
+				'label'   => 'Album name',
+				'rules'   => 'trim|required'
+			),
+			array(
+				'field'   => 'label',
+				'label'   => 'Album label',
+				'rules'   => 'trim|required|is_edit_unique|label_char_format'
+			)
+		);
+
 	}
 
 	public function index()
@@ -138,20 +152,7 @@ class Album_control extends CI_Controller
 
 	public function do_add_subalbum()
 	{
-		$config_validation = array(
-			array(
-				'field'   => 'name',
-				'label'   => 'Album name',
-				'rules'   => 'trim|required'
-			),
-			array(
-				'field'   => 'label',
-				'label'   => 'Album label',
-				'rules'   => 'trim|required|is_unique[album.label]|label_char_format'
-			)
-		);
-
-		$this->form_validation->set_rules($config_validation);
+		$this->form_validation->set_rules($this->config_validation_add_album);
 
 		if ($this->form_validation->run() == FALSE)
 		{
@@ -185,20 +186,7 @@ class Album_control extends CI_Controller
 
 	public function update_album_info()
 	{
-		$config_validation = array(
-			array(
-				'field'   => 'name',
-				'label'   => 'Album name',
-				'rules'   => 'trim|required'
-			),
-			array(
-				'field'   => 'label',
-				'label'   => 'Album label',
-				'rules'   => 'trim|required|is_edit_unique|label_char_format'
-			)
-		);
-
-		$this->form_validation->set_rules($config_validation);
+		$this->form_validation->set_rules($this->config_validation_edit_album);
 
 		if ($this->form_validation->run() == FALSE)
 		{
@@ -213,15 +201,19 @@ class Album_control extends CI_Controller
 		{
 			$album_id = $this->input->post("id");
 			$post_data = $this->input->post(NULL, TRUE);
-			$post_data["label"] =  trim(strtolower($post_data["label"]));
+			$post_data["label"] = trim(strtolower($post_data["label"]));
 			$original_label = $this->album_model->get_album_label($album_id);
-			$original_folder =  FCPATH."/assets/photos/".$original_label;
-			$new_folder =  FCPATH."/assets/photos/".$post_data["label"];
+			$original_folder = FCPATH . "/assets/photos/" . $original_label;
+			$new_folder = FCPATH . "/assets/photos/" . $post_data["label"];
 
-			if ($original_label!=$new_folder)
+			if (file_exists($original_folder))
 			{
-				rename($original_folder, $new_folder);
+				if ($original_label!=$new_folder)
+				{
+					rename($original_folder, $new_folder);
+				}
 			}
+
 			$result =  $this->album_model->update_album_info($post_data);
 
 			if ($result)
@@ -350,8 +342,6 @@ class Album_control extends CI_Controller
 		}
 
 		$this->photo_model->update_photo_data($update_data, $album_id);
-
-		//JSONAPI::echo_json_successful_response($this->input->post(), TRUE);
 	}
 
 	public function check_exist()
@@ -446,7 +436,6 @@ class Album_control extends CI_Controller
 					JSONAPI::echo_json_error_response("CANNOT_MOVE_FILE");
 				}
 
-
 				$data = array(
 					"albumId" => $_POST["albumId"],
 					"slug_filename" => $slug_filename_only,
@@ -465,12 +454,6 @@ class Album_control extends CI_Controller
 
 			}
 		}
-	}
-
-
-	public  function remove_failed_uploads()
-	{
-
 	}
 
 	private function resize_photo($long_side, $target_file)

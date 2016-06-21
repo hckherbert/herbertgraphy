@@ -141,8 +141,7 @@
 	<div class="section" id="sectionAddAlbum">
 		<?php if ($photo_data != NULL) { ?>
 		<h1 class="pageHeading">Add more photos</h1>
-		<?php } else ?>
-		<?php { ?>
+		<?php } else {?>
 		<h1 class="pageHeading">Upload photos</h1>
 		<?php } ?>
 		<div id="uploaderWrapper">
