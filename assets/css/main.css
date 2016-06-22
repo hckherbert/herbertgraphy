@@ -595,8 +595,8 @@ html, body
 .sDesktop .wrapperAlbum .gridPanel .grid img
 {
 	/*add some extra pixels to round up, preventing borders*/
-	width:102%;
-	height:102%;
+	width:100%;
+	height:100%;
 	position:relative;
 	left:0;
 	top:0;

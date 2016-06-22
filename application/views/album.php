@@ -27,6 +27,8 @@
 	$selectAlbumSql = "SELECT * FROM album WHERE parentId IS NULL";
 	$resultSelectAlbum=mysql_query($selectAlbumSql) or die("Insert Error: ".mysql_error());
 	*/
+	
+	//var_dump($current_album_data);
 
 ?>
 <!DOCTYPE html>
@@ -128,7 +130,20 @@
 		$rowCount++;
 		}
 		*/?>
-		<div class="grid" data-highlight="true" data-filename="dummyLargeH.jpg"><img src="<?php echo base_url("assets/images/dummyHighlightH.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
+		
+		<?php foreach($current_album_data["photo_data"] as $photo){ ?>
+			<div class="grid" data-highlight="true" data-filename="../assets/photos/<?php echo $current_album_data["album_details"]->label; ?>/<?php echo $photo["hash_filename"]; ?>">
+				<img src="../assets/photos/<?php echo $current_album_data["album_details"]->label; ?>/<?php echo $photo["hash_filename"]; ?>">
+				<div class="titleOverlay">
+					<div class="bg"></div>
+					<div class="title"><?php echo $photo['title']; ?></div>
+					<span class="desc"><?php echo $photo['desc']; ?></span>
+				</div>
+			</div>
+		<?php } ?>
+		
+		
+		<!--<div class="grid" data-highlight="true" data-filename="dummyLargeH.jpg"><img src="<?php echo base_url("assets/images/dummyHighlightH.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
 		<div class="grid" data-filename="dummyLargeH.jpg"><img src="<?php echo base_url("assets/images/dummyThumb1.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
 		<div class="grid" data-filename="dummyLargeH.jpg"><img src="<?php echo base_url("assets/images/dummyThumb2.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
 		<div class="grid" data-filename="dummyLargeH.jpg"><img src="<?php echo base_url("assets/images/dummyThumb3.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
@@ -157,7 +172,7 @@
 		<div class="grid" data-filename="dummyLargeH.jpg"><img src="<?php echo base_url("assets/images/dummyThumb26.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
 		<div class="grid" data-filename="dummyLargeH.jpg"><img src="<?php echo base_url("assets/images/dummyThumb27.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
 		<div class="grid" data-filename="dummyLargeH.jpg"><img src="<?php echo base_url("assets/images/dummyThumb28.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
-		<div class="grid" data-filename="dummyLargeH.jpg"><img src="<?php echo base_url("assets/images/dummyThumb29.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>
+		<div class="grid" data-filename="dummyLargeH.jpg"><img src="<?php echo base_url("assets/images/dummyThumb29.jpg"); ?>"><div class="titleOverlay"><div class="bg"></div><div class="title">This is title</div><span class="desc">This is description.</span></div></div>-->
 	 </div>
 </div>
 <div class="photoZoomOverlay">

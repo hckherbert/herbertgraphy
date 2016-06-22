@@ -216,7 +216,7 @@ GridControl.prototype.positionGrids = function()
 		
 		console.log("grid panel offset: " + ($(".gridPanel").width() - (_gridWidth_num * this.mColCount_num)));
 		_gridHeight_num = Math.round(_gridWidth_num / this.mAspectRatio_num);
-		
+		 
 	
 		if (this.mGrid_array[_i].getOrientation() == "v")
 		{
