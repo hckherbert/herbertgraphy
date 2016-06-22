@@ -27,7 +27,7 @@
 	$selectAlbumSql = "SELECT * FROM album WHERE parentId IS NULL";
 	$resultSelectAlbum=mysql_query($selectAlbumSql) or die("Insert Error: ".mysql_error());
 	*/
-	
+
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
@@ -69,22 +69,36 @@
 <div class="wrapper wrapperAlbum">
 	 <div class="infoPanel">
 		<div class="menuMask"></div>
-		<h1>Ebook Test</h1>
+		<h1><?php echo $current_album_data["album_details"]->name; ?></h1>
 		<div class="menuContainer mainMenuClose">
+			<?php if ($subalbum_data) { ?>
 			<ul class="subMenus">
-				<li class="active"><a href="javascript:void(0)">Sub-alubm 0</a></li>
+				<?php foreach ($subalbum_data as $subalbum) { ?>
+					<li>
+						<a href="<?php echo $subalbum["label"]; ?>" <?php if ($subalbum["label"] == $current_album_data["album_details"]->label) { ?>class="active"<?php } ?>>
+						<?php echo $subalbum["name"]?>
+						</a>
+					</li>
+				<?php } ?>
+				<!--<li class="active"><a href="javascript:void(0)">Sub-alubm 0</a></li>
 				<li><a href="javascript:void(0)">Sub-alubm 1</a></li>
 				<li><a href="javascript:void(0)">Sub-alubm 2</a></li>
-				<li><a href="javascript:void(0)">Sub-alubm 3</a></li>
+				<li><a href="javascript:void(0)">Sub-alubm 3</a></li>-->
 			</ul>
+			<?php } ?>
+			<?php if ($all_other_albums_data) { ?>
 			<div class="menuHeading">Other album</div>
 			<ul class="otherAlbumMenus">
-				<li><a href="javascript:void(0)">Ohter Album 0</a></li>
+				<?php foreach ($all_other_albums_data as $other_albums) { ?>
+					<li><a href="<?php echo $other_albums["label"]; ?>"><?php echo $other_albums["name"]?></a></li>
+				<?php } ?>
+				<!--<li><a href="javascript:void(0)">Ohter Album 0</a></li>
 				<li><a href="javascript:void(0)">Ohter Album 1</a></li>
 				<li><a href="javascript:void(0)">Ohter Album 2</a></li>
 				<li><a href="javascript:void(0)">Ohter Album 3</a></li>
-				<li><a href="javascript:void(0)">Ohter Album 4</a></li>
+				<li><a href="javascript:void(0)">Ohter Album 4</a></li>-->
 			</ul>
+			<?php } ?>
 			<ul class="menuLinks">
 				<li><a href="javascript:void(0)">Links 0</a></li>
 				<li><a href="javascript:void(0)">Links 1</a></li>

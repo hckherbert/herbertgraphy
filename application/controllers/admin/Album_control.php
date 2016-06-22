@@ -257,9 +257,9 @@ class Album_control extends CI_Controller
 			$all_del_ids = array();
 			$sub_album_ids = $this->album_model->get_sub_album_by_parent_id($del_id);
 
-			$all_del_ids = array_map(function($arr)
+			$all_del_ids = array_map(function($input_array)
 			{
-				return $arr["id"];
+				return $input_array["id"];
 			}, $sub_album_ids);
 
 			$all_del_ids[] = $del_id;
