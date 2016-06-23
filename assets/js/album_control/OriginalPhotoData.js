@@ -45,17 +45,19 @@ OriginalPhotoData.prototype.check_unique_with_new_filenames = function(pNew_file
 
     for (_i = 0; _i < _totalPhoto; _i++)
     {
-         if (!this.mData_array[_i]["to_be_removed"] && pNew_file_name_array[_i]!="" && this.mData_array[_i]["original_file_name"]!=pNew_file_name_array[_i])
+         for (_j = 0; _j < this.mData_array.length; _j++)
          {
-             for (_j = 0; _j < _totalPhoto; _j++)
+             if (!this.mData_array[_j]["to_be_removed"] && pNew_file_name_array[_i]!="" && this.mData_array[_j]["original_file_name"]==pNew_file_name_array[_i])
              {
-                 if (this.mData_array[_j]["original_file_name"] == pNew_file_name_array[_i] &&  pNew_file_name_array[_i]!= this.mData_array[_i]["original_file_name"] )
-                 {
+                // if (this.mData_array[_j]["original_file_name"] == pNew_file_name_array[_i] && pNew_file_name_array[_i] != this.mData_array[_i]["original_file_name"])
+                 //{
                      _duplicated_index_array.push(_i);
-                 }
+                 //}
              }
          }
     }
+
+    console.log("@OriginalPhotoData check_unique_with_new_filenames: " + _duplicated_index_array);
 
     return _duplicated_index_array;
 }

@@ -320,7 +320,7 @@ Album_control.prototype.check_is_unique_new_photo_filenames = function(pSelector
     return !_duplicated_filenames_found;
 }
 
-
+//Used when uploading photos to new album, or when adding more photos to existing album
 Album_control.prototype.is_validate_upload_new_photo_data = function()
 {
     var _self = this;
@@ -358,7 +358,7 @@ Album_control.prototype.is_validate_upload_new_photo_data = function()
     if (_self.mIsValidatedUpload == false || _is_photo_input_validated == false)
     {
         _self.displayFail(_self.mErrorMsgUpload);
-        return;
+        return false;
     }
 
     return true;
@@ -423,8 +423,36 @@ Album_control.prototype.submit_handler = function()
         }
         else if ($("#page_album_details").size())
         {
+
             if ( _self.is_validate_upload_new_photo_data())
             {
+                var _i = 0;
+                var _duplicated_index_array = [];
+                var _new_file_names_array = [];
+
+                $("input[name='new_filename']").each(
+                    function(i,e)
+                    {
+                        _new_file_names_array.push($.trim($(e).val()).toLowerCase());
+                    }
+                )
+
+                if (_self.mOriginalPhotoData)
+                {
+                    _duplicated_index_array = _self.mOriginalPhotoData.check_unique_with_new_filenames(_new_file_names_array);
+
+                    if (_duplicated_index_array.length)
+                    {
+                        for (_i = 0; _i < _duplicated_index_array.length; _i++)
+                        {
+                            $("input[name='new_filename']:eq(" + _duplicated_index_array[_i] + ")").next(".error").removeClass("hide").text("Filename existed. Please use others.");
+                        }
+
+                        _self.displayFail(_self.mErrorMsgUpload);
+                        return;
+                    }
+                }
+
                 if ($(".uploadifive-queue-item").size())
                 {
                     $('#file_upload').uploadifive('upload');
@@ -657,7 +685,7 @@ Album_control.prototype.submit_handler = function()
         {
             pEvent.preventDefault();
 
-
+            /*
             var _i = 0;
             var _new_file_names_array = [];
             //var _is_unique_filenames = true;
@@ -691,6 +719,10 @@ Album_control.prototype.submit_handler = function()
                 _self.displayFail(_self.mErrorMsgUpload);
                 return;
             }
+            */
+
+            var _formInstance = $(this);
+            var _postData = $(this).serializeArray();
 
             $.ajax(
                 {
@@ -862,7 +894,7 @@ Album_control.prototype.append_added_parent_album_record = function(pInsert_id, 
 
     var _new_album_html = "";
 
-    _new_album_html += "<tr class='ui-sortable-handle'>"
+    _new_album_html += "<tr class='ui-sortable-handle'>";
     _new_album_html += "<td>" + _album_name +  "</td>";
     _new_album_html += "<td>" + _album_label +  "</td>";
     _new_album_html += "<td>" + _album_intro +  "</td>";
