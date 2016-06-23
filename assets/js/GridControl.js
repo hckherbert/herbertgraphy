@@ -14,6 +14,7 @@ GridControl.prototype.mWinWidthBeforeStaggered_num = 0;
 GridControl.prototype.mOverlayPopSpeed_num = 0.5
 GridControl.prototype.mOverlayScale_num = 0.7;
 GridControl.prototype.mTimerReposition = null;
+GridControl.prototype.mInfoPanelMinHeight = null;
 
 function GridControl(pGridControl, pPhotoOverlay)
 {
@@ -24,6 +25,7 @@ function GridControl(pGridControl, pPhotoOverlay)
 	this.mPhotoOverlay = pPhotoOverlay;
 	this.mPhotoOverlay.setOnHideStart(function(){_self.photoOverlayOnHideStart();});
 	this.mGridCount_num = this.mGridControl.children(".grid").length;
+	this.mInfoPanelMinHeight = $(".infoPanel").css("min-height");
 	
 	this.shuffleGrids();
 	
@@ -157,8 +159,6 @@ GridControl.prototype.setHighlightOccupy = function()
 
 GridControl.prototype.rePositionGrid = function()
 {
-	console.log("rePositionGrid");
-	
 	clearTimeout(this.mTimerReposition);
 	
 	if ($(window).width()>=0 && $(window).width()<=768)
@@ -304,43 +304,51 @@ GridControl.prototype.onStaggeredAll = function()
 			100
 		)
 	}
-	else
-	{
-		_self.rePositionGrid();
-	}
 
 	this.updateGridInfoHeight();
 }
 
 GridControl.prototype.updateGridInfoHeight = function()
 {
-	
 	if (this.mColCount_num > 3)
 	{
-		//console.log(this.mGrid_array[this.mGridCount_num-1].getElement().html());
-		
 		var _i = 0;
 		var _maxLastGridHeight_num = 0;
 		var _gridPanelHeight_num = this.mGrid_array[this.mGridCount_num-1].getPosition()["y"];
-		
-		for (_i = this.mGridCount_num - this.mColCount_num ; _i < this.mGridCount_num; _i++)
+		var _startLastRowIndex = this.mGridCount_num - this.mColCount_num;
+
+		if (_startLastRowIndex  > 0)
 		{
-			if (this.mGrid_array[_i].getSize()["height"] >= _maxLastGridHeight_num)
+
+			for (_i = this.mGridCount_num - this.mColCount_num ; _i < this.mGridCount_num; _i++)
 			{
-				_maxLastGridHeight_num = this.mGrid_array[_i].getSize()["height"];
+				if (this.mGrid_array[_i].getSize()["height"] >= _maxLastGridHeight_num)
+				{
+					_maxLastGridHeight_num = this.mGrid_array[_i].getSize()["height"];
+				}
+			}
+
+			_gridPanelHeight_num +=  _maxLastGridHeight_num;
+
+			if (_gridPanelHeight_num > $(".infoPanel").height())
+			{
+				$(".infoPanel").css("height", _gridPanelHeight_num + "px");
+			}
+			else
+			{
+				$(".infoPanel").css("height", "auto");
 			}
 		}
-		
-		_gridPanelHeight_num +=  _maxLastGridHeight_num;
-		
-		$(".infoPanel").css("height", _gridPanelHeight_num + "px");
+		else
+		{
+			$(".infoPanel").css("height", "auto");
+		}
 	}
 	else
 	{
-		$(".infoPanel").css("height", "60px");
+		$(".infoPanel").css("height", this.mInfoPanelMinHeight);
 	}
-	
-	
+
 	var _gridWidth_num = Math.floor($(".gridPanel").width()/this.mColCount_num);
 	var _gridPanelWidth_num = Math.floor($(".gridPanel").width());
 	var _offset_num = _gridWidth_num * this.mColCount_num - _gridPanelWidth_num;
@@ -349,7 +357,6 @@ GridControl.prototype.updateGridInfoHeight = function()
 	
 	$("html").addClass("vScrollOn");
 }
-
  
 GridControl.prototype.onClick = function(pObj)
 {
@@ -460,7 +467,6 @@ GridControl.prototype.onPhotoOverlayHidden = function(pActiveGridTop_num)
 	}
 
 	$("html").css("overflow-y", "auto");
-
 }
 	
 	

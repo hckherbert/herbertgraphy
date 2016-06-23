@@ -110,6 +110,7 @@
 		<div class="intro">
 			<p>The LRS is the heart of any Tin Can ecosystem, receiving, storing and returning data about learning experiences, achievements and job performance. You’ll need an LRS in order to do anything with Tin Can</p>
 		</div>
+		<div class="clear"></div>
 	 </div>
 	 <div class="gridPanel">
 
@@ -222,7 +223,7 @@
 					mGridControl.updateDensity("medium");
 				}
 				
-				$(".infoPanel").css("height", $(window).height()+"px");
+				//$(".infoPanel").css("height", $(window).height()+"px");
 			 
 			}
 			
