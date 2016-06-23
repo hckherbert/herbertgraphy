@@ -711,15 +711,18 @@ Album_control.prototype.submit_handler = function()
 
                 _is_photo_input_validated = false;
             }
+            */
 
-            //_is_unique_filenames = _self.check_is_unique_new_photo_filenames(".photo_data input[name='new_filename[]']");
+            var _is_unique_filenames = _self.check_is_unique_new_photo_filenames(".photo_data input[name='new_filename[]']");
 
-            if ( _is_photo_input_validated == false)
+            if (! _is_unique_filenames)
             {
                 _self.displayFail(_self.mErrorMsgUpload);
+                console.log("not passed...");
                 return;
             }
-            */
+
+            return;
 
             var _formInstance = $(this);
             var _postData = $(this).serializeArray();
