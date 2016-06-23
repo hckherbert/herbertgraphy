@@ -314,6 +314,10 @@ Album_control.prototype.check_is_unique_new_photo_filenames = function(pSelector
 
                 _duplicated_filenames_found = true;
             }
+            else
+            {
+                $(e).next(".error").addClass("hide");
+            }
         }
     );
 
@@ -714,6 +718,7 @@ Album_control.prototype.submit_handler = function()
             */
 
             var _is_unique_filenames = _self.check_is_unique_new_photo_filenames(".photo_data input[name='new_filename[]']");
+            console.log("717: " + _is_unique_filenames);
 
             if (! _is_unique_filenames)
             {
