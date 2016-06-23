@@ -337,8 +337,6 @@ Album_control.prototype.is_validate_upload_new_photo_data = function()
         {
             if (!$(e).hasClass("hide"))
             {
-                //_self.displayFail(_self.mErrorMsgUpload);
-                //return;
                 _is_photo_input_validated = false;
             }
         }
@@ -348,8 +346,6 @@ Album_control.prototype.is_validate_upload_new_photo_data = function()
 
     if (!_is_unique_filenames)
     {
-        // _self.displayFail(_self.mErrorMsgUpload);
-        // return;
         _is_photo_input_validated = false;
     }
 
@@ -689,36 +685,9 @@ Album_control.prototype.submit_handler = function()
         {
             pEvent.preventDefault();
 
-            /*
-            var _i = 0;
-            var _new_file_names_array = [];
-            //var _is_unique_filenames = true;
-            var _is_photo_input_validated = true;
             var _formInstance = $(this);
             var _postData = $(this).serializeArray();
-
-            $("input[name='new_filename[]']", $(".formUploadPhotoData")).each(
-                function(i,e)
-                {
-                    _new_file_names_array.push($.trim($(e).val()).toLowerCase());
-                }
-            )
-
-            var _duplicated_index_array = _self.mOriginalPhotoData.check_unique_with_new_filenames(_new_file_names_array);
-
-            if (_duplicated_index_array.length)
-            {
-                for (_i = 0; _i < _duplicated_index_array.length; _i++)
-                {
-                    $("input[name='new_filename[]']:eq(" + _duplicated_index_array[_i] + ")", $(".formUploadPhotoData")).next(".error").removeClass("hide").text("Filename existed. Please use others.");
-                }
-
-                _is_photo_input_validated = false;
-            }
-            */
-
             var _is_unique_filenames = _self.check_is_unique_new_photo_filenames(".photo_data input[name='new_filename[]']");
-            console.log("717: " + _is_unique_filenames);
 
             if (! _is_unique_filenames)
             {
@@ -726,9 +695,6 @@ Album_control.prototype.submit_handler = function()
                 console.log("not passed...");
                 return;
             }
-
-            var _formInstance = $(this);
-            var _postData = $(this).serializeArray();
 
             $.ajax(
                 {

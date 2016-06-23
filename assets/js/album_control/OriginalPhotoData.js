@@ -17,7 +17,6 @@ function OriginalPhotoData(pPhotoDataForm)
         {
             var _data_obj = {};
             _data_obj["original_file_name"] = $("input[name='new_filename[]']", $(e)).val();
-            _data_obj["to_be_removed"] = false;
             _self.mData_array.push(_data_obj);
         }
     );
@@ -32,7 +31,6 @@ OriginalPhotoData.prototype.toggleRemove = function(pEvent)
 {
     //console.log($(pEvent.currentTarget).is(":checked"));
     var _current_index = $(pEvent.currentTarget).index("input[name='del_id[]']", this.mPhotoDataForm);
-    this.mData_array[_current_index]["to_be_removed"] = $(pEvent.currentTarget).is(":checked");
 
 }
 
@@ -47,12 +45,9 @@ OriginalPhotoData.prototype.check_unique_with_new_filenames = function(pNew_file
     {
          for (_j = 0; _j < this.mData_array.length; _j++)
          {
-             if (!this.mData_array[_j]["to_be_removed"] && pNew_file_name_array[_i]!="" && this.mData_array[_j]["original_file_name"]==pNew_file_name_array[_i])
+             if (pNew_file_name_array[_i]!="" && this.mData_array[_j]["original_file_name"]==pNew_file_name_array[_i])
              {
-                // if (this.mData_array[_j]["original_file_name"] == pNew_file_name_array[_i] && pNew_file_name_array[_i] != this.mData_array[_i]["original_file_name"])
-                 //{
-                     _duplicated_index_array.push(_i);
-                 //}
+                 _duplicated_index_array.push(_i);
              }
          }
     }
