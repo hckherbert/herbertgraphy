@@ -727,8 +727,6 @@ Album_control.prototype.submit_handler = function()
                 return;
             }
 
-            return;
-
             var _formInstance = $(this);
             var _postData = $(this).serializeArray();
 
