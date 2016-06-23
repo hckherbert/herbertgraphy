@@ -660,7 +660,7 @@ Album_control.prototype.submit_handler = function()
 
             var _i = 0;
             var _new_file_names_array = [];
-            var _is_unique_filenames = true;
+            //var _is_unique_filenames = true;
             var _is_photo_input_validated = true;
             var _formInstance = $(this);
             var _postData = $(this).serializeArray();
@@ -684,7 +684,7 @@ Album_control.prototype.submit_handler = function()
                 _is_photo_input_validated = false;
             }
 
-            _is_unique_filenames = _self.check_is_unique_new_photo_filenames(".photo_data input[name='new_filename[]']");
+            //_is_unique_filenames = _self.check_is_unique_new_photo_filenames(".photo_data input[name='new_filename[]']");
 
             if ( _is_photo_input_validated == false)
             {
@@ -701,7 +701,7 @@ Album_control.prototype.submit_handler = function()
                     success: function (pData)
                     {
                         console.log(_postData);
-                        _self.displaySuccess("Photo infos are updated successfully.");
+                        _self.displaySuccess("Photo infos are updated successfully.", "_self");
                     },
                     error: function (jqxhr, status)
                     {
