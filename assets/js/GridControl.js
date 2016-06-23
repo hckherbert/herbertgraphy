@@ -95,7 +95,6 @@ GridControl.prototype.onAllImageLoaded = function()
 
 GridControl.prototype.updateDensity = function(pDensity_str)
 {
-
 	if (pDensity_str == "low")
 	{	
 		this.mColCount_num = 3;
@@ -184,19 +183,20 @@ GridControl.prototype.positionGrids = function()
 	var _i = 0;
 	var _j = 0;
 	var _gridWidth_num = 0;
+	var _gridHeight_num = 0;
 	var _nextAvailableIndex_num = 0;
 	var _widthFactor_num = 1;
-	var _heightFactor_num = 1;
+	var _finalGridWidth_num = 0;
+	var _finalGridHeight_num = 0;
 
 	this.resetOccupy();
-	
+
 	for (_i = 0; _i< this.mGridCount_num; _i++)
 	{
 		var _nextAvailableFound = false;
 		
 		_j = _nextAvailableIndex_num;
 		_widthFactor_num = 1;
-		_heightFactor_num = 1;
 		
 		while (!_nextAvailableFound)
 		{
@@ -216,8 +216,7 @@ GridControl.prototype.positionGrids = function()
 		
 		console.log("grid panel offset: " + ($(".gridPanel").width() - (_gridWidth_num * this.mColCount_num)));
 		_gridHeight_num = Math.round(_gridWidth_num / this.mAspectRatio_num);
-		 
-	
+
 		if (this.mGrid_array[_i].getOrientation() == "v")
 		{
 			this.mIsOccupied_array[_nextAvailableIndex_num+this.mColCount_num] = true;
@@ -229,22 +228,32 @@ GridControl.prototype.positionGrids = function()
 			if (this.mGrid_array[_i].getOrientation() == "h")
 			{
 				_widthFactor_num = 3;
-				_heightFactor_num = 3;
+				_finalGridWidth_num = _gridWidth_num*_widthFactor_num;
+				_finalGridHeight_num = Math.round(_finalGridWidth_num / this.mAspectRatio_num);
 			}
 			else if (this.mGrid_array[_i].getOrientation() == "v")
 			{
 				_widthFactor_num = 2;
-				_heightFactor_num = 4;
+				_finalGridWidth_num = _gridWidth_num*_widthFactor_num;
+				_finalGridHeight_num = _finalGridWidth_num * this.mAspectRatio_num;
 			}
 		}
 		else
-		{	if (this.mGrid_array[_i].getOrientation() == "v")
+		{	if (this.mGrid_array[_i].getOrientation() == "h")
 			{
-				_heightFactor_num = 2;
+				_widthFactor_num = 1;
+				_finalGridWidth_num = _gridWidth_num*_widthFactor_num;
+				_finalGridHeight_num = Math.round(_finalGridWidth_num / this.mAspectRatio_num);
+			}
+			else
+			{
+				_widthFactor_num = 1;
+				_finalGridWidth_num = _gridWidth_num*_widthFactor_num;
+				_finalGridHeight_num = _finalGridWidth_num * this.mAspectRatio_num;
 			}
 		}
-		
-		this.mGrid_array[_i].setSize(_gridWidth_num*_widthFactor_num, _gridHeight_num* _heightFactor_num);
+
+		this.mGrid_array[_i].setSize(_finalGridWidth_num, _finalGridHeight_num);
 		this.mGrid_array[_i].setPosition((_nextAvailableIndex_num % this.mColCount_num) *_gridWidth_num, Math.floor(_nextAvailableIndex_num / this.mColCount_num) * _gridHeight_num);
 		
 		if (this.mGrid_array[_i].getOrientation() == "v")
@@ -255,7 +264,6 @@ GridControl.prototype.positionGrids = function()
 	}
 	
 	//$(".wrapperAlbum").addClass("show");
-	
 	this.mTmpWinWidth = $(window).width();
 	
 	if (!this.mGridstaggered)
@@ -283,7 +291,7 @@ GridControl.prototype.onStaggeredAll = function()
 	console.log("staggered all!");
 	console.log("before starggered: " + this.mWinWidthBeforeStaggered_num + " ; after staggered: " + $(window).width());
 	this.mGridstaggered = true;
-	
+
 	if (this.mWinWidthBeforeStaggered_num  != $(window).width())
 	{	
 		console.log("go to reposition!");
@@ -291,11 +299,14 @@ GridControl.prototype.onStaggeredAll = function()
 		( 
 			function()
 			{
-			
 				_self.rePositionGrid();
 			},
 			100
 		)
+	}
+	else
+	{
+		_self.rePositionGrid();
 	}
 
 	this.updateGridInfoHeight();
