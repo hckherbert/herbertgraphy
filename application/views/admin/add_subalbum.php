@@ -48,6 +48,11 @@
  (
 	function()
 	{
+		if ($("input[name='name']").val()!="")
+		{
+			location.href = GLOBAL_SITE_URL + "/admin/album_control/album_details/" + <?php echo $album_details->id; ?>
+		}
+
 		mAlbum_control = new Album_control(null, mParent_id);
 
 	}
