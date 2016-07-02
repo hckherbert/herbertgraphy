@@ -416,6 +416,7 @@ class Album_control extends CI_Controller
 
 			$desc = $photo_user_data["desc"][$post_data_index];
 			$title = $photo_user_data["title"][$post_data_index];
+			$featured = $photo_user_data["featured"][$post_data_index];
 			$hash = hash("sha256", $slug_filename_only .time()."herbertgraphyalbumadmin");
 			$hash_filename = $slug_filename_only."-".$hash.".".$extension;
 			$target_file = $uploadDir.$hash_filename;
@@ -442,6 +443,7 @@ class Album_control extends CI_Controller
 					"hash_filename" => $hash_filename,
 					"title" => $title,
 					"desc" => $desc,
+					"featured" => $featured,
 					"create_date" => date('Y-m-d H:i:s')
 				);
 
