@@ -36,8 +36,15 @@ class Album_model extends CI_Model
 		return $result;
 
 	}
-
-
+	
+	public function get_parent_album_id($album_id)
+	{
+		$this->db->select("parentId");
+		$this->db->where("id", $album_id);
+		$query  = $this->db->get("album");
+		return $query->row()->parentId;
+	}
+	
 	public function delete_albums_and_reorder($del_ids, $album_ids)
 	{
 		$this->db->where_in("id", $del_ids);

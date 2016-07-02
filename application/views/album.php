@@ -89,10 +89,20 @@
 			</ul>
 			<?php } ?>
 			<?php if ($all_other_albums_data) { ?>
-			<div class="menuHeading">Other album</div>
 			<ul class="otherAlbumMenus">
 				<?php foreach ($all_other_albums_data as $other_albums) { ?>
-					<li><a href="<?php echo $other_albums["label"]; ?>"><?php echo $other_albums["name"]?></a></li>
+					<li <?php if ($other_albums["siblings"]!==NULL) { ?> class="parent" <?php } ?>>
+						<a href="<?php echo $other_albums["label"]; ?>"><?php echo $other_albums["name"]?>
+						</a>
+					</li>
+					<?php if ($other_albums["siblings"]!==NULL) { ?>
+						<?php foreach ($other_albums["siblings"] as $sibling) { ?>
+						<li class="siblings<?php if (end($other_albums["siblings"]) == $sibling) {?> last<?php } ?><?php if ($sibling["name"] == $current_album_data["album_details"]->name) {?> current<?php } ?>">
+							<a href="<?php echo $sibling["label"]; ?>"><?php echo $sibling["name"]?>
+							</a>
+						</li>	
+						<?php } ?>
+					<?php }?>
 				<?php } ?>
 				<!--<li><a href="javascript:void(0)">Ohter Album 0</a></li>
 				<li><a href="javascript:void(0)">Ohter Album 1</a></li>

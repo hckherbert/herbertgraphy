@@ -349,7 +349,7 @@ html, body
 
 .sDesktop .infoPanel h1
 {
-	font-size:50px;
+	font-size:46px;
 	padding:20px;
 	margin: 100px 0 0 0;
 	font-weight:200;
@@ -454,6 +454,29 @@ html, body
 .infoPanel .otherAlbumMenus li a
 {
 	color:#4d4d4d;
+}
+
+.sDesktop .infoPanel .otherAlbumMenus li.parent
+{
+	font-size:16px;
+	font-style:italic;
+	margin:0;
+}
+
+.sDesktop .infoPanel .otherAlbumMenus li.siblings
+{
+	font-style:italic;
+	margin:0;
+}
+
+.sDesktop .infoPanel .otherAlbumMenus li.siblings.last
+{
+	margin:0 0 5px;
+}
+
+.sDesktop .infoPanel .otherAlbumMenus li.siblings.current
+{
+	font-weight:bold;
 }
 
 .sDesktop .infoPanel .menuLinks
