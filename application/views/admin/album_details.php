@@ -128,7 +128,9 @@
 			<span class="error hide">Number, letters and hyphens only</span>
 			<input name="title[]" value="<?php echo $row["title"]; ?>" type="text" placeholder="Give me a title if you wish" maxlength="100">
 			<textarea name="desc[]"  placeholder="Say something about me if you wish" maxlength="500"><?php echo $row["desc"]; ?></textarea>
-			<input name="del_id[]" type="checkbox" value="<?php echo $row["photoId"]; ?>">Remove
+			<label><input name="del_id[]" type="checkbox" value="<?php echo $row["photoId"]; ?>">Remove</label>
+			<br>
+			<label><input name="featured[]" type="radio" value="<?php echo ($row["featured"] == "1") ? "1" : "0" ?>" <?php if ($row["featured"] == 1) { ?>checked<?php } ?>>Featured</label>
 			<input name="photo_id[]" type="hidden" value="<?php echo $row["photoId"]; ?>">
 		</div>
 		<?php } ?>

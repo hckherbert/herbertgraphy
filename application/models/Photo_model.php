@@ -20,7 +20,7 @@ class Photo_model extends CI_Model
 
     public function get_photo_data($album_id)
     {
-        $this->db->select("photoId,slug_filename,hash_filename,title,desc");
+        $this->db->select("photoId,slug_filename,hash_filename,title,desc,featured");
         $this->db->where("albumId", $album_id);
         $query = $this->db->get("photos");
 
