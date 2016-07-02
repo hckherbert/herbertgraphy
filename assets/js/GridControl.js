@@ -134,32 +134,46 @@ GridControl.prototype.setHighlightOccupy = function()
 		this.mIsOccupied_array[0] = true;
 		this.mIsOccupied_array[1] = true;
 		this.mIsOccupied_array[2] = true;
+		this.mIsOccupied_array[3] = true;
 		
 		this.mIsOccupied_array[this.mColCount_num] = true;
 		this.mIsOccupied_array[this.mColCount_num+1] = true;
 		this.mIsOccupied_array[this.mColCount_num+2] = true;
+		this.mIsOccupied_array[this.mColCount_num+3] = true;
 		
 		this.mIsOccupied_array[this.mColCount_num*2] = true;
 		this.mIsOccupied_array[this.mColCount_num*2+1] = true;
 		this.mIsOccupied_array[this.mColCount_num*2+2] = true;
+		this.mIsOccupied_array[this.mColCount_num*2+3] = true;
+		
+		this.mIsOccupied_array[this.mColCount_num*3] = true;
+		this.mIsOccupied_array[this.mColCount_num*3+1] = true;
+		this.mIsOccupied_array[this.mColCount_num*3+2] = true;
+		this.mIsOccupied_array[this.mColCount_num*3+3] = true;
+		
 	}
 	else if (this.mGrid_array[0].getOrientation() == "v")
 	{
 		this.mIsOccupied_array[0] = true;
 		this.mIsOccupied_array[1] = true;
 		this.mIsOccupied_array[2] = true;
+		
 		this.mIsOccupied_array[this.mColCount_num] = true;
 		this.mIsOccupied_array[this.mColCount_num+1] = true;
 		this.mIsOccupied_array[this.mColCount_num+2] = true;
+		
 		this.mIsOccupied_array[this.mColCount_num*2] = true;
 		this.mIsOccupied_array[this.mColCount_num*2+1] = true;
 		this.mIsOccupied_array[this.mColCount_num*2+2] = true;
+		
 		this.mIsOccupied_array[this.mColCount_num*3] = true;
 		this.mIsOccupied_array[this.mColCount_num*3+1] = true;
 		this.mIsOccupied_array[this.mColCount_num*3+2] = true;
+		
 		this.mIsOccupied_array[this.mColCount_num*4] = true;
 		this.mIsOccupied_array[this.mColCount_num*4+1] = true;
 		this.mIsOccupied_array[this.mColCount_num*4+2] = true;
+		
 		this.mIsOccupied_array[this.mColCount_num*5] = true;
 		this.mIsOccupied_array[this.mColCount_num*5+1] = true;
 		this.mIsOccupied_array[this.mColCount_num*5+2] = true;
@@ -236,7 +250,7 @@ GridControl.prototype.positionGrids = function()
 		{
 			if (this.mGrid_array[_i].getOrientation() == "h")
 			{
-				_widthFactor_num = 3;
+				_widthFactor_num = 4;
 				_finalGridWidth_num = _gridWidth_num*_widthFactor_num;
 				_finalGridHeight_num = Math.round(_finalGridWidth_num / this.mAspectRatio_num);
 			}
