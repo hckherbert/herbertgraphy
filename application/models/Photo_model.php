@@ -18,15 +18,47 @@ class Photo_model extends CI_Model
         return $this->db->insert_id();
     }
 
-    public function get_photo_data($album_id)
+    public function get_photo_data($album_id, $pIsShuffle)
     {
-        $this->db->select("photoId,slug_filename,hash_filename,title,desc,featured");
-        $this->db->where("albumId", $album_id);
-        $this->db->order_by("featured", 'DESC');
-        $this->db->order_by("create_date", 'DESC');
-        $query = $this->db->get("photos");
 
-        return $query->result_array();
+		$this->db->select("photoId,slug_filename,hash_filename,title,desc,featured");
+		$this->db->where("albumId", $album_id);
+		$this->db->order_by("featured", "DESC");
+		$this->db->order_by("create_date", "DESC");
+		$query = $this->db->get("photos");
+
+		if ($pIsShuffle)
+		{
+			$featured_index = -1;
+			$result = $query->result_array();
+			shuffle($result);
+			
+			foreach($result as $key=>$record)
+			{
+				var_dump($record["featured"]);
+			
+				if ($record["featured"] == "1")
+				{
+					var_dump($key);
+					$featured_index = $key;
+					break;
+				}
+			}
+			
+			if ($featured_index>=0)
+			{
+				$featured_photo = $result[$featured_index];
+				unset($result[$featured_index]);
+				array_unshift($result, $featured_photo);
+			}
+			
+			return $result;
+		}
+		else
+		{
+			return $query->result_array();
+		}
+		 
     }
 
     public function update_photo_data($data, $album_id)

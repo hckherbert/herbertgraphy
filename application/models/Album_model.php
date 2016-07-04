@@ -192,7 +192,7 @@ class Album_model extends CI_Model
 
 	}
 
-	public function get_album_details($pAlbum_id)
+	public function get_album_details($pAlbum_id, $pIsShuffle=true)
 	{
 		$data = array();
 		$this->db->select("id, parentId, order, name, label, intro");
@@ -220,7 +220,7 @@ class Album_model extends CI_Model
 			}
 		}
 
-		$data["photo_data"] = $this->photo_model->get_photo_data($pAlbum_id);
+		$data["photo_data"] = $this->photo_model->get_photo_data($pAlbum_id, $pIsShuffle);
 		$data["album_details"] = $album_details;
 
 		return $data;

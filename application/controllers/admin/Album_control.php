@@ -146,7 +146,7 @@ class Album_control extends CI_Controller
 	public function go_add_subalbum()
 	{
 		$album_id = $this->input->post("albumId");
-		$data = $this->album_model->get_album_details($album_id);
+		$data = $this->album_model->get_album_details($album_id, false);
 		$this->load->view("admin/add_subalbum", $data);
 	}
 
@@ -229,7 +229,7 @@ class Album_control extends CI_Controller
 
 	public function album_details($pAlbum_id)
 	{
-		$data= $this->album_model->get_album_details($pAlbum_id);
+		$data= $this->album_model->get_album_details($pAlbum_id, false);
 
 		if ($data["album_details"]=== NULL)
 		{
