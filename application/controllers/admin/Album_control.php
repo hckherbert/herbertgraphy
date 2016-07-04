@@ -295,6 +295,7 @@ class Album_control extends CI_Controller
 
 	public function update_photo_data($album_id)
 	{
+		$featuredId = $this->input->post("featured")[0];
 		$del_data = array();
 		$update_data = array();
 		$update_data["slug_filename"] = array();
@@ -303,6 +304,8 @@ class Album_control extends CI_Controller
 		$update_data["title"] = array();
 		$update_data["desc"] = array();
 		$update_data["photoId"] = array();
+		$update_data["featured"] = array();
+		$featured_array = array();
 
 		foreach($this->input->post() as $key=>$value)
 		{
@@ -325,6 +328,21 @@ class Album_control extends CI_Controller
 			else if ($key == "photo_id")
 			{
 				array_push($update_data["photoId"], $value);
+
+				foreach($value as $photoId)
+				{
+					if ($photoId == $featuredId)
+					{
+						array_push($featured_array, "1");
+					}
+					else
+					{
+						array_push($featured_array, "0");
+					}
+				}
+
+				array_push($update_data["featured"], $featured_array);
+
 			}
 			else if ($key == "original_filename")
 			{
@@ -335,6 +353,7 @@ class Album_control extends CI_Controller
 				array_push($update_data["original_slug"], $value);
 			}
 		}
+
 
 		if (count($del_data))
 		{

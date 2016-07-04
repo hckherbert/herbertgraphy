@@ -30,9 +30,9 @@ function Album_control(pAlbumId, pParentId)
         }
     }
 
-    if ($(".formUploadPhotoData").size())
+    if ($(".formUpdatePhotoData").size())
     {
-        this.mOriginalPhotoData = new OriginalPhotoData($(".formUploadPhotoData"));
+        this.mOriginalPhotoData = new OriginalPhotoData($(".formUpdatePhotoData"));
     }
 
     this.init_upload();
@@ -310,7 +310,7 @@ Album_control.prototype.check_is_unique_new_photo_filenames = function(pSelector
 
             if (_new_filenames_occurances[_filename] > 1 && _filename!="")
             {
-                if ($('.formUploadPhotoData').size())
+                if ($('.formUpdatePhotoData').size())
                 {
                     if ($(e).next(".error").hasClass("hide") && $(e).closest(".photo_data").find(".original_filename").text() != _filename)
                     {
@@ -688,13 +688,12 @@ Album_control.prototype.submit_handler = function()
         }
     );
 
-    $(".formUploadPhotoData").on
+    $(".formUpdatePhotoData").on
     (
         "submit",
         function(pEvent)
         {
             pEvent.preventDefault();
-
             var _formInstance = $(this);
             var _postData = $(this).serializeArray();
             var _is_unique_filenames = _self.check_is_unique_new_photo_filenames(".photo_data input[name='new_filename[]']");
@@ -746,6 +745,27 @@ Album_control.prototype.prepare_listeners = function()
     {
         _self.onFormInfoFieldOnKeyDown(pEvent);
     });
+
+    if ($("#formUpdatePhotoData").length)
+    {
+        $("#formUpdatePhotoData input[name='featured[]']").on("click", function(pEvent)
+        {
+            $("#formUpdatePhotoData input[name='featured[]']").val("0");
+            $("#formUpdatePhotoData .photo_data.featured").removeClass("featured");
+
+            if ($(this).is(":checked"))
+            {
+                console.log("photoid: " + $(this).closest(".photo_data").attr("data-photoId"));
+                $(this).val($(this).closest(".photo_data").attr("data-photoId"));
+                $(this).closest(".photo_data").addClass("featured");
+            }
+            else
+            {
+                $(this).val("0");
+            }
+        });
+    }
+
 
 }
 

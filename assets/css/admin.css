@@ -246,6 +246,11 @@ input[type='button']
 	margin:2px 0;
 }
 
+.photo_data.featured
+{
+	background:#ccffbb;
+}
+
 .uploadifive-button
 {
 	width:100% !important;

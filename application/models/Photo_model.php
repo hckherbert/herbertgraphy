@@ -22,6 +22,8 @@ class Photo_model extends CI_Model
     {
         $this->db->select("photoId,slug_filename,hash_filename,title,desc,featured");
         $this->db->where("albumId", $album_id);
+        $this->db->order_by("featured", 'DESC');
+        $this->db->order_by("create_date", 'DESC');
         $query = $this->db->get("photos");
 
         return $query->result_array();
@@ -82,7 +84,8 @@ class Photo_model extends CI_Model
                 "slug_filename"=> $data["slug_filename"][0][$i],
                 "hash_filename"=>  $data["hash_filename"][0][$i],
                 "title"=> $data["title"][0][$i],
-                "desc"=> $data["desc"][0][$i]
+                "desc"=> $data["desc"][0][$i],
+                "featured"=>$data["featured"][0][$i]
             );
         }
 

@@ -117,9 +117,9 @@
 	<?php if ($photo_data != NULL) { ?>
 	<div class="section">
 		<h1 class="pageHeading">Photo list</h1>
-		<?php echo form_open('admin/album_control/update_photo_data', 'class="formUploadPhotoData" id="formUploadPhotoData"'); ?>
+		<?php echo form_open('admin/album_control/update_photo_data', 'class="formUpdatePhotoData" id="formUpdatePhotoData"'); ?>
 		<?php foreach ($photo_data as $row) { ?>
-		<div class="photo_data">
+		<div class="photo_data<?php if ($row["featured"] == "1"){ ?> featured<?php }?>" data-photoId="<?php echo $row["photoId"]; ?>">
 			<img class="uploadImgPreview" src="<?php echo  base_url("assets/photos/". $album_details->label."/".$row["hash_filename"]); ?>">
 			<p class="original_filename"><?php echo $row["slug_filename"]; ?></p>
 			<input name="original_filename[]" value="<?php echo $row["hash_filename"]; ?>" type="hidden">
@@ -130,7 +130,7 @@
 			<textarea name="desc[]"  placeholder="Say something about me if you wish" maxlength="500"><?php echo $row["desc"]; ?></textarea>
 			<label><input name="del_id[]" type="checkbox" value="<?php echo $row["photoId"]; ?>">Remove</label>
 			<br>
-			<label><input name="featured[]" type="radio" value="<?php echo ($row["featured"] == "1") ? "1" : "0" ?>" <?php if ($row["featured"] == 1) { ?>checked<?php } ?>>Featured</label>
+			<label><input name="featured[]" type="radio" value="<?php echo ($row["featured"] == "1") ? $row["photoId"] : "0" ?>" <?php if ($row["featured"] == 1) { ?>checked<?php } ?>>Featured</label>
 			<input name="photo_id[]" type="hidden" value="<?php echo $row["photoId"]; ?>">
 		</div>
 		<?php } ?>
