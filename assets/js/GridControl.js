@@ -27,7 +27,7 @@ function GridControl(pGridControl, pPhotoOverlay)
 	this.mGridCount_num = this.mGridControl.children(".grid").length;
 	this.mInfoPanelMinHeight = $(".infoPanel").css("min-height");
 	
-	this.shuffleGrids();
+	//this.shuffleGrids();
 	
 	this.mGridControl.children(".grid").each
 	(
@@ -36,6 +36,11 @@ function GridControl(pGridControl, pPhotoOverlay)
 			var _grid = new Grid($(this));
 			_grid.addEventListener("click", function() { _self.onClick(_grid);});
 			_grid.setIndex(i);
+			
+			if ($(this).attr("data-featured") == "true")
+			{
+				_grid.setFeatured(true);
+			}
 			
 			var _imgObj = new Image();
 			_imgObj.onload = function()
@@ -52,6 +57,7 @@ function GridControl(pGridControl, pPhotoOverlay)
 
 }
 
+/*
 GridControl.prototype.shuffleGrids = function()
 {
     var _gridChildren = this.mGridControl.children(".grid");
@@ -64,6 +70,7 @@ GridControl.prototype.shuffleGrids = function()
 		}
     }
 }
+*/
 
 GridControl.prototype.imageOnLoaded = function(pImgObj)
 {
@@ -127,7 +134,7 @@ GridControl.prototype.resetOccupy = function(pAspectRatio_num)
 	}
 }
 
-GridControl.prototype.setHighlightOccupy = function()
+GridControl.prototype.setFeaturedtOccupy = function()
 {
 	if (this.mGrid_array[0].getOrientation() == "h")
 	{
@@ -233,7 +240,10 @@ GridControl.prototype.positionGrids = function()
 			_j++;
 		}
 
-		this.setHighlightOccupy();
+		if (this.mGrid_array[_i].isFeatured())
+		{
+			this.setFeaturedtOccupy();
+		}
 		
 		_gridWidth_num = Math.floor($(".gridPanel").width()/this.mColCount_num);
 		
@@ -246,7 +256,7 @@ GridControl.prototype.positionGrids = function()
 			
 		}
 		
-		if (_i == 0)
+		if (this.mGrid_array[_i].isFeatured())
 		{
 			if (this.mGrid_array[_i].getOrientation() == "h")
 			{

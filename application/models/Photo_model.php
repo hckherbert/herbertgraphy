@@ -35,11 +35,8 @@ class Photo_model extends CI_Model
 			
 			foreach($result as $key=>$record)
 			{
-				var_dump($record["featured"]);
-			
 				if ($record["featured"] == "1")
 				{
-					var_dump($key);
 					$featured_index = $key;
 					break;
 				}

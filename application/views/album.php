@@ -86,7 +86,7 @@
 	 </div>
 	 <div class="gridPanel">
 		<?php foreach($current_album_data["photo_data"] as $photo){ ?>
-			<div class="grid" data-filename="../assets/photos/<?php echo $current_album_data["album_details"]->label; ?>/<?php echo $photo["hash_filename"]; ?>">
+			<div class="grid" data-filename="../assets/photos/<?php echo $current_album_data["album_details"]->label; ?>/<?php echo $photo["hash_filename"]; ?>"  <?php if ($photo["featured"] == "1"){ ?>data-featured="true"<?php } ?>>
 				<img src="../assets/photos/<?php echo $current_album_data["album_details"]->label; ?>/<?php echo $photo["hash_filename"]; ?>">
 				<div class="titleOverlay">
 					<div class="bg"></div>

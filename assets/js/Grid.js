@@ -1,7 +1,7 @@
 Grid.prototype.mGrid = null;
 Grid.prototype.mIndex_num = -1;
 Grid.prototype.mOrientation_str = "";
-Grid.prototype.mIsHighlight = false;
+Grid.prototype.mIsFeatured = false;
 Grid.prototype.mDesc_str = null;
  
 
@@ -80,14 +80,14 @@ Grid.prototype.getOrientation =  function()
 	return this.mOrientation_str;
 }
 
-Grid.prototype.setHighlight =  function(pIsHighlight)
+Grid.prototype.setFeatured =  function(pIsFeatured)
 {
-	this.mIsHighlight = pIsHighlight
+	this.mIsFeatured = pIsFeatured
 }
 
-Grid.prototype.isHighlight =  function()
+Grid.prototype.isFeatured =  function()
 {
-	return this.mIsHighlight;
+	return this.mIsFeatured;
 }
 
 Grid.prototype.getDesc = function()
