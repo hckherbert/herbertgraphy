@@ -117,6 +117,10 @@
 	<?php if ($photo_data != NULL) { ?>
 	<div class="section">
 		<h1 class="pageHeading">Photo list</h1>
+		<div class="hintArea">
+			<p>Hints:</p>
+			<p>If you choose to remove the currently featured photo, the album will remain no featured photo.</p>
+		</div>
 		<?php echo form_open('admin/album_control/update_photo_data', 'class="formUpdatePhotoData" id="formUpdatePhotoData"'); ?>
 		<?php foreach ($photo_data as $row) { ?>
 		<div class="photo_data<?php if ($row["featured"] == "1"){ ?> featured<?php }?>" data-photoId="<?php echo $row["photoId"]; ?>">
@@ -143,6 +147,11 @@
 	<div class="section" id="sectionAddAlbum">
 		<?php if ($photo_data != NULL) { ?>
 		<h1 class="pageHeading">Add more photos</h1>
+		<div class="hintArea">
+		<p>Hints:</p>
+			<p>1. Setting any additional featured will remove the current assignment of the featured photo, if any, and vise versa.</p>
+			<p>2. If you choose to remove the currently featured photo, the album will remain no featured photo.</p>
+		</div>
 		<?php } else {?>
 		<h1 class="pageHeading">Upload photos</h1>
 		<?php } ?>
@@ -163,6 +172,9 @@
 	<?php if ($album_details->parentId == NULL) { ?>
 	<div class="section">
 		<h1 class="pageHeading">Sub-album List</h1>
+		<div class="hintArea">
+			<p>The lower the album is positioned in the list, the upper it will show in the client side</p>
+		</div>
 		<?php
 		echo form_open('admin/album_control/update_album_list', 'class="formAlbumList hide" id="formSubAlbumList"');
 		?>

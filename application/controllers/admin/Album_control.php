@@ -373,6 +373,18 @@ class Album_control extends CI_Controller
 
 	}
 
+	public function unset_featured()
+	{
+		if ($this->photo_model->unset_featured($this->input->post("id")))
+		{
+			JSONAPI::echo_json_successful_response();
+		}
+		else
+		{
+			JSONAPI::echo_json_error_response();
+		}
+	}
+	
 	public function upload()
 	{
 

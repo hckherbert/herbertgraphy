@@ -298,7 +298,15 @@ input[type='button']
 	font-size:24px;
 }
 
-.dropButton:hover {
+.dropButton:hover 
+{
 	background-color:transparent;
 	background-image:none;
+}
+
+.hintArea
+{
+	font-style:italic;
+	margin:0 0 10px;
+	font-size:14px;
 }

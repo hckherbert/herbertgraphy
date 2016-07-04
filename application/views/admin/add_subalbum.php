@@ -73,6 +73,10 @@
 	<a class="menu_link" href="<?php echo site_url("admin/album_control/album_details/$album_details->id"); ?>">Back to parent album (<?php echo $album_details->name; ?>)</a>
 	<div class="section" id="sectionAddAlbum">
 		<h1 class="pageHeading">Add a sub-album</h1>
+		<div class="hintArea">
+			<p>Hints:</p>
+			<p>If you choose to remove the currently featured photo, the album will remain no featured photo.</p>
+		</div>
 		<?php echo form_open('admin/album_control/do_add_subalbum', 'class="formInfo" id="formAddAlbum"'); ?>
 		<table>
 			<tr>

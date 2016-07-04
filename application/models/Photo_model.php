@@ -179,4 +179,14 @@ class Photo_model extends CI_Model
         $this->db->where_in("albumId",$album_id_array);
         $this->db->delete("photos");
     }
+	
+	public function unset_featured($id)
+	{
+		$data = array
+		(
+			"featured" => "0"
+		);
+		$this->db->where("photoId", $id);
+		return $this->db->update("photos", $data);	
+	}
 }

@@ -395,7 +395,6 @@ Album_control.prototype.submit_handler = function()
 
                        if ( _self.is_validate_upload_new_photo_data())
                        {
-
                            if ($(".uploadifive-queue-item").size())
                            {
                                $('#file_upload').uploadifive('upload');
@@ -433,7 +432,6 @@ Album_control.prototype.submit_handler = function()
         }
         else if ($("#page_album_details").size())
         {
-
             if ( _self.is_validate_upload_new_photo_data())
             {
                 var _i = 0;
@@ -461,6 +459,35 @@ Album_control.prototype.submit_handler = function()
                         _self.displayFail(_self.mErrorMsgUpload);
                         return;
                     }
+					
+					if ($(".photo_data.featured").length)
+					{
+						
+						$.ajax(
+							{
+								url: GLOBAL_SITE_URL + "admin/album_control/unset_featured",
+								data: {"id":  $(".photo_data.featured").find("input[name='featured[]']").val()},
+								type: "POST",
+								dataType: "json",
+								success: function (pData)
+								{
+									console.log("unset_featured done!");
+								
+									if ($(".uploadifive-queue-item").size())
+									{
+										$('#file_upload').uploadifive('upload');
+									}	
+								},
+								error: function (jqxhr, status)
+								{
+									_self.displayFail();
+								}
+							}
+						);
+						
+						return;
+					}
+					
                 }
 
                 if ($(".uploadifive-queue-item").size())
