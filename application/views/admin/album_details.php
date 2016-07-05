@@ -173,7 +173,7 @@
 	<div class="section">
 		<h1 class="pageHeading">Sub-album List</h1>
 		<div class="hintArea">
-			<p>The lower the album is positioned in the list, the upper it will show in the client side</p>
+			<p>Drag the row upper to make the album positioned higher in the client side.</p>
 		</div>
 		<?php
 		echo form_open('admin/album_control/update_album_list', 'class="formAlbumList hide" id="formSubAlbumList"');
