@@ -135,25 +135,16 @@ class Album_model extends CI_Model
 
 	public function add_album($data)
 	{
-
 		$this->db->trans_start();
-
-		$total_rows = $this->db->count_all_results("album");
-
-		for ($i=0; $i<$total_rows; $i++)
-		{
-			$this->db->set("order", $i+1);
-			$this->db->where("order", $i);
-			$this->db->where("parentId IS NULL");
-			$this->db->update("album");
-		}
-
-		$this->db->where("parentId", NULL);
+		$sql_update_order = "UPDATE `album` SET `order` = `order` + 1 WHERE `parentId` IS NULL";
+		$this->db->query($sql_update_order);
+		
+		//$total_rows = $this->db->count_all_results("album");
 		//$total_rows = $this->db->count_all_results("album");
 		//$data = array_merge($data, array("order" => $total_rows));
+		
 		$data = array_merge($data, array("order" => 0));
 		$this->db->insert("album", $data);
-
 		$insert_id = $this->db->insert_id();
 
 		$data = array
@@ -190,26 +181,9 @@ class Album_model extends CI_Model
 		}
 		*/
 
-
-		$this->db->select("order");
-		$this->db->where("parentId",$data["parentId"]);
-		$query = $this->db->get("album");
-		$total_rows = $query->num_rows();
-
-
-		for ($i=0; $i<$total_rows; $i++)
-		{
-			$where_array = array(
-				"order"=>$i,
-				"parentId" =>$data["parentId"]
-			);
-
-			$this->db->set("order", $i+1);
-			$this->db->where($where_array);
-			$this->db->update("album");
-		}
-
-
+		$sql_update_order = sprintf("UPDATE `album` SET `order` = `order` + 1 WHERE `parentId` = '%s'" ,$data["parentId"]);
+		$this->db->query($sql_update_order);
+		
 		$data = array_merge($data, array("order" => $order));
 		unset($data["submit"]);
 		$this->db->insert("album", $data);
