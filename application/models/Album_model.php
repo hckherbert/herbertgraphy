@@ -144,6 +144,7 @@ class Album_model extends CI_Model
 		{
 			$this->db->set("order", $i+1);
 			$this->db->where("order", $i);
+			$this->db->where("parentId IS NULL");
 			$this->db->update("album");
 		}
 
@@ -175,6 +176,7 @@ class Album_model extends CI_Model
 	public function add_subalbum($data)
 	{
 		$order = 0;
+		/*
 		$this->db->select("order");
 		$this->db->order_by("order", "desc");
 		$this->db->where('parentId', $data["parentId"]);
@@ -186,6 +188,27 @@ class Album_model extends CI_Model
 		{
 			$order = $query->row()->order + 1;
 		}
+		*/
+
+
+		$this->db->select("order");
+		$this->db->where("parentId",$data["parentId"]);
+		$query = $this->db->get("album");
+		$total_rows = $query->num_rows();
+
+
+		for ($i=0; $i<$total_rows; $i++)
+		{
+			$where_array = array(
+				"order"=>$i,
+				"parentId" =>$data["parentId"]
+			);
+
+			$this->db->set("order", $i+1);
+			$this->db->where($where_array);
+			$this->db->update("album");
+		}
+
 
 		$data = array_merge($data, array("order" => $order));
 		unset($data["submit"]);
