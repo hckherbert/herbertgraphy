@@ -7,8 +7,22 @@
  */
 class Archive extends CI_Controller
 {
-    public function index()
+    function _remap($param)
     {
+        $this->index($param);
+    }
+
+    public function index($album_label = NULL)
+    {
+
+        if ($album_label != Null)
+        {
+            redirect("http://www.herbertgraphy.com/archive/".$album_label.".php");
+        }
         redirect("http://www.herbertgraphy.com/archive/index.php");
     }
+
+
+
+
 }

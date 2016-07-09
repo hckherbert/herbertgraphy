@@ -14,6 +14,7 @@ class Album extends CI_Controller
 	{
 		$this->index($param);
 	}
+ 
 
 	public function index($album_label = NULL)
 	{
