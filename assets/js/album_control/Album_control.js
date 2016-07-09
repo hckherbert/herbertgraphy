@@ -1,4 +1,5 @@
 Album_control.prototype.mParentId = null;
+Album_control.prototype.mParentLabel = null;
 Album_control.prototype.mQueueItemCount = 0;
 Album_control.prototype.mIsValidatedUpload = true;
 Album_control.prototype.mSimUploadLimit = 10;
@@ -7,11 +8,10 @@ Album_control.prototype.mErrorMsgUpload = "";
 Album_control.prototype.mUploadFormData = null;
 Album_control.prototype.mOriginalPhotoData = null;
 
-function Album_control(pAlbumId, pParentId)
+function Album_control(pAlbumId, pParentId, pParentLabel)
 {
     this.init_ui();
-
-    //Case for all album listings
+    //Case for all album li0stings
     if (pAlbumId==undefined && pParentId==undefined)
     {
         this.get_all_parent_albums();
@@ -26,6 +26,7 @@ function Album_control(pAlbumId, pParentId)
         //case for parent album details
         else
         {
+            this.mParentLabel = pParentLabel;
             this.get_sub_album_list(pAlbumId);
         }
     }
@@ -946,14 +947,25 @@ Album_control.prototype.append_added_parent_album_record = function(pInsert_id, 
 Album_control.prototype.render_album_list = function(pData)
 {
     var _album_html = "";
+    $(".formAlbumList table tbody").empty();
 
     for (var _i=0; _i< pData.length; _i++)
     {
-        $(".formAlbumList table tbody").empty();
+        var _albumLabel = pData[_i]["label"];
+        var _url;
+
+        if (this.mParentLabel != null)
+        {
+            _url = "../../../album/" + this.mParentLabel + "/" + _albumLabel;
+        }
+        else
+        {
+            _url = "../album/"  + _albumLabel;
+        }
 
         _album_html += "<tr class='ui-sortable-handle'>"
-        _album_html += "<td>" + pData[_i]["name"] +  "</td>";
-        _album_html += "<td>" + pData[_i]["label"] +  "</td>";
+        _album_html += "<td><a href='" + _url + "' target='_blank'>"+ pData[_i]["name"] +  "</a></td>";
+        _album_html += "<td>" + _albumLabel +  "</td>";
         _album_html += "<td>" + pData[_i]["intro"] +  "</td>";
         _album_html += "<td align='center'>";
         _album_html += "<input name='id[]' type='hidden' value='" + pData[_i]["id"] + "'>";

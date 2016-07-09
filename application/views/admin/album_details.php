@@ -45,12 +45,13 @@
  var mAlbum_control = null;
  var mAlbum_id = "<?php echo $album_details->id ?>";
  var mParent_id = "<?php echo $album_details->parentId; ?>";
+ var mParentLabel = "<?php echo $album_details->name; ?>";
 
  $(document).ready
  (
 	function()
 	{
-		mAlbum_control = new Album_control(mAlbum_id, mParent_id);
+		mAlbum_control = new Album_control(mAlbum_id, mParent_id, mParentLabel);
 
 	}
  );

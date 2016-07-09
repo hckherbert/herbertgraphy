@@ -125,6 +125,12 @@ h1.pageHeading
 	font-size:14px;
 }
 
+.listing a
+{
+	color:#e78f08;
+	text-decoration:underline;
+}
+
 .listing td, .listing th
 {
 	border:1px solid #000;
