@@ -39,6 +39,7 @@ class Album extends CI_Controller
 	private function get_all_other_albums_data($current_album_label, $parent_id)
 	{
 		$data = $this->album_model->get_all_parent_albums();
+
 		$data = array_map(function($input_array)use ($current_album_label, $parent_id)
 		{
 		   if ($current_album_label !=  $input_array["label"])
@@ -54,7 +55,14 @@ class Album extends CI_Controller
 			   
 			   return $output;
 		   }
+
 		}, $data);
+
+
+		$data = array_filter($data, function($key)
+		{
+			return $key!= NULL;
+		});
 
 		return $data;
 	}
