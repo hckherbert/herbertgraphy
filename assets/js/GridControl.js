@@ -496,7 +496,9 @@ GridControl.prototype.photoOverlayOnHideStart = function()
 GridControl.prototype.onPhotoOverlayHidden = function(pActiveGridTop_num)
 {
 	console.log("onPhotoOverlayHidden; " + pActiveGridTop_num);
-	
+
+	this.mGrid_array[this.mActiveGridIndex_num].setOpacity(1);
+
 	if (this.mWinWidthBeforeOpen_num!=$(window).width()) 
 	{
 		$(window).scrollTop(pActiveGridTop_num); 

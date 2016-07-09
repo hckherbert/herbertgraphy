@@ -92,6 +92,11 @@ Grid.prototype.isFeatured =  function()
 	return this.mIsFeatured;
 }
 
+Grid.prototype.setOpacity = function(pOpacity)
+{
+	this.mGrid.fadeTo("fast",pOpacity);
+}
+
 Grid.prototype.getDesc = function()
 {
 	return this.mDesc_str;
