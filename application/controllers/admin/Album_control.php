@@ -53,13 +53,13 @@ class Album_control extends CI_Controller
 	{
 		$data = $this->album_model->get_all_parent_albums();
 
-		if ($data)
+		if ($data === FALSE)
 		{
-			JSONAPI::echo_json_successful_response($data, TRUE);
+			JSONAPI::echo_json_error_response();
 		}
 		else
 		{
-			JSONAPI::echo_json_error_response();
+			JSONAPI::echo_json_successful_response($data, TRUE);
 		}
 	}
 	
