@@ -40,7 +40,7 @@
 <div class="wrapper wrapperAlbum">
 	 <div class="infoPanel">
 		<div class="menuMask"></div>
-		<h1><?php echo $current_album_data["album_details"]->name; ?></h1>
+		<h1 class="bgBrown"><?php echo $current_album_data["album_details"]->name; ?></h1>
 		<div class="menuContainer mainMenuClose">
 			<?php if ($subalbum_data) { ?>
 			<ul class="subAlbumMenus">
@@ -171,8 +171,9 @@
 		mGridControl.positionGrids();
 	}
 	
-	function toggleMenu()
+	function toggleMenu(pEvent)
 	{
+		pEvent.preventDefault();
 		$(".menuContainer").toggleClass("mainMenuClose");
 		$(".menuMask").toggleClass("show");
 	}

@@ -359,8 +359,10 @@ html, body
 .sMobile .infoPanel h1
 {
 	font-size:30px;
-	padding:12px 60px 12px 12px;
+	padding:10px 60px 10px 12px;
 	font-weight:200;
+	position:absolute;
+	width:100%;
 }
 
 .sDesktop .infoPanel .subAlbumMenus
@@ -375,17 +377,17 @@ html, body
 	position:absolute;
 	top:50px;
 	opacity:1;
-	-webkit-transition: all .4s  ease-out;
-	-moz-transition: all .4s  ease-out;
-	-ms-transition: all .4s  ease-out;
-	-o-transition: all .4s  ease-out;
-	transition: all .4s  ease-out;
+	-webkit-transition: all .5s  ease-out;
+	-moz-transition: all .5s  ease-out;
+	-ms-transition: all .5s  ease-out;
+	-o-transition: all .5s  ease-out;
+	transition: all .5s  ease-out;
 }
 
 .sMobile .mainMenuClose
 {
 	top:-360px !important;
-	opacity:0 !important;
+	opacity:0.5 !important;
 }
 
 .sDesktop .mainMenuClose
