@@ -3,6 +3,9 @@ PhotoOverlay.prototype.mPhotoContainer = null;
 PhotoOverlay.prototype.mOrientation_str = null;
 PhotoOverlay.prototype.mAspectRatio_num = null;
 PhotoOverlay.prototype.mOnHideStart_fn = null;
+PhotoOverlay.zoomFactorHd_num = 0.7;
+PhotoOverlay.zoomFactorHm_num = 0.9;
+PhotoOverlay.zoomFactorV_num = 0.8;
 
 function PhotoOverlay(pPhotoOverlay)
 {
@@ -11,7 +14,12 @@ function PhotoOverlay(pPhotoOverlay)
 	this.mPhotoContainer = $(".photoContainer", this.mPhotoOverlay);
 
 	$(".btnClose , this.mPhotoOverlay").on("click", function(){_self.readyHide();});
-	$(".bg", this.mPhotoOverlay).on("click", function(){_self.readyHide();});
+	$(".bg", this.mPhotoOverlay).on("click", function(){_self.readyHide();})
+
+	$(window).on("resize", function()
+	{
+		_self.centerPhoto();
+	});
 }
 
 PhotoOverlay.prototype.show = function(pSpeed_num, pFileName_str, pDesc_str)
@@ -26,6 +34,7 @@ PhotoOverlay.prototype.show = function(pSpeed_num, pFileName_str, pDesc_str)
 	
 	this.mPhotoOverlay.show();
 	this.mPhotoOverlay.addClass("show");
+	this.centerPhoto();
 	
 	setTimeout
 	( 
@@ -74,7 +83,6 @@ PhotoOverlay.prototype.setSizeData = function(pOrientation_str, pAspectRatio_num
 	this.mAspectRatio_num = pAspectRatio_num;
 }
 
-
 PhotoOverlay.prototype.setOnHideStart = function(pOnHideStart_fn)
 {
 	this.mOnHideStart_fn = pOnHideStart_fn;
@@ -95,15 +103,21 @@ PhotoOverlay.prototype.getPhotoContainer = function()
 
 PhotoOverlay.prototype.centerPhoto = function()
 {
-
 	if (this.mOrientation_str == "h")
-	{	
-		this.mPhotoContainer.css("width", Math.round($(window).width()*0.7) + "px");
+	{
+		if ($("body").hasClass("sDesktop"))
+		{
+			this.mPhotoContainer.css("width", Math.round($(window).width() * PhotoOverlay.zoomFactorHd_num) + "px");
+		}
+		else
+		{
+			this.mPhotoContainer.css("width", Math.round($(window).width() * PhotoOverlay.zoomFactorHm_num) + "px");
+		}
 		this.mPhotoContainer.css("top", Math.round(0.5* ($(window).height() -  Math.round(this.mPhotoContainer.width() / this.mAspectRatio_num))) + "px");
 	}
 	else if (this.mOrientation_str == "v")
 	{
-		this.mPhotoContainer.css("height", Math.round($(window).height()*0.7) + "px");
+		this.mPhotoContainer.css("height", Math.round($(window).height() * PhotoOverlay.zoomFactorV_num) + "px");
 		this.mPhotoContainer.css("width", this.mPhotoContainer.height()/ this.mAspectRatio_num +  "px");
 		this.mPhotoContainer.css("top", Math.round(0.5* ($(window).height() - this.mPhotoContainer.height())) + "px");
 	}

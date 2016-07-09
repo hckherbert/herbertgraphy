@@ -11,8 +11,7 @@ GridControl.prototype.mPhotoOverlay = null;
 GridControl.prototype.mActiveGridIndex_num = -1;
 GridControl.prototype.mWinWidthBeforeOpen_num = 0;
 GridControl.prototype.mWinWidthBeforeStaggered_num = 0;
-GridControl.prototype.mOverlayPopSpeed_num = 0.5
-GridControl.prototype.mOverlayScale_num = 0.7;
+GridControl.prototype.mOverlayPopSpeed_num = 0.5;
 GridControl.prototype.mTimerReposition = null;
 
 function GridControl(pGridControl, pPhotoOverlay)
@@ -24,9 +23,6 @@ function GridControl(pGridControl, pPhotoOverlay)
 	this.mPhotoOverlay = pPhotoOverlay;
 	this.mPhotoOverlay.setOnHideStart(function(){_self.photoOverlayOnHideStart();});
 	this.mGridCount_num = this.mGridControl.children(".grid").length;
-
-	
-	//this.shuffleGrids();
 	
 	this.mGridControl.children(".grid").each
 	(
@@ -55,21 +51,6 @@ function GridControl(pGridControl, pPhotoOverlay)
 	)
 
 }
-
-/*
-GridControl.prototype.shuffleGrids = function()
-{
-    var _gridChildren = this.mGridControl.children(".grid");
-    while (_gridChildren.length>1) 
-	{
-		var _index_num = Math.floor(Math.random() * _gridChildren.length);
-		if (_index_num > 0)
-		{
-			this.mGridControl.append(_gridChildren.splice(_index_num, 1)[0]);
-		}
-    }
-}
-*/
 
 GridControl.prototype.imageOnLoaded = function(pImgObj)
 {
@@ -117,10 +98,6 @@ GridControl.prototype.updateDensity = function(pDensity_str)
 	}
 }
 
-GridControl.prototype.setAspectRatio = function(pAspectRatio_num)
-{
-	this.mAspectRatio_num = pAspectRatio_num;
-}
 
 GridControl.prototype.resetOccupy = function(pAspectRatio_num)
 {
@@ -425,14 +402,20 @@ GridControl.prototype.onClick = function(pObj)
 	}
 	
 	
-	if (pObj.getOrientation() == "h")
-	{
-		_toWidth_num = Math.round($(window).width()*this.mOverlayScale_num);
+	if (pObj.getOrientation() == "h") {
+		if ($("body").hasClass("sDesktop"))
+		{
+			_toWidth_num = Math.round($(window).width() * PhotoOverlay.zoomFactorHd_num);
+		}
+		else
+		{
+			_toWidth_num = Math.round($(window).width() * PhotoOverlay.zoomFactorHm_num);
+		}
 		_toHeight_num = Math.round(_toWidth_num / this.mAspectRatio_num);
 	}
 	else
 	{
-		_toHeight_num = Math.round($(window).height()*this.mOverlayScale_num);
+		_toHeight_num = Math.round($(window).height()* PhotoOverlay.zoomFactorV_num);
 		_toWidth_num = Math.round(_toHeight_num / this.mAspectRatio_num);
 	}
 	

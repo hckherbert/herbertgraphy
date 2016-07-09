@@ -126,7 +126,7 @@
 			mResponsive.init(["sMobile", "sDesktop"], mBaseBreakPoint_array, mWideScreenBreakPoint_num);
 			mPhotoOverlay = new PhotoOverlay($(".photoZoomOverlay"));
 			mGridControl = new GridControl($(".gridPanel"), mPhotoOverlay);
-			mGridControl.setAspectRatio(1.5);
+
 			
 			if ($("body").hasClass("sMobile"))
 			{
