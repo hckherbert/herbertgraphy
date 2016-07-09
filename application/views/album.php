@@ -72,8 +72,8 @@
 			</ul>
 			<?php } ?>
 			<ul class="menuLinks">
-				<li><a href="javascript:void(0)">Links 0</a></li>
-				<li><a href="javascript:void(0)">Links 1</a></li>
+				<li><a href="javascript:void(0)">Why <em>Herbertgraphy</em></a></li>
+				<li><a href="javascript:void(0)">Herbertbloggy</a></li>
 			</ul>
 		</div>
 		<a class="btnMenuToggle" href="javascript:void(0)"><img src="<?php echo base_url("assets/images/btnMenuToggle.png"); ?>"></a>
@@ -123,9 +123,7 @@
 		{
 			mResponsive = new Responsive();
 			mResponsive.init(["sMobile", "sDesktop"], [0, 768], mWideScreenBreakPoint_num);
-			
 			mPhotoOverlay = new PhotoOverlay($(".photoZoomOverlay"));
-			
 			mGridControl = new GridControl($(".gridPanel"), mPhotoOverlay);
 			mGridControl.setAspectRatio(1.5);
 			
@@ -143,20 +141,20 @@
 				{
 					mGridControl.updateDensity("medium");
 				}
-				
-				//$(".infoPanel").css("height", $(window).height()+"px");
-			 
 			}
-			
+
+			windowOnResized();
+
 			$(".btnMenuToggle").on("click", toggleMenu);
-			
 			$(window).on("resize", windowOnResized);
 			$(document).on("responsive", closeMenu);
+
 		}
 	);
 	
 	function windowOnResized()
 	{
+
 		mPhotoOverlay.centerPhoto();
 		
 		if ($(window).width()>=0 && $(window).width()<=768)
@@ -171,7 +169,6 @@
 		{
 			mGridControl.updateDensity("high");
 		}
-		
 		mGridControl.positionGrids();
 	}
 	

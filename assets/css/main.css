@@ -45,7 +45,7 @@ html, body
 /********** COLOR SCHEMES **********/
 .bgBrown
 {
-	background:#bcae85;
+	background:#b7a59a;
 }
 
 /********** HOME ***************/
@@ -301,10 +301,9 @@ html, body
 {
 	display:block;
 	width:100%;
-	min-height:60px;
+	min-height:50px;
 	position:relative;
 	text-align:left;
-	background:#bcae85;
 }
 
 .sDesktop .infoPanel
@@ -313,7 +312,6 @@ html, body
 	width:35%;
 	height:auto;
 	text-align:right;
-	background:#bcae85;
 }
 
 .sDesktop .infoPanel .intro p:first-child:first-letter 
@@ -324,7 +322,7 @@ html, body
 	height:.7em; 
 	line-height:.85em; 
 	float:left; 
-	color: #714b1d;
+	color: #887a72;
 }
 
 .sDesktop .infoPanel .intro
@@ -333,7 +331,7 @@ html, body
     width: 80%;
     margin: 150px 20px 0 0;
 	padding: 20px 0 0 0;
-    border-top: 2px solid #fcf7d8;
+    border-top: 1px solid #f4e3d9;
 }
 
 .sDesktop .infoPanel .intro p
@@ -341,7 +339,7 @@ html, body
     text-align: justify;
     font-size: 15px;
     line-height: 1.2em;
-	color:#fcf7d8;
+	color:#f4e3d9;
 }
 
 .sMobile .infoPanel .intro
@@ -359,13 +357,9 @@ html, body
 
 .sMobile .infoPanel h1
 {
-	font-size:34px;
-	padding:12px;
+	font-size:30px;
+	padding:12px 60px 12px 12px;
 	font-weight:200;
-	width:100%;
-	background:#bcae85;
-	position:absolute;
- 
 }
 
 .sDesktop .infoPanel .subAlbumMenus
@@ -375,10 +369,11 @@ html, body
 
 .sMobile .infoPanel .menuContainer 
 {
-	background:#e1f3ff;
+	background:#d3c4bb;
 	width:100%;
 	position:absolute;
-	top:58px;
+	top:50px;
+	opacity:1;
 	-webkit-transition: all .4s  ease-out;
 	-moz-transition: all .4s  ease-out;
 	-ms-transition: all .4s  ease-out;
@@ -386,9 +381,15 @@ html, body
 	transition: all .4s  ease-out;
 }
 
-.mainMenuClose
+.sMobile .mainMenuClose
 {
 	top:-360px !important;
+	opacity:0 !important;
+}
+
+.sDesktop .mainMenuClose
+{
+	opacity:1 !important;;
 }
 
 
@@ -402,19 +403,25 @@ html, body
 
 .sMobile .infoPanel .subAlbumMenus li
 {
-	padding:8px;
-	line-height:1.3em;
-	font-size:16px;
+	padding:4px 8px;
+	line-height:1.1em;
+	font-size:15px;
+	font-style:italic;
 }
 
 .infoPanel .subAlbumMenus li a
 {
-	color:#78726c;
+	color:#6a5d5d;
 }
 
 .infoPanel .subAlbumMenus li.active a
 {
 	color:#ff0000;
+}
+
+.sMobile .infoPanel .subAlbumMenus
+{
+	margin:4px 0;
 }
 
 .sDesktop .infoPanel .menuHeading
@@ -439,45 +446,60 @@ html, body
 {
 	margin:0 20px;
 }
+
+.sMobile .infoPanel .otherAlbumMenus
+{
+	margin:4px 0;
+}
  
 .sDesktop .infoPanel .otherAlbumMenus li
 {
 	margin:0 0 5px 0;
 	line-height:1.3em;
-	font-size:14px;
+	font-size:15px;
 }
 
 .sMobile .infoPanel .otherAlbumMenus li
 {
-	padding:8px;
+	padding:4px 8px;
 	line-height:1.3em;
-	font-size:13px;
+	font-size:14px;
 }
 
 .infoPanel .otherAlbumMenus li a
 {
-	color:#78726c;
+	color:#6a5d5d;
 }
 
 .sDesktop .infoPanel .otherAlbumMenus li.parent
 {
-	font-size:16px;
+	font-size:18px;
 	font-style:italic;
-	margin:0;
+	margin:20px 0 3px 0;
+}
+
+.sMobile .infoPanel .otherAlbumMenus li.parent
+{
+	font-style:italic;
 }
 
 .sDesktop .infoPanel .otherAlbumMenus li.siblings
 {
 	font-style:italic;
-	margin:0;
+	margin:0 0 3px 0;
+}
+
+.sMobile .infoPanel .otherAlbumMenus li.siblings
+{
+	font-style:italic;
 }
 
 .sDesktop .infoPanel .otherAlbumMenus li.siblings.last
 {
-	margin:0 0 5px;
+	margin:0 0 20px;
 }
 
-.sDesktop .infoPanel .otherAlbumMenus li.siblings.current
+.infoPanel .otherAlbumMenus li.siblings.current
 {
 	font-weight:bold;
 }
@@ -497,22 +519,21 @@ html, body
 
 .sMobile .infoPanel .menuLinks li
 {
-	padding:8px;
+	padding:4px 8px;
 	line-height:1.3em;
 	font-size:13px;
 }
 
 .infoPanel .menuLinks li a
 {
-	color:#4d4d4d;
+	color:#6a5d5d;
 }
 
 .sMobile .infoPanel .menuLinks
 {
-	background:#ebf8f6;
+	background:#e1d8d3;
+	padding:4px 0;
 }
-
-
 
 
 /****** Album *********/
@@ -534,7 +555,7 @@ html, body
     height: 100%;
     position: fixed;
     left: 0;
-    top: 0;
+    top: 50px;
     background-color: #000;
 	display:none;
 	-webkit-opacity: 0;
@@ -566,7 +587,7 @@ html, body
     height: 36px;
     display: block;
     position: absolute;
-    padding: 12px;
+    padding: 6px 12px;
     right: 0;
     top: 0;
 }
@@ -825,6 +846,3 @@ html, body
 	display:block;
 	text-align:center;
 }
-
-
-
