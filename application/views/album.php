@@ -114,6 +114,7 @@
 	var mResponsive = null;
 	var mPhotoOverlay = null;
 	var mGridControl = null;
+	var mBaseBreakPoint_array  = [0,768];
 	var mWideScreenBreakPoint_num = 1680;
 	var mIsReorderingWideScreen = false;
 
@@ -122,7 +123,7 @@
 		function()
 		{
 			mResponsive = new Responsive();
-			mResponsive.init(["sMobile", "sDesktop"], [0, 768], mWideScreenBreakPoint_num);
+			mResponsive.init(["sMobile", "sDesktop"], mBaseBreakPoint_array, mWideScreenBreakPoint_num);
 			mPhotoOverlay = new PhotoOverlay($(".photoZoomOverlay"));
 			mGridControl = new GridControl($(".gridPanel"), mPhotoOverlay);
 			mGridControl.setAspectRatio(1.5);
@@ -143,7 +144,6 @@
 				}
 			}
 
-			windowOnResized();
 
 			$(".btnMenuToggle").on("click", toggleMenu);
 			$(window).on("resize", windowOnResized);
@@ -154,14 +154,13 @@
 	
 	function windowOnResized()
 	{
-
 		mPhotoOverlay.centerPhoto();
 		
-		if ($(window).width()>=0 && $(window).width()<=768)
+		if ($(window).width()>=0 && $(window).width()<=mBaseBreakPoint_array[1])
 		{
 			mGridControl.updateDensity("low");
 		}
-		else if ($(window).width()>768 && $(window).width()<=mWideScreenBreakPoint_num)
+		else if ($(window).width()>mBaseBreakPoint_array[1] && $(window).width()<=mWideScreenBreakPoint_num)
 		{
 			mGridControl.updateDensity("medium");
 		}

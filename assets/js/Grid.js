@@ -49,10 +49,12 @@ Grid.prototype.getFileName = function()
 	return this.mGrid.attr("data-filename");
 }
 
-Grid.prototype.centerImageVertically = function()
+Grid.prototype.centerImageVertically = function(pAspectRatio_num)
 {
-	this.mGrid.find("img").css("top", -0.5 * (this.mGrid.find("img").height() - this.mGrid.height()) + "px");
-
+	//this.mGrid.find("img").css("top", -0.5 * (this.mGrid.find("img").height() - this.mGrid.height()) + "px");
+	var _aspectedHeight = this.mGrid.width()*pAspectRatio_num;
+	this.mGrid.find("img").css("height",_aspectedHeight + "px");
+	this.mGrid.find("img").css("top", -0.5 * Math.abs(_aspectedHeight - this.mGrid.height()) + "px");
 }
 
 Grid.prototype.getElement = function()

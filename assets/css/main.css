@@ -18,6 +18,7 @@ html
 html, body
 {
 	font-family: 'Catamaran', sans-serif;
+	min-width:320px;
 }
 
 .hide
