@@ -117,22 +117,26 @@ GridControl.prototype.setFeaturedtOccupy = function()
 		this.mIsOccupied_array[0] = true;
 		this.mIsOccupied_array[1] = true;
 		this.mIsOccupied_array[2] = true;
-		this.mIsOccupied_array[3] = true;
 		
 		this.mIsOccupied_array[this.mColCount_num] = true;
 		this.mIsOccupied_array[this.mColCount_num+1] = true;
 		this.mIsOccupied_array[this.mColCount_num+2] = true;
-		this.mIsOccupied_array[this.mColCount_num+3] = true;
-		
+
 		this.mIsOccupied_array[this.mColCount_num*2] = true;
 		this.mIsOccupied_array[this.mColCount_num*2+1] = true;
 		this.mIsOccupied_array[this.mColCount_num*2+2] = true;
-		this.mIsOccupied_array[this.mColCount_num*2+3] = true;
-		
+
 		this.mIsOccupied_array[this.mColCount_num*3] = true;
 		this.mIsOccupied_array[this.mColCount_num*3+1] = true;
 		this.mIsOccupied_array[this.mColCount_num*3+2] = true;
-		this.mIsOccupied_array[this.mColCount_num*3+3] = true;
+
+		if (this.mColCount_num > 3)
+		{
+			this.mIsOccupied_array[3] = true;
+			this.mIsOccupied_array[this.mColCount_num+3] = true;
+			this.mIsOccupied_array[this.mColCount_num*2+3] = true;
+			this.mIsOccupied_array[this.mColCount_num*3+3] = true;
+		}
 		
 	}
 	else if (this.mGrid_array[0].getOrientation() == "v")
