@@ -323,7 +323,8 @@ html, body
 	height:.7em; 
 	line-height:.85em; 
 	float:left; 
-	color: #887a72;
+	/*color: #887a72;*/
+	color:#987f7a;
 }
 
 .sDesktop .infoPanel .intro
