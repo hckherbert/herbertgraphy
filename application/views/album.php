@@ -40,7 +40,7 @@
 <div class="wrapper wrapperAlbum">
 	 <div class="infoPanel">
 		<div class="menuMask"></div>
-		<h1 class="bgBrown"><?php echo $current_album_data["album_details"]->name; ?></h1>
+		 <div class="albumTitle bgBrown"><h1 class="bgBrown"><?php echo $current_album_data["album_details"]->name; ?></h1><a class="btnMenuToggle" href="javascript:void(0)"><img src="<?php echo base_url("assets/images/btnMenuToggle.png"); ?>"></a></div>
 		<div class="menuContainer mainMenuClose">
 			<?php if ($subalbum_data) { ?>
 			<ul class="subAlbumMenus">
@@ -76,7 +76,6 @@
 				<li><a href="javascript:void(0)">Herbertbloggy</a></li>
 			</ul>
 		</div>
-		<a class="btnMenuToggle" href="javascript:void(0)"><img src="<?php echo base_url("assets/images/btnMenuToggle.png"); ?>"></a>
 		<?php if ($current_album_data["album_details"]->intro) { ?>
 		<div class="intro">
 			<p><?php echo $current_album_data["album_details"]->intro; ?></p>
@@ -155,18 +154,23 @@
 	function windowOnResized()
 	{
 		mPhotoOverlay.centerPhoto();
-		
+
 		if ($(window).width()>=0 && $(window).width()<=mBaseBreakPoint_array[1])
 		{
 			mGridControl.updateDensity("low");
+			$(".menuContainer").removeClass("menuTransition");
+			$(".albumTitle").css("height", $(".albumTitle h1").outerHeight() + "px");
+			$(".menuContainer").css("top", $(".albumTitle").height() + "px");
 		}
 		else if ($(window).width()>mBaseBreakPoint_array[1] && $(window).width()<=mWideScreenBreakPoint_num)
 		{
 			mGridControl.updateDensity("medium");
+			$(".albumTitle").css("height", "auto");
 		}
 		else
 		{
 			mGridControl.updateDensity("high");
+			$(".albumTitle").css("height", "auto");
 		}
 		mGridControl.positionGrids();
 	}
@@ -174,6 +178,11 @@
 	function toggleMenu(pEvent)
 	{
 		pEvent.preventDefault();
+
+		$(".menuContainer").addClass("menuTransition");
+		$(".albumTitle").css("height", $(".albumTitle h1").outerHeight() + "px");
+		$(".menuContainer").css("top", $(".albumTitle").height() + "px");
+
 		$(".menuContainer").toggleClass("mainMenuClose");
 		$(".menuMask").toggleClass("show");
 	}

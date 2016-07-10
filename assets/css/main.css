@@ -307,6 +307,13 @@ html, body
 	text-align:left;
 }
 
+.sMobile .albumTitle
+{
+	width:100%;
+	position:absolute;
+	z-index:2;
+}
+
 .sDesktop .infoPanel
 {
 	float:left;
@@ -314,6 +321,7 @@ html, body
 	height:auto;
 	text-align:right;
 }
+
 
 .sDesktop .infoPanel .intro p:first-child:first-letter 
 {	
@@ -362,8 +370,7 @@ html, body
 	font-size:30px;
 	padding:10px 60px 10px 12px;
 	font-weight:200;
-	position:absolute;
-	width:100%;
+
 }
 
 .sDesktop .infoPanel .subAlbumMenus
@@ -378,6 +385,11 @@ html, body
 	position:absolute;
 	top:50px;
 	opacity:1;
+	z-index:1;
+}
+
+.menuTransition
+{
 	-webkit-transition: all .5s  ease-out;
 	-moz-transition: all .5s  ease-out;
 	-ms-transition: all .5s  ease-out;
@@ -590,10 +602,10 @@ html, body
 	width: 36px;
     height: 36px;
     display: block;
-    position: absolute;
     padding: 6px 12px;
     right: 0;
     top: 0;
+	position:absolute;
 }
 
 .sMobile .infoPanel .btnMenuToggle img
