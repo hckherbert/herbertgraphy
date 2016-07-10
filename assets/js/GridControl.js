@@ -400,29 +400,38 @@ GridControl.prototype.onClick = function(pObj)
 		_fromX_num = pObj.getPosition()["x"] + $(".infoPanel").width();
 		_fromY_num = pObj.getPosition()["y"]- _scrollTop;
 	}
-	
-	
-	if (pObj.getOrientation() == "h") {
-		if ($("body").hasClass("sDesktop"))
+
+	if ($(window).width() <= $(window).height())
+	{
+		_toWidth_num = Math.round($(window).width() * PhotoOverlay.zoomFactor );
+
+		if (pObj.getOrientation() == "h")
 		{
-			_toWidth_num = Math.round($(window).width() * PhotoOverlay.zoomFactorHd_num);
+			_toHeight_num = Math.round(_toWidth_num / this.mAspectRatio_num);
 		}
 		else
 		{
-			_toWidth_num = Math.round($(window).width() * PhotoOverlay.zoomFactorHm_num);
+			_toHeight_num = Math.round(_toWidth_num * this.mAspectRatio_num);
 		}
-		_toHeight_num = Math.round(_toWidth_num / this.mAspectRatio_num);
 	}
 	else
 	{
-		_toHeight_num = Math.round($(window).height()* PhotoOverlay.zoomFactorV_num);
-		_toWidth_num = Math.round(_toHeight_num / this.mAspectRatio_num);
+		_toHeight_num = Math.round($(window).height() * PhotoOverlay.zoomFactor );
+
+
+		if (pObj.getOrientation() == "h")
+		{
+			_toWidth_num = Math.round(_toHeight_num * this.mAspectRatio_num);
+		}
+		else
+		{
+			_toWidth_num = Math.round(_toHeight_num / this.mAspectRatio_num);
+		}
+
 	}
 	
 	_toX_num =  Math.round(0.5* (($(window).width() - _toWidth_num)));
 	_toY_num =  0.5* (($(window).height() - _toHeight_num));
-
-	console.log(_toY_num);
 
 	TweenMax.fromTo(this.mPhotoOverlay.getPhotoContainer(), this.mOverlayPopSpeed_num, {left:_fromX_num, top:_fromY_num, width:pObj.getSize()["width"], height:pObj.getSize()["height"], ease:Back.easeOut}, {left:_toX_num, top:_toY_num, width: _toWidth_num, height: _toHeight_num, ease:Back.easeOut});
 	

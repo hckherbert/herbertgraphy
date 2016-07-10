@@ -3,9 +3,7 @@ PhotoOverlay.prototype.mPhotoContainer = null;
 PhotoOverlay.prototype.mOrientation_str = null;
 PhotoOverlay.prototype.mAspectRatio_num = null;
 PhotoOverlay.prototype.mOnHideStart_fn = null;
-PhotoOverlay.zoomFactorHd_num = 0.7;
-PhotoOverlay.zoomFactorHm_num = 0.9;
-PhotoOverlay.zoomFactorV_num = 0.8;
+PhotoOverlay.zoomFactor = 0.85;
 
 function PhotoOverlay(pPhotoOverlay)
 {
@@ -103,25 +101,40 @@ PhotoOverlay.prototype.getPhotoContainer = function()
 
 PhotoOverlay.prototype.centerPhoto = function()
 {
-	if (this.mOrientation_str == "h")
+	var _toWidth_num;
+	var _toHeight_num;
+
+	if ($(window).width() <= $(window).height())
 	{
-		if ($("body").hasClass("sDesktop"))
+		_toWidth_num = Math.round($(window).width() * PhotoOverlay.zoomFactor);
+
+		if (this.mOrientation_str == "h")
 		{
-			this.mPhotoContainer.css("width", Math.round($(window).width() * PhotoOverlay.zoomFactorHd_num) + "px");
+			_toHeight_num = Math.round(_toWidth_num / this.mAspectRatio_num);
 		}
 		else
 		{
-			this.mPhotoContainer.css("width", Math.round($(window).width() * PhotoOverlay.zoomFactorHm_num) + "px");
+			_toHeight_num = Math.round(_toWidth_num * this.mAspectRatio_num);
 		}
-		this.mPhotoContainer.css("top", Math.round(0.5* ($(window).height() -  Math.round(this.mPhotoContainer.width() / this.mAspectRatio_num))) + "px");
 	}
-	else if (this.mOrientation_str == "v")
+	else
 	{
-		this.mPhotoContainer.css("height", Math.round($(window).height() * PhotoOverlay.zoomFactorV_num) + "px");
-		this.mPhotoContainer.css("width", this.mPhotoContainer.height()/ this.mAspectRatio_num +  "px");
-		this.mPhotoContainer.css("top", Math.round(0.5* ($(window).height() - this.mPhotoContainer.height())) + "px");
+		_toHeight_num = Math.round($(window).height() * PhotoOverlay.zoomFactor);
+
+
+		if (this.mOrientation_str == "h")
+		{
+			_toWidth_num = Math.round(_toHeight_num * this.mAspectRatio_num);
+		}
+		else
+		{
+			_toWidth_num = Math.round(_toHeight_num / this.mAspectRatio_num);
+		}
 	}
-	
+
+	this.mPhotoContainer.css("width", _toWidth_num + "px");
+	this.mPhotoContainer.css("height", _toHeight_num + "px");
+	this.mPhotoContainer.css("top", Math.round(0.5* ($(window).height() - this.mPhotoContainer.height())) + "px");
 	this.mPhotoContainer.css("left", Math.round(0.5* ($(window).width() - this.mPhotoContainer.width())) + "px");
 	
 	$(".descContainer", this.mPhotoOverlay).css("height", $(".desc", this.mPhotoOverlay).outerHeight() + "px");
