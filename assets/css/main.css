@@ -46,7 +46,7 @@ html, body
 /********** COLOR SCHEMES **********/
 .bgBrown
 {
-	background:#b7a59a;
+	background:#2e2c28;
 }
 
 /********** HOME ***************/
@@ -341,7 +341,7 @@ html, body
     width: 80%;
     margin: 150px 20px 0 0;
 	padding: 20px 0 0 0;
-    border-top: 1px solid #f4e3d9;
+    border-top: 1px solid #a29c93;
 }
 
 .sDesktop .infoPanel .intro p
@@ -349,7 +349,7 @@ html, body
     text-align: justify;
     font-size: 15px;
     line-height: 1.2em;
-	color:#f4e3d9;
+	color:#a29c93;
 }
 
 .sMobile .infoPanel .intro
@@ -357,11 +357,16 @@ html, body
 	display:none;
 }
 
+.infoPanel h1
+{
+	color:#d0c4c0;
+}
+
 .sDesktop .infoPanel h1
 {
-	font-size:46px;
+	font-size:50px;
 	padding:20px;
-	margin: 100px 0 0 0;
+	margin: 200px 0 0 0;
 	font-weight:200;
 }
 
@@ -427,7 +432,7 @@ html, body
 
 .infoPanel .subAlbumMenus li a
 {
-	color:#6a5d5d;
+	color:#7d726b;
 }
 
 .infoPanel .subAlbumMenus li.active a
@@ -455,7 +460,7 @@ html, body
 	line-height:1.3em;
 	font-size:14px;
 	color:#000;
-	border-top:1px solid #77756a;
+	border-top:1px solid #a29c93;
 }
  
 .sDesktop .infoPanel .otherAlbumMenus
@@ -484,7 +489,7 @@ html, body
 
 .infoPanel .otherAlbumMenus li a
 {
-	color:#6a5d5d;
+	color:#7d726b;
 }
 
 .sDesktop .infoPanel .otherAlbumMenus li.parent
@@ -542,7 +547,7 @@ html, body
 
 .infoPanel .menuLinks li a
 {
-	color:#6a5d5d;
+	color:#7d726b;
 }
 
 .sMobile .infoPanel .menuLinks
