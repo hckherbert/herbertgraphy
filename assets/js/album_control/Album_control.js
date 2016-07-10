@@ -153,6 +153,7 @@ Album_control.prototype.init_upload = function()
 
                 if (_onCancelCount == _itemToUploadCount && !$("#page_album_list").size())
                 {
+                    console.log("upload all success!");
                     _self.displaySuccess("Photos are uploaded successfully.", "_self");
                 }
             }
@@ -461,7 +462,7 @@ Album_control.prototype.submit_handler = function()
                         return;
                     }
 					
-					if ($(".photo_data.featured").length)
+					if ($(".uploadifive-queue-item input[name='featured']:checked").length)
 					{
 						
 						$.ajax(

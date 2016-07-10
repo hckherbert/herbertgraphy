@@ -93,6 +93,7 @@ class Photo_model extends CI_Model
 
     public function update_photo_data($data, $album_id)
     {
+       
         $photo_base_dir = FCPATH."/assets/photos/";
         $album_label = $this->get_photo_folder($album_id);
         $batch_update_data_array = array();
