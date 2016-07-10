@@ -45,8 +45,12 @@ Grid.prototype.getPosition = function()
 
 Grid.prototype.getFileName = function()
 {
-	console.log("getFileName: "  + this.mGrid.attr("data-filename"));
 	return this.mGrid.attr("data-filename");
+}
+
+Grid.prototype.getFileZoomSize = function()
+{
+	return this.mGrid.attr("data-file_zoom_size");
 }
 
 Grid.prototype.centerImageVertically = function(pAspectRatio_num)

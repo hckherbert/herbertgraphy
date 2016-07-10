@@ -20,6 +20,8 @@ class Photo_model extends CI_Model
 
     public function get_photo_data($album_id, $pIsShuffle)
     {
+        $photo_base_dir = FCPATH."/assets/photos/";
+        $album_label = $this->get_photo_folder($album_id);
 
 		$this->db->select("photoId,slug_filename,hash_filename,title,desc,featured");
 		$this->db->where("albumId", $album_id);
@@ -38,8 +40,39 @@ class Photo_model extends CI_Model
 				if ($record["featured"] == "1")
 				{
 					$featured_index = $key;
-					break;
+					//break;
 				}
+
+                $last_dot_pos = strrpos($record["hash_filename"], ".");
+                $file_name_without_ext = substr($record["hash_filename"],0, $last_dot_pos);
+
+                $result[$key]["hash_filename"] = $file_name_without_ext;
+
+                if (file_exists($photo_base_dir.$album_label."/".$file_name_without_ext."_800.jpg"))
+                {
+                    $result[$key]["file_thumb_path"] = $file_name_without_ext."_800.jpg";
+                }
+                else
+                {
+                    $result[$key]["file_thumb_path"] = $result[$key]["hash_filename"];
+                }
+
+                if (file_exists($photo_base_dir.$album_label."/".$file_name_without_ext."_1680.jpg"))
+                {
+                    $result[$key]["file_zoom_size"] = "1680";
+                }
+                else if (file_exists($photo_base_dir.$album_label."/".$file_name_without_ext."_1280.jpg"))
+                {
+                    $result[$key]["file_zoom_size"] = "1280";
+                }
+                else if (file_exists($photo_base_dir.$album_label."/".$file_name_without_ext."_800.jpg"))
+                {
+                    $result[$key]["file_zoom_size"] = "800";
+                }
+                else
+                {
+                    $result[$key]["file_zoom_path"] = "";
+                }
 			}
 			
 			if ($featured_index>=0)
@@ -48,7 +81,7 @@ class Photo_model extends CI_Model
 				unset($result[$featured_index]);
 				array_unshift($result, $featured_photo);
 			}
-			
+
 			return $result;
 		}
 		else

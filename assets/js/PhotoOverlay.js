@@ -20,13 +20,13 @@ function PhotoOverlay(pPhotoOverlay)
 	});
 }
 
-PhotoOverlay.prototype.show = function(pSpeed_num, pFileName_str, pDesc_str)
+PhotoOverlay.prototype.show = function(pSpeed_num, pFileName_str, pFileZoomSize, pDesc_str)
 {
 	var _self =  this;
 	//REMARK: ADD ON LOAD CALLBACK...
 	$(".photo", this.mPhotoContainer).remove();
 	$(".desc", this.mPhotoOverlay).text(pDesc_str);
-	this.mPhotoContainer.prepend("<img class='photo' src='" + pFileName_str + "' >");
+	this.mPhotoContainer.prepend("<img class='photo' src='" + pFileName_str + "_" + pFileZoomSize + ".jpg' >");
 	
 	console.log("overlay show");
 	
