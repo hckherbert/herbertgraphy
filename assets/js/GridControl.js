@@ -278,25 +278,36 @@ GridControl.prototype.positionGrids = function()
 		}
 		
 	}
-	
-	//$(".wrapperAlbum").addClass("show");
-	this.mTmpWinWidth = $(window).width();
-	
-	if (!this.mGridstaggered)
+
+	// TODO: Change to detect when mboile only? test ofr ipad also
+	if ($("body").hasClass("sDesktop"))
 	{
-		if (!this.mGridstaggering)
+		if (!this.mGridstaggered)
 		{
-			$(".wrapperAlbum").addClass("show");
-			this.mGridstaggering = true;
-			this.mGridTween = TweenMax.staggerFrom($(".grid"), 0.8, {opacity:0 , "left":Math.round(Math.random()* $(".gridPanel").width()) + "px","top":Math.round($(window).height()) + "px", ease:Back.easeInOut}, 0.8/this.mGridCount_num, function(){_self.onStaggeredAll()});
-			
+			if (!this.mGridstaggering)
+			{
+				$(".wrapperAlbum").addClass("show");
+				this.mGridstaggering = true;
+				this.mGridTween = TweenMax.staggerFrom($(".grid"), 0.8, {
+					opacity: 0,
+					"left": Math.round(Math.random() * $(".gridPanel").width()) + "px",
+					"top": Math.round($(window).height()) + "px",
+					ease: Back.easeInOut
+				}, 0.8 / this.mGridCount_num, function () {
+					_self.onStaggeredAll()
+				});
+			}
+		}
+		else
+		{
+			this.updateGridInfoHeight();
 		}
 	}
 	else
 	{
-		this.updateGridInfoHeight();
+		$(".wrapperAlbum").addClass("show");
+		this.onStaggeredAll();
 	}
-
 }
 
 
