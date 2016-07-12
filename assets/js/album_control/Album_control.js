@@ -818,7 +818,7 @@ Album_control.prototype.get_all_parent_albums = function()
     $.ajax
     (
         {
-            url: "../admin/album_control/get_all_parent_albums",
+            url: GLOBAL_SITE_URL + "admin/album_control/get_all_parent_albums",
             type: "POST",
             dataType: "json",
             success: function (pData)
