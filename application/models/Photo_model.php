@@ -185,9 +185,8 @@ class Photo_model extends CI_Model
            $last_dot_pos = strrpos($file_name, ".");
            $file_name_without_ext = substr($file_name,0, $last_dot_pos);
 
-           $resize_value = array("800", "1280", "1680");
 
-           foreach ($resize_value as $value)
+           foreach ($this->config->item("photo_long_side") as $value)
            {
                $resize_file_path = $photo_base_dir.$album_label."/".$file_name_without_ext."_".$value.".jpg";
 
