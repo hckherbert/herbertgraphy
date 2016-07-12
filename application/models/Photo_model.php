@@ -10,6 +10,7 @@ class Photo_model extends CI_Model
     public function __construct()
     {
         $this->load->database();
+        $this->load->config("photo");
     }
 
     public function add_uploaded_file_records($data)
@@ -34,7 +35,7 @@ class Photo_model extends CI_Model
 			$featured_index = -1;
 			$result = $query->result_array();
 			shuffle($result);
-			
+
 			foreach($result as $key=>$record)
 			{
 				if ($record["featured"] == "1")
@@ -48,30 +49,22 @@ class Photo_model extends CI_Model
 
                 $result[$key]["hash_filename"] = $file_name_without_ext;
 
-                if (file_exists($photo_base_dir.$album_label."/".$file_name_without_ext."_800.jpg"))
+                if (file_exists($photo_base_dir.$album_label."/".$file_name_without_ext."_".$this->config->item("photo_long_side")[0].".jpg"))
                 {
-                    $result[$key]["file_thumb_path"] = $file_name_without_ext."_800.jpg";
+                    $result[$key]["file_thumb_path"] = $file_name_without_ext."_".$this->config->item("photo_long_side")[0].".jpg";
                 }
                 else
                 {
-                    $result[$key]["file_thumb_path"] = $result[$key]["hash_filename"];
+                    $result[$key]["file_thumb_path"] = $result[$key]["hash_filename"].".jpg";
                 }
 
-                if (file_exists($photo_base_dir.$album_label."/".$file_name_without_ext."_1680.jpg"))
+                $result[$key]["file_zoom_size"] = "";
+                foreach ($this->config->item("photo_long_side") as $value)
                 {
-                    $result[$key]["file_zoom_size"] = "1680";
-                }
-                else if (file_exists($photo_base_dir.$album_label."/".$file_name_without_ext."_1280.jpg"))
-                {
-                    $result[$key]["file_zoom_size"] = "1280";
-                }
-                else if (file_exists($photo_base_dir.$album_label."/".$file_name_without_ext."_800.jpg"))
-                {
-                    $result[$key]["file_zoom_size"] = "800";
-                }
-                else
-                {
-                    $result[$key]["file_zoom_path"] = "";
+                    if (file_exists($photo_base_dir.$album_label."/".$file_name_without_ext."_".$value."jpg"))
+                    {
+                        $result[$key]["file_zoom_size"] = $value;
+                    }
                 }
 			}
 			
