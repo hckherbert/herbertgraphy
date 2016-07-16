@@ -289,7 +289,7 @@ GridControl.prototype.positionGrids = function()
 				$(".wrapperAlbum").addClass("show");
 				this.mGridstaggering = true;
 				this.mGridTween = TweenMax.staggerFrom($(".grid"), 0.8, {
-					opacity: 0.4,
+					opacity: 0.5,
 					"left": Math.round(Math.random() * $(".gridPanel").width()) + "px",
 					"top": Math.round($(window).height()) + "px",
 					ease: Back.easeInOut
