@@ -70,7 +70,7 @@ PhotoOverlay.prototype.hide = function(pCallBack_fn)
 			_self.mPhotoOverlay.hide();
 			pCallBack_fn.apply(null);
 		},
-		500
+		150
 	)
 
 }

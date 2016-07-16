@@ -279,7 +279,7 @@ GridControl.prototype.positionGrids = function()
 		
 	}
 
-	// TODO: Change to detect when mboile only? test ofr ipad also
+	// TODO: Change to detect when mboile only? test for ipad also
 	if ($("body").hasClass("sDesktop"))
 	{
 		if (!this.mGridstaggered)
@@ -289,7 +289,7 @@ GridControl.prototype.positionGrids = function()
 				$(".wrapperAlbum").addClass("show");
 				this.mGridstaggering = true;
 				this.mGridTween = TweenMax.staggerFrom($(".grid"), 0.8, {
-					opacity: 0,
+					opacity: 0.4,
 					"left": Math.round(Math.random() * $(".gridPanel").width()) + "px",
 					"top": Math.round($(window).height()) + "px",
 					ease: Back.easeInOut
