@@ -497,9 +497,14 @@ html, body
 	transition: all .3s ease;
 }
 
-.infoPanel .otherAlbumMenus li a:hover
+.sDesktop .infoPanel .otherAlbumMenus li a:hover
 {
 	color:#bfafa6;
+}
+
+.sMobile .infoPanel .otherAlbumMenus li a:hover
+{
+	color:#b5a69d;
 }
 
 .sDesktop .infoPanel .otherAlbumMenus li.parent
@@ -565,9 +570,14 @@ html, body
 	transition: all .3s ease;
 }
 
-.infoPanel .menuLinks li a:hover
+.sDesktop .infoPanel .menuLinks li a:hover
 {
 	color:#bfafa6;
+}
+
+.sMobile .infoPanel .menuLinks li a:hover
+{
+	color:#b5a69d;
 }
 
 .sMobile .infoPanel .menuLinks
