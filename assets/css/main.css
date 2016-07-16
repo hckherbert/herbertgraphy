@@ -490,6 +490,16 @@ html, body
 .infoPanel .otherAlbumMenus li a
 {
 	color:#7d726b;
+	-webkit-transition: all .3s ease;
+	-moz-transition: all .3s ease;
+	-ms-transition: all .3s ease;
+	-o-transition: all .3s ease;
+	transition: all .3s ease;
+}
+
+.infoPanel .otherAlbumMenus li a:hover
+{
+	color:#bfafa6;
 }
 
 .sDesktop .infoPanel .otherAlbumMenus li.parent
@@ -548,6 +558,16 @@ html, body
 .infoPanel .menuLinks li a
 {
 	color:#7d726b;
+	-webkit-transition: all .3s ease;
+	-moz-transition: all .3s ease;
+	-ms-transition: all .3s ease;
+	-o-transition: all .3s ease;
+	transition: all .3s ease;
+}
+
+.infoPanel .menuLinks li a:hover
+{
+	color:#bfafa6;
 }
 
 .sMobile .infoPanel .menuLinks
@@ -659,6 +679,7 @@ html, body
 	display:block;
 	position:absolute;
 	overflow:hidden;
+	cursor:pointer;
 }
 
 .sDesktop .wrapperAlbum .gridPanel .grid img
