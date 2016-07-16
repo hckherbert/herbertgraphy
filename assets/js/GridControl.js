@@ -508,7 +508,9 @@ GridControl.prototype.onPhotoOverlayHidden = function(pActiveGridTop_num)
 
 	if (this.mWinWidthBeforeOpen_num!=$(window).width()) 
 	{
-		$(window).scrollTop(pActiveGridTop_num); 
+		//$(window).scrollTop(pActiveGridTop_num);
+		$("html, body").stop().animate({scrollTop:pActiveGridTop_num}, '50', 'swing');
+
 	}
 
 	$("html").css("overflow-y", "auto");
