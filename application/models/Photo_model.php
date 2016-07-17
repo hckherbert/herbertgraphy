@@ -10,6 +10,7 @@ class Photo_model extends CI_Model
     public function __construct()
     {
         $this->load->database();
+        $this->load->config("photo");
     }
 
     public function add_uploaded_file_records($data)
@@ -34,44 +35,52 @@ class Photo_model extends CI_Model
 			$featured_index = -1;
 			$result = $query->result_array();
 			shuffle($result);
-			
+
 			foreach($result as $key=>$record)
 			{
-				if ($record["featured"] == "1")
-				{
-					$featured_index = $key;
-					//break;
-				}
 
                 $last_dot_pos = strrpos($record["hash_filename"], ".");
                 $file_name_without_ext = substr($record["hash_filename"],0, $last_dot_pos);
-
                 $result[$key]["hash_filename"] = $file_name_without_ext;
 
-                if (file_exists($photo_base_dir.$album_label."/".$file_name_without_ext."_800.jpg"))
+                if ($record["featured"] == "1")
                 {
-                    $result[$key]["file_thumb_path"] = $file_name_without_ext."_800.jpg";
+                    $featured_index = $key;
+
+                    //if featured pic, use 1280
+                    if (file_exists($photo_base_dir . $album_label . "/" . $file_name_without_ext . "_" . $this->config->item("photo_long_side")[2] . ".jpg"))
+                    {
+                        $result[$key]["file_thumb_path"] = $file_name_without_ext . "_" . $this->config->item("photo_long_side")[2] . ".jpg";
+                    }
+                    //if 1280 not found, use default (won't happen in normal case)
+                    else
+                    {
+                        $result[$key]["file_thumb_path"] = $result[$key]["hash_filename"] . ".jpg";
+                    }
+
                 }
                 else
                 {
-                    $result[$key]["file_thumb_path"] = $result[$key]["hash_filename"];
+                    //if non-featured, use 640
+                    if (file_exists($photo_base_dir . $album_label . "/" . $file_name_without_ext . "_" . $this->config->item("photo_long_side")[0] . ".jpg"))
+                    {
+                        $result[$key]["file_thumb_path"] = $file_name_without_ext . "_" . $this->config->item("photo_long_side")[0] . ".jpg";
+                    }
+                    //if 640 not found, use default (won't happen in normal case)
+                    else
+                    {
+                        $result[$key]["file_thumb_path"] = $result[$key]["hash_filename"] . ".jpg";
+                    }
                 }
 
-                if (file_exists($photo_base_dir.$album_label."/".$file_name_without_ext."_1680.jpg"))
+                $result[$key]["file_zoom_size"] = "";
+
+                foreach ($this->config->item("photo_long_side") as $value)
                 {
-                    $result[$key]["file_zoom_size"] = "1680";
-                }
-                else if (file_exists($photo_base_dir.$album_label."/".$file_name_without_ext."_1280.jpg"))
-                {
-                    $result[$key]["file_zoom_size"] = "1280";
-                }
-                else if (file_exists($photo_base_dir.$album_label."/".$file_name_without_ext."_800.jpg"))
-                {
-                    $result[$key]["file_zoom_size"] = "800";
-                }
-                else
-                {
-                    $result[$key]["file_zoom_path"] = "";
+                    if (file_exists($photo_base_dir.$album_label."/".$file_name_without_ext."_".$value.".jpg"))
+                    {
+                        $result[$key]["file_zoom_size"] = $value;
+                    }
                 }
 			}
 			
@@ -176,9 +185,8 @@ class Photo_model extends CI_Model
            $last_dot_pos = strrpos($file_name, ".");
            $file_name_without_ext = substr($file_name,0, $last_dot_pos);
 
-           $resize_value = array("800", "1280", "1680");
 
-           foreach ($resize_value as $value)
+           foreach ($this->config->item("photo_long_side") as $value)
            {
                $resize_file_path = $photo_base_dir.$album_label."/".$file_name_without_ext."_".$value.".jpg";
 
