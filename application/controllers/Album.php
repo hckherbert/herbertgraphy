@@ -22,7 +22,7 @@ class Album extends CI_Controller
 		$album_label = trim(strtolower($album_label));
 		$album_id = $this->album_model->get_album_id($album_label);
 
-		if ($album_id === NULL)
+		if ($album_id === FALSE)
 		{
 			show_404();
 		}
