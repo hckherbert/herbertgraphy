@@ -311,7 +311,6 @@ html, body
 {
 	width:100%;
 	position:absolute;
-	z-index:2;
 }
 
 .sDesktop .infoPanel
@@ -390,7 +389,6 @@ html, body
 	position:absolute;
 	top:50px;
 	opacity:1;
-	z-index:1;
 }
 
 .menuTransition
@@ -767,7 +765,6 @@ html, body
 	-webkit-opacity: 0;
 	-moz-opacity: 0;
 	opacity:0;
-	z-index:3;
 	-webkit-transition: all 0.5s  ease-in-out;
 	-moz-transition: all 0.5s ease-in-out;
 	-ms-transition: all 0.5s ease-in-out;
