@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `photos` (
   `photoId` int(11) NOT NULL AUTO_INCREMENT,
   `albumId` int(11) NOT NULL,
   `album_code` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `create_date` datetime DEFAULT NULL,
+  `created_date` datetime DEFAULT NULL,
   `slug_filename` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `hash_filename` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,

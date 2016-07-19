@@ -16,6 +16,7 @@ class Album_control extends CI_Controller
 		$this->load->library("JSONAPI");
 		$this->load->library("JSONAPIEnum");
 		$this->load->library("form_validation");
+		$this->load->library("DateUtils");
 		$this->load->config("photo");
 
 		$this->config_validation_add_album =  array(
@@ -482,7 +483,7 @@ class Album_control extends CI_Controller
 					"title" => $title,
 					"desc" => $desc,
 					"featured" => $featured,
-					"create_date" => date('Y-m-d H:i:s'),
+					"created_date" => DateUtils::current_db_datetime(),
 					"exif"=>$exif
 				);
 

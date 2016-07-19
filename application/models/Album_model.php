@@ -145,7 +145,12 @@ class Album_model extends CI_Model
 		//$total_rows = $this->db->count_all_results("album");
 		//$data = array_merge($data, array("order" => $total_rows));
 		
-		$data = array_merge($data, array("order" => 0, "album_code"=> DBCodeGenerator::generate_db_code()));
+		$data = array_merge($data,
+			array(
+				"order" => 0,
+				"album_code"=> DBCodeGenerator::generate_db_code(),
+				"created_date"=>DateUtils::current_db_datetime()
+			));
 		$this->db->insert("album", $data);
 		$insert_id = $this->db->insert_id();
 
@@ -187,7 +192,12 @@ class Album_model extends CI_Model
 		$sql_update_order = sprintf("UPDATE `album` SET `order` = `order` + 1 WHERE `parentId` = '%s'" ,$data["parentId"]);
 		$this->db->query($sql_update_order);
 		
-		$data = array_merge($data, array("order" => $order, "album_code"=> DBCodeGenerator::generate_db_code()));
+		$data = array_merge($data, array(
+			"order" => $order,
+			"album_code"=> DBCodeGenerator::generate_db_code(),
+			"created_date"=>DateUtils::current_db_datetime()
+			)
+		);
 		unset($data["submit"]);
 		$this->db->insert("album", $data);
 

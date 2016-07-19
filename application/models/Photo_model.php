@@ -27,7 +27,7 @@ class Photo_model extends CI_Model
 		$this->db->select("photoId,slug_filename,hash_filename,title,desc,featured");
 		$this->db->where("albumId", $album_id);
 		$this->db->order_by("featured", "DESC");
-		$this->db->order_by("create_date", "DESC");
+		$this->db->order_by("created_date", "DESC");
 		$query = $this->db->get("photos");
 
 		if ($pIsShuffle)
