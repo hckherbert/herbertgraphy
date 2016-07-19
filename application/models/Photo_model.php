@@ -127,9 +127,7 @@ class Photo_model extends CI_Model
 
                 rename($original_file_path, $new_filename_path);
 
-                $resize_value = array("800", "1280", "1680");
-
-                foreach ($resize_value as $value)
+                foreach ($this->config->item("photo_long_side") as $value)
                 {
                     $original_resize_filename = $original_filename_without_ext."_".$value.".jpg";
                     $new_resize_filename = $new_file_names_array[$i]."-".$hash."_".$value.".jpg";
@@ -184,7 +182,6 @@ class Photo_model extends CI_Model
            $file_name = $row["hash_filename"];
            $last_dot_pos = strrpos($file_name, ".");
            $file_name_without_ext = substr($file_name,0, $last_dot_pos);
-
 
            foreach ($this->config->item("photo_long_side") as $value)
            {
