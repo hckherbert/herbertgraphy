@@ -12,6 +12,7 @@ class Album_control extends CI_Controller
 		$this->load->helper("url_helper");
 		$this->load->helper('security');
 		$this->load->helper('form');
+		$this->load->library("EXIFReader");
 		$this->load->library("JSONAPI");
 		$this->load->library("JSONAPIEnum");
 		$this->load->library("form_validation");
@@ -425,6 +426,8 @@ class Album_control extends CI_Controller
 			$fileParts = pathinfo($_FILES['Filedata']['name']);
 			$extension = strtolower($fileParts['extension']);
 			$tempFile   = $_FILES['Filedata']['tmp_name'];
+			$exif = JSONAPI::encode(EXIFReader::getData($_FILES['Filedata']['tmp_name']));
+
 
 			foreach($photo_user_data["original_filename"] as $index=>$value)
 			{
@@ -477,7 +480,8 @@ class Album_control extends CI_Controller
 					"title" => $title,
 					"desc" => $desc,
 					"featured" => $featured,
-					"create_date" => date('Y-m-d H:i:s')
+					"create_date" => date('Y-m-d H:i:s'),
+					"exif"=>$exif
 				);
 
 				$this->photo_model->add_uploaded_file_records($data);

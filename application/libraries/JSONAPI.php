@@ -109,4 +109,28 @@ class JSONAPI
         $ci_instance =& get_instance();
         $ci_instance->output->set_content_type('application/json', 'utf-8')->set_output(json_encode($default_array, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS));
     }
+
+    public static function decode($json)
+    {
+        return json_decode($json, self::get_json_decode_assoc(), self::get_json_decode_default_depth(), self::get_json_decode_options());
+    }
+
+    public static function encode($data){
+        return json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    }
+
+    private static function get_json_decode_assoc()
+    {
+        return TRUE;
+    }
+
+    private static function get_json_decode_default_depth()
+    {
+        return 512;
+    }
+
+    private static function get_json_decode_options()
+    {
+        return JSON_NUMERIC_CHECK & JSON_FORCE_OBJECT & JSON_UNESCAPED_SLASHES;
+    }
 }
