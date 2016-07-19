@@ -473,6 +473,8 @@ class Album_control extends CI_Controller
 					JSONAPI::echo_json_error_response("CANNOT_MOVE_FILE");
 				}
 
+				var_dump($_POST["albumId"]);
+
 				$data = array(
 					"albumId" => $_POST["albumId"],
 					"slug_filename" => $slug_filename_only,

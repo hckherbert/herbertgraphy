@@ -3,6 +3,7 @@ class Album_model extends CI_Model
 {
 	public function __construct()
 	{
+		$this->load->library("DBCodeGenerator");
 		$this->load->database();
 	}
 
@@ -135,6 +136,7 @@ class Album_model extends CI_Model
 
 	public function add_album($data)
 	{
+
 		$this->db->trans_start();
 		$sql_update_order = "UPDATE `album` SET `order` = `order` + 1 WHERE `parentId` IS NULL";
 		$this->db->query($sql_update_order);
@@ -143,13 +145,14 @@ class Album_model extends CI_Model
 		//$total_rows = $this->db->count_all_results("album");
 		//$data = array_merge($data, array("order" => $total_rows));
 		
-		$data = array_merge($data, array("order" => 0));
+		$data = array_merge($data, array("order" => 0, "album_code"=> DBCodeGenerator::generate_db_code()));
 		$this->db->insert("album", $data);
 		$insert_id = $this->db->insert_id();
 
 		$data = array
 		(
-			"albumId"=>$insert_id
+			"albumId"=>$insert_id,
+			"album_code"=>$this->get_album_code($insert_id)
 		);
 		$this->db->where("albumId", 0);
 		$this->db->update("photos", $data);
@@ -184,7 +187,7 @@ class Album_model extends CI_Model
 		$sql_update_order = sprintf("UPDATE `album` SET `order` = `order` + 1 WHERE `parentId` = '%s'" ,$data["parentId"]);
 		$this->db->query($sql_update_order);
 		
-		$data = array_merge($data, array("order" => $order));
+		$data = array_merge($data, array("order" => $order, "album_code"=> DBCodeGenerator::generate_db_code()));
 		unset($data["submit"]);
 		$this->db->insert("album", $data);
 
@@ -261,6 +264,22 @@ class Album_model extends CI_Model
 		if ($result)
 		{
 			return $result->id;
+		}
+
+		return FALSE;
+	}
+
+	public function get_album_code($pAlbum_id)
+	{
+		$this->db->select("album_code");
+		$this->db->where("id",$pAlbum_id);
+		$query = $this->db->get("album");
+
+		$result = $query->row();
+
+		if ($result)
+		{
+			return $result->album_code;
 		}
 
 		return FALSE;

@@ -145,7 +145,7 @@ Album_control.prototype.init_upload = function()
         },
         'onCancel': function(file)
         {
-            console.log("onCancel: " + file.name);
+            console.log("onCancel: " + file.name + " ;_itemToUploadCount = " + _itemToUploadCount + "_isQueueCleared = " + _isQueueCleared);
 
             if (_isQueueCleared)
             {
@@ -154,7 +154,7 @@ Album_control.prototype.init_upload = function()
                 if (_onCancelCount == _itemToUploadCount && !$("#page_album_list").size())
                 {
                     console.log("upload all success!");
-                    _self.displaySuccess("Photos are uploaded successfully.", "_self");
+                   _self.displaySuccess("Photos are uploaded successfully.", "_self");
                 }
             }
 
@@ -162,7 +162,6 @@ Album_control.prototype.init_upload = function()
         'onQueueComplete':function(pUploads)
         {
             console.log("onQueueComplete; " + pUploads["attempted"] + "; " +  pUploads["successful"]);
-
             console.log(pUploads);
 
             if (pUploads["errors"] == 0)
@@ -403,7 +402,6 @@ Album_control.prototype.submit_handler = function()
                            }
                            else
                            {
-
                                $("#formAddAlbum").submit();
                            }
                        }
