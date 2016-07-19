@@ -25,8 +25,12 @@
 <!-- FONT -->
 <link href='https://fonts.googleapis.com/css?family=Catamaran:400,700,300,200' rel='stylesheet' type='text/css'>
 <!-- Javascript -->
-<script src="<?php echo base_url("assets/js/jquery-1.11.3.min.js"); ?>"></script>
-<script src="<?php echo base_url("assets/js/jquery-migrate-1.2.1.min.js"); ?>"></script>
+<?php if (get_instance()->agent->browser() == "Internet Explorer" && intval(get_instance()->agent->version()) == 8) { ?>
+<script src="<?php echo base_url("assets/js/jquery-1.12.3.min.js"); ?>"></script>
+<?php } else { ?>
+<script src="<?php echo base_url("assets/js/jquery-3.1.0.min.js"); ?>"></script>
+<?php } ?>
+<script src="<?php echo base_url("assets/js/jquery-migrate-3.0.0.min.js"); ?>"></script>
 <script src="<?php echo base_url("assets/js/jquery.jscrollpane.min.js"); ?>"></script>
 <script src="<?php echo base_url("assets/js/jquery.mousewheel.js"); ?>"></script>
 <script src="<?php echo base_url("assets/js/greensock-js/TweenMax.min.js"); ?>"></script>
@@ -35,6 +39,7 @@
 <script src="<?php echo base_url("assets/js/PhotoOverlay.js"); ?>"></script>
 <script src="<?php echo base_url("assets/js/GridControl.js"); ?>"></script>
 <script src="<?php echo base_url("assets/js/Grid.js"); ?>"></script>
+
 </head>
 <body class="bgBrown">
 <div class="wrapper wrapperAlbum">
