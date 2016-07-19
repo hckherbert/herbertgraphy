@@ -148,7 +148,7 @@ class Album_model extends CI_Model
 		$data = array_merge($data,
 			array(
 				"order" => 0,
-				"album_code"=> DBCodeGenerator::generate_db_code(),
+				"album_code"=> DBCodeGenerator::generate_db_code("a"),
 				"created_date"=>DateUtils::current_db_datetime()
 			));
 		$this->db->insert("album", $data);
@@ -194,7 +194,7 @@ class Album_model extends CI_Model
 		
 		$data = array_merge($data, array(
 			"order" => $order,
-			"album_code"=> DBCodeGenerator::generate_db_code(),
+			"album_code"=> DBCodeGenerator::generate_db_code("a"),
 			"created_date"=>DateUtils::current_db_datetime()
 			)
 		);

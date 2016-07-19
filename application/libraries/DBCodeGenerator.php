@@ -24,10 +24,10 @@ class DBCodeGenerator
     {
         $ci_instance =& get_instance();
         $ci_instance->load->helper("date");
-        $primaryKey = sprintf("%s%s%s", $prefix, now(), self::create_random_pattern(4, $large_data_insert));
+        $primaryKey = sprintf("%s%s%s", $prefix, now(), self::create_random_pattern(8, $large_data_insert));
         return $primaryKey;
     }
-    
+
     public static function create_random_pattern($length, $more_random_code = FALSE)
     {
         $token = "";

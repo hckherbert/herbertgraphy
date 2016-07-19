@@ -28,18 +28,18 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `album` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `album_code` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `album_code` varchar(32)  DEFAULT NULL,
   `created_date` datetime DEFAULT NULL,
   `order` int(11) DEFAULT NULL,
   `parentId` int(11) DEFAULT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `label` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `intro` text COLLATE utf8_unicode_ci,
+  `name` varchar(255)  NOT NULL,
+  `label` varchar(255)  NOT NULL,
+  `intro` text ,
   `visible` tinyint(1) DEFAULT '1',
   `view_count` int(11) DEFAULT NULL,
-  `privatekey` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `privatekey` varchar(100)  DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 
 -- --------------------------------------------------------
 
@@ -49,20 +49,21 @@ CREATE TABLE IF NOT EXISTS `album` (
 
 CREATE TABLE IF NOT EXISTS `photos` (
   `photoId` int(11) NOT NULL AUTO_INCREMENT,
+  `photo_code` varchar(32)  DEFAULT NULL,
   `albumId` int(11) NOT NULL,
-  `album_code` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `album_code` varchar(32)  DEFAULT NULL,
   `created_date` datetime DEFAULT NULL,
-  `slug_filename` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `hash_filename` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `desc` varchar(1000) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `slug_filename` varchar(255)  NOT NULL,
+  `hash_filename` varchar(255)  NOT NULL,
+  `title` varchar(255)  DEFAULT NULL,
+  `desc` varchar(1000)  DEFAULT NULL,
   `featured` tinyint(1) DEFAULT '0',
   `visible` tinyint(1) DEFAULT '1',
   `highlighted` tinyint(1) DEFAULT '0',
   `view_count` int(11) DEFAULT NULL,
-  `exif` varchar(1000) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `exif` varchar(1000)  DEFAULT NULL,
   PRIMARY KEY (`photoId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8  ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

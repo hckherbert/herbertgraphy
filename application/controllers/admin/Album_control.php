@@ -478,6 +478,7 @@ class Album_control extends CI_Controller
 
 				$data = array(
 					"albumId" => $_POST["albumId"],
+					"photo_code"=>DBCodeGenerator::generate_db_code("p", true),
 					"slug_filename" => $slug_filename_only,
 					"hash_filename" => $hash_filename,
 					"title" => $title,
