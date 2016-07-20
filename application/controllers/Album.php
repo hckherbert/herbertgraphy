@@ -32,7 +32,7 @@ class Album extends CI_Controller
 		$data["current_album_data"] = $this->album_model->get_album_details($album_id);
 		$data["all_other_albums_data"] = $this->get_all_other_albums_data($data["current_album_data"]["album_details"]->label, $parent_id);
 		$data["subalbum_data"] = $this->get_sub_albums($album_id);
-		$this->load->view("album", $data);
+		$this->load->template_client("album", "album", $data);
 
 	}
 	

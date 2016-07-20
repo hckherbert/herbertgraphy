@@ -7,11 +7,21 @@
  */
 class MY_Loader extends CI_Loader
 {
-    public function template_client($main_view_name, $data = array())
+    public function template_client($main_view_name, $template_name = "basic", $data = array())
     {
-        $this->view("templates/header", $data);
-        $this->view($main_view_name, $data);
-        $this->view("templates/footer", $data);
+        if ($template_name == "basic")
+        {
+            $this->view("client/templates/common_include", $data);
+            $this->view("client/templates/base", $data);
+            $this->view("client/templates/footer", $data);
+        }
+        else if ($template_name == "album")
+        {
+            $this->view("client/templates/common_include", $data);
+            $this->view("client/templates/partials/album_include", $data);
+            $this->view("client/album", $data);
+            $this->view("client/templates/footer", $data);
+        }
     }
 
     public function template_admin($main_view_name, $data = array())
