@@ -18,6 +18,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="<?php echo base_url("assets/css/reset.css"); ?>" type="text/css" />
     <link rel="stylesheet" href="<?php echo base_url("assets/css/zindex.css"); ?>" type="text/css" />
+    <link rel="stylesheet" href="<?php echo base_url("assets/css/page_loading.css"); ?>" type="text/css" />
     <link rel="stylesheet" href="<?php echo base_url("assets/css/main.css"); ?>" type="text/css" />
     <link rel="stylesheet" href="<?php echo base_url("assets/css/jquery.jscrollpane.css"); ?>" type="text/css" />
     <!-- FONT -->

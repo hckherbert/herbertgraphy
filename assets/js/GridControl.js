@@ -332,7 +332,8 @@ GridControl.prototype.onStaggeredAll = function()
 		)
 	}
 
-	this.updateGridInfoHeight();
+	this.removePageLoading();
+	//this.updateGridInfoHeight();
 }
 
 GridControl.prototype.updateGridInfoHeight = function()
@@ -514,6 +515,19 @@ GridControl.prototype.onPhotoOverlayHidden = function(pActiveGridTop_num)
 	}
 
 	$("html").css("overflow-y", "auto");
+}
+
+GridControl.prototype.removePageLoading = function()
+{
+	var _self = this;
+
+	$(".pageLoading").fadeTo(400, 0, function()
+	{
+		$(this).remove();
+		_self.updateGridInfoHeight()
+	});
+
+
 }
 	
 	
