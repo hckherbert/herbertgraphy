@@ -128,7 +128,12 @@ h1.pageHeading
 .listing a
 {
 	color:#e78f08;
-	text-decoration:underline;
+	text-decoration:none;
+}
+
+.listing a:hover
+{
+	text-decoration: underline;
 }
 
 .listing td, .listing th

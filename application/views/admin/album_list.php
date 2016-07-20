@@ -1,78 +1,12 @@
-<?php $timestamp = time();?>
-<?php $token = md5("unique_salt" . $timestamp);?>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-<title>HerbertGraphy Admin Control - Album List</title>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-<meta name="format-detection" content="telephone=no" />
-<meta name="description" content="">
-<meta name="keywords" content="">
-<title></title>
-<!-- ICON -->
-<link href="apple-touch-icon.png" rel="apple-touch-icon" />
-<link href="apple-touch-icon-76x76.png" rel="apple-touch-icon" sizes="76x76" />
-<link href="apple-touch-icon-120x120.png" rel="apple-touch-icon" sizes="120x120" />
-<link href="apple-touch-icon-152x152.png" rel="apple-touch-icon" sizes="152x152" />
-<link href="apple-touch-icon-180x180.png" rel="apple-touch-icon" sizes="180x180" />
-<link href="android-icon-192x192.png" rel="icon" sizes="192x192" />
-<link href="android-icon-128x128.png" rel="icon" sizes="128x128" />
-<!-- CSS -->
-<link rel="stylesheet" href="<?php echo base_url('assets/css/jquery.jscrollpane.css'); ?>" type="text/css" />
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/uploadifive.css'); ?>">
-<link rel="stylesheet" href="<?php echo base_url('assets/css/reset.css'); ?>" type="text/css" />
-<link rel="stylesheet" href="<?php echo base_url('assets/css/admin.css'); ?>" type="text/css" />
-<link rel="stylesheet" href="<?php echo base_url('assets/css/zindex.css'); ?>" type="text/css" />
-<!-- FONT -->
-<link href='https://fonts.googleapis.com/css?family=Catamaran:400,700,300,200' rel='stylesheet' type='text/css'>
-<!-- Javascript -->
-<script>
-	GLOBAL_SITE_URL = "<?php echo site_url(); ?>";
-	var mTimeStamp = "<?php echo $timestamp;?>";
-	var mToken = "<?php echo md5('unique_salt' . $timestamp);?>";
-</script>
-<script src="<?php echo base_url('assets/js/jquery-1.11.3.min.js'); ?>"></script>
-<script src="<?php echo base_url('assets/js/jquery-ui-1.11.4/jquery-ui.js'); ?>"></script>
-<script src="<?php echo base_url('assets/js/jquery-migrate-1.2.1.min.js'); ?>"></script>
-<script src="<?php echo base_url('assets/js/jquery.jscrollpane.min.js'); ?>"></script>
-<script src="<?php echo base_url('assets/js/jquery.mousewheel.js'); ?>"></script>
-<script src="<?php echo base_url('assets/js/album_control/jquery.uploadifive.min.js'); ?>" type="text/javascript"></script>
-<script src="<?php echo base_url('assets/js/album_control/Album_control.js'); ?>"></script>
-<script>
-
- var mAlbum_control = null;
-
-
- $(document).ready
- (
-	function()
-	{
-		mAlbum_control = new Album_control();
-
-	}
-  );
-</script>
-</head>
 <body>
-<div class="ajaxSuccessDisplay hide">
-	<div class="bg"></div>
-	<p>Ajax Response success</p>
-</div>
-<div class="ajaxFailDisplay hide">
-	<div class="bg"></div>
-	<p>Ajax Response Failed</p>
-</div>
+<?php $this->load->partials("admin/templates/partials/common_body");?>
 <div class="adminMain" id="page_album_list">
 	<div class="section">
 		<h1 class="pageHeading">Album List</h1>
 		<div class="hintArea">
 			<p>Drag the row upper to make the album positioned higher in the client side.</p>
 		</div>
-		<?php
-
-			echo form_open('admin/album_control/update_album_list', 'class="formAlbumList hide" id="formAlbumList"');
-		?>
+		<?php echo form_open('admin/album_control/update_album_list', 'class="formAlbumList hide" id="formAlbumList"'); ?>
 		<table class="albumList listing">
 			<thead>
 				<th width="25%">Album name</th>
@@ -136,4 +70,16 @@
 	</div>
 </div>
 </body>
+<script>
+	var mAlbum_control = null;
+
+	$(document).ready
+	(
+		function()
+		{
+			mAlbum_control = new Album_control();
+
+		}
+	);
+</script>
 </html>

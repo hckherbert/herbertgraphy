@@ -924,7 +924,7 @@ Album_control.prototype.append_added_parent_album_record = function(pInsert_id, 
     var _new_album_html = "";
 
     _new_album_html += "<tr class='ui-sortable-handle'>";
-    _new_album_html += "<td><a href='" + GLOBAL_SITE_URL + "album/" + _album_name + "' target='_blank'>" + _album_name +  "</a></td>";
+    _new_album_html += "<td><a href='" + GLOBAL_SITE_URL + "album/" + _album_label + "' target='_blank'>" + _album_name +  "</a></td>";
     _new_album_html += "<td>" + _album_label +  "</td>";
     _new_album_html += "<td>" + _album_intro +  "</td>";
     _new_album_html += "<td align='center'>";
@@ -951,16 +951,7 @@ Album_control.prototype.render_album_list = function(pData)
     for (var _i=0; _i< pData.length; _i++)
     {
         var _albumLabel = pData[_i]["label"];
-        var _url;
-
-        if (this.mParentLabel != null)
-        {
-            _url = GLOBAL_SITE_URL + "album/" + this.mParentLabel + "/" + _albumLabel;
-        }
-        else
-        {
-            _url = GLOBAL_SITE_URL + "album/"  + _albumLabel;
-        }
+        var _url = GLOBAL_SITE_URL + "album/"  + _albumLabel;
 
         _album_html += "<tr class='ui-sortable-handle'>"
         _album_html += "<td><a href='" + _url + "' target='_blank'>"+ pData[_i]["name"] +  "</a></td>";

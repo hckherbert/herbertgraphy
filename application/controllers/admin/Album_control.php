@@ -49,7 +49,7 @@ class Album_control extends CI_Controller
 
 	public function index()
 	{
-		$this->load->view("admin/album_list");
+		$this->load->template_admin("admin/album_list");
 	}
 
 	public function get_all_parent_albums()
@@ -150,7 +150,7 @@ class Album_control extends CI_Controller
 	{
 		$album_id = $this->input->post("albumId");
 		$data = $this->album_model->get_album_details($album_id, false);
-		$this->load->view("admin/add_subalbum", $data);
+		$this->load->template_admin("admin/add_subalbum", $data);
 	}
 
 	public function do_add_subalbum()
@@ -239,7 +239,7 @@ class Album_control extends CI_Controller
 			show_404();
 		}
 
-		$this->load->view("admin/album_details", $data);
+		$this->load->template_admin("admin/album_details", $data);
 	}
 
 	public function delete_album()
