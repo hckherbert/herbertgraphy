@@ -286,16 +286,31 @@ GridControl.prototype.positionGrids = function()
 		{
 			if (!this.mGridstaggering)
 			{
-				$(".wrapperAlbum").addClass("show");
 				this.mGridstaggering = true;
-				this.mGridTween = TweenMax.staggerFrom($(".grid"), 0.8, {
-					opacity: 0.5,
-					"left": Math.round(Math.random() * $(".gridPanel").width()) + "px",
-					"top": Math.round($(window).height()) + "px",
-					ease: Back.easeInOut
-				}, 0.8 / this.mGridCount_num, function () {
-					_self.onStaggeredAll()
-				});
+
+				$(".camera").addClass("cameraZoom vaporizing");
+				$(".blink").addClass("blinkInit");
+
+				setTimeout(function()
+				{
+					$(".pageLoading").fadeTo(800, 0, function()
+					{
+						$(this).remove();
+					});
+
+					$(".wrapperAlbum").addClass("show");
+
+					_self.mGridTween = TweenMax.staggerFrom($(".grid"), 0.8, {
+						opacity: 0.5,
+						"left": Math.round(Math.random() * $(".gridPanel").width()) + "px",
+						"top": Math.round($(window).height()) + "px",
+						ease: Back.easeInOut
+					}, 0.8 / _self.mGridCount_num, function () {
+						_self.onStaggeredAll()
+					});
+
+				},800);
+
 			}
 		}
 		else
@@ -332,8 +347,7 @@ GridControl.prototype.onStaggeredAll = function()
 		)
 	}
 
-	this.removePageLoading();
-	//this.updateGridInfoHeight();
+	this.updateGridInfoHeight();
 }
 
 GridControl.prototype.updateGridInfoHeight = function()
@@ -516,18 +530,3 @@ GridControl.prototype.onPhotoOverlayHidden = function(pActiveGridTop_num)
 
 	$("html").css("overflow-y", "auto");
 }
-
-GridControl.prototype.removePageLoading = function()
-{
-	var _self = this;
-
-	$(".pageLoading").fadeTo(400, 0, function()
-	{
-		$(this).remove();
-		_self.updateGridInfoHeight()
-	});
-
-
-}
-	
-	

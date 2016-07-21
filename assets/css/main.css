@@ -340,7 +340,7 @@ html, body
     width: 80%;
     margin: 150px 20px 0 0;
 	padding: 20px 0 0 0;
-    border-top: 1px solid #a29c93;
+    border-top: 1px solid #716f6a;
 }
 
 .sDesktop .infoPanel .intro p
@@ -367,6 +367,7 @@ html, body
 	padding:20px;
 	margin: 200px 0 0 0;
 	font-weight:200;
+	word-wrap:break-word;
 }
 
 .sMobile .infoPanel h1

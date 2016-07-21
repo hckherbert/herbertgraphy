@@ -14,5 +14,6 @@
       </div>
       <div class="light"></div>
     </div>
-    <div class="flash"></div>
+    <!--<div class="flash"></div>-->
+    <div class="blink"></div>
 </div>
