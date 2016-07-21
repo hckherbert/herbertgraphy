@@ -6,6 +6,17 @@
   z-index: 4;
 }
 
+.pageLoading .loadingText
+{
+  color:#d3cfc7;
+  width:60px;
+  font-size:10px;
+  position:relative;
+  left:50%;
+  margin-left:-30px;
+  top:65px;
+}
+
 .camera
 {
   transition: all 0.2s ease-in-out;
