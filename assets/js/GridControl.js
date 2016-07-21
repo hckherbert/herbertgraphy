@@ -293,7 +293,7 @@ GridControl.prototype.positionGrids = function()
 
 				setTimeout(function()
 				{
-					$(".pageLoading").fadeTo(800, 0, function()
+					$(".pageLoading").fadeTo(400, 0, function()
 					{
 						$(this).remove();
 					});
@@ -309,7 +309,7 @@ GridControl.prototype.positionGrids = function()
 						_self.onStaggeredAll()
 					});
 
-				},800);
+				},400);
 
 			}
 		}
