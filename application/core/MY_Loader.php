@@ -12,7 +12,7 @@ class MY_Loader extends CI_Loader
         if ($template_name == "basic")
         {
             $this->view("client/templates/common_include", $data);
-            $this->view("client/templates/base", $data);
+            $this->view("client/base", $data);
             $this->view("client/templates/footer", $data);
         }
         else if ($template_name == "album")

@@ -1,8 +1,8 @@
 <div class="infoPanel">
     <div class="menuMask"></div>
-    <div class="albumTitle bgBrown"><h1 class="bgBrown"><?php echo $current_album_data["album_details"]->name; ?></h1><a class="btnMenuToggle" href="javascript:void(0)"><img src="<?php echo base_url("assets/images/btnMenuToggle.png"); ?>"></a></div>
+    <div class="albumTitle bgBrown"><h1 class="bgBrown"><?php if (isset($current_album_data)) {echo $current_album_data["album_details"]->name;} ?></h1><a class="btnMenuToggle" href="javascript:void(0)"><img src="<?php echo base_url("assets/images/btnMenuToggle.png"); ?>"></a></div>
     <div class="menuContainer mainMenuClose">
-        <?php if ($subalbum_data) { ?>
+        <?php if (isset($subalbum_data)) { ?>
             <ul class="subAlbumMenus">
                 <?php foreach ($subalbum_data as $subalbum) { ?>
                     <li>
@@ -13,7 +13,7 @@
                 <?php } ?>
             </ul>
         <?php } ?>
-        <?php if ($all_other_albums_data) { ?>
+        <?php if (isset($all_other_albums_data)) { ?>
             <ul class="otherAlbumMenus">
                 <?php foreach ($all_other_albums_data as $other_albums) { ?>
                     <li <?php if ($other_albums["siblings"]!==NULL) { ?> class="parent" <?php } ?>>
@@ -36,7 +36,7 @@
             <li><a href="javascript:void(0)">Herbertbloggy</a></li>
         </ul>
     </div>
-    <?php if ($current_album_data["album_details"]->intro) { ?>
+    <?php if (isset($current_album_data["album_details"]->intro)) { ?>
         <div class="intro">
             <p><?php echo $current_album_data["album_details"]->intro; ?></p>
         </div>

@@ -1071,3 +1071,12 @@ html, body
 	margin-left: -33px;
 	margin-top: -33px;
 }
+
+/**** 404 ******/
+.text_404
+{
+	font-size: 30px;
+	padding: 20px;
+	margin: 210px 0 0 50px;
+	font-weight: 200;
+}
