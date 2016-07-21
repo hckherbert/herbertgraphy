@@ -367,7 +367,7 @@ html, body
 	padding:20px;
 	margin: 200px 0 0 0;
 	font-weight:200;
-	word-wrap:break-word;
+	/*word-wrap:break-word;*/
 }
 
 .sMobile .infoPanel h1
@@ -1075,8 +1075,10 @@ html, body
 /**** 404 ******/
 .text_404
 {
-	font-size: 30px;
+	font-size: 50px;
 	padding: 20px;
-	margin: 210px 0 0 50px;
 	font-weight: 200;
+	position:absolute;
+	right:0;
+	bottom:0;
 }
