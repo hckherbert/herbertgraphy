@@ -1,4 +1,9 @@
 /*client side */
+#simple-loading
+{
+	z-index:2;
+}
+
 .sMobile .infoPanel
 {
 	z-index:1;

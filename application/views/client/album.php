@@ -1,6 +1,7 @@
 <?php ?>
 <body class="bgBrown">
 <?php $this->load->partials("client/templates/partials/page_loading"); ?>
+<?php $this->load->partials("client/templates/partials/simple_loading"); ?>
 <div class="wrapper">
 	<div class="wrapperAlbum">
 		 <?php $this->load->partials("client/templates/menu_info_panel"); ?>
