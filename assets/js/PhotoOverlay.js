@@ -33,28 +33,13 @@ PhotoOverlay.prototype.show = function(pSpeed_num, pFileName_str, pFileZoomSize,
 	this.mPhotoOverlay.addClass("show");
 	this.centerPhoto();
 
-
 	setTimeout
 	( 
 		function()
 		{
-			/*
-			var _toHeight_num =  $(".desc", _self.mPhotoOverlay).outerHeight() ;
-			var _textHeight = $(".desc", _self.mPhotoOverlay).outerHeight() + $(".title", _self.mPhotoOverlay).outerHeight();
-
-			$(".btnClose , this.mPhotoOverlay").show();
-			$(".descContainer", _self.mPhotoOverlay).show();
-			//$(".descContainer", _self.mPhotoOverlay).css("height", _textHeight + "px");
-			$(".descContainer", _self.mPhotoOverlay).css("top", $(".photo", _self.mPhotoContainer).height() - $(".descContainer", _self.mPhotoOverlay).height() + "px");
-			*/
-
-			var _textHeight = $(".desc", _self.mPhotoOverlay).outerHeight() + $(".title", _self.mPhotoOverlay).outerHeight();
-			//alert(_textHeight);
-
 			$(".btnClose" , _self.mPhotoOverlay).show();
 			$(".descContainer", _self.mPhotoOverlay).show();
 			$(".descContainer", _self.mPhotoOverlay).css("top", $(".photo", _self.mPhotoContainer).height());
-			//(".descContainer", _self.mPhotoOverlay).css("height", _textHeight + "px");
 			$(".photoContainer").css("top", 0.5*($(window).height() - ($(".photoContainer .photo").height() + $(".descContainer", _self.mPhotoOverlay).height())))
 		},
 		500
@@ -144,6 +129,8 @@ PhotoOverlay.prototype.centerPhoto = function()
 			_toWidth_num = Math.round(_toHeight_num / this.mAspectRatio_num);
 		}
 	}
+
+	console.log("center photo");
 
 	this.mPhotoContainer.css("width", _toWidth_num + "px");
 	this.mPhotoContainer.css("height", _toHeight_num + "px");

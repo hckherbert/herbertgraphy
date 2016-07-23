@@ -13,6 +13,7 @@ GridControl.prototype.mWinWidthBeforeOpen_num = 0;
 GridControl.prototype.mWinWidthBeforeStaggered_num = 0;
 GridControl.prototype.mOverlayPopSpeed_num = 0.5;
 GridControl.prototype.mTimerReposition = null;
+GridControl.prototype.mTimerAlbumShowTrasit = null;
 
 function GridControl(pGridControl, pPhotoOverlay)
 {
@@ -273,7 +274,6 @@ GridControl.prototype.positionGrids = function()
 		
 		if (this.mGrid_array[_i].getOrientation() == "v")
 		{
-			console.log("aaa");
 			this.mGrid_array[_i].centerImageVertically(this.mAspectRatio_num);
 		}
 		
@@ -317,8 +317,10 @@ GridControl.prototype.positionGrids = function()
 		setTimeout(function()
 		{
 			_self.transitLoadingandAlbumStart();
-			_self.onStaggeredAll();
+			//_self.onStaggeredAll();
+			_self.updateGridPanelAndWinScroll();
 		}, 400);
+
 	}
 }
 
@@ -406,12 +408,17 @@ GridControl.prototype.updateGridInfoHeight = function()
 		$(".infoPanel").css("height", "auto");
 	}
 
+	this.updateGridPanelAndWinScroll();
+}
+
+GridControl.prototype.updateGridPanelAndWinScroll = function()
+{
 	var _gridWidth_num = Math.floor($(".gridPanel").width()/this.mColCount_num);
 	var _gridPanelWidth_num = Math.floor($(".gridPanel").width());
 	var _offset_num = _gridWidth_num * this.mColCount_num - _gridPanelWidth_num;
 	console.log("_offset_num: " + _offset_num);
 	$(".gridPanel").css("right", _offset_num + "px");
-	
+
 	$("html").addClass("vScrollOn");
 }
  
