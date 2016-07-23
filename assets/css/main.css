@@ -372,7 +372,7 @@ html, body
 .sMobile .infoPanel h1
 {
 	font-size:26px;
-	padding:10px 60px 4px 12px;
+	padding:8px 60px 6px 6px;
 	font-weight:200;
 
 }
@@ -633,12 +633,12 @@ html, body
 
 .sMobile .infoPanel .btnMenuToggle
 {
-	width: 46px;
-    height: 46px;
+	width: 44px;
+    height: 44px;
     display: block;
     padding: 6px 12px;
     right: 0;
-    top: 0;
+    top: 2px;
 	position:absolute;
 	-webkit-transition: all 0.2s  ease-in-out;
 	-moz-transition: all 0.2s ease-in-out;
