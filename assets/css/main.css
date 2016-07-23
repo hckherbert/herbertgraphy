@@ -302,7 +302,7 @@ html, body
 {
 	display:block;
 	width:100%;
-	min-height:50px;
+	min-height:40px;
 	position:relative;
 	text-align:left;
 }
@@ -371,8 +371,8 @@ html, body
 
 .sMobile .infoPanel h1
 {
-	font-size:30px;
-	padding:10px 60px 10px 12px;
+	font-size:26px;
+	padding:7px 60px 7px 12px;
 	font-weight:200;
 
 }
@@ -387,7 +387,7 @@ html, body
 	background:#d3c4bb;
 	width:100%;
 	position:absolute;
-	top:50px;
+	top:40px;
 	opacity:1;
 }
 
@@ -605,7 +605,7 @@ html, body
     height: 100%;
     position: fixed;
     left: 0;
-    top: 50px;
+    top: 0;
     background-color: #000;
 	display:none;
 	-webkit-opacity: 0;
@@ -805,7 +805,6 @@ html, body
 	width:100%;
 	color: #f2e6e4;
 	font-size:14px;
-	line-height:1.1em;
 	-webkit-transition: all 0.3s  ease-in-out;
 	-moz-transition: all 0.3s ease-in-out;
 	-ms-transition: all 0.3s ease-in-out;
@@ -820,6 +819,7 @@ html, body
 	font-weight:bold;
 	display:block;
 	position:relative;;
+	line-height:1.1em;
 }
 
 .photoZoomOverlay  .descContainer .titleOnly
@@ -835,6 +835,7 @@ html, body
 	font-size:14px;
 	display:block;
 	position:relative;;
+	line-height:1.1em;
 }
 
 .photoZoomOverlay  .descContainer .bg

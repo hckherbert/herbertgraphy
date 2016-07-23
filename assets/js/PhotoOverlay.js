@@ -6,7 +6,7 @@ PhotoOverlay.prototype.mOnHideStart_fn = null;
 PhotoOverlay.prototype.mBaseBreakPoint_array = null;
 PhotoOverlay.prototype.mWideScreenBreakPoint_num = null;
 PhotoOverlay.zoomFactorDesktop = 0.85;
-PhotoOverlay.zoomFactorMobile = 0.7;
+PhotoOverlay.zoomFactorMobile = 0.8;
 
 function PhotoOverlay(pPhotoOverlay)
 {
@@ -67,9 +67,9 @@ PhotoOverlay.prototype.show = function(pSpeed_num, pFileName_str, pFileZoomSize,
 				$(".descContainer", _self.mPhotoOverlay).addClass("show");
 			}
 
-			$(".descContainer").css("top", -1 * $(".descContainer").outerHeight() + "px");
-
-			//$(".photoContainer").css("top", 0.5*($(window).height() - ($(".photoContainer .photo").height() + $(".descContainer", _self.mPhotoOverlay).height())))
+			//$(".descContainer").css("top", -1 * $(".descContainer").outerHeight() + "px");
+			//$(".photoContainer").css("top", 0.5*($(window).height() - ($(".photoContainer .photo").height() + $(".descContainer", _self.mPhotoOverlay).height())) + "px");
+			$(".photoContainer").css("top", $(".photoContainer").position().top - $(".descContainer").height()*0.5 + "px")
 		},
 		500
 	);
