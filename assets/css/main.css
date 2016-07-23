@@ -431,7 +431,7 @@ html, body
 
 .infoPanel .subAlbumMenus li a
 {
-	color:#7d726b;
+	color:#857b75;
 }
 
 .infoPanel .subAlbumMenus li.active a
@@ -488,7 +488,7 @@ html, body
 
 .infoPanel .otherAlbumMenus li a
 {
-	color:#7d726b;
+	color:#857b75;
 	-webkit-transition: all .3s ease;
 	-moz-transition: all .3s ease;
 	-ms-transition: all .3s ease;
@@ -498,7 +498,7 @@ html, body
 
 .sDesktop .infoPanel .otherAlbumMenus li a:hover
 {
-	color:#bfafa6;
+	color:#ccc2bc;
 }
 
 .sMobile .infoPanel .otherAlbumMenus li a:hover
@@ -537,6 +537,7 @@ html, body
 .infoPanel .otherAlbumMenus li.siblings.current
 {
 	font-weight:bold;
+	color:#a79b94;
 }
 
 .sDesktop .infoPanel .menuLinks
@@ -561,7 +562,7 @@ html, body
 
 .infoPanel .menuLinks li a
 {
-	color:#7d726b;
+	color:#857b75;
 	-webkit-transition: all .3s ease;
 	-moz-transition: all .3s ease;
 	-ms-transition: all .3s ease;
@@ -571,7 +572,7 @@ html, body
 
 .sDesktop .infoPanel .menuLinks li a:hover
 {
-	color:#bfafa6;
+	color:#ccc2bc;
 }
 
 .sMobile .infoPanel .menuLinks li a:hover

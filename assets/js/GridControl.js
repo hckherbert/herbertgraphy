@@ -287,18 +287,11 @@ GridControl.prototype.positionGrids = function()
 			if (!this.mGridstaggering)
 			{
 				this.mGridstaggering = true;
-
-				$(".camera").addClass("cameraZoom vaporizing");
-				$(".blink").addClass("blinkInit");
+				this.fadeOutPageLoadingElements();
 
 				setTimeout(function()
 				{
-					$(".pageLoading").fadeTo(400, 0, function()
-					{
-						$(this).remove();
-					});
-
-					$(".wrapperAlbum").addClass("show");
+					this.transitLoadingandAlbumStart();
 
 					_self.mGridTween = TweenMax.staggerFrom($(".grid"), 0.8, {
 						opacity: 0.5,
@@ -320,11 +313,33 @@ GridControl.prototype.positionGrids = function()
 	}
 	else
 	{
-		$(".wrapperAlbum").addClass("show");
-		this.onStaggeredAll();
+		this.fadeOutPageLoadingElements();
+
+		setTimeout(function()
+		{
+			_self.transitLoadingandAlbumStart();
+			_self.onStaggeredAll();
+		}, 400);
 	}
 }
 
+GridControl.prototype.fadeOutPageLoadingElements = function()
+{
+	$(".loadingText").addClass("show down");
+	$(".camera").addClass("cameraZoom vaporizing");
+	$(".blink").addClass("blinkInit");
+}
+
+GridControl.prototype.transitLoadingandAlbumStart = function()
+{
+	$(".pageLoading").fadeTo(400, 0, function()
+	{
+		$(this).remove();
+	});
+
+	$(".wrapperAlbum").addClass("show");
+
+}
 
 GridControl.prototype.onStaggeredAll = function()
 {

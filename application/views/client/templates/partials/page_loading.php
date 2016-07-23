@@ -13,8 +13,8 @@
         <i class="lens-9"></i>
       </div>
       <div class="light"></div>
-      <div class="loadingText">Herbertgraphy</div>
     </div>
+    <div class="loadingText">Herbertgraphy</div>
     <!--<div class="flash"></div>-->
     <div class="blink"></div>
 </div>
