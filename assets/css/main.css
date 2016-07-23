@@ -794,17 +794,22 @@ html, body
 .photoZoomOverlay  .photoContainer .photo
 {
 	width:100%;
+	display:block;
 }
 
 .photoZoomOverlay  .descContainer 
 {
-	position:absolute;
-	left:0;
-	top:0;
+	position:relative;
 	width:100%;
 	color: #fff;
 	font-size:14px;
 	line-height:1.1em;
+	-webkit-transition: all 0.3s  ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-ms-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+	opacity:0;
 }
 
 .photoZoomOverlay  .descContainer .title
@@ -830,10 +835,10 @@ html, body
 	top:0;
 	width:100%;
 	height:100%;
-	background:#000;
+	background:#2b2928;
 	opacity: 0.8;
 	filter: alpha(opacity=80); 
-	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";;
 }
 
 .photoZoomOverlay .btnClose

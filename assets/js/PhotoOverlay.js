@@ -11,7 +11,7 @@ function PhotoOverlay(pPhotoOverlay)
 	this.mPhotoOverlay = pPhotoOverlay;
 	this.mPhotoContainer = $(".photoContainer", this.mPhotoOverlay);
 
-	$(".btnClose , this.mPhotoOverlay").on("click", function(){_self.readyHide();});
+	$(".btnClose" , this.mPhotoOverlay).on("click", function(){_self.readyHide();});
 	$(".bg", this.mPhotoOverlay).on("click", function(){_self.readyHide();})
 
 	$(window).on("resize", function()
@@ -38,8 +38,7 @@ PhotoOverlay.prototype.show = function(pSpeed_num, pFileName_str, pFileZoomSize,
 		function()
 		{
 			$(".btnClose" , _self.mPhotoOverlay).show();
-			$(".descContainer", _self.mPhotoOverlay).show();
-			$(".descContainer", _self.mPhotoOverlay).css("top", $(".photo", _self.mPhotoContainer).height());
+			$(".descContainer", _self.mPhotoOverlay).addClass("show");
 			$(".photoContainer").css("top", 0.5*($(window).height() - ($(".photoContainer .photo").height() + $(".descContainer", _self.mPhotoOverlay).height())))
 		},
 		500
@@ -50,8 +49,8 @@ PhotoOverlay.prototype.show = function(pSpeed_num, pFileName_str, pFileZoomSize,
 
 PhotoOverlay.prototype.readyHide = function()
 {	
-	$(".btnClose , this.mPhotoOverlay").hide();
-	$(".descContainer", this.mPhotoOverlay).hide();
+	$(".btnClose" , this.mPhotoOverlay).hide();
+	//$(".descContainer", this.mPhotoOverlay).hide();
 	this.mOnHideStart_fn.apply(null);
 }
 
@@ -65,6 +64,7 @@ PhotoOverlay.prototype.hide = function(pCallBack_fn)
 	(
 		function()
 		{
+			$(".descContainer", _self.mPhotoOverlay).removeClass("show");
 			_self.mPhotoOverlay.hide();
 			pCallBack_fn.apply(null);
 		},
@@ -136,8 +136,6 @@ PhotoOverlay.prototype.centerPhoto = function()
 	this.mPhotoContainer.css("height", _toHeight_num + "px");
 	this.mPhotoContainer.css("top", Math.round(0.5* ($(window).height() - this.mPhotoContainer.height())) + "px");
 	this.mPhotoContainer.css("left", Math.round(0.5* ($(window).width() - this.mPhotoContainer.width())) + "px");
-	
-	//$(".descContainer", this.mPhotoOverlay).css("height", $(".desc", this.mPhotoOverlay).outerHeight() + "px");
-	//$(".descContainer", this.mPhotoOverlay).css("top", $(".photo", this.mPhotoContainer).height() - $(".descContainer", this.mPhotoOverlay).height() + "px");
+	$(".photoContainer").css("top", 0.5*($(window).height() - ($(".photoContainer .photo").height() + $(".descContainer", this.mPhotoOverlay).height())));
 	
 }
