@@ -666,6 +666,7 @@ html, body
 	display:block;
 	position:absolute;
 	overflow:hidden;
+	cursor:pointer;
 }
 
 .sMobile .wrapperAlbum .gridPanel .grid img
@@ -704,6 +705,8 @@ html, body
 .wrapperAlbum .grid  .titleOverlay
 {
 	position:absolute;
+	color:#f2e6e4;
+	font-size:14px;
 	left:0;
 	top:100%;
 	width:100%;
@@ -740,13 +743,12 @@ html, body
 
 .wrapperAlbum .grid  .titleOverlay .title
 {
-	color:#fff;
 	text-align:center;
 	position:absolute;
 	left:0;
 	bottom:0;
-	margin:10px;
-	text-align:center;
+	margin:8px;
+	text-shadow: 1px 1px 6px #413b3b;
 }
 
 .wrapperAlbum .grid  .titleOverlay .desc
@@ -801,7 +803,7 @@ html, body
 {
 	position:relative;
 	width:100%;
-	color: #fff;
+	color: #f2e6e4;
 	font-size:14px;
 	line-height:1.1em;
 	-webkit-transition: all 0.3s  ease-in-out;
@@ -824,6 +826,7 @@ html, body
 {
 	font-weight: normal;
 	text-align: center;
+	padding:5px;
 }
 
 .photoZoomOverlay  .descContainer  .desc
@@ -868,6 +871,12 @@ html, body
 	-ms-transition: all .3s  ease-out;
 	-o-transition: all .3s  ease-out;
 	transition: all .3s  ease-out;
+}
+
+.sMobile .photoZoomOverlay .btnClose
+{
+	padding:11px 3px;
+	font-size:28px;
 }
 
 .photoZoomOverlay .btnClose:hover
