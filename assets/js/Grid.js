@@ -15,7 +15,7 @@ Grid.prototype.setSize = function(pWidth_num, pHeight_num)
 	var _self = this;
 	
 	this.mGrid.css("width", pWidth_num + "px");
-	this.mGrid.css("height", pHeight_num + "px");	
+	this.mGrid.css("height", (pHeight_num + 1) + "px"); //add one more to prevent 1-pixel space
 	
 	this.mDesc_str =  $(".desc", this.mGrid).text();
 	
@@ -57,9 +57,9 @@ Grid.prototype.centerImageVertically = function(pAspectRatio_num)
 {
 	//uncomment if wanna keep aspect ratio for vertical photos.
 
-	//var _aspectedHeight = this.mGrid.width()*pAspectRatio_num;
-	//this.mGrid.find("img").css("height",_aspectedHeight + "px");
-	//this.mGrid.find("img").css("top", -0.5 * Math.abs(_aspectedHeight - this.mGrid.height()) + "px");
+	var _aspectedHeight = this.mGrid.width()*pAspectRatio_num;
+	this.mGrid.find("img").css("height",_aspectedHeight + "px");
+	this.mGrid.find("img").css("top", -0.5 * Math.abs(_aspectedHeight - this.mGrid.height()) + "px");
 }
 
 Grid.prototype.getElement = function()
