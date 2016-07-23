@@ -329,9 +329,8 @@ html, body
 	padding:0 .1em 0 0; 
 	height:.7em; 
 	line-height:.85em; 
-	float:left; 
-	/*color: #887a72;*/
-	color:#987f7a;
+	float:left;
+	color:#99827d;
 }
 
 .sDesktop .infoPanel .intro
@@ -803,18 +802,25 @@ html, body
 	left:0;
 	top:0;
 	width:100%;
-	display:none;
+	color: #fff;
+	font-size:14px;
+	line-height:1.1em;
+}
+
+.photoZoomOverlay  .descContainer .title
+{
+	padding: 5px 5px 0 5px;
+	font-weight:bold;
+	display:block;
+	position:relative;;
 }
 
 .photoZoomOverlay  .descContainer  .desc
 {
 	padding: 5px;
-    color: #fff;
-    position: absolute;
-    left: 0;
-    top: 0;
 	font-size:14px;
-	line-height:1.1em;
+	display:block;
+	position:relative;;
 }
 
 .photoZoomOverlay  .descContainer .bg

@@ -20,33 +20,46 @@ function PhotoOverlay(pPhotoOverlay)
 	});
 }
 
-PhotoOverlay.prototype.show = function(pSpeed_num, pFileName_str, pFileZoomSize, pDesc_str)
+PhotoOverlay.prototype.show = function(pSpeed_num, pFileName_str, pFileZoomSize, pDesc_str, pTitle_str)
 {
 	var _self =  this;
 	//REMARK: ADD ON LOAD CALLBACK...
 	$(".photo", this.mPhotoContainer).remove();
 	$(".desc", this.mPhotoOverlay).text(pDesc_str);
+	$(".title", this.mPhotoOverlay).text(pTitle_str);
+
 	this.mPhotoContainer.prepend("<img class='photo' src='" + pFileName_str + "_" + pFileZoomSize + ".jpg' >");
-	
-	console.log("overlay show");
-	
 	this.mPhotoOverlay.show();
 	this.mPhotoOverlay.addClass("show");
 	this.centerPhoto();
-	
+
+
 	setTimeout
 	( 
 		function()
 		{
+			/*
 			var _toHeight_num =  $(".desc", _self.mPhotoOverlay).outerHeight() ;
-			
+			var _textHeight = $(".desc", _self.mPhotoOverlay).outerHeight() + $(".title", _self.mPhotoOverlay).outerHeight();
+
 			$(".btnClose , this.mPhotoOverlay").show();
 			$(".descContainer", _self.mPhotoOverlay).show();
-			$(".descContainer", _self.mPhotoOverlay).css("height", $(".desc", _self.mPhotoOverlay).outerHeight() + "px");
+			//$(".descContainer", _self.mPhotoOverlay).css("height", _textHeight + "px");
 			$(".descContainer", _self.mPhotoOverlay).css("top", $(".photo", _self.mPhotoContainer).height() - $(".descContainer", _self.mPhotoOverlay).height() + "px");
+			*/
+
+			var _textHeight = $(".desc", _self.mPhotoOverlay).outerHeight() + $(".title", _self.mPhotoOverlay).outerHeight();
+			//alert(_textHeight);
+
+			$(".btnClose" , _self.mPhotoOverlay).show();
+			$(".descContainer", _self.mPhotoOverlay).show();
+			$(".descContainer", _self.mPhotoOverlay).css("top", $(".photo", _self.mPhotoContainer).height());
+			//(".descContainer", _self.mPhotoOverlay).css("height", _textHeight + "px");
+			$(".photoContainer").css("top", 0.5*($(window).height() - ($(".photoContainer .photo").height() + $(".descContainer", _self.mPhotoOverlay).height())))
 		},
 		500
 	);
+
 
 }
 
@@ -137,7 +150,7 @@ PhotoOverlay.prototype.centerPhoto = function()
 	this.mPhotoContainer.css("top", Math.round(0.5* ($(window).height() - this.mPhotoContainer.height())) + "px");
 	this.mPhotoContainer.css("left", Math.round(0.5* ($(window).width() - this.mPhotoContainer.width())) + "px");
 	
-	$(".descContainer", this.mPhotoOverlay).css("height", $(".desc", this.mPhotoOverlay).outerHeight() + "px");
-	$(".descContainer", this.mPhotoOverlay).css("top", $(".photo", this.mPhotoContainer).height() - $(".descContainer", this.mPhotoOverlay).height() + "px");
+	//$(".descContainer", this.mPhotoOverlay).css("height", $(".desc", this.mPhotoOverlay).outerHeight() + "px");
+	//$(".descContainer", this.mPhotoOverlay).css("top", $(".photo", this.mPhotoContainer).height() - $(".descContainer", this.mPhotoOverlay).height() + "px");
 	
 }

@@ -29,7 +29,9 @@
 		<!--<img class="photo" src="images/dummyLargeH.jpg">-->
 		<div class="descContainer">
 			<div class="bg"></div>
+			<span class="title"></span>
 			<span class="desc"></span>
+			<div class="clear"></div>
 		</div>
 		<a class="btnClose" href="javascript:void(0)"></a>
 	</div>

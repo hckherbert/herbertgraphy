@@ -18,6 +18,7 @@ Grid.prototype.setSize = function(pWidth_num, pHeight_num)
 	this.mGrid.css("height", (pHeight_num + 1) + "px"); //add one more to prevent 1-pixel space
 	
 	this.mDesc_str =  $(".desc", this.mGrid).text();
+	this.mTitle_str =  $(".title", this.mGrid).text();
 	
 	this.mGrid.on("mouseover", function() { _self.onMouseOver();});
 	this.mGrid.on("mouseout", function() { _self.onMouseOut();});
@@ -105,6 +106,11 @@ Grid.prototype.setOpacity = function(pOpacity)
 Grid.prototype.getDesc = function()
 {
 	return this.mDesc_str;
+}
+
+Grid.prototype.getTitle = function()
+{
+	return this.mTitle_str;
 }
 
 Grid.prototype.addEventListener =  function(pEvent_str, pCallBack_fn)
