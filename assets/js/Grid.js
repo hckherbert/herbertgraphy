@@ -15,7 +15,7 @@ Grid.prototype.setSize = function(pWidth_num, pHeight_num)
 	var _self = this;
 	
 	this.mGrid.css("width", pWidth_num + "px");
-	this.mGrid.css("height", pHeight_num + "px");  
+	this.mGrid.css("height", (pHeight_num + 1) + "px");  //add one more to prevent 1-pixel space
 	$("img", this.mGrid).css("height", (pHeight_num + 2) + "px"); //add one more to prevent 1-pixel space
 	
 	this.mDesc_str =  $(".desc", this.mGrid).text();

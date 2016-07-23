@@ -68,7 +68,6 @@ PhotoOverlay.prototype.show = function(pSpeed_num, pFileName_str, pFileZoomSize,
 			}
 
 			//$(".descContainer").css("top", -1 * $(".descContainer").outerHeight() + "px");
-			//$(".photoContainer").css("top", 0.5*($(window).height() - ($(".photoContainer .photo").height() + $(".descContainer", _self.mPhotoOverlay).height())) + "px");
 			$(".photoContainer").css("top", $(".photoContainer").position().top - $(".descContainer").height()*0.5 + "px")
 		},
 		500

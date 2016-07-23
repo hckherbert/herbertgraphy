@@ -109,6 +109,7 @@
 	function toggleMenu(pEvent)
 	{
 		pEvent.preventDefault();
+		$(".btnMenuToggle").toggleClass("btnMenuToggleRotate");
 
 		$(".menuContainer").addClass("menuTransition");
 		$(".albumTitle").css("height", $(".albumTitle h1").outerHeight() + "px");

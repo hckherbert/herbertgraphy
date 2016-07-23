@@ -372,7 +372,7 @@ html, body
 .sMobile .infoPanel h1
 {
 	font-size:26px;
-	padding:7px 60px 7px 12px;
+	padding:10px 60px 4px 12px;
 	font-weight:200;
 
 }
@@ -633,13 +633,31 @@ html, body
 
 .sMobile .infoPanel .btnMenuToggle
 {
-	width: 36px;
-    height: 36px;
+	width: 46px;
+    height: 46px;
     display: block;
     padding: 6px 12px;
     right: 0;
     top: 0;
 	position:absolute;
+	-webkit-transition: all 0.2s  ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-ms-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+}
+
+.sMobile .infoPanel .btnMenuToggle:hover
+{
+	-webkit-filter: brightness(120%);
+	filter: brightness(120%);
+}
+
+.btnMenuToggleRotate
+{
+	-ms-transform: rotate(90deg);
+	-webkit-transform: rotate(90deg);
+	transform: rotate(90deg);
 }
 
 .sMobile .infoPanel .btnMenuToggle img
