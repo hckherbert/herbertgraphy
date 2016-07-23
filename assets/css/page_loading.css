@@ -268,9 +268,9 @@
 
 .down
 {
-  -ms-transform: translate(0, 300%); /* IE 9 */
-  -webkit-transform: translate(0, 300%); /* Safari */
-  transform: translate(0, 300%);
+  -ms-transform: translate(0, 200%); /* IE 9 */
+  -webkit-transform: translate(0, 200%); /* Safari */
+  transform: translate(0, 200%);
   opacity:0;
 
 }

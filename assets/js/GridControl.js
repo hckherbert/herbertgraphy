@@ -13,7 +13,8 @@ GridControl.prototype.mWinWidthBeforeOpen_num = 0;
 GridControl.prototype.mWinWidthBeforeStaggered_num = 0;
 GridControl.prototype.mOverlayPopSpeed_num = 0.5;
 GridControl.prototype.mTimerReposition = null;
-GridControl.prototype.mTimerAlbumShowTrasit = null;
+GridControl.prototype.mBaseBreakPoint_array = null;
+GridControl.prototype.mWideScreenBreakPoint_num = null;
 
 function GridControl(pGridControl, pPhotoOverlay)
 {
@@ -51,6 +52,12 @@ function GridControl(pGridControl, pPhotoOverlay)
 		}
 	)
 
+}
+
+GridControl.prototype.initBreakPoints = function(pBaseBreakPoint_array, pWideScreenBreakPoint_num)
+{
+	this.mBaseBreakPoint_array = pBaseBreakPoint_array;
+	this.mWideScreenBreakPoint_num = pWideScreenBreakPoint_num;
 }
 
 GridControl.prototype.imageOnLoaded = function(pImgObj)
@@ -171,12 +178,12 @@ GridControl.prototype.setFeaturedtOccupy = function()
 GridControl.prototype.rePositionGrid = function()
 {
 	clearTimeout(this.mTimerReposition);
-	
-	if ($(window).width()>=0 && $(window).width()<=768)
+
+	if ($(window).width()>=0 && $(window).width()<=this.mBaseBreakPoint_array[1])
 	{
 		this.updateDensity("low");
 	}
-	else if ($(window).width()>768 && $(window).width()<=mWideScreenBreakPoint_num)
+	else if ($(window).width()>mBaseBreakPoint_array[1] && $(window).width()<=this.mWideScreenBreakPoint_num)
 	{
 		this.updateDensity("medium");
 	}
@@ -426,9 +433,7 @@ GridControl.prototype.updateGridPanelAndWinScroll = function()
  
 GridControl.prototype.onClick = function(pObj)
 {
-
 	$("html").css("overflow-y", "hidden");
-
 	var _scrollTop = $(window).scrollTop();
 	var _fromX_num = 0;
 	var _fromY_num = 0;
@@ -436,11 +441,11 @@ GridControl.prototype.onClick = function(pObj)
 	var _toY_num = 0;
 	var _toWidth_num = 0;
 	var _toHeight_num = 0;
+	var _zoomFactor = 0;
 	
 	this.mActiveGridIndex_num = pObj.getIndex();
 	console.log("active index on click: " +  pObj.getIndex());
 	this.mWinWidthBeforeOpen_num = $(window).width();
-	
 	console.log("active index: " + this.mActiveGridIndex_num);
 	 
 	if (this.mColCount_num == 3)
@@ -454,9 +459,25 @@ GridControl.prototype.onClick = function(pObj)
 		_fromY_num = pObj.getPosition()["y"]- _scrollTop;
 	}
 
+	if ($("body").hasClass("sDesktop"))
+	{
+		if ( $(window).width() >= this.mWideScreenBreakPoint_num)
+		{
+			_zoomFactor = PhotoOverlay.zoomFactorDesktop;
+		}
+		else
+		{
+			_zoomFactor =PhotoOverlay.zoomFactorMobile;
+		}
+	}
+	else
+	{
+		_zoomFactor =PhotoOverlay.zoomFactorMobile;
+	}
+
 	if ($(window).width() <= $(window).height())
 	{
-		_toWidth_num = Math.round($(window).width() * PhotoOverlay.zoomFactor );
+		_toWidth_num = Math.round($(window).width() * _zoomFactor );
 
 		if (pObj.getOrientation() == "h")
 		{
@@ -469,8 +490,7 @@ GridControl.prototype.onClick = function(pObj)
 	}
 	else
 	{
-		_toHeight_num = Math.round($(window).height() * PhotoOverlay.zoomFactor );
-
+		_toHeight_num = Math.round($(window).height() * _zoomFactor);
 
 		if (pObj.getOrientation() == "h")
 		{
@@ -480,9 +500,7 @@ GridControl.prototype.onClick = function(pObj)
 		{
 			_toWidth_num = Math.round(_toHeight_num / this.mAspectRatio_num);
 		}
-
 	}
-	
 	_toX_num =  Math.round(0.5* (($(window).width() - _toWidth_num)));
 	_toY_num =  0.5* (($(window).height() - _toHeight_num));
 

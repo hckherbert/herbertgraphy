@@ -820,6 +820,12 @@ html, body
 	position:relative;;
 }
 
+.photoZoomOverlay  .descContainer .titleOnly
+{
+	font-weight: normal;
+	text-align: center;
+}
+
 .photoZoomOverlay  .descContainer  .desc
 {
 	padding: 5px;

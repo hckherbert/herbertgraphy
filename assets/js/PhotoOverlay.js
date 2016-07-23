@@ -3,7 +3,10 @@ PhotoOverlay.prototype.mPhotoContainer = null;
 PhotoOverlay.prototype.mOrientation_str = null;
 PhotoOverlay.prototype.mAspectRatio_num = null;
 PhotoOverlay.prototype.mOnHideStart_fn = null;
-PhotoOverlay.zoomFactor = 0.85;
+PhotoOverlay.prototype.mBaseBreakPoint_array = null;
+PhotoOverlay.prototype.mWideScreenBreakPoint_num = null;
+PhotoOverlay.zoomFactorDesktop = 0.85;
+PhotoOverlay.zoomFactorMobile = 0.7;
 
 function PhotoOverlay(pPhotoOverlay)
 {
@@ -13,11 +16,12 @@ function PhotoOverlay(pPhotoOverlay)
 
 	$(".btnClose" , this.mPhotoOverlay).on("click", function(){_self.readyHide();});
 	$(".bg", this.mPhotoOverlay).on("click", function(){_self.readyHide();})
+}
 
-	$(window).on("resize", function()
-	{
-		_self.centerPhoto();
-	});
+PhotoOverlay.prototype.initBreakPoints = function(pBaseBreakPoint_array, pWideScreenBreakPoint_num)
+{
+	this.mBaseBreakPoint_array = pBaseBreakPoint_array;
+	this.mWideScreenBreakPoint_num = pWideScreenBreakPoint_num;
 }
 
 PhotoOverlay.prototype.show = function(pSpeed_num, pFileName_str, pFileZoomSize, pDesc_str, pTitle_str)
@@ -27,6 +31,26 @@ PhotoOverlay.prototype.show = function(pSpeed_num, pFileName_str, pFileZoomSize,
 	$(".photo", this.mPhotoContainer).remove();
 	$(".desc", this.mPhotoOverlay).text(pDesc_str);
 	$(".title", this.mPhotoOverlay).text(pTitle_str);
+
+	if (pDesc_str == "")
+	{
+		$(".title", this.mPhotoOverlay).addClass("titleOnly");
+		$(".desc", this.mPhotoOverlay).addClass("hide");
+	}
+	else
+	{
+		$(".title", this.mPhotoOverlay).removeClass("titleOnly");
+		$(".desc", this.mPhotoOverlay).removeClass("hide");
+	}
+
+	if (pTitle_str == "")
+	{
+		$(".title", this.mPhotoOverlay).addClass("hide");
+	}
+	else
+	{
+		$(".title", this.mPhotoOverlay).removeClass("hide");
+	}
 
 	this.mPhotoContainer.prepend("<img class='photo' src='" + pFileName_str + "_" + pFileZoomSize + ".jpg' >");
 	this.mPhotoOverlay.show();
@@ -42,6 +66,7 @@ PhotoOverlay.prototype.show = function(pSpeed_num, pFileName_str, pFileZoomSize,
 			{
 				$(".descContainer", _self.mPhotoOverlay).addClass("show");
 			}
+
 			$(".photoContainer").css("top", 0.5*($(window).height() - ($(".photoContainer .photo").height() + $(".descContainer", _self.mPhotoOverlay).height())))
 		},
 		500
@@ -102,12 +127,29 @@ PhotoOverlay.prototype.getPhotoContainer = function()
 
 PhotoOverlay.prototype.centerPhoto = function()
 {
-	var _toWidth_num;
-	var _toHeight_num;
+	var _toWidth_num = 0;
+	var _toHeight_num = 0;
+	var _zoomFactor = 0;
+
+	if ($("body").hasClass("sDesktop"))
+	{
+		if ( $(window).width() >= this.mWideScreenBreakPoint_num)
+		{
+			_zoomFactor = PhotoOverlay.zoomFactorDesktop;
+		}
+		else
+		{
+			_zoomFactor =PhotoOverlay.zoomFactorMobile;
+		}
+	}
+	else
+	{
+		_zoomFactor =PhotoOverlay.zoomFactorMobile;
+	}
 
 	if ($(window).width() <= $(window).height())
 	{
-		_toWidth_num = Math.round($(window).width() * PhotoOverlay.zoomFactor);
+		_toWidth_num = Math.round($(window).width() * _zoomFactor);
 
 		if (this.mOrientation_str == "h")
 		{
@@ -120,8 +162,7 @@ PhotoOverlay.prototype.centerPhoto = function()
 	}
 	else
 	{
-		_toHeight_num = Math.round($(window).height() * PhotoOverlay.zoomFactor);
-
+		_toHeight_num = Math.round($(window).height() * _zoomFactor);
 
 		if (this.mOrientation_str == "h")
 		{
@@ -132,13 +173,9 @@ PhotoOverlay.prototype.centerPhoto = function()
 			_toWidth_num = Math.round(_toHeight_num / this.mAspectRatio_num);
 		}
 	}
-
-	console.log("center photo");
-
 	this.mPhotoContainer.css("width", _toWidth_num + "px");
 	this.mPhotoContainer.css("height", _toHeight_num + "px");
-	this.mPhotoContainer.css("top", Math.round(0.5* ($(window).height() - this.mPhotoContainer.height())) + "px");
 	this.mPhotoContainer.css("left", Math.round(0.5* ($(window).width() - this.mPhotoContainer.width())) + "px");
-	$(".photoContainer").css("top", 0.5*($(window).height() - ($(".photoContainer .photo").height() + $(".descContainer", this.mPhotoOverlay).height())));
+	this.mPhotoContainer.css("top", 0.5*($(window).height() - ($(".photoContainer .photo").height() + $(".descContainer", this.mPhotoOverlay).height())));
 	
 }

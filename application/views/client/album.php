@@ -53,9 +53,10 @@
 			mResponsive = new Responsive();
 			mResponsive.init(["sMobile", "sDesktop"], mBaseBreakPoint_array, mWideScreenBreakPoint_num);
 			mPhotoOverlay = new PhotoOverlay($(".photoZoomOverlay"));
+			mPhotoOverlay.initBreakPoints(mBaseBreakPoint_array, mWideScreenBreakPoint_num);
 			mGridControl = new GridControl($(".gridPanel"), mPhotoOverlay);
+			mGridControl.initBreakPoints(mBaseBreakPoint_array, mWideScreenBreakPoint_num);
 
-			
 			if ($("body").hasClass("sMobile"))
 			{
 				mGridControl.updateDensity("low");
@@ -90,6 +91,7 @@
 			$(".menuContainer").removeClass("menuTransition");
 			$(".albumTitle").css("height", $(".albumTitle h1").outerHeight() + "px");
 			$(".menuContainer").css("top", $(".albumTitle").height() + "px");
+			$(".infoPanel").css("height", "auto");
 		}
 		else if ($(window).width()>mBaseBreakPoint_array[1] && $(window).width()<=mWideScreenBreakPoint_num)
 		{
