@@ -291,8 +291,7 @@ GridControl.prototype.positionGrids = function()
 
 				setTimeout(function()
 				{
-					this.transitLoadingandAlbumStart();
-
+					_self.transitLoadingandAlbumStart();
 					_self.mGridTween = TweenMax.staggerFrom($(".grid"), 0.8, {
 						opacity: 0.5,
 						"left": Math.round(Math.random() * $(".gridPanel").width()) + "px",
