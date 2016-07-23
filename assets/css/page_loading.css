@@ -15,7 +15,7 @@
   left:50%;
   margin-left:-30px;
   top:50%;
-  margin-top:30px;
+  margin-top:35px;
   opacity:0;
   transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
@@ -268,9 +268,10 @@
 
 .down
 {
-  -ms-transform: translate(0, 40%); /* IE 9 */
-  -webkit-transform: translate(0, 40%); /* Safari */
-  transform: translate(0, 40%);
+  -ms-transform: translate(0, 300%); /* IE 9 */
+  -webkit-transform: translate(0, 300%); /* Safari */
+  transform: translate(0, 300%);
+  opacity:0;
 
 }
 

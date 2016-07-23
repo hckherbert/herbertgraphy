@@ -364,6 +364,8 @@ class Album_control extends CI_Controller
 		}
 
 
+		$this->photo_model->update_photo_data($update_data, $album_id);
+ 
 		if ($this->photo_model->update_photo_data($update_data, $album_id))
 		{
 			JSONAPI::echo_json_successful_response();
@@ -372,6 +374,7 @@ class Album_control extends CI_Controller
 		{
 			JSONAPI::echo_json_error_response();
 		}
+		 
 	}
 
 	public function check_exist()

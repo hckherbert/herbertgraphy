@@ -740,7 +740,7 @@ Album_control.prototype.submit_handler = function()
                     dataType: "json",
                     success: function (pData)
                     {
-                        console.log(_postData);
+                        //console.log(_postData);
                         _self.displaySuccess("Photo infos are updated successfully.", "_self");
                     },
                     error: function (jqxhr, status)

@@ -161,14 +161,16 @@ class Photo_model extends CI_Model
 
         unset($data);
 
-        if ($this->db->trans_status() === TRUE)
-        {
-            return TRUE;
-        }
-        else
-        {
-            return FALSE;
-        }
+        $this->db->update_batch("photos", $batch_update_data_array, "photoId");
+
+         if ($this->db->trans_status() === TRUE)
+         {
+             return TRUE;
+         }
+         else
+         {
+             return FALSE;
+         }
     }
 
     public function delete_photo($data, $album_id)

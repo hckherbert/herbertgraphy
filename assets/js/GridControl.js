@@ -326,13 +326,15 @@ GridControl.prototype.positionGrids = function()
 
 GridControl.prototype.fadeOutPageLoadingElements = function()
 {
-	$(".loadingText").addClass("show down");
+	$(".loadingText").addClass("show");
 	$(".camera").addClass("cameraZoom vaporizing");
 	$(".blink").addClass("blinkInit");
 }
 
 GridControl.prototype.transitLoadingandAlbumStart = function()
 {
+	$(".loadingText").addClass("down");
+
 	$(".pageLoading").fadeTo(400, 0, function()
 	{
 		$(this).remove();

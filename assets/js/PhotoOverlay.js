@@ -38,7 +38,10 @@ PhotoOverlay.prototype.show = function(pSpeed_num, pFileName_str, pFileZoomSize,
 		function()
 		{
 			$(".btnClose" , _self.mPhotoOverlay).show();
-			$(".descContainer", _self.mPhotoOverlay).addClass("show");
+			if (pDesc_str!="" || pTitle_str!="")
+			{
+				$(".descContainer", _self.mPhotoOverlay).addClass("show");
+			}
 			$(".photoContainer").css("top", 0.5*($(window).height() - ($(".photoContainer .photo").height() + $(".descContainer", _self.mPhotoOverlay).height())))
 		},
 		500
