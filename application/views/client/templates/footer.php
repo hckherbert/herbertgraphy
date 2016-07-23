@@ -1,7 +1,4 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: HerbertHo
- * Date: 7/20/2016
- * Time: 11:45 AM
- */
+<?php ?>
+<div class="footer">
+    <div class="text">&copy; <?php echo date("Y"); ?> HerbertGraphy</div>
+</div>

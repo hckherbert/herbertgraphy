@@ -46,7 +46,7 @@ html, body
 /********** COLOR SCHEMES **********/
 .bgBrown
 {
-	background:#2e2c28;
+	background:#383432;
 }
 
 /********** HOME ***************/
@@ -348,6 +348,7 @@ html, body
     font-size: 15px;
     line-height: 1.2em;
 	color:#a29c93;
+	margin:0 0 20px 0;
 }
 
 .sMobile .infoPanel .intro
@@ -523,6 +524,14 @@ html, body
 	margin:0 0 3px 0;
 }
 
+.sDesktop .infoPanel .otherAlbumMenus li.parent a,
+.sDesktop .infoPanel .otherAlbumMenus li.siblings a,
+.sDesktop .subAlbumMenus a
+{
+	border-right: 1px solid #605854;
+	padding: 0 10px 0 0;
+}
+
 .sMobile .infoPanel .otherAlbumMenus li.siblings
 {
 	font-style:italic;
@@ -585,8 +594,26 @@ html, body
 	padding:4px 0;
 }
 
+/******** Footer ********/
+.footer
+{
+	height:24px;
+	background:#131312;
+	color:#d0c4c0;
+	position:fixed;
+	width:100%;
+	bottom:0;
+}
 
-/****** Album *********/
+.footer .text
+{
+	padding:6px;
+	text-align:right;
+	font-size:14px;
+}
+
+
+/******** Album ********/
 .wrapperAlbum
 {
 	-webkit-opacity: 0;

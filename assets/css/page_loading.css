@@ -1,6 +1,6 @@
 .pageLoading
 {
-  position: absolute;
+  position: fixed;
   height: 100%;
   width: 100%;
   z-index: 4;
@@ -268,10 +268,9 @@
 
 .down
 {
-  -ms-transform: translate(0, 200%); /* IE 9 */
-  -webkit-transform: translate(0, 200%); /* Safari */
-  transform: translate(0, 200%);
-  opacity:0;
+  -ms-transform: translate(0, 15%); /* IE 9 */
+  -webkit-transform: translate(0, 15s0%); /* Safari */
+  transform: translate(0, 150%);
 
 }
 
