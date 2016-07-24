@@ -21,6 +21,11 @@ html, body
 	min-width:320px;
 }
 
+a
+{
+	outline: 0;
+}
+
 .hide
 {
 	display:none !important;

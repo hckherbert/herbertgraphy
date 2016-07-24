@@ -27,7 +27,8 @@ PhotoOverlay.prototype.initBreakPoints = function(pBaseBreakPoint_array, pWideSc
 PhotoOverlay.prototype.show = function(pSpeed_num, pFileName_str, pFileZoomSize, pDesc_str, pTitle_str)
 {
 	var _self =  this;
-	//REMARK: ADD ON LOAD CALLBACK...
+
+	$("#simple-loading").addClass("show");
 	$(".photo", this.mPhotoContainer).remove();
 	$(".desc", this.mPhotoOverlay).text(pDesc_str);
 	$(".title", this.mPhotoOverlay).text(pTitle_str);
@@ -52,27 +53,36 @@ PhotoOverlay.prototype.show = function(pSpeed_num, pFileName_str, pFileZoomSize,
 		$(".title", this.mPhotoOverlay).removeClass("hide");
 	}
 
-	this.mPhotoContainer.prepend("<img class='photo' src='" + pFileName_str + "_" + pFileZoomSize + ".jpg' >");
-	this.mPhotoOverlay.show();
-	this.mPhotoOverlay.addClass("show");
-	this.centerPhoto();
+	var _imgObj = new Image();
+	_imgObj.onload = function()
+	{
 
-	setTimeout
-	( 
-		function()
-		{
-			$(".btnClose" , _self.mPhotoOverlay).show();
-			if (pDesc_str!="" || pTitle_str!="")
+		_self.mPhotoContainer.prepend("<img class='photo' src='" + pFileName_str + "_" + pFileZoomSize + ".jpg' >");
+		_self.mPhotoOverlay.show();
+		_self.mPhotoOverlay.addClass("show");
+		_self.centerPhoto();
+
+		setTimeout
+		(
+			function()
 			{
-				$(".descContainer", _self.mPhotoOverlay).addClass("show");
-			}
+				$(".btnClose" , _self.mPhotoOverlay).show();
+				if (pDesc_str!="" || pTitle_str!="")
+				{
+					$(".descContainer", _self.mPhotoOverlay).addClass("show");
+				}
+				//$(".descContainer").css("top", -1 * $(".descContainer").outerHeight() + "px");
+				$(".photoContainer").css("top", $(".photoContainer").position().top - $(".descContainer").height()*0.5 + "px");
+				$("#simple-loading").removeClass("show");
+			},
+			500
+		);
 
-			//$(".descContainer").css("top", -1 * $(".descContainer").outerHeight() + "px");
-			$(".photoContainer").css("top", $(".photoContainer").position().top - $(".descContainer").height()*0.5 + "px")
-		},
-		500
-	);
+	}
 
+	_imgObj.src = pFileName_str + "_" + pFileZoomSize + ".jpg";
+
+	//TODO show error if load failed
 
 }
 
