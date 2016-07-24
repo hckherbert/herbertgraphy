@@ -299,7 +299,7 @@ GridControl.prototype.positionGrids = function()
 
 				setTimeout(function()
 				{
-					_self.transitLoadingandAlbumStart();
+					_self.transitLoadingAndAlbumStart();
 					_self.mGridTween = TweenMax.staggerFrom($(".grid"), 0.8, {
 						opacity: 0.5,
 						"left": Math.round(Math.random() * $(".gridPanel").width()) + "px",
@@ -324,7 +324,7 @@ GridControl.prototype.positionGrids = function()
 
 		setTimeout(function()
 		{
-			_self.transitLoadingandAlbumStart();
+			_self.transitLoadingAndAlbumStart();
 			//_self.onStaggeredAll();
 			_self.updateGridPanelAndWinScroll();
 		}, 400);
@@ -339,7 +339,7 @@ GridControl.prototype.fadeOutPageLoadingElements = function()
 	$(".blink").addClass("blinkInit");
 }
 
-GridControl.prototype.transitLoadingandAlbumStart = function()
+GridControl.prototype.transitLoadingAndAlbumStart = function()
 {
 	$(".loadingText").addClass("down");
 
@@ -382,14 +382,13 @@ GridControl.prototype.updateGridInfoHeight = function()
 	if ($("body").hasClass("sDesktop"))
 	{
 		var _i = 0;
-		var _maxLastGridHeight_num = 0;
+		var _maxLastGridHeight_num = this.mGrid_array[this.mGridCount_num-1].getSize()["height"];
 		var _gridPanelHeight_num = this.mGrid_array[this.mGridCount_num-1].getPosition()["y"];
 		var _startLastRowIndex = this.mGridCount_num - this.mColCount_num;
 
 		if (_startLastRowIndex  > 0)
 		{
-
-			for (_i = this.mGridCount_num - this.mColCount_num ; _i < this.mGridCount_num; _i++)
+			for (_i = _startLastRowIndex ; _i < this.mGridCount_num; _i++)
 			{
 				if (this.mGrid_array[_i].getSize()["height"] >= _maxLastGridHeight_num)
 				{
