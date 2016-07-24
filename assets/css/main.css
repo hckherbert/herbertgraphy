@@ -510,7 +510,7 @@ html, body
 {
 	font-size:18px;
 	font-style:italic;
-	margin:20px 0 3px 0;
+	margin:0 0 3px 0;
 }
 
 .sMobile .infoPanel .otherAlbumMenus li.parent
@@ -530,6 +530,7 @@ html, body
 {
 	border-right: 1px solid #605854;
 	padding: 0 10px 0 0;
+	margin:0 -10px 0 0;
 }
 
 .sMobile .infoPanel .otherAlbumMenus li.siblings

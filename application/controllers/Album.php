@@ -50,7 +50,7 @@ class Album extends CI_Controller
 			  
 			   if ($parent_id !== NULL && $input_array["id"] == $parent_id)
 			   {
-					$output["siblings"] = $this->get_sub_albums($parent_id);
+				   $output["siblings"] = $this->get_sub_albums($parent_id);
 			   }
 			   
 			   return $output;
@@ -58,11 +58,25 @@ class Album extends CI_Controller
 
 		}, $data);
 
-
 		$data = array_filter($data, function($key)
 		{
 			return $key!= NULL;
 		});
+
+		$item_with_parent_and_siblings = array();
+
+		foreach ($data as $key=>$value)
+		{
+			if ($data[$key]["siblings"]!=NULL)
+			{
+				$item_with_parent_and_siblings = $data[$key];
+				unset($data[$key]);
+			}
+		}
+
+		if (!empty($item_with_parent_and_siblings)) {
+			array_unshift($data, $item_with_parent_and_siblings);
+		}
 
 		return $data;
 	}
