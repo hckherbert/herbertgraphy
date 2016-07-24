@@ -604,11 +604,18 @@ a
 .footer
 {
 	height:24px;
-	background:#131312;
+	background:#625652;
 	color:#d0c4c0;
 	position:fixed;
 	width:100%;
 	bottom:0;
+ 
+	opacity:0;
+	-webkit-transition: all 3s ease;
+	-moz-transition: all 3s ease;
+	-ms-transition: all 3s ease;
+	-o-transition: all 3s ease;
+	transition: all 3s ease;
 }
 
 .footer .text
@@ -619,17 +626,57 @@ a
 }
 
 
+.footer .footerMenu
+{
+	height: 69px;
+	width: 138px;
+	border-radius: 90px 90px 0 0;
+	-moz-border-radius: 90px 90px 0 0;
+	-webkit-border-radius: 90px 90px 0 0;
+	background: #625652;
+	position: absolute;
+	top: -30px;
+	left: 10%;
+}
+
+.footer .footerMenu a
+{
+	width:30px;
+	height:30px;
+	display:block;
+	position: absolute;
+}
+
+.footer .footerMenu #btn_ask_her
+{
+	left: 8px;
+	top: 0px;
+	background:url(../images/icon-message.png) 0 0 no-repeat;
+	background-size:100%;
+}
+
+.footer .footerMenu #btn_update_her
+{
+	left: 54px;
+	top: -15px;
+	background:url(../images/icon-news.png) 0 0 no-repeat;
+	background-size:100%;
+}
+
+.footer .footerMenu #btn_share_her
+{
+	left: 100px;
+	top: 0px;
+	background:url(../images/icon-share.png) 0 0 no-repeat;
+	background-size:100%;
+}
 /******** Album ********/
 .wrapperAlbum
 {
 	-webkit-opacity: 0;
 	-moz-opacity: 0;
 	opacity:0;
-	-webkit-transition: all 3s ease;
-	-moz-transition: all 3s ease;
-	-ms-transition: all 3s ease;
-	-o-transition: all 3s ease;
-	transition: all 3s ease;
+foot
 }
 
 .sMobile .menuMask

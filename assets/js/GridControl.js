@@ -349,6 +349,7 @@ GridControl.prototype.transitLoadingAndAlbumStart = function()
 	});
 
 	$(".wrapperAlbum").addClass("show");
+	$(".footer").addClass("show");
 
 }
 

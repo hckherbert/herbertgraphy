@@ -31,10 +31,11 @@
                 <?php } ?>
             </ul>
         <?php } ?>
-        <ul class="menuLinks">
+        <!--<ul class="menuLinks">
             <li><a href="javascript:void(0)">Why <em>Herbertgraphy</em></a></li>
             <li><a href="javascript:void(0)">Herbertbloggy</a></li>
         </ul>
+        -->
     </div>
     <?php if (isset($current_album_data["album_details"]->intro) && $current_album_data["album_details"]->intro!=NULL) { ?>
         <div class="intro">
