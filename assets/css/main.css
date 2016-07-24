@@ -795,6 +795,7 @@ html, body
 	bottom:0;
 	margin:8px;
 	text-shadow: 1px 1px 6px #413b3b;
+	width:100%;
 }
 
 .wrapperAlbum .grid  .titleOverlay .desc

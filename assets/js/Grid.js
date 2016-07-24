@@ -123,7 +123,6 @@ Grid.prototype.addEventListener =  function(pEvent_str, pCallBack_fn)
 Grid.prototype.onMouseOver = function()
 {
 	$(".titleOverlay", this.mGrid).addClass("titleOverlayShow");
-	$(".title",  this.mGrid).css("width",   this.mGrid.width() - 20 + "px");
 }
 
 Grid.prototype.onMouseOut = function()

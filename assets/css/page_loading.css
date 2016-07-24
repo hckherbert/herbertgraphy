@@ -268,8 +268,8 @@
 
 .down
 {
-  -ms-transform: translate(0, 15%); /* IE 9 */
-  -webkit-transform: translate(0, 15s0%); /* Safari */
+  -ms-transform: translate(0, 150%); /* IE 9 */
+  -webkit-transform: translate(0, 150%); /* Safari */
   transform: translate(0, 150%);
 
 }
