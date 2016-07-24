@@ -496,12 +496,12 @@ html, body
 	transition: all .3s ease;
 }
 
-.sDesktop .infoPanel .otherAlbumMenus li a:hover
+.sDesktop .infoPanel li a:hover
 {
 	color:#ccc2bc;
 }
 
-.sMobile .infoPanel .otherAlbumMenus li a:hover
+.sMobile .infoPanel li a:hover
 {
 	color:#b5a69d;
 }
