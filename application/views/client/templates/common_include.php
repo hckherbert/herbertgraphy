@@ -8,13 +8,13 @@
     <meta name="keywords" content="">
     <title></title>
     <!-- ICON -->
-    <link href="apple-touch-icon.png" rel="apple-touch-icon" />
-    <link href="apple-touch-icon-76x76.png" rel="apple-touch-icon" sizes="76x76" />
-    <link href="apple-touch-icon-120x120.png" rel="apple-touch-icon" sizes="120x120" />
-    <link href="apple-touch-icon-152x152.png" rel="apple-touch-icon" sizes="152x152" />
-    <link href="apple-touch-icon-180x180.png" rel="apple-touch-icon" sizes="180x180" />
-    <link href="android-icon-192x192.png" rel="icon" sizes="192x192" />
-    <link href="android-icon-128x128.png" rel="icon" sizes="128x128" />
+    <link href="<?php echo base_url("assets/images/apple-touch-icon.png"); ?>" rel="apple-touch-icon" />
+    <link href="<?php echo base_url("assets/images/apple-touch-icon-76x76.png"); ?>" rel="apple-touch-icon" sizes="76x76" />
+    <link href="<?php echo base_url("assets/images/apple-touch-icon-120x120.png"); ?>" rel="apple-touch-icon" sizes="120x120" />
+    <link href="<?php echo base_url("assets/images/apple-touch-icon-152x152.png"); ?>" rel="apple-touch-icon" sizes="152x152" />
+    <link href="<?php echo base_url("assets/images/apple-touch-icon-180x180.png"); ?>" rel="apple-touch-icon" sizes="180x180" />
+    <link href="<?php echo base_url("assets/images/android-icon-192x192.png"); ?>" rel="icon" sizes="192x192" />
+    <link href="<?php echo base_url("assets/images/android-icon-128x128.png"); ?>" rel="icon" sizes="128x128" />
     <!-- CSS -->
     <link rel="stylesheet" href="<?php echo base_url("assets/css/reset.css"); ?>" type="text/css" />
     <link rel="stylesheet" href="<?php echo base_url("assets/css/zindex.css"); ?>" type="text/css" />

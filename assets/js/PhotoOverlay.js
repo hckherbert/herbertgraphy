@@ -168,7 +168,22 @@ PhotoOverlay.prototype.centerPhoto = function()
 		}
 		else
 		{
-			_toHeight_num = Math.round(_toWidth_num * this.mAspectRatio_num);
+			//_toHeight_num = Math.round(_toWidth_num * this.mAspectRatio_num);
+
+			_toHeight_num = Math.round($(window).height() * _zoomFactor);
+			_toWidth_num = Math.round(_toHeight_num * this.mAspectRatio_num);
+
+			if (_toHeight_num > $(window).height())
+			{
+				_toHeight_num = $(window).height() * 0.6;
+				_toWidth_num = Math.round(_toHeight_num / this.mAspectRatio_num);
+			}
+			if (_toWidth_num > $(window).width())
+			{
+				_toWidth_num = $(window).width()*0.6;
+				_toHeight_num = Math.round(_toWidth_num / this.mAspectRatio_num);
+			}
+
 		}
 	}
 	else
@@ -178,14 +193,23 @@ PhotoOverlay.prototype.centerPhoto = function()
 		if (this.mOrientation_str == "h")
 		{
 			_toWidth_num = Math.round(_toHeight_num * this.mAspectRatio_num);
+
+			if (_toWidth_num > $(window).width())
+			{
+				_toWidth_num = $(window).width()*0.6;
+				_toHeight_num = Math.round(_toWidth_num / this.mAspectRatio_num);
+			}
+
 		}
 		else
 		{
 			_toWidth_num = Math.round(_toHeight_num / this.mAspectRatio_num);
 		}
 	}
+
 	this.mPhotoContainer.css("width", _toWidth_num + "px");
 	this.mPhotoContainer.css("height", _toHeight_num + "px");
+
 	this.mPhotoContainer.css("left", Math.round(0.5* ($(window).width() - this.mPhotoContainer.width())) + "px");
 	this.mPhotoContainer.css("top", 0.5*($(window).height() - ($(".photoContainer .photo").height() + $(".descContainer", this.mPhotoOverlay).height())));
 	
