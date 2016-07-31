@@ -51,7 +51,6 @@
 	(
 		function()
 		{
-			var windowWidth = $(window).width(),
 			mResponsive = new Responsive();
 			mResponsive.init(["sMobile", "sDesktop"], mBaseBreakPoint_array, mWideScreenBreakPoint_num);
 			mPhotoOverlay = new PhotoOverlay($(".photoZoomOverlay"));
@@ -87,31 +86,39 @@
 	{
 		mPhotoOverlay.centerPhoto();
 
+		//on tablets, scrolling will trigger resize events.. so
+		//check window width has actually changed and it's not just iOS triggering a resize event on scroll
 
 		if ($(window).width() != mWinWidth) {
 
 			// Update the window width for next time
 			mWinWidth = $(window).width();
-		}
 
-		if (mWinWidth >= 0 && mWinWidth <= mBaseBreakPoint_array[1])
-		{
-			mGridControl.updateDensity("low");
-			$(".menuContainer").removeClass("menuTransition");
-			$(".albumTitle").css("height", $(".albumTitle h1").outerHeight() + "px");
-			$(".menuContainer").css("top", $(".albumTitle").height() + "px");
-			$(".infoPanel").css("height", "auto");
+			if (mWinWidth >= 0 && mWinWidth <= mBaseBreakPoint_array[1])
+			{
+				mGridControl.updateDensity("low");
+				$(".menuContainer").removeClass("menuTransition");
+				$(".albumTitle").css("height", $(".albumTitle h1").outerHeight() + "px");
+				$(".menuContainer").css("top", $(".albumTitle").height() + "px");
+				$(".infoPanel").css("height", "auto");
+			}
+			else if (mWinWidth > mBaseBreakPoint_array[1] && mWinWidth <= mWideScreenBreakPoint_num)
+			{
+				mGridControl.updateDensity("medium");
+				$(".albumTitle").css("height", "auto");
+			}
+			else
+			{
+				mGridControl.updateDensity("high");
+				$(".albumTitle").css("height", "auto");
+			}
 		}
-		else if (mWinWidth > mBaseBreakPoint_array[1] && mWinWidth <= mWideScreenBreakPoint_num)
+		else
 		{
 			mGridControl.updateDensity("medium");
 			$(".albumTitle").css("height", "auto");
 		}
-		else
-		{
-			mGridControl.updateDensity("high");
-			$(".albumTitle").css("height", "auto");
-		}
+
 
 		mGridControl.positionGrids();
 
