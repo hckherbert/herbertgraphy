@@ -6,7 +6,8 @@ PhotoOverlay.prototype.mOnHideStart_fn = null;
 PhotoOverlay.prototype.mBaseBreakPoint_array = null;
 PhotoOverlay.prototype.mWideScreenBreakPoint_num = null;
 PhotoOverlay.zoomFactorDesktop = 0.85;
-PhotoOverlay.zoomFactorMobile = 0.8;
+PhotoOverlay.zoomFactorMobile = 0.75;
+PhotoOverlay.mBoundaryTolerance = 0.9;
 
 function PhotoOverlay(pPhotoOverlay)
 {
@@ -158,55 +159,29 @@ PhotoOverlay.prototype.centerPhoto = function()
 		_zoomFactor =PhotoOverlay.zoomFactorMobile;
 	}
 
-	if ($(window).width() <= $(window).height())
-	{
-		_toWidth_num = Math.round($(window).width() * _zoomFactor);
-
 		if (this.mOrientation_str == "h")
 		{
+			_toWidth_num = Math.round($(window).width() * _zoomFactor);
 			_toHeight_num = Math.round(_toWidth_num / this.mAspectRatio_num);
+
+			if (_toHeight_num > $(window).height()* PhotoOverlay.mBoundaryTolerance)
+			{
+				_toHeight_num = $(window).height() * _zoomFactor;
+				_toWidth_num = _toHeight_num * this.mAspectRatio_num;
+			}
 		}
 		else
 		{
-			//_toHeight_num = Math.round(_toWidth_num * this.mAspectRatio_num);
-
 			_toHeight_num = Math.round($(window).height() * _zoomFactor);
-			_toWidth_num = Math.round(_toHeight_num * this.mAspectRatio_num);
+			_toWidth_num = Math.round(_toHeight_num /  this.mAspectRatio_num);
 
-			if (_toHeight_num > $(window).height())
+			if (_toWidth_num > $(window).width * PhotoOverlay.mBoundaryTolerance)
 			{
-				_toHeight_num = $(window).height() * 0.6;
-				_toWidth_num = Math.round(_toHeight_num / this.mAspectRatio_num);
+				_toWidth_num = $(window).width() * _zoomFactor;
+				_toHeight_num = _toWidth_num / this.mAspectRatio_num;
 			}
-			if (_toWidth_num > $(window).width())
-			{
-				_toWidth_num = $(window).width()*0.6;
-				_toHeight_num = Math.round(_toWidth_num / this.mAspectRatio_num);
-			}
-
 		}
-	}
-	else
-	{
-		_toHeight_num = Math.round($(window).height() * _zoomFactor);
-
-		if (this.mOrientation_str == "h")
-		{
-			_toWidth_num = Math.round(_toHeight_num * this.mAspectRatio_num);
-
-			if (_toWidth_num > $(window).width())
-			{
-				_toWidth_num = $(window).width()*0.6;
-				_toHeight_num = Math.round(_toWidth_num / this.mAspectRatio_num);
-			}
-
-		}
-		else
-		{
-			_toWidth_num = Math.round(_toHeight_num / this.mAspectRatio_num);
-		}
-	}
-
+	
 	this.mPhotoContainer.css("width", _toWidth_num + "px");
 	this.mPhotoContainer.css("height", _toHeight_num + "px");
 
