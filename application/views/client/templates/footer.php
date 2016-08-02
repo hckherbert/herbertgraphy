@@ -8,5 +8,5 @@
         </div>
     </div>
     <div class="bg"></div>
-    <div class="text">&copy; <?php echo date("Y"); ?> HerbertGraphy</div>
+    <div class="text">&copy; <?php echo date("Y"); ?> Herbertgraphy</div>
 </div>
