@@ -38,21 +38,15 @@
 </div>
 </body>
 <script language="javascript">
-	
-	var mResponsive = null;
+
 	var mPhotoOverlay = null;
 	var mGridControl = null;
-	var mBaseBreakPoint_array  = [0,768];
-	var mWideScreenBreakPoint_num = 1680;
-	var mIsReorderingWideScreen = false;
 	var mWinWidth = $(window).width();
 
 	$(document).ready
 	(
 		function()
 		{
-			mResponsive = new Responsive();
-			mResponsive.init(["sMobile", "sDesktop"], mBaseBreakPoint_array, mWideScreenBreakPoint_num);
 			mPhotoOverlay = new PhotoOverlay($(".photoZoomOverlay"));
 			mPhotoOverlay.initBreakPoints(mBaseBreakPoint_array, mWideScreenBreakPoint_num);
 			mGridControl = new GridControl($(".gridPanel"), mPhotoOverlay);
@@ -74,11 +68,8 @@
 				}
 			}
 
-
 			$(".btnMenuToggle").on("click", toggleMenu);
 			$(window).on("resize", windowOnResized);
-			$(document).on("responsive", closeMenu);
-
 		}
 	);
 	
@@ -124,23 +115,5 @@
 
 	}
 	
-	function toggleMenu(pEvent)
-	{
-		pEvent.preventDefault();
-		$(".btnMenuToggle").toggleClass("btnMenuToggleRotate");
-
-		$(".menuContainer").addClass("menuTransition");
-		$(".albumTitle").css("height", $(".albumTitle h1").outerHeight() + "px");
-		$(".menuContainer").css("top", $(".albumTitle").height() + "px");
-
-		$(".menuContainer").toggleClass("mainMenuClose");
-		$(".menuMask").toggleClass("show");
-	}
-	
-	function closeMenu()
-	{
-		$(".menuContainer").addClass("mainMenuClose");
-		$(".menuMask").removeClass("show");
-	}
 </script>
 </html>

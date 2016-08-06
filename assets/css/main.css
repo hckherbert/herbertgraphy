@@ -19,6 +19,7 @@ html, body
 {
 	font-family: 'Catamaran', sans-serif;
 	min-width:320px;
+	height:100%;
 }
 
 a
@@ -46,6 +47,11 @@ a
 		width:1920px;
 		margin:0 auto;
 	}
+}
+
+.wrapper
+{
+	height:100%;
 }
 
 /********** COLOR SCHEMES **********/
@@ -320,10 +326,10 @@ a
 
 .sDesktop .infoPanel
 {
-	float:left;
-	width:35%;
-	height:auto;
-	text-align:right;
+	float: left;
+	width: 35%;
+	height: auto;
+	text-align: right;
 }
 
 
@@ -701,13 +707,36 @@ a
 	background:url(../images/icon-share.png) 0 0 no-repeat;
 	background-size:100%;
 }
+
+/******* Base *********/
+.wrapperBase
+{
+	width:100%;
+	height:100%;
+}
+
+.sDesktop .wrapperBase .mainPanel
+{
+	width: 65%;
+	position: relative;
+	float: left;
+	height:100%;
+}
+
+.sMobile .wrapperBase .mainPanel
+{
+	width:100%;
+	display:block;
+	position:relative;
+}
+
+
 /******** Album ********/
 .wrapperAlbum
 {
 	-webkit-opacity: 0;
 	-moz-opacity: 0;
 	opacity:0;
-foot
 }
 
 .sMobile .menuMask

@@ -35,4 +35,5 @@
     <script src="<?php echo base_url("assets/js/greensock-js/TweenMax.min.js"); ?>"></script>
     <script src="<?php echo base_url("assets/js/greensock-js/TimelineLite.min.js"); ?>"></script>
     <script src="<?php echo base_url("assets/js/Responsive.js"); ?>"></script>
+    <script src="<?php echo base_url("assets/js/common.js"); ?>"></script>
 </head>

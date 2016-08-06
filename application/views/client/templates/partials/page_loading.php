@@ -1,5 +1,5 @@
 <?php ?>
-<div class="pageLoading">
+<div class="pageLoading bgBrown">
     <div class="camera">
       <div class="shot">
         <i class="lens-1"></i>
