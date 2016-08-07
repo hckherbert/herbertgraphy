@@ -1,5 +1,5 @@
 <?php ?>
-<div class="footer">
+<div class="footer<?php if (isset($is_base) && $is_base === true){ ?>  show<?php }?>">
     <div class="footerMenuWrapper">
         <div class="footerMenu">
             <a id="btn_ask_her" href="javascript:void(0)"></a>

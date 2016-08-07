@@ -11,6 +11,7 @@ class MY_Loader extends CI_Loader
     {
         if ($template_name == "basic")
         {
+            $data = array_merge($data, array("is_base"=>true));
             $this->view("client/templates/common_include", $data);
             $this->view("client/base", $data);
             $this->view("client/templates/footer", $data);

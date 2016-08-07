@@ -11,7 +11,10 @@ class Base extends CI_Controller
 
     public function index()
     {
-        $this->load->template_client("base", "basic");
+        $all_parent_albums = $this->album_model->get_all_parent_albums();
+        $data["all_parent_albums"] = $all_parent_albums;
+        $data["main_title"] = "Herbertgraphy";
+        $this->load->template_client("base", "basic", $data);
 
     }
 }

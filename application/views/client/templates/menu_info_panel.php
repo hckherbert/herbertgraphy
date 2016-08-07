@@ -1,6 +1,12 @@
 <div class="infoPanel">
     <div class="menuMask"></div>
-    <div class="albumTitle bgBrown"><h1 class="bgBrown"><?php if (isset($current_album_data)) {echo $current_album_data["album_details"]->name;} ?></h1><a class="btnMenuToggle" href="javascript:void(0)"><img src="<?php echo base_url("assets/images/btnMenuToggle.png"); ?>"></a></div>
+    <div class="albumTitle bgBrown">
+        <h1 class="bgBrown">
+            <?php if (isset($current_album_data) && $current_album_data!=NULL) {echo $current_album_data["album_details"]->name;} else ?>
+            <?php if (isset($main_title) && $main_title !=NULL) { echo $main_title; } ?>
+        </h1>
+        <a class="btnMenuToggle" href="javascript:void(0)"><img src="<?php echo base_url("assets/images/btnMenuToggle.png"); ?>"></a>
+    </div>
     <div class="menuContainer mainMenuClose">
         <?php if (isset($subalbum_data) && $subalbum_data!=NULL) { ?>
             <ul class="subAlbumMenus">
@@ -29,6 +35,16 @@
                         <?php } ?>
                     <?php }?>
                 <?php } ?>
+            </ul>
+        <?php } ?>
+        <?php if (isset($all_parent_albums) && $all_parent_albums!=NULL) { ?>
+            <ul class="otherAlbumMenus">
+            <?php foreach ($all_parent_albums as $album) { ?>
+                <li>
+                    <a href="album/<?php echo $album["label"]; ?>"><?php echo $album["name"]?>
+                    </a>
+                </li>
+            <?php } ?>
             </ul>
         <?php } ?>
         <!--<ul class="menuLinks">
