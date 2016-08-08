@@ -1,12 +1,10 @@
 <?php
 
-class Album extends CI_Controller
+class Album extends MY_Common
 {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model("album_model");
-		$this->load->model("photo_model");
 	}
 
 
@@ -24,7 +22,8 @@ class Album extends CI_Controller
 
 		if ($album_id === FALSE)
 		{
-			show_404();
+			$this->not_found();
+			return;
 		}
 		
 		$parent_id = $this->album_model->get_parent_album_id($album_id);

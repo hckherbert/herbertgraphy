@@ -1,10 +1,40 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Home extends CI_Controller {
+class Home extends MY_Common
+{
+	public function __construct()
+	{
+		parent::__construct();
+	}
+
+	public function _remap($param)
+	{
+		if (!function_exists($param) && $param!=="index")
+		{
+			$this->not_found();
+		}
+		else
+		{
+			$this->index();
+		}
+	}
 
 	public function index()
 	{
-		$this->load->view('home');
+		$data["all_parent_albums"] = $this->all_parent_albums;
+
+		if (ENVIRONMENT == "dev_cp")
+		{
+			$data["main_title"] = "Commercialdev";
+		}
+		else
+		{
+			$data["main_title"] = "Herbertgraphy";
+		}
+
+		$this->load->template_client("base", "basic", $data);
 	}
+
+
 }

@@ -7,8 +7,6 @@
 	<?php $this->load->partials("client/templates/menu_info_panel"); ?>
 	<div class="mainPanel">
 		<img src="<?php echo base_url("assets/test/sopot.jpg"); ?>" style="position:absolute;top:0;left:0;height:100%;">
-		<p class="text_404">Oops! Herbert hasn't got related photographs</p>
-
 	</div>
 </div>
 </div>
