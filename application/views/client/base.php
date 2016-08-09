@@ -6,7 +6,7 @@
 	<div class="wrapperBase">
 	<?php $this->load->partials("client/templates/menu_info_panel"); ?>
 	<div class="mainPanel">
-		<img src="<?php echo base_url("assets/test/sopot.jpg"); ?>" style="position:absolute;top:0;left:0;height:100%;">
+		<img id="cover" src="<?php echo base_url("assets/test/sopot.jpg"); ?>" style="position:absolute;top:0;left:0;width:100%;">
 	</div>
 </div>
 </div>
@@ -31,12 +31,22 @@
 			//TODO: probably move loading stuff to common
 
 			$(window).on("resize", windowOnResized);
+			windowOnResized();
 		}
 	);
 
 	function windowOnResized()
 	{
-
+		if ($("#cover").width() < $(".mainPanel").width())
+		{
+			$("#cover").css("width", "100%");
+			$("#cover").css("height", "auto");
+		}
+		else if ($("#cover").width() < $(window).width())
+		{
+			$("#cover").css("height", "100%");
+			$("#cover").css("width", "auto");
+		}
 	}
 
 	$(window).load(function()

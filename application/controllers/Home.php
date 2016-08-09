@@ -30,7 +30,7 @@ class Home extends MY_Common
 		}
 		else
 		{
-			$data["main_title"] = "Herbertgraphy";
+			$data["main_title"] = "Herbert<span class='graphy'>Graphy</span>";
 		}
 
 		$this->load->template_client("base", "basic", $data);

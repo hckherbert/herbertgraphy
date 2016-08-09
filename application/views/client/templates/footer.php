@@ -6,5 +6,5 @@
         <a id="btn_share_her" href="javascript:void(0)"></a>
     </div>
     <div class="bg"></div>
-    <div class="text">&copy; <?php echo date("Y"); ?> Herbertgraphy</div>
+    <div class="text">&copy; <?php echo date("Y"); ?> HerbertGraphy</div>
 </div>
