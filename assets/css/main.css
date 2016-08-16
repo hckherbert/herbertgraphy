@@ -665,18 +665,10 @@ a
 	z-index: 1;
 }
 
-.sDesktop .footer .footerMenuWrapper a
+.footer .footerMenuWrapper a
 {
 	width:26px;
 	height:26px;
-	display:inline-block;
-	margin:0 2px;
-}
-
-.sMobile .footer .footerMenuWrapper a
-{
-	width:30px;
-	height:30px;
 	display:inline-block;
 	margin:0 2px;
 }
