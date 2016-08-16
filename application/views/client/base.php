@@ -42,7 +42,8 @@
 			$("#cover").css("width", "100%");
 			$("#cover").css("height", "auto");
 		}
-		else if ($("#cover").width() < $(window).width())
+
+		if ($("#cover").height()  < $(".mainPanel").height())
 		{
 			$("#cover").css("height", "100%");
 			$("#cover").css("width", "auto");
