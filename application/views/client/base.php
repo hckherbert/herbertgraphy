@@ -1,4 +1,3 @@
-<?php ?>
 <body class="bgBrown">
 <?php $this->load->partials("client/templates/partials/page_loading"); ?>
 <?php $this->load->partials("client/templates/partials/simple_loading"); ?>
@@ -6,54 +5,16 @@
 	<div class="wrapperBase">
 	<?php $this->load->partials("client/templates/menu_info_panel"); ?>
 	<div class="mainPanel">
-		<img id="cover" src="<?php echo base_url("assets/test/sopot.jpg"); ?>" style="position:absolute;top:0;left:0;width:100%;">
-	</div>
-</div>
-</div>
-<div class="photoZoomOverlay">
-	<div class="bg"></div>
-	<div class="photoContainer">	
-		<!--<img class="photo" src="images/dummyLargeH.jpg">-->
-		<div class="descContainer">
-			<div class="bg"></div>
-			<span class="desc"></span>
-		</div>
-		<a class="btnClose" href="javascript:void(0)"></a>
+		<?php if (isset($main_content_path)) { ?>
+		<?php $this->load->partials($main_content_path); ?>
+		<?php } ?>
 	</div>
 </div>
 </body>
-<script language="javascript">
-
-	$(document).ready
-	(
-		function()
-		{
-			//TODO: probably move loading stuff to common
-
-			$(window).on("resize", windowOnResized);
-			windowOnResized();
-		}
-	);
-
-	function windowOnResized()
-	{
-		if ($("#cover").width() < $(".mainPanel").width())
-		{
-			$("#cover").css("width", "100%");
-			$("#cover").css("height", "auto");
-		}
-
-		if ($("#cover").height()  < $(".mainPanel").height())
-		{
-			$("#cover").css("height", "100%");
-			$("#cover").css("width", "auto");
-		}
-	}
-
+<script>
 	$(window).load(function()
 	{
 		$(".pageLoading").hide();
 	})
-
 </script>
 </html>

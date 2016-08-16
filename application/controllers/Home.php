@@ -26,14 +26,14 @@ class Home extends MY_Common
 
 		if (ENVIRONMENT == "dev_cp")
 		{
-			$data["main_title"] = "Commercialdev";
+			$data["main_title"] = "Commercial<span class='graphy'>Press</span>";
 		}
 		else
 		{
 			$data["main_title"] = "Herbert<span class='graphy'>Graphy</span>";
 		}
 
-		$this->load->template_client("base", "basic", $data);
+		$this->load->template_client("home", "basic", $data);
 	}
 
 
