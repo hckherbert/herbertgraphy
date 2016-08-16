@@ -18,6 +18,11 @@ class MY_Common extends CI_Controller
         $this->all_parent_albums = $this->album_model->get_all_parent_albums();
     }
 
+    public function getInfoPanelBaseData()
+    {
+        $data ["all_parent_albums"] = $this->all_parent_albums;
+        return $data;
+    }
 
     public function not_found()
     {

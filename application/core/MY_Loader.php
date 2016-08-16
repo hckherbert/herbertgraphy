@@ -26,6 +26,10 @@ class MY_Loader extends CI_Loader
                 $js_includes[] = "home.js";
                 $data["main_content_path"] = "client/home/main";
             }
+            else if ($main_view_name == "about")
+            {
+                $data["main_content_path"] = "client/about/main";
+            }
 
             $data["js_includes"] = $js_includes;
 

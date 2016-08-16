@@ -22,7 +22,7 @@ class Home extends MY_Common
 
 	public function index()
 	{
-		$data["all_parent_albums"] = $this->all_parent_albums;
+		$data = $this->getInfoPanelBaseData();
 
 		if (ENVIRONMENT == "dev_cp")
 		{
