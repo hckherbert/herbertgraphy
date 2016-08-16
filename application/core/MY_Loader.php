@@ -9,19 +9,27 @@ class MY_Loader extends CI_Loader
 {
     public function template_client($main_view_name, $template_name = "basic", $data = array())
     {
-
         if ($template_name == "basic")
         {
             $data["is_base"] = true;
 
-            if ($main_view_name == "home")
+            $js_includes = array(
+                "base.js"
+            );
+
+            if ($main_view_name == "base")
             {
-                $data["js_includes"] = array(
-                    "home.js"
-                );
+                $data["main_content_path"] = "client/base/main";
+            }
+            else if ($main_view_name == "home")
+            {
+                $js_includes[] = "home.js";
+                $data["main_content_path"] = "client/home/main";
             }
 
-            $data["main_content_path"] = "client/home/main";
+            $data["js_includes"] = $js_includes;
+
+
             $this->view("client/templates/common_include", $data);
             $this->view("client/base", $data);
             $this->view("client/templates/footer", $data);

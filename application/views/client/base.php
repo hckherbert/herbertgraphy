@@ -11,10 +11,4 @@
 	</div>
 </div>
 </body>
-<script>
-	$(window).load(function()
-	{
-		$(".pageLoading").hide();
-	})
-</script>
 </html>
