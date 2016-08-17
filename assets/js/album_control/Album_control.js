@@ -286,6 +286,28 @@ Album_control.prototype.init_upload = function()
             }
         }
     )
+
+    $(document).on(
+        "keyup",
+        ".photo_data input[name='new_filename[]']",
+        function()
+        {
+            var _value =$(this).val();
+
+            if (_value == "" || _value.match( new RegExp(_self.mFileNameRegexPattern)))
+            {
+                $(this).next(".error").addClass("hide");
+                $(this).closest(".uploadifive-queue-item").removeClass("error");
+                $(this).closest(".uploadifive-queue-item").find(".fileinfo").text("");
+
+            }
+            else
+            {
+                $(this).next(".error").removeClass("hide").text("Number, letters and hyphens only");
+            }
+        }
+    );
+
 }
 
 Album_control.prototype.isValidSourceFileNamePattern = function(pFileName)
@@ -333,7 +355,7 @@ Album_control.prototype.check_is_unique_new_photo_filenames = function(pSelector
                 _new_filenames_occurances[_key]++;
             }
 
-            console.log(_key);
+            console.log("key: " + _key);
         }
     );
 
@@ -347,7 +369,7 @@ Album_control.prototype.check_is_unique_new_photo_filenames = function(pSelector
             {
                 if ($('.formUpdatePhotoData').length)
                 {
-                    if ($(e).next(".error").hasClass("hide") && $(e).closest(".photo_data").find(".original_filename").text() != _filename)
+                    if ($(e).next(".error").hasClass("hide")) // && $(e).closest(".photo_data").find(".original_filename").text() != _filename)
                     {
                         $(e).next(".error").removeClass("hide").text("Filename duplicated");
                     }
@@ -757,15 +779,26 @@ Album_control.prototype.submit_handler = function()
             pEvent.preventDefault();
             var _formInstance = $(this);
             var _postData = $(this).serializeArray();
-            var _is_unique_filenames = _self.check_is_unique_new_photo_filenames(".photo_data input[name='new_filename[]']");
+            var _isValidated = true;
+            _self.check_is_unique_new_photo_filenames(".photo_data input[name='new_filename[]']");
 
-            if (! _is_unique_filenames)
+            $(".photo_data .error").each(function(i,e)
+            {
+                if (!$(this).hasClass("hide"))
+                {
+                    _isValidated = false;
+                    console.log('ya');
+                    return false;
+                }
+            });
+
+            if (!_isValidated)
             {
                 _self.displayFail(_self.mErrorMsgUpload);
                 console.log("not passed...");
                 return;
             }
-
+ 
             $.ajax(
                 {
                     url: _formInstance.attr("action") + "/" + mAlbum_id,
