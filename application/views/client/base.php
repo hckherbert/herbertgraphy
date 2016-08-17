@@ -1,4 +1,4 @@
-<body class="bgBrown">
+<body class="<?php echo $class_main_color; ?>">
 <?php $this->load->partials("client/templates/partials/page_loading"); ?>
 <?php $this->load->partials("client/templates/partials/simple_loading"); ?>
 <div class="wrapper">

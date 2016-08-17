@@ -60,6 +60,31 @@ a
 	background:#383432;
 }
 
+.bgBase
+{
+	background:#d6bab0;
+}
+
+.bgBrown .infoPanel h1
+{
+	color:#d0c4c0;
+}
+
+.bgBase .infoPanel h1
+{
+	color:#7d655d;
+}
+
+.bgBase.sMobile .infoPanel .menuContainer
+{
+	background:#fbf3e6;
+}
+
+.bgBrown.sMobile .infoPanel .menuContainer
+{
+	background:#d3c4bb;
+}
+
 /********** HOME ***************/
 .wrapperHome
 {	
@@ -367,11 +392,6 @@ a
 	display:none;
 }
 
-.infoPanel h1
-{
-	color:#d0c4c0;
-}
-
 .sDesktop .infoPanel h1
 {
 	font-size:2.4vw;
@@ -400,7 +420,6 @@ a
 
 .sMobile .infoPanel .menuContainer 
 {
-	background:#d3c4bb;
 	width:100%;
 	position:absolute;
 	top:40px;
@@ -1055,8 +1074,8 @@ a
 /* dummy to be remvoed */
 .about
 {
-	color:#d0c4c0;
-	background:#655952;
+	color:#84857c;
+	background:#f6ebd9;
 	width:100%;
 	height:100%;
 	padding:200px 20% 20% 20%;
@@ -1068,7 +1087,7 @@ a
 
 .about p
 {
-	font-size:14px;
+	font-size:15px;
 	line-height:1.2em;
 }
 

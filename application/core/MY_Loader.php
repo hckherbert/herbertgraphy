@@ -32,7 +32,7 @@ class MY_Loader extends CI_Loader
             }
 
             $data["js_includes"] = $js_includes;
-
+            $data["class_main_color"] = "bgBase";
 
             $this->view("client/templates/common_include", $data);
             $this->view("client/base", $data);
@@ -40,6 +40,8 @@ class MY_Loader extends CI_Loader
         }
         else if ($template_name == "album")
         {
+            $data["class_main_color"] = "bgBrown";
+            
             $this->view("client/templates/common_include", $data);
             $this->view("client/templates/partials/album_include", $data);
             $this->view("client/album", $data);

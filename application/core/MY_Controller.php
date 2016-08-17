@@ -34,7 +34,7 @@ class MY_Common extends CI_Controller
         }
         else
         {
-            $data["main_title"] = "Not founnd";
+            $data["main_title"] = "Opps";
         }
 
         $this->load->template_client("base", "basic", $data);

@@ -1,11 +1,37 @@
 <div class="about">
 
-    <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sollicitudin urna at dolor venenatis, a tempor arcu tristique. Mauris suscipit eros ultrices porta bibendum. Proin consequat mauris quis tortor sodales tincidunt. Praesent sit amet fringilla lectus. Pellentesque odio orci, ultricies quis congue a, maximus ac lorem. Etiam a ultricies risus. Nam auctor dignissim augue at accumsan. Pellentesque quis ante sit amet lorem aliquam mattis vitae quis nibh. Aenean sit amet rutrum elit, eu commodo massa. Donec gravida in sapien at posuere. Maecenas sagittis lorem scelerisque turpis hendrerit, vel dictum tellus ultrices. Proin sapien nulla, mattis sit amet est quis, placerat consectetur diam.
-    </p>
+    <p>I said to Love,</p>
+    <p>"It is not now as in old days</p>
+    <p>When men adored thee and thy ways</p>
+    <p>All else above;</p>
+    <p>Named thee the Boy, the Bright, the One</p>
+    <p>Who spread a heaven beneath the sun,"</p>
+    <p>I said to Love.</p>
     <br>
-    <p>
-        Integer enim libero, tincidunt quis pretium eget, aliquam in velit. Phasellus ut finibus turpis. Vivamus ac libero vel dolor fringilla auctor. Curabitur eget sem viverra massa mattis feugiat a ut justo. Curabitur vitae tortor cursus, pellentesque orci non, dignissim sapien. Ut vitae semper velit, vitae eleifend magna.
-    </p>
+    <p>I said to him,</p>
+    <p>"We now know more of thee than then;</p>
+    <p>We were but weak in judgment when,</p>
+    <p>With hearts abrim,</p>
+    <p>We clamoured thee that thou would'st please</p>
+    <p>Inflict on us thine agonies,"</p>
+    <p>I said to him.</p>
+    <br>
+    <p>I said to Love,</p>
+    <p>"Thou art not young, thou art not fair,</p>
+    <p>No faery darts, no cherub air,</p>
+    <p>Nor swan, nor dove</p>
+    <p>Are thine; but features pitiless,</p>
+    <p>And iron daggers of distress,"</p>
+    <p>I said to Love.</p>
+    <br>
+    <p>"Depart then, Love! . . .</p>
+    <p>- Man's race shall end, dost threaten thou?</p>
+    <p>The age to come the man of now</p>
+    <p>Know nothing of? -</p>
+    <p>We fear not such a threat from thee;</p>
+    <p>We are too old in apathy!</p>
+    <p>Mankind shall cease.--So let it be,"</p>
+    <p>I said to Love.</p>
+    <p>Thomas Hardy</p>
 
 </div>
