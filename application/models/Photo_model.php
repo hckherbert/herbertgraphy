@@ -102,7 +102,11 @@ class Photo_model extends CI_Model
 
     public function update_photo_data($data, $album_id)
     {
-       
+        if (ENVIRONMENT != "production")
+        {
+            error_reporting(0);
+        }
+
         $photo_base_dir = FCPATH."/assets/photos/";
         $album_label = $this->get_photo_folder($album_id);
         $batch_update_data_array = array();
@@ -162,6 +166,11 @@ class Photo_model extends CI_Model
         unset($data);
 
         $this->db->update_batch("photos", $batch_update_data_array, "photoId");
+
+        if (ENVIRONMENT != "production")
+        {
+            error_reporting(-1);
+        }
 
          if ($this->db->trans_status() === TRUE)
          {

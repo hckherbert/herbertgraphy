@@ -798,7 +798,7 @@ Album_control.prototype.submit_handler = function()
                 console.log("not passed...");
                 return;
             }
- 
+
             $.ajax(
                 {
                     url: _formInstance.attr("action") + "/" + mAlbum_id,
