@@ -278,6 +278,14 @@ Album_control.prototype.init_upload = function()
                 $(this).closest(".uploadifive-queue-item").removeClass("error");
                 $(this).closest(".uploadifive-queue-item").find(".fileinfo").text("");
 
+                $(".uploadifive-queue-item").each(function(i,e)
+                {
+                    if ($(e).find(".error").text() == "Filename duplicated")
+                    {
+                        $(e).find(".error").text("");
+                    }
+                });
+
             }
             else
             {
@@ -297,9 +305,14 @@ Album_control.prototype.init_upload = function()
             if (_value == "" || _value.match( new RegExp(_self.mFileNameRegexPattern)))
             {
                 $(this).next(".error").addClass("hide");
-                $(this).closest(".uploadifive-queue-item").removeClass("error");
-                $(this).closest(".uploadifive-queue-item").find(".fileinfo").text("");
 
+                $(".photo_data").each(function(i,e)
+                {
+                    if ($(e).find(".error").text() == "Filename duplicated")
+                    {
+                        $(e).find(".error").text("");
+                    }
+                });
             }
             else
             {
