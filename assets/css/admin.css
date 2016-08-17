@@ -249,6 +249,12 @@ input[type='button']
 	box-sizing: border-box;
 }
 
+.uploadifive-queue-item label
+{
+	color:#000 !important;
+	font-style: normal;
+}
+
 .photo_data .original_filename
 {
 	font-size:14px;

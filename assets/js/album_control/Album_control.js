@@ -7,6 +7,7 @@ Album_control.prototype.mFileSizeLimit = "4MB";
 Album_control.prototype.mErrorMsgUpload = "";
 Album_control.prototype.mUploadFormData = null;
 Album_control.prototype.mOriginalPhotoData = null;
+Album_control.prototype.mFileNameRegexPattern = "^[a-zA-Z0-9-_]+$";
 
 function Album_control(pAlbumId, pParentId, pParentLabel)
 {
@@ -62,7 +63,7 @@ Album_control.prototype.init_upload = function()
     _itemTemplate += "<span class='fileinfo'></span>";
     _itemTemplate += "<div class='close'></div><div class='progress'><div class='progress-bar'></div></div>";
     _itemTemplate += "<div class='imgPreview'></div>";
-    _itemTemplate += "<input name='new_filename' value='' type='text' placeholder='Rename me if possible' pattern='^[a-zA-Z0-9-_]+$' maxlength='50'>";
+    _itemTemplate += "<input name='new_filename' value='' type='text' placeholder='Rename me if possible' maxlength='50'>";
     _itemTemplate += "<span class='error hide'>Number, letters and hyphens only</span>";
     _itemTemplate += "<input name='title' value='' type='text' placeholder='Give me a title if you wish' maxlength='100'>";
     _itemTemplate += "<textarea name='desc' value='' placeholder='Say something about me if you wish' maxlength='500'></textarea>";
@@ -111,6 +112,12 @@ Album_control.prototype.init_upload = function()
             if (!_self.isValidUploadFileExtension(file["name"]))
             {
                 $("#uploadifive-file_upload-file-" + _self.mQueueItemCount).find(".fileinfo").text(" - File type not allowed");
+                $("#uploadifive-file_upload-file-" + _self.mQueueItemCount).addClass("error");
+                _self.mIsValidatedUpload = false;
+            }
+            else if (!_self.isValidSourceFileNamePattern(file["name"]))
+            {
+                $("#uploadifive-file_upload-file-" + _self.mQueueItemCount).find(".fileinfo").text(" -Number, letters and hyphens only");
                 $("#uploadifive-file_upload-file-" + _self.mQueueItemCount).addClass("error");
                 _self.mIsValidatedUpload = false;
             }
@@ -246,19 +253,46 @@ Album_control.prototype.init_upload = function()
         ".uploadifive-queue-item input[name='new_filename']",
         function()
         {
-            var _pattern = $(this).attr('pattern');
             var _value =$(this).val();
 
-            if (_value.match( new RegExp(_pattern)) || _value=="")
+            if (_value == "")
+            {
+                var _fileNameOnlyBeforeRenamed =  $(this).closest(".uploadifive-queue-item").find(".filename").text();
+
+                if (_self.isValidSourceFileNamePattern(_fileNameOnlyBeforeRenamed))
+                {
+                    $(this).next(".error").addClass("hide");
+                    $(this).closest(".uploadifive-queue-item").removeClass("error");
+                    $(this).closest(".uploadifive-queue-item").find(".fileinfo").text("");
+                }
+                else
+                {
+                    $(this).closest(".uploadifive-queue-item").find(".fileinfo").text(" -Number, letters and hyphens only");
+                    $(this).closest(".uploadifive-queue-item").addClass("error");
+                }
+
+            }
+            else if (_value.match( new RegExp(_self.mFileNameRegexPattern)))
             {
                 $(this).next(".error").addClass("hide");
+                $(this).closest(".uploadifive-queue-item").removeClass("error");
+                $(this).closest(".uploadifive-queue-item").find(".fileinfo").text("");
+
             }
             else
             {
-                $(this).next(".error").removeClass("hide");
+                $(this).next(".error").removeClass("hide").text("Number, letters and hyphens only");
+
             }
         }
     )
+}
+
+Album_control.prototype.isValidSourceFileNamePattern = function(pFileName)
+{
+    var _lastDotIndex = pFileName.lastIndexOf(".");
+    var _filenameOnly = pFileName.substr(0,_lastDotIndex);
+    return _filenameOnly.match(new RegExp(this.mFileNameRegexPattern));
 }
 
 Album_control.prototype.isValidUploadFileExtension = function(pFileName)
