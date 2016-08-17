@@ -639,22 +639,22 @@ a
 
 .footer .text
 {
-	padding:6px;
 	text-align:right;
 	position:absolute;
 	top:0;
 	right:0;
 	font-weight:200;
+	padding:4px;
 }
 
 .sDesktop .footer .text
 {
-	font-size:14px;
+	font-size:16px;
 }
 
 .sMobile .footer .text
 {
-	font-size:16px;
+	font-size:15px;
 }
 
 .footer .footerMenuWrapper
@@ -671,6 +671,18 @@ a
 	height:26px;
 	display:inline-block;
 	margin:0 2px;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-ms-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+}
+
+.footer .footerMenuWrapper a:hover
+{
+	-webkit-filter: brightness(120%);
+	filter: brightness(150%);
+	margin-top:-4px;
 }
 
 .footer .footerMenuWrapper #btn_ask_her
@@ -688,6 +700,12 @@ a
 .footer .footerMenuWrapper #btn_share_her
 {
 	background:url(../images/icon-share.png) 0 0 no-repeat;
+	background-size:100%;
+}
+
+.footer .footerMenuWrapper #btn_about_her
+{
+	background:url(../images/icon-about.png) 0 0 no-repeat;
 	background-size:100%;
 }
 
@@ -756,14 +774,14 @@ a
 
 .sMobile .infoPanel .btnMenuToggle
 {
-	width: 40px;
-    height: 40px;
-    display: block;
-    padding: 6px 12px;
-    right: 0;
-    top: 2px;
-	position:absolute;
-	-webkit-transition: all 0.2s  ease-in-out;
+	width: 32px;
+	height: 32px;
+	display: block;
+	margin:-16px 6px 0 0;
+	right: 0;
+	top: 50%;
+	position: absolute;
+	-webkit-transition: all 0.2s ease-in-out;
 	-moz-transition: all 0.2s ease-in-out;
 	-ms-transition: all 0.2s ease-in-out;
 	-o-transition: all 0.2s ease-in-out;
