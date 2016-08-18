@@ -1,7 +1,7 @@
 Grid.prototype.mGrid = null;
 Grid.prototype.mIndex_num = -1;
 Grid.prototype.mOrientation_str = "";
-Grid.prototype.mIsHighlight = false;
+Grid.prototype.mIsFeatured = false;
 Grid.prototype.mDesc_str = null;
  
 
@@ -15,9 +15,11 @@ Grid.prototype.setSize = function(pWidth_num, pHeight_num)
 	var _self = this;
 	
 	this.mGrid.css("width", pWidth_num + "px");
-	this.mGrid.css("height", pHeight_num + "px");	
+	this.mGrid.css("height", (pHeight_num + 1) + "px");  //add one more to prevent 1-pixel space
+	$("img", this.mGrid).css("height", (pHeight_num + 2) + "px"); //add one more to prevent 1-pixel space
 	
 	this.mDesc_str =  $(".desc", this.mGrid).text();
+	this.mTitle_str =  $(".title", this.mGrid).text();
 	
 	this.mGrid.on("mouseover", function() { _self.onMouseOver();});
 	this.mGrid.on("mouseout", function() { _self.onMouseOut();});
@@ -45,14 +47,21 @@ Grid.prototype.getPosition = function()
 
 Grid.prototype.getFileName = function()
 {
-	console.log("getFileName: "  + this.mGrid.attr("data-filename"));
 	return this.mGrid.attr("data-filename");
 }
 
-Grid.prototype.centerImageVertically = function()
+Grid.prototype.getFileZoomSize = function()
 {
-	this.mGrid.find("img").css("top", -0.5 * (this.mGrid.find("img").height() - this.mGrid.height()) + "px");
+	return this.mGrid.attr("data-file_zoom_size");
+}
 
+Grid.prototype.centerImageVertically = function(pAspectRatio_num)
+{
+	//uncomment if wanna keep aspect ratio for vertical photos.
+
+	var _aspectedHeight = this.mGrid.width()*pAspectRatio_num;
+	this.mGrid.find("img").css("height",_aspectedHeight + "px");
+	this.mGrid.find("img").css("top", -0.5 * Math.abs(_aspectedHeight - this.mGrid.height()) + "px");
 }
 
 Grid.prototype.getElement = function()
@@ -80,19 +89,29 @@ Grid.prototype.getOrientation =  function()
 	return this.mOrientation_str;
 }
 
-Grid.prototype.setHighlight =  function(pIsHighlight)
+Grid.prototype.setFeatured =  function(pIsFeatured)
 {
-	this.mIsHighlight = pIsHighlight
+	this.mIsFeatured = pIsFeatured
 }
 
-Grid.prototype.isHighlight =  function()
+Grid.prototype.isFeatured =  function()
 {
-	return this.mIsHighlight;
+	return this.mIsFeatured;
+}
+
+Grid.prototype.setOpacity = function(pOpacity)
+{
+	this.mGrid.fadeTo("fast",pOpacity);
 }
 
 Grid.prototype.getDesc = function()
 {
 	return this.mDesc_str;
+}
+
+Grid.prototype.getTitle = function()
+{
+	return this.mTitle_str;
 }
 
 Grid.prototype.addEventListener =  function(pEvent_str, pCallBack_fn)
@@ -104,7 +123,6 @@ Grid.prototype.addEventListener =  function(pEvent_str, pCallBack_fn)
 Grid.prototype.onMouseOver = function()
 {
 	$(".titleOverlay", this.mGrid).addClass("titleOverlayShow");
-	$(".title",  this.mGrid).css("width",   this.mGrid.width() - 20 + "px");
 }
 
 Grid.prototype.onMouseOut = function()

@@ -1,5 +1,0 @@
-1. album details - list all subalbum (if any)
-2. after a sub-album is added, add one more record to the sub-album list
-3. remove "there is no sub-album" if a 1st sub-album is just added
-4. subalbm list edit
-5. home album list: do not fetch sub-album if it is a sub-album

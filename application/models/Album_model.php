@@ -1,17 +1,18 @@
 <?php
-class Album_model extends CI_Model 
+class Album_model extends CI_Model
 {
 	public function __construct()
 	{
+		$this->load->library("DBCodeGenerator");
 		$this->load->database();
 	}
-	
+
 	public function get_all_parent_albums()
 	{
 		$this->db->where("parentId", NULL);
 		$this->db->order_by("order");
 		$query = $this->db->get("album");
-        return $query->result_array();
+		return $query->result_array();
 	}
 
 	public function get_sub_album_by_parent_id($parent_id)
@@ -27,7 +28,7 @@ class Album_model extends CI_Model
 	{
 		$data = array
 		(
-			"order"=>$order
+			"order" => $order
 		);
 
 		$this->db->where("id", $album_id);
@@ -36,25 +37,32 @@ class Album_model extends CI_Model
 		return $result;
 
 	}
-
-
-	public function delete_albums($del_ids, $album_ids)
+	
+	public function get_parent_album_id($album_id)
+	{
+		$this->db->select("parentId");
+		$this->db->where("id", $album_id);
+		$query  = $this->db->get("album");
+		return $query->row()->parentId;
+	}
+	
+	public function delete_albums_and_reorder($del_ids, $album_ids)
 	{
 		$this->db->where_in("id", $del_ids);
+		$this->db->or_where_in("parentId", $del_ids);
 		$result = $this->db->delete("album");
 
-		if ($result)
-		{
+		if ($result) {
 
 			$order_count = 0;
 
-			for ($i=0; $i<count($album_ids); $i++)
+			for ($i = 0; $i < count($album_ids); $i++)
 			{
-				if (!in_array($album_ids[$i],$del_ids))
+				if (!in_array($album_ids[$i], $del_ids))
 				{
 					$data = array
 					(
-						"order"=>$order_count
+						"order" => $order_count
 					);
 
 					$order_count++;
@@ -74,18 +82,100 @@ class Album_model extends CI_Model
 		return $result;
 	}
 
-	public  function add_album($data)
+	public function delete_single_album($id, $order, $parent_id)
 	{
-		$this->db->where("parentId", NULL);
-		$total_rows = $this->db->count_all_results("album");
-		$data = array_merge($data, array("order" => $total_rows));
-		$this->db->insert("album", $data);
-		return $this->db->insert_id();
+		$this->db->where_in("id", $id);
+		$this->db->or_where_in("parentId", $id);
+		$result = $this->db->delete("album");
+
+		if ($result) {
+
+			if ($parent_id !== NULL && $parent_id !== "" )
+			{
+				$this->db->where("parentId", $parent_id);
+				$this->db->order_by("order");
+				$query = $this->db->get("album");
+				$sub_album_count = $query->num_rows();
+
+				if ($sub_album_count > 0)
+				{
+
+					for ($i = $order+1; $i <= $sub_album_count; $i++)
+					{
+						$data = array
+						(
+							"order" => $i-1
+						);
+
+						$this->db->where("order", $i);
+						$this->db->where("parentId", $parent_id);
+						$result_update = $this->db->update("album", $data);
+
+
+						if (!$result_update)
+						{
+							return;
+						}
+					}
+
+					return true;
+				}
+				else
+				{
+					return true;
+				}
+
+			}
+			else
+			{
+				return true;
+			}
+
+		}
 	}
 
-	public  function add_subalbum($data)
+	public function add_album($data)
+	{
+
+		$this->db->trans_start();
+		$sql_update_order = "UPDATE `album` SET `order` = `order` + 1 WHERE `parentId` IS NULL";
+		$this->db->query($sql_update_order);
+		
+		//$total_rows = $this->db->count_all_results("album");
+		//$total_rows = $this->db->count_all_results("album");
+		//$data = array_merge($data, array("order" => $total_rows));
+		
+		$data = array_merge($data,
+			array(
+				"order" => 0,
+				"album_code"=> DBCodeGenerator::generate_db_code("a"),
+				"created_date"=>DateUtils::current_db_datetime()
+			));
+		$this->db->insert("album", $data);
+		$insert_id = $this->db->insert_id();
+
+		$data = array
+		(
+			"albumId"=>$insert_id,
+			"album_code"=>$this->get_album_code($insert_id)
+		);
+		$this->db->where("albumId", 0);
+		$this->db->update("photos", $data);
+		$this->db->trans_complete();
+
+		if ($this->db->trans_status() === FALSE)
+		{
+			return;
+		}
+
+		return $insert_id;
+
+	}
+
+	public function add_subalbum($data)
 	{
 		$order = 0;
+		/*
 		$this->db->select("order");
 		$this->db->order_by("order", "desc");
 		$this->db->where('parentId', $data["parentId"]);
@@ -96,23 +186,155 @@ class Album_model extends CI_Model
 		if (count($result_get_order) > 0)
 		{
 			$order = $query->row()->order + 1;
-
 		}
+		*/
 
-		$data = array_merge($data, array("order" => $order));
+		$sql_update_order = sprintf("UPDATE `album` SET `order` = `order` + 1 WHERE `parentId` = '%s'" ,$data["parentId"]);
+		$this->db->query($sql_update_order);
+		
+		$data = array_merge($data, array(
+			"order" => $order,
+			"album_code"=> DBCodeGenerator::generate_db_code("a"),
+			"created_date"=>DateUtils::current_db_datetime()
+			)
+		);
 		unset($data["submit"]);
 		$this->db->insert("album", $data);
-		return $this->db->insert_id();
+
+		$insert_id = $this->db->insert_id();
+		$data = array
+		(
+			"albumId"=>$insert_id
+		);
+		$this->db->where("albumId", 0);
+		$this->db->update("photos", $data);
+
+		return $insert_id;
+
 	}
 
-	public function get_album_details($pAlbum_id)
+	public function get_album_details($pAlbum_id, $pIsShuffle=true)
 	{
 		$data = array();
-		$this->db->select("id, parentId, name, label, intro");
+		$this->db->select("id, parentId, order, name, label, intro");
 		$this->db->where("id", $pAlbum_id);
 		$query = $this->db->get("album");
 
-		$data["album_details"] = $query->row();
+		if ($query->num_rows() == 0)
+		{
+			show_404();
+		}
+
+		$this->load->model("photo_model");
+
+		$album_details = $query->row();
+
+		if ($album_details->parentId !== NULL)
+		{
+			$this->db->select("name AS parentName");
+			$this->db->where("id", $query->row()->parentId);
+			$query = $this->db->get("album");
+
+			if ($query->row())
+			{
+				$album_details->parentName = $query->row()->parentName;
+			}
+		}
+
+		$data["photo_data"] = $this->photo_model->get_photo_data($pAlbum_id, $pIsShuffle);
+		$data["album_details"] = $album_details;
+
 		return $data;
 	}
+
+	public function get_album_label($pAlbum_id)
+	{
+		$this->db->select("label");
+		$this->db->where("id",$pAlbum_id);
+		$query = $this->db->get("album");
+
+		$result = $query->row();
+
+		if ($result)
+		{
+			return $result->label;
+		}
+
+		return FALSE;
+	}
+
+	public function get_album_id($pAlbum_label)
+	{
+		$this->db->select("id");
+		$this->db->where("label",$pAlbum_label);
+		$query = $this->db->get("album");
+
+		$result = $query->row();
+
+		if ($result)
+		{
+			return $result->id;
+		}
+
+		return FALSE;
+	}
+
+	public function get_album_code($pAlbum_id)
+	{
+		$this->db->select("album_code");
+		$this->db->where("id",$pAlbum_id);
+		$query = $this->db->get("album");
+
+		$result = $query->row();
+
+		if ($result)
+		{
+			return $result->album_code;
+		}
+
+		return FALSE;
+	}
+
+
+	public function get_all_albums_and_subalbums_labels($pAlbum_ids)
+	{
+		$this->db->select("label");
+		$this->db->where_in("id", $pAlbum_ids);
+		$this->db->or_where_in("parentId", $pAlbum_ids);
+		$query = $this->db->get("album");
+
+		return $query->result_array();
+	}
+
+	public function update_album_info($data)
+	{
+		$this->db->where("id", $data["id"]);
+		$result = $this->db->update("album", $data);
+
+		if ($result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	public function is_current_label_unique_against_others($pAlbum_label, $pAlbum_id)
+	{
+		$this->db->where("label", $pAlbum_label);
+		$this->db->where("id!=$pAlbum_id");
+		$query = $this->db->get("album");
+
+		if ($query->num_rows() > 0)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+
 }
