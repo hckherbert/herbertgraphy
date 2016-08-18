@@ -2,6 +2,7 @@
 <?php $this->load->partials("admin/templates/partials/common_body"); ?>
 <div class="adminMain" id="page_album_details">
 	<?php $this->load->partials("admin/templates/partials/menu"); ?>
+	<?php if (!isset($authUrl)) { ?>
 	<div class="section">
 		<h1 class="pageHeading">Album details</h1>
 		<?php echo form_open('admin/album_control/update_album_info', 'class="formInfo" id="formUpdateAlbumInfo"'); ?>
@@ -147,6 +148,7 @@
 		<?php echo form_close(); ?>
 		<div class="clear"></div>
 	</div>
+	<?php } ?>
 </div>
 </body>
 <script>
