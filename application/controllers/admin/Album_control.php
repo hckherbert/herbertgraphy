@@ -31,9 +31,6 @@ class Album_control extends CI_Controller
 			{
 				$client->authenticate($this->input->get("code"));
 				$_SESSION['access_token'] = $client->getAccessToken();
-				//$redirect = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
-				//$redirect = 'http://localhost:8002/dev/hg/admin/album_control';
-				//header('Location: ' .$redirect);
 			}
 		}
 
@@ -103,14 +100,15 @@ class Album_control extends CI_Controller
 
 	public function logout()
 	{
-		$data["authUrl"] = 'http://localhost:8002/dev/hg/admin/album_control';
+
+		$lgout_url ='https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:8002/dev/hg/admin/album_control';
 
 		if (isset($_SESSION['access_token']) && $_SESSION['access_token'])
 		{
 			unset($_SESSION['access_token']);
 		}
 
-		redirect($data["authUrl"]);
+		redirect($lgout_url);
 	}
 
 
