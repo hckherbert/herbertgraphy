@@ -3,10 +3,14 @@
 class Album_control extends CI_Controller 
 {
 	private $config_validation_add_album;
+	private $auth_data;
 
 	public function __construct()
 	{
 		parent::__construct();
+
+		require_once 'vendor/autoload.php';
+
 		$this->load->model("album_model");
 		$this->load->model("photo_model");
 		$this->load->helper("url_helper");
@@ -18,6 +22,49 @@ class Album_control extends CI_Controller
 		$this->load->library("form_validation");
 		$this->load->library("DateUtils");
 		$this->load->config("photo");
+		$this->load->config("auth");
+
+		session_start();
+
+		$client_id = $this->config->item("auth_client_id");
+		$client_secret =  $this->config->item("auth_client_secret");
+		$redirect_uri =  $this->config->item("auth_redirect_uri");
+
+		$client = new Google_Client();
+		$client->setClientId($client_id);
+		$client->setClientSecret($client_secret);
+		$client->setRedirectUri($redirect_uri);
+		$client->setScopes('email');
+
+		$objOAuthService = new Google_Service_Oauth2($client);
+
+		if ($this->input->get("code"))
+		{
+			if (!isset($_SESSION['access_token']))
+			{
+				$client->authenticate($this->input->get("code"));
+				$_SESSION['access_token'] = $client->getAccessToken();
+			}
+		}
+
+		if (isset($_SESSION['access_token']) && $_SESSION['access_token'])
+		{
+			$client->setAccessToken($_SESSION['access_token']);
+			$userData = $objOAuthService->userinfo->get();
+			$this->auth_data["userData"] = $userData;
+
+			if ($userData->email != $this->config->item("auth_admin_email"))
+			{
+				$authUrl = $client->createAuthUrl();
+				$this->auth_data["is_invalid_user"] = true;
+				$this->auth_data["authUrl"] = $authUrl;
+			}
+		}
+		else
+		{
+			$authUrl = $client->createAuthUrl();
+			$this->auth_data["authUrl"] = $authUrl;
+		}
 
 		$this->config_validation_add_album =  array(
 			array(
@@ -49,8 +96,21 @@ class Album_control extends CI_Controller
 
 	public function index()
 	{
-		$this->load->template_admin("admin/album_list");
+		$this->load->template_admin("admin/album_list", $this->auth_data);
 	}
+
+	public function logout()
+	{
+		$logout_url = $this->config->item("auth_logout_url");
+
+		if (isset($_SESSION['access_token']) && $_SESSION['access_token'])
+		{
+			unset($_SESSION['access_token']);
+		}
+
+		redirect($logout_url);
+	}
+
 
 	public function get_all_parent_albums()
 	{
@@ -150,6 +210,7 @@ class Album_control extends CI_Controller
 	{
 		$album_id = $this->input->post("albumId");
 		$data = $this->album_model->get_album_details($album_id, false);
+		$data = array_merge($data, $this->auth_data);
 		$this->load->template_admin("admin/add_subalbum", $data);
 	}
 
@@ -239,6 +300,7 @@ class Album_control extends CI_Controller
 			show_404();
 		}
 
+		$data = array_merge($data, $this->auth_data);
 		$this->load->template_admin("admin/album_details", $data);
 	}
 
@@ -484,8 +546,6 @@ class Album_control extends CI_Controller
 
 					JSONAPI::echo_json_error_response("CANNOT_MOVE_FILE");
 				}
-
-				var_dump($_POST["albumId"]);
 
 				$data = array(
 					"albumId" => $_POST["albumId"],
