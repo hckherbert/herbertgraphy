@@ -1,6 +1,8 @@
 <body>
 <?php $this->load->partials("admin/templates/partials/common_body");?>
 <div class="adminMain" id="page_album_list">
+	<?php $this->load->partials("admin/templates/partials/menu"); ?>
+	<?php if (!isset($authUrl)) { ?>
 	<div class="section">
 		<h1 class="pageHeading">Album List</h1>
 		<div class="hintArea">
@@ -66,8 +68,8 @@
 
 		<input name="submit" type="button" value="Add">
 		<div class="clear"></div>
-
 	</div>
+	<?php } ?>
 </div>
 </body>
 <script>

@@ -2,6 +2,7 @@
 <?php $this->load->partials("admin/templates/partials/common_body"); ?>
 <div class="adminMain" id="page_add_subalbum">
 	<?php $this->load->partials("admin/templates/partials/menu"); ?>
+	<?php if (!isset($authUrl)) { ?>
 	<div class="section" id="sectionAddAlbum">
 		<h1 class="pageHeading">Add a sub-album</h1>
 		<div class="hintArea">
@@ -54,6 +55,7 @@
 		<div class="clear"></div>
 
 	</div>
+	<?php } ?>
 </div>
 </body>
 <script>
