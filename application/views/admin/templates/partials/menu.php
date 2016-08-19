@@ -1,5 +1,5 @@
 <?php if (isset($is_invalid_user) && $is_invalid_user == true) { ?>
-    <p>Invalid user. Please verify the credentials.</p>
+    <p>Invalid user. Please verify the credentials. Attempt again <a href="<?php echo base_url("admin/album_control/logout"); ?>">here</a>.</p>
 <?php } else if (isset($authUrl)) { ?>
     <p>Please <a href="<?php echo $authUrl; ?>">sign in</a> to continue.</p>
 <?php } else { ?>

@@ -11,11 +11,24 @@ class Album_control extends CI_Controller
 
 		require_once 'vendor/autoload.php';
 
+		$this->load->model("album_model");
+		$this->load->model("photo_model");
+		$this->load->helper("url_helper");
+		$this->load->helper('security');
+		$this->load->helper('form');
+		$this->load->library("EXIFReader");
+		$this->load->library("JSONAPI");
+		$this->load->library("JSONAPIEnum");
+		$this->load->library("form_validation");
+		$this->load->library("DateUtils");
+		$this->load->config("photo");
+		$this->load->config("auth");
+
 		session_start();
-		$client_id = '998607285686-sdfrotg4s79mf3p61c9m1f905pnh1spn.apps.googleusercontent.com';
-		$client_secret = 'WNNQhcEDbVLNtjlY6lOGCOeR';
-		$redirect_uri = base_url("admin/album_control");
-		//$simple_api_key = 'AIzaSyDwdK1sULWf51UIcYTuyDF-P9dveivbS6A';
+
+		$client_id = $this->config->item("auth_client_id");
+		$client_secret =  $this->config->item("auth_client_secret");
+		$redirect_uri =  $this->config->item("auth_redirect_uri");
 
 		$client = new Google_Client();
 		$client->setClientId($client_id);
@@ -40,9 +53,10 @@ class Album_control extends CI_Controller
 			$userData = $objOAuthService->userinfo->get();
 			$this->auth_data["userData"] = $userData;
 
-			if ($userData->email != "herberthck@gmail.com")
+			if ($userData->email != $this->config->item("auth_admin_email"))
 			{
 				$authUrl = $client->createAuthUrl();
+				$this->auth_data["is_invalid_user"] = true;
 				$this->auth_data["authUrl"] = $authUrl;
 			}
 		}
@@ -51,18 +65,6 @@ class Album_control extends CI_Controller
 			$authUrl = $client->createAuthUrl();
 			$this->auth_data["authUrl"] = $authUrl;
 		}
-
-		$this->load->model("album_model");
-		$this->load->model("photo_model");
-		$this->load->helper("url_helper");
-		$this->load->helper('security');
-		$this->load->helper('form');
-		$this->load->library("EXIFReader");
-		$this->load->library("JSONAPI");
-		$this->load->library("JSONAPIEnum");
-		$this->load->library("form_validation");
-		$this->load->library("DateUtils");
-		$this->load->config("photo");
 
 		$this->config_validation_add_album =  array(
 			array(
@@ -92,7 +94,6 @@ class Album_control extends CI_Controller
 
 	}
 
-
 	public function index()
 	{
 		$this->load->template_admin("admin/album_list", $this->auth_data);
@@ -100,15 +101,14 @@ class Album_control extends CI_Controller
 
 	public function logout()
 	{
-
-		$lgout_url ='https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:8002/dev/hg/admin/album_control';
+		$logout_url = $this->config->item("auth_logout_url");
 
 		if (isset($_SESSION['access_token']) && $_SESSION['access_token'])
 		{
 			unset($_SESSION['access_token']);
 		}
 
-		redirect($lgout_url);
+		redirect($logout_url);
 	}
 
 
