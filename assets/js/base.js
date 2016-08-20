@@ -16,6 +16,8 @@ $(document).ready
         {
             $("html").removeClass("vScrollOn");
         }
+
+
     }
 );
 
@@ -40,6 +42,9 @@ function windowOnResized()
 
 $(window).load(function()
 {
-    $(".pageLoading").hide();
+    $(".pageLoading").fadeOut(400, function()
+    {
+        $(".wrapperBase").addClass("show");
+    });
 
 })
