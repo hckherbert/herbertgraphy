@@ -34,6 +34,7 @@
 
     <!-- FONT -->
     <link href='https://fonts.googleapis.com/css?family=Catamaran:400,700,300,200' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Cinzel:400,700" rel="stylesheet">
     <!-- Javascript -->
     <script src="<?php echo base_url("assets/js/jquery-3.1.0.min.js"); ?>"></script>
     <script src="<?php echo base_url("assets/js/jquery-migrate-3.0.0.min.js"); ?>"></script>

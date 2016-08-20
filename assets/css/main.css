@@ -1091,6 +1091,17 @@ a
 	line-height:1.2em;
 }
 
+.sDesktop .about p:first-child:first-letter
+{
+	float: left;
+	font-family: 'Cinzel', serif;
+	font-size: 200px;
+	line-height: 0.85em;
+	margin-right: 0.03em;
+	margin-bottom:-0.1em;
+	color:#99827d;
+}
+
 
 
 /******** SIMPLE LOADING **********/
