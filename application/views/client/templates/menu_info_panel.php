@@ -1,7 +1,7 @@
 <div class="infoPanel">
     <div class="menuMask"></div>
     <div class="albumTitle <?php echo $class_main_color; ?>">
-        <h1 class="<?php echo $class_main_color; ?>">
+        <h1>
             <?php if (isset($current_album_data) && $current_album_data!=NULL) {echo $current_album_data["album_details"]->name;} else ?>
             <?php if (isset($main_title) && $main_title !=NULL) { echo $main_title; } ?>
         </h1>
