@@ -1121,17 +1121,32 @@ a
 	background-size:cover;
 }
 
-.section_about .infoPanel .albumTitle
+.sDesktop .section_about .infoPanel h1
 {
-	background:transparent;
+	display:none;
 }
 
+.section_about .infoPanel .albumTitle
+{
+	background:#dbe7e7;
+}
+
+
+.sDesktop .section_about  article
+{
+	width: 60vw;
+	padding: 10% 20% 20% 10%;
+}
+
+.sMobile .section_about  article
+{
+	padding: 25px 25px 50px 25px;
+}
 
 .section_about  article
 {
 	color: #8c8884;
-	width: 60vw;
-	padding: 10% 20% 20% 10%;
+
 	text-align: justify;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -1157,6 +1172,17 @@ a
 	float: left;
 	font-family: 'Cinzel', serif;
 	font-size: 240px;
+	line-height: 0.85em;
+	margin-right: 0.03em;
+	margin-bottom:-0.1em;
+	color:#99827d;
+}
+
+.sMobile .section_about  article p:first-child:first-letter
+{
+	float: left;
+	font-family: 'Cinzel', serif;
+	font-size: 100px;
 	line-height: 0.85em;
 	margin-right: 0.03em;
 	margin-bottom:-0.1em;

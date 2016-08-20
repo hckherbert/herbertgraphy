@@ -6,6 +6,16 @@ $(document).ready
 
         $(window).on("resize", windowOnResized);
         windowOnResized();
+
+
+        if ($("body").hasClass("sMobile"))
+        {
+            $("html").addClass("vScrollOn");
+        }
+        else
+        {
+            $("html").removeClass("vScrollOn");
+        }
     }
 );
 
@@ -31,4 +41,5 @@ function windowOnResized()
 $(window).load(function()
 {
     $(".pageLoading").hide();
+
 })
