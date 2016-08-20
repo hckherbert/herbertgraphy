@@ -73,14 +73,9 @@ a
 	color:#6e5855;
 }
 
-.bgBase.sMobile .infoPanel .menuContainer
+.sMobile .infoPanel .menuContainer
 {
 	background:#fbf3e6;
-}
-
-.bgBrown.sMobile .infoPanel .menuContainer
-{
-	background:#d3c4bb;
 }
 
 /********** HOME ***************/
