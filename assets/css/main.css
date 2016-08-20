@@ -70,7 +70,7 @@ a
 
 .bgBase .infoPanel h1
 {
-	color:#7d655d;
+	color:#6e5855;
 }
 
 .bgBase.sMobile .infoPanel .menuContainer
@@ -419,7 +419,7 @@ a
 
 .graphy
 {
-	color:#999797;
+	color:#a3bfc1;
 }
 
 .sDesktop .infoPanel .subAlbumMenus
@@ -539,9 +539,14 @@ a
 	transition: all .3s ease;
 }
 
-.sDesktop .infoPanel li a:hover
+.sDesktop .wrapperAlbum .infoPanel li a:hover
 {
 	color:#ccc2bc;
+}
+
+.sDesktop .wrapperBase .infoPanel li a:hover
+{
+	color:#b2a59d;
 }
 
 .sMobile .infoPanel li a:hover
