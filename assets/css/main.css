@@ -84,250 +84,17 @@ a
 }
 
 /********** HOME ***************/
-.wrapperHome
-{	
-	width:100%;
-}
-
-.wrapperHome .header
+.homeSubTitle
 {
-	width:100%;
-}
-
-.wrapperHome .header .banner
-{
-	width:100%;
-	display:block;
-}
-
-
-.wrapperHome .homeGridContainer
-{
-	width:100%;
-}
-
-.wrapperHome .homeGridContainer .grid
-{
-	width:100%;
-}
-
-.wrapperHome .homeGridContainer .gridCover
-{
-	width:100%;
-	display:block;
-}
-
-.sMobile .wrapperHome .homeGridContainer #grid0
-{
-	width:100%;
-}
-
-.sMobile .wrapperHome .homeGridContainer #grid1
-{
-	width:100%;
-}
-
-.sMobile .wrapperHome .homeGridContainer #grid2
-{
-	width:100%;
-}
-
-.sMobile .wrapperHome .homeGridContainer #grid3
-{
-	width:100%;
-}
-
-.sMobile .wrapperHome .homeGridContainer #grid3a
-{
-	width:50%;
-	height:250px;
-	background:#ffeecc;
-	float:left;
-}
-
-.sMobile .wrapperHome .homeGridContainer #grid3b
-{
-	width:50%;
-	height:250px;
-	background:#eeffdd;
-	float:left;
-}
-
-.sMobile .wrapperHome .homeGridContainer #grid3c
-{
-	width:50%;
-	height:180px;
-	background:#ddccee;
-	float:left;
-}
-
-.sMobile .wrapperHome .homeGridContainer #grid3d
-{
-	width:50%;
-	height:180px;
-	background:#ccddbb;
-	float:left;
-}
-
-.sDesktop .wrapperHome .homeGridContainer #grid0
-{
-	width:50%;
-	float:left;
-}
-
-.sDesktop .wrapperHome .homeGridContainer #grid1
-{
-	width:50%;
-	float:left;
-}
-
-.sDesktop .wrapperHome .homeGridContainer #grid2
-{
-	width:50%;
-	float:left;
-	height: 430px;
-    background-color: #eee;
-}
-
-.sDesktop .wrapperHome .homeGridContainer #grid3
-{
-	width:50%;
-	float:left;
-}
-
-.sDesktop .wrapperHome .homeGridContainer #grid3a
-{
-	width:50%;
-	height:250px;
-	background:#ffeecc;
-	float:left;
-}
-
-.sDesktop .wrapperHome .homeGridContainer #grid3b
-{
-	width:50%;
-	height:250px;
-	background:#eeffdd;
-	float:left;
-}
-
-.sDesktop .wrapperHome .homeGridContainer #grid3c
-{
-	width:50%;
-	height:180px;
-	background:#ddccee;
-	float:left;
-}
-
-.sDesktop .wrapperHome .homeGridContainer #grid3d
-{
-	width:50%;
-	height:180px;
-	background:#ccddbb;
-	float:left;
-}
-
-.sMobile .wrapperHome .sectionInfoTop
-{
-	float:left;
-	width:100%;
-}
-
-.sMobile .wrapperHome .sectionInfoTop .boxAbout
-{
-	width:100%;
-	background:#eeccaa;
-	height:140px;
-}
-
-.sMobile .wrapperHome .sectionInfoTop .boxBlog
-{
-	width:100%;
-	background:#aaccdd;
-	height:200px;
-}
-
-.sMobile .wrapperHome .sectionInfoTop .boxEvents
-{
-	width:100%;
-	background:#eebbcc;
-	height:160px;
-}
-
-.sDesktop .wrapperHome .sectionInfoTop
-{
-	float:left;
-	width:100%;
-	margin:10px 0;
-	text-align:center;
-}
-
-.sDesktop .wrapperHome .sectionInfoTop .boxAbout
-{
-	width: 33%;
-	background: #eeccaa;
-	height: 200px;
-	display: inline-block;
-}
-
-.sDesktop .wrapperHome .sectionInfoTop .boxBlog
-{
-	width: 33%;
-	background:#aaccdd;
-	height:200px;
-	display: inline-block;
-}
-
-.sDesktop .wrapperHome .sectionInfoTop .boxEvents
-{
-	width: 33%;
-	background:#eebbcc;
-	height:200px;
-	display: inline-block;
-}
-
-.sMobile .wrapperHome .sectionInfoBottom
-{
-	float:left;
-	width:100%;
-}
-
-.sMobile .wrapperHome .sectionInfoBottom .boxFeaturedPhoto
-{
-	width:100%;
-	background:#ddeeff;
-	height:160px;
-}
-
-.sMobile .wrapperHome .sectionInfoBottom .boxContact
-{
-	width:100%;
-	background:#cceedd;
-	height:160px;
-}
-
-.sDesktop .wrapperHome .sectionInfoBottom
-{
-	float:left;
-	width:100%;
-	margin:0 0 10px;
-	text-align:center;
-}
-
-.sDesktop .wrapperHome .sectionInfoBottom .boxFeaturedPhoto
-{
-	width:65%;
-	background:#ddeeff;
-	height:160px;
-	display:inline-block;
-}
-
-.sDesktop .wrapperHome .sectionInfoBottom .boxContact
-{
-	width:34%;
-	background:#cceedd;
-	height:160px;
-	display:inline-block;
+	position: absolute;
+	bottom: 40px;
+	color: #fffff0;
+	left: -15%;
+	font-size: 25px;
+	opacity: 0.8;
+	/* font-family: Cenzl; */
+	font-style: italic;
+	font-family: 'Cinzel', serif;
 }
 
 /********** Info Panel *************/
@@ -419,7 +186,7 @@ a
 
 .graphy
 {
-	color:#a3bfc1;
+	color:#98b2b4;
 }
 
 .sDesktop .infoPanel .subAlbumMenus
@@ -692,7 +459,7 @@ a
 
 .footer .footerMenuWrapper
 {
-	left: 4%;
+	left: 2%;
 	position: relative;
 	bottom: 30%;
 	z-index: 1;
