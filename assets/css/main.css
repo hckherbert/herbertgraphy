@@ -60,7 +60,7 @@ a
 
 .bgBase
 {
-	background:#e6d1c8;
+	background:#d0bbb2;
 }
 
 .bgBrown .infoPanel h1
@@ -79,16 +79,75 @@ a
 }
 
 /********** HOME ***************/
-.homeSubTitle
+.homeSubTitle_a
+{
+	position: absolute;
+	bottom: 30px;
+	color: #7e726d;
+	right:8px;
+	font-size: 30px;
+	opacity: 0.8;
+	font-family: 'Halant', serif;
+}
+
+.homeSubTitle_b
+{
+	position: absolute;
+	bottom: 30px;
+	color: #fffff0;
+	left: 8px;
+	font-size: 30px;
+	opacity: 0.8;
+	font-family: 'Halant', serif;
+}
+
+.homeSubTitle_c
+{
+	position: absolute;
+	bottom: 170px;
+	color: #fffff0;
+	left: 8%;
+	font-size: 30px;
+	opacity: 0.8;
+	text-align: center;
+	font-family: 'Halant', serif;
+	min-width: 320px;
+}
+
+.homeSubTitle_c em
+{
+	font-size:25px;
+}
+
+.homeSubTitle_d em
+{
+	font-size:20px;
+}
+
+.homeSubTitle_d
+{
+	position: absolute;
+	bottom: 80px;
+	color: #fffff0;
+	left: 30%;
+	font-size: 20px;
+	opacity: 0.7;
+	font-family: 'Halant', serif;
+	max-width:320px;
+}
+
+.homeSubTitle_e
 {
 	position: absolute;
 	bottom: 40px;
 	color: #fffff0;
-	left: 15px;
-	font-size: 30px;
-	opacity: 0.8;
-	font-family: 'Junge', serif;
+	left: 120px;
+	font-size: 35px;
+	opacity: 0.9;
+	font-family: 'Halant', serif;
+	text-align:center;
 }
+
 
 /********** Info Panel *************/
 
@@ -113,6 +172,7 @@ a
 	width: 35%;
 	height: auto;
 	text-align: right;
+	position:relative;
 }
 
 
@@ -179,7 +239,7 @@ a
 
 .graphy
 {
-	color:#98b2b4;
+	color:#809d9f;
 }
 
 .sDesktop .infoPanel .subAlbumMenus
@@ -872,6 +932,7 @@ a
 {
 	width:100%;
 	height:100%;
+	background:#e6d1c8;
 }
 
 .sDesktop .section_about .mainPanel
@@ -951,7 +1012,7 @@ a
 .sDesktop .section_about  article p:first-child:first-letter
 {
 	float: left;
-	font-family: 'Junge', serif;
+	font-family: 'Halant', serif;
 	font-size: 240px;
 	line-height: 0.85em;
 	margin-right: 0.03em;
@@ -962,7 +1023,7 @@ a
 .sMobile .section_about  article p:first-child:first-letter
 {
 	float: left;
-	font-family: 'Cinzel', serif;
+	font-family: 'Halant', serif;
 	font-size: 100px;
 	line-height: 0.85em;
 	margin-right: 0.03em;
