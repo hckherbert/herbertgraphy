@@ -104,7 +104,7 @@ a
 .homeSubTitle_c
 {
 	position: absolute;
-	bottom: 170px;
+	bottom: 145px;
 	color: #fffff0;
 	left: 8%;
 	font-size: 30px;
@@ -149,6 +149,20 @@ a
 }
 
 
+.homeSubTitle_e
+{
+	font-family: 'Catamaran', sans-serif;
+	position: absolute;
+	top:4px;
+	color: #274358;
+	left: 4px;
+	font-size: 35px;
+	opacity: 0.9;
+	font-size:12px;
+}
+
+
+
 /********** Info Panel *************/
 
 .sMobile .infoPanel
@@ -178,7 +192,7 @@ a
 
 .sDesktop .infoPanel .intro p:first-child:first-letter 
 {
-	font-family: 'Junge', serif;
+	font-family: 'Halant', serif;
 	font-size:70px;
 	margin:5px 0 -5px 0; 
 	padding:0 .1em 0 0; 
