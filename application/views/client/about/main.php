@@ -9,8 +9,8 @@
         <p>I’m glad to have received very positive feedbacks from my friends on the photographs. I’ll keep HerbretGraphy up-to-date, and bring more surprises from time to time. I enjoy most when I’m asked to take portrait photos. If you wanna become one of the lucky ones who appear here, just ask <em>her</em> out:</p>
         <br>
         <br>
-        <p>&#9993; info@herbertgraphy.com</p>
-        <p>&#9990; 95851099</p>
+        <p><span class="simple_icon">&#9993;</span>info@herbertgraphy.com</p>
+        <p><span class="simple_icon">&#9990;</span>95851099</p>
         <div class="clear"></div>
     </article>
     <div class="herbert">
