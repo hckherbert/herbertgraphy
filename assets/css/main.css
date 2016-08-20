@@ -759,6 +759,7 @@ a
 	width:100%;
 	display:block;
 	position:relative;
+	height:100%;
 }
 
 
@@ -1098,7 +1099,7 @@ a
 	height:100%;
 }
 
-.section_about .mainPanel
+.sDesktop .section_about .mainPanel
 {
 	overflow-y:auto;
 }
@@ -1129,6 +1130,11 @@ a
 .section_about .infoPanel .albumTitle
 {
 	background:#dbe7e7;
+}
+
+.sMobile .section_about .infoPanel h1
+{
+	color:#383432;
 }
 
 
@@ -1189,6 +1195,12 @@ a
 	color:#99827d;
 }
 
+
+.sDesktop .section_about .menuContainer,
+.sDesktop .section_about .albumTitle
+{
+	display:none;
+}
 
 
 /******** SIMPLE LOADING **********/

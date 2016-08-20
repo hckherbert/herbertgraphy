@@ -9,8 +9,8 @@ class About extends MY_Common
 
     public function index()
     {
-
-        $data["main_title"] = "All About HerbertGraphy";
+        $data = $this->getInfoPanelBaseData();
+        $data["main_title"] = "About HerbertGraphy";
         $this->load->template_client("about", "basic", $data);
     }
 }

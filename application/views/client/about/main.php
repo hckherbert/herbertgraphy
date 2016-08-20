@@ -13,7 +13,4 @@
         <p><span class="simple_icon">&#9990;</span>95851099</p>
         <div class="clear"></div>
     </article>
-    <div class="herbert">
-
-    </div>
 </div>
