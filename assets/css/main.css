@@ -84,12 +84,10 @@ a
 	position: absolute;
 	bottom: 40px;
 	color: #fffff0;
-	left: -15%;
-	font-size: 25px;
+	left: 15px;
+	font-size: 30px;
 	opacity: 0.8;
-	/* font-family: Cenzl; */
-	font-style: italic;
-	font-family: 'Cinzel', serif;
+	font-family: 'Junge', serif;
 }
 
 /********** Info Panel *************/
@@ -120,7 +118,7 @@ a
 
 .sDesktop .infoPanel .intro p:first-child:first-letter 
 {
-	font-family: 'Cinzel', serif;
+	font-family: 'Junge', serif;
 	font-size:70px;
 	margin:5px 0 -5px 0; 
 	padding:0 .1em 0 0; 
@@ -953,7 +951,7 @@ a
 .sDesktop .section_about  article p:first-child:first-letter
 {
 	float: left;
-	font-family: 'Cinzel', serif;
+	font-family: 'Junge', serif;
 	font-size: 240px;
 	line-height: 0.85em;
 	margin-right: 0.03em;
