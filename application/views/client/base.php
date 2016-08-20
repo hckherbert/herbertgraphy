@@ -4,7 +4,7 @@
 <div class="wrapper">
 	<div class="wrapperBase<?php if (isset($section)) {echo " ".$section; } ?>">
 	<?php $this->load->partials("client/templates/menu_info_panel"); ?>
-	<div class="mainPanel">
+	<div class="mainPanel bgBase">
 		<?php if (isset($main_content_path)) { ?>
 		<?php $this->load->partials($main_content_path); ?>
 		<?php } ?>

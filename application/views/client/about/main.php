@@ -1,4 +1,4 @@
-<div class="aboutContainer">
+<div class="aboutContainer bgBase">
     <article>
         <p>In 2008, I got my first SLR camera. Since then I developed an interest in photography. Here is a showcase of the photographs that I’ve been taking. Everything here is organized by me, Herbert - from every photograph, layout design and  technical stuff like programming etc. of the site. I see it a way to present my passion for what I’ve been doing  - passion, sincerity and uniqueness.</p>
         <br>
