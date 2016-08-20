@@ -437,11 +437,11 @@ a
 
 .menuTransition
 {
-	-webkit-transition: all .5s  ease-out;
-	-moz-transition: all .5s  ease-out;
-	-ms-transition: all .5s  ease-out;
-	-o-transition: all .5s  ease-out;
-	transition: all .5s  ease-out;
+	-webkit-transition: all .3s  ease-out;
+	-moz-transition: all .3s  ease-out;
+	-ms-transition: all .3s  ease-out;
+	-o-transition: all .3s  ease-out;
+	transition: all .3s  ease-out;
 }
 
 .sMobile .mainMenuClose
@@ -699,6 +699,7 @@ a
 	height:26px;
 	display:inline-block;
 	margin:0 2px;
+	position:relative;
 	-webkit-transition: all 0.3s ease-in-out;
 	-moz-transition: all 0.3s ease-in-out;
 	-ms-transition: all 0.3s ease-in-out;
@@ -710,7 +711,8 @@ a
 {
 	-webkit-filter: brightness(120%);
 	filter: brightness(150%);
-	margin-top:-4px;
+	top:-2px;
+
 }
 
 .footer .footerMenuWrapper #btn_ask_her
@@ -734,6 +736,12 @@ a
 .footer .footerMenuWrapper #btn_about_her
 {
 	background:url(../images/icon-about.png) 0 0 no-repeat;
+	background-size:100%;
+}
+
+.footer .footerMenuWrapper #btn_home
+{
+	background:url(../images/icon-home.png) 0 0 no-repeat;
 	background-size:100%;
 }
 

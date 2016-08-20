@@ -14,7 +14,7 @@
       </div>
       <div class="light"></div>
     </div>
-    <div class="loadingText">Herbertgraphy</div>
+    <div class="loadingText">HerbertGraphy</div>
     <!--<div class="flash"></div>-->
     <div class="blink"></div>
 </div>
