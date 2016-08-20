@@ -31,4 +31,5 @@ function windowOnResized()
 $(window).load(function()
 {
     $(".pageLoading").hide();
+    $("html").addClass("vScrollOn");
 })

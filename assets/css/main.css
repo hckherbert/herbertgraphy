@@ -359,7 +359,8 @@ a
 
 
 .sDesktop .infoPanel .intro p:first-child:first-letter 
-{	
+{
+	font-family: 'Cinzel', serif;
 	font-size:70px;
 	margin:5px 0 -5px 0; 
 	padding:0 .1em 0 0; 
@@ -813,6 +814,11 @@ a
 	filter: brightness(120%);
 }
 
+.sDesktop .wrapperBase .infoPanel
+{
+	height:100%;
+}
+
 .btnMenuToggleRotate
 {
 	-ms-transform: rotate(90deg);
@@ -1074,28 +1080,29 @@ a
 /* dummy to be remvoed */
 .about
 {
-	color:#84857c;
-	background:#f6ebd9;
-	width:100%;
-	height:100%;
-	padding:200px 20% 20% 20%;
-	text-align:justify;
+	color: #84857c;
+	width: 100%;
+	height: 100%;
+	padding: 100px 75% 20% 5%;
+	text-align: justify;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
+	background: url(../images/herbert.jpg) #f6ebd9 right center no-repeat;
 }
 
 .about p
 {
-	font-size:15px;
+	font-size:16px;
 	line-height:1.2em;
+
 }
 
 .sDesktop .about p:first-child:first-letter
 {
 	float: left;
 	font-family: 'Cinzel', serif;
-	font-size: 200px;
+	font-size: 250px;
 	line-height: 0.85em;
 	margin-right: 0.03em;
 	margin-bottom:-0.1em;
