@@ -29,22 +29,22 @@ function commonBindUIEvents()
 function toggleMenu(pEvent)
 {
     pEvent.preventDefault();
-    $(".btnMenuToggle").toggleClass("btnMenuToggleRotate");
 
-    $(".menuContainer").addClass("menuTransition");
-
-    $(".menuContainer").css("top", $(".albumTitle").height() + "px");
-
-    $(".menuContainer").toggleClass("mainMenuClose");
-    $(".menuMask").toggleClass("show")
-
-    if (("body").hasClass("sDesktop"))
+    if ($("body").hasClass("sDesktop"))
     {
-        $(".albumTitle").css("height", "auto");
+       $(".albumTitle").css("height", "auto");
     }
     else
     {
-        $(".albumTitle").css("height", $(".albumTitle h1").outerHeight() + "px");
+        $(".btnMenuToggle").toggleClass("btnMenuToggleRotate");
+
+        $(".menuContainer").addClass("menuTransition");
+
+        $(".menuContainer").css("top", $(".albumTitle").height() + "px");
+
+        $(".menuContainer").toggleClass("mainMenuClose");
+        $(".menuMask").toggleClass("show");
+
     }
 }
 

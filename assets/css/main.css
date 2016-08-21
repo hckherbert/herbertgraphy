@@ -78,6 +78,11 @@ a
 	background:#fbf3e6;
 }
 
+.sDesktop .infoPanel .menuContainer
+{
+	background:transparent;
+}
+
 /********** HOME ***************/
 .homeSubTitle_c
 {
@@ -996,7 +1001,7 @@ a
 
 .section_about .aboutContainer,
 .section_about .mainPanel,
-.section_about article,
+.section_about article
 {
 	background:#e6d1c8;
 }
