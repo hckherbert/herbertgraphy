@@ -32,11 +32,20 @@ function toggleMenu(pEvent)
     $(".btnMenuToggle").toggleClass("btnMenuToggleRotate");
 
     $(".menuContainer").addClass("menuTransition");
-    $(".albumTitle").css("height", $(".albumTitle h1").outerHeight() + "px");
+
     $(".menuContainer").css("top", $(".albumTitle").height() + "px");
 
     $(".menuContainer").toggleClass("mainMenuClose");
-    $(".menuMask").toggleClass("show");
+    $(".menuMask").toggleClass("show")
+
+    if (("body").hasClass("sDesktop"))
+    {
+        $(".albumTitle").css("height", "auto");
+    }
+    else
+    {
+        $(".albumTitle").css("height", $(".albumTitle h1").outerHeight() + "px");
+    }
 }
 
 function closeMenu()

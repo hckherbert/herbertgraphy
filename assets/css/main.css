@@ -70,7 +70,7 @@ a
 
 .bgBase .infoPanel h1
 {
-	color:#6e5855;
+	color:#4c3c3a;
 }
 
 .sMobile .infoPanel .menuContainer
@@ -115,14 +115,18 @@ a
 	.sDesktop .homeSubTitle_c,
 	.sDesktop .homeSubTitle_d
 	{
-		width:550px;
 		left: 8%;
 	}
 
+	.sDesktop .homeSubTitle_c
+	{
+		font-size:40px;
+		width:740px;
+	}
 
 	.sDesktop .homeSubTitle_c .second_line
 	{
-		margin-left:30px;
+		margin-left:50px;
 	}
 }
 
@@ -142,14 +146,14 @@ a
 	text-align:left;
 }
 
-.homeSubTitle_c em
-{
-	font-size:25px;
-}
-
-.homeSubTitle_d em
+.sDesktop .homeSubTitle_d
 {
 	font-size:20px;
+}
+
+.sMobile .homeSubTitle_d
+{
+	font-size:15px;
 }
 
 .homeSubTitle_d
@@ -341,7 +345,7 @@ a
 
 .infoPanel .subAlbumMenus li a
 {
-	color:#857b75;
+	color:#6d6864;
 }
 
 .infoPanel .subAlbumMenus li.active a
@@ -398,7 +402,7 @@ a
 
 .infoPanel .otherAlbumMenus li a
 {
-	color:#857b75;
+	color:#6d6864;
 	-webkit-transition: all .3s ease;
 	-moz-transition: all .3s ease;
 	-ms-transition: all .3s ease;
@@ -486,7 +490,7 @@ a
 
 .infoPanel .menuLinks li a
 {
-	color:#857b75;
+	color:#6d6864;
 	-webkit-transition: all .3s ease;
 	-moz-transition: all .3s ease;
 	-ms-transition: all .3s ease;
