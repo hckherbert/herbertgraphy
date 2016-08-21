@@ -35,7 +35,7 @@ function windowOnResized()
         }
     }
 
-    if ($(".albumTitle").outerHeight() + $(".menuContainer").outerHeight() +  $(".footer").height() > $(window).height())
+    if ($(".albumTitle:visible").outerHeight() + $(".menuContainer:visible").outerHeight() +  $(".footer").height() > $(window).height())
     {
         $("html").addClass("vScrollOn");
     }

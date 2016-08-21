@@ -995,7 +995,8 @@ a
 }
 
 .section_about .aboutContainer,
-.section_about .mainPanel
+.section_about .mainPanel,
+.section_about article,
 {
 	background:#e6d1c8;
 }
