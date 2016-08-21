@@ -79,39 +79,67 @@ a
 }
 
 /********** HOME ***************/
-.homeSubTitle_a
-{
-	position: absolute;
-	bottom: 30px;
-	color: #7e726d;
-	right:8px;
-	font-size: 30px;
-	opacity: 0.8;
-	font-family: 'Halant', serif;
-}
-
-.homeSubTitle_b
-{
-	position: absolute;
-	bottom: 30px;
-	color: #fffff0;
-	left: 8px;
-	font-size: 30px;
-	opacity: 0.8;
-	font-family: 'Halant', serif;
-}
-
 .homeSubTitle_c
 {
 	position: absolute;
-	bottom: 145px;
+	bottom: 85px;
 	color: #fffff0;
-	left: 8%;
 	font-size: 30px;
 	opacity: 0.8;
-	text-align: center;
 	font-family: 'Halant', serif;
-	min-width: 320px;
+	text-align:left;
+}
+
+.homeSubTitle_c .cap
+{
+	font-size:120%;
+}
+
+
+@media (max-width: 1023px)
+{
+	.sDesktop .homeSubTitle_c,
+	.sDesktop .homeSubTitle_d
+	{
+		padding: 0 20px;
+	}
+
+	.sDesktop .homeSubTitle_c .second_line
+	{
+		margin-left:0px;
+	}
+}
+
+@media (min-width: 1024px)
+{
+	.sDesktop .homeSubTitle_c,
+	.sDesktop .homeSubTitle_d
+	{
+		width:550px;
+		left: 8%;
+	}
+
+
+	.sDesktop .homeSubTitle_c .second_line
+	{
+		margin-left:30px;
+	}
+}
+
+@media (max-height:400px)
+{
+	.homeSubTitle_c,
+	.homeSubTitle_d
+	{
+		display:none;
+	}
+}
+
+.sMobile .homeSubTitle_c,
+.sMobile .homeSubTitle_d
+{
+	padding: 0 20px;
+	text-align:left;
 }
 
 .homeSubTitle_c em
@@ -127,13 +155,11 @@ a
 .homeSubTitle_d
 {
 	position: absolute;
-	bottom: 80px;
+	bottom: 40px;
 	color: #fffff0;
-	left: 30%;
 	font-size: 20px;
 	opacity: 0.7;
 	font-family: 'Halant', serif;
-	max-width:320px;
 }
 
 .homeSubTitle_e
@@ -153,7 +179,6 @@ a
 {
 	font-family: 'Catamaran', sans-serif;
 	position: absolute;
-	top:4px;
 	color: #274358;
 	left: 4px;
 	font-size: 35px;
@@ -161,7 +186,15 @@ a
 	font-size:12px;
 }
 
+.sDesktop .homeSubTitle_e
+{
+	top:4px;
+}
 
+.sMobile .homeSubTitle_e
+{
+	top:44px;
+}
 
 /********** Info Panel *************/
 
@@ -609,7 +642,6 @@ a
 {
 	width:100%;
 	display:block;
-	position:relative;
 	height:100%;
 }
 

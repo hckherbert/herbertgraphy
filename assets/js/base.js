@@ -14,16 +14,24 @@ function windowOnResized()
 {
     if ($("#cover").length)
     {
-        if ($("#cover").width() < $(".mainPanel").width())
+        if ($("body").hasClass("sDesktop"))
         {
-            $("#cover").css("width", "100%");
-            $("#cover").css("height", "auto");
+            $("#cover").css("position", "absolute");
+            
+            if ($("#cover").width() < $(".mainPanel").width()) {
+                $("#cover").css("width", "100%");
+                $("#cover").css("height", "auto");
+            }
+            if ($("#cover").height() < $(".mainPanel").height()) {
+                $("#cover").css("height", "100%");
+                $("#cover").css("width", "auto");
+            }
         }
-
-        if ($("#cover").height() < $(".mainPanel").height())
+        else
         {
-            $("#cover").css("height", "100%");
-            $("#cover").css("width", "auto");
+            $("#cover").css("height", "auto");
+            $("#cover").css("width", "100%");
+            $("#cover").css("position", "relative");
         }
     }
 }
