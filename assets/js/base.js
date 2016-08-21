@@ -17,7 +17,7 @@ function windowOnResized()
         if ($("body").hasClass("sDesktop"))
         {
             $("#cover").css("position", "absolute");
-            
+
             if ($("#cover").width() < $(".mainPanel").width()) {
                 $("#cover").css("width", "100%");
                 $("#cover").css("height", "auto");
@@ -33,6 +33,15 @@ function windowOnResized()
             $("#cover").css("width", "100%");
             $("#cover").css("position", "relative");
         }
+    }
+
+    if ($(".albumTitle").outerHeight() + $(".menuContainer").outerHeight() +  $(".footer").height() > $(window).height())
+    {
+        $("html").addClass("vScrollOn");
+    }
+    else
+    {
+        $("html").removeClass("vScrollOn");
     }
 }
 

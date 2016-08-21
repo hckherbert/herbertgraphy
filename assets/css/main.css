@@ -278,8 +278,7 @@ a
 {
 	.sDesktop .infoPanel h1 {
 		font-size: 3vw;
-		padding: 10px 20px;
-		margin: 200px 0 0 0;
+		padding: 210px 20px 10px 20px;
 		font-weight: 200;
 	}
 }
@@ -287,8 +286,7 @@ a
 @media (min-width: 1440px) {
 	.sDesktop .infoPanel h1 {
 		font-size: 2.3vw;
-		padding: 10px 20px;
-		margin: 200px 0 0 0;
+		padding: 210px 20px 10px 20px;
 		font-weight: 200;
 	}
 }
