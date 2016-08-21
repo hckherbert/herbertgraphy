@@ -58,9 +58,15 @@ a
 	background:#383432;
 }
 
-.bgBase
+.bgBase,
+.sMobile.bgBase .infoPanel .menuContainer
 {
 	background:#d0bbb2;
+}
+
+.sDesktop .infoPanel .menuContainer
+{
+	background:transparent;
 }
 
 .bgBrown .infoPanel h1
@@ -68,20 +74,21 @@ a
 	color:#d0c4c0;
 }
 
+.sMobile.bgBrown  .infoPanel .menuContainer
+{
+	background:#ede1b5;
+}
+
 .bgBase .infoPanel h1
 {
 	color:#4c3c3a;
 }
 
-.sMobile .infoPanel .menuContainer
+.sMobile.bgBase .albumTitle
 {
-	background:#fbf3e6;
+	background:#dbe7e7;
 }
 
-.sDesktop .infoPanel .menuContainer
-{
-	background:transparent;
-}
 
 /********** HOME ***************/
 .homeSubTitle_c
@@ -1035,10 +1042,6 @@ a
 	display:none;
 }
 
-.section_about .infoPanel .albumTitle
-{
-	background:#dbe7e7;
-}
 
 .sMobile .section_about .infoPanel h1
 {
