@@ -115,18 +115,30 @@ a
 	.sDesktop .homeSubTitle_c,
 	.sDesktop .homeSubTitle_d
 	{
-		left: 8%;
+		left: 30px;
 	}
 
+	.sDesktop .homeSubTitle_c
+	{
+		width:550px;
+	}
+
+	.sDesktop .homeSubTitle_c .second_line {
+		margin-left: 30px;
+	}
+
+}
+
+@media (min-width: 1280px)
+{
 	.sDesktop .homeSubTitle_c
 	{
 		font-size:40px;
 		width:740px;
 	}
 
-	.sDesktop .homeSubTitle_c .second_line
-	{
-		margin-left:50px;
+	.sDesktop .homeSubTitle_c .second_line {
+		margin-left: 50px;
 	}
 }
 
