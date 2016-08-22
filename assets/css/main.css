@@ -1037,9 +1037,11 @@ a
 }
 
 /********* About ************/
-.section_about
+.section_about,
+.section_about .aboutContainer
+
 {
-	background:#fff;
+	background:#e6d1c8;
 
 }
 
@@ -1056,9 +1058,17 @@ a
 	background:#e6d1c8;
 }
 
+.sMobile .section_about .mainPanel
+{
+	position: relative !important;
+	height:auto;
+
+}
 
 .sDesktop .section_about .mainPanel
 {
+	overflow-y:auto;
+	overflow-x:hidden;
 	position: relative !important;
 }
 
