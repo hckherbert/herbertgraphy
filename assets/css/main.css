@@ -714,6 +714,7 @@ a
 	.menuContainer
 	{
 		background:rgba(208, 187, 178, 0.8) !important;
+		padding:0 0 10px 0;
 	}
 
 	html
