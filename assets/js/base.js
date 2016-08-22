@@ -38,10 +38,25 @@ function windowOnResized()
     if ($(".albumTitle:visible").outerHeight() + $(".menuContainer:visible").outerHeight() +  $(".footer").height() > $(window).height())
     {
         $("html").addClass("vScrollOn");
+
+        if ($("body").hasClass("sDesktop"))
+        {
+            $(".mainPanel").css("position", "fixed");
+            $(".mainPanel").css("left", "35%");
+        }
+        else
+        {
+            $(".mainPanel").css("position", "relative");
+            $(".mainPanel").css("left", "0");
+        }
+
     }
     else
     {
         $("html").removeClass("vScrollOn");
+        $(".mainPanel").css("position", "relative");
+        $(".mainPanel").css("left", "0");
+
     }
 }
 
