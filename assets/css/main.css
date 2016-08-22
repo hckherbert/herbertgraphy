@@ -67,7 +67,6 @@ a
 .sDesktop .infoPanel .menuContainer
 {
 	background:transparent;
-	margin:0 0 24px 0;
 }
 
 .bgBrown .infoPanel h1
@@ -222,7 +221,7 @@ a
 
 .sMobile .homeSubTitle_e
 {
-	top:44px;
+	top:4px;
 }
 
 /********** Info Panel *************/
@@ -329,6 +328,11 @@ a
 	opacity:1;
 }
 
+.menuContainer
+{
+	margin:0 0 24px 0;
+}
+
 .menuTransition
 {
 	-webkit-transition: all .3s  ease-out;
@@ -340,7 +344,7 @@ a
 
 .sMobile .mainMenuClose
 {
-	top:-360px !important;
+	/*top:-360px !important;*/
 	opacity:0.5 !important;
 }
 

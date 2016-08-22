@@ -22,6 +22,7 @@ function commonSetUpResponsive()
 
 function commonBindUIEvents()
 {
+    $(".sMobile .mainMenuClose").css("top", -1 * $(".menuContainer").outerHeight() + "px");
     $(".btnMenuToggle").on("click", toggleMenu);
     $(document).on("responsive", closeMenu);
 }
@@ -43,6 +44,7 @@ function toggleMenu(pEvent)
         $(".menuContainer").css("top", $(".albumTitle").height() + "px");
 
         $(".menuContainer").toggleClass("mainMenuClose");
+
         $(".menuMask").toggleClass("show");
 
     }

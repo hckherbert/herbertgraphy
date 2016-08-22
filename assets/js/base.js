@@ -58,6 +58,12 @@ function windowOnResized()
         $(".mainPanel").css("left", "0");
 
     }
+
+    if ($("body").hasClass("sMobile"))
+    {
+
+        $(".sMobile .mainMenuClose").css("top", -1 * $(".menuContainer").outerHeight() + "px");
+    }
 }
 
 
