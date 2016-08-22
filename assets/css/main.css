@@ -67,6 +67,7 @@ a
 .sDesktop .infoPanel .menuContainer
 {
 	background:transparent;
+	margin:0 0 24px 0;
 }
 
 .bgBrown .infoPanel h1
@@ -545,6 +546,7 @@ a
 	width:100%;
 	bottom:0;
 	opacity:0;
+	z-index:1;
 	-webkit-transition: all 3s ease;
 	-moz-transition: all 3s ease;
 	-ms-transition: all 3s ease;
@@ -669,6 +671,36 @@ a
 	width:100%;
 	display:block;
 	height:100%;
+}
+
+@media (min-width: 768px) and (max-width: 960px) {
+	.wrapperBase .mainPanel {
+		position: fixed !important;
+		left: 0;
+		top: 0;
+	}
+
+	.infoPanel
+	{
+		z-index:1;
+	}
+
+	.albumTitle
+	{
+		background:rgba(208, 187, 178, 0.8) !important;
+	}
+
+	.albumTitle h1
+	{
+		padding: 10px 20px !important;
+		margin-top: 200px;
+		background:transparent !important;
+	}
+
+	.menuContainer
+	{
+		background:rgba(208, 187, 178, 0.8) !important;
+	}
 }
 
 
