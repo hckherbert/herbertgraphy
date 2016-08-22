@@ -1056,15 +1056,16 @@ a
 	background:#e6d1c8;
 }
 
+
 .sDesktop .section_about .mainPanel
 {
-	overflow-y:auto;
+	position: relative !important;
 }
 
 @media (max-width: 1439px) {
 	.sDesktop .section_about .mainPanel
 	{
-		width:55%;
+		width:55% !important;
 	}
 
 	.sDesktop .section_about .infoPanel

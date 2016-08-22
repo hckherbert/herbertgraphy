@@ -53,15 +53,14 @@ function windowOnResized()
     }
     else
     {
-        $("html").removeClass("vScrollOn");
-        $(".mainPanel").css("position", "relative");
-        $(".mainPanel").css("left", "0");
+        //$("html").removeClass("vScrollOn");
+        //$(".mainPanel").css("position", "relative");
+       // $(".mainPanel").css("left", "0");
 
     }
 
     if ($("body").hasClass("sMobile"))
     {
-
         $(".sMobile .mainMenuClose").css("top", -1 * $(".menuContainer").outerHeight() + "px");
     }
 }
