@@ -25,10 +25,24 @@ class Album extends MY_Common
 			$this->not_found();
 			return;
 		}
-		
+
+		$data["featured_photo"] = "";
 		$parent_id = $this->album_model->get_parent_album_id($album_id);
-	
 		$data["current_album_data"] = $this->album_model->get_album_details($album_id);
+
+		foreach ($data["current_album_data"]["photo_data"] as $photo)
+		{
+			if ($photo["featured"] == "1")
+			{
+				$data["featured_photo"]= base_url()."assets/photos/".$data["current_album_data"]["album_details"]->label."/".$photo["file_thumb_path"];
+			}
+		}
+
+		if ($data["featured_photo"] == "")
+		{
+			$data["featured_photo"] = base_url()."assets/photos/".$data["current_album_data"]["album_details"]->label."/".$data["current_album_data"]["photo_data"][0]["file_thumb_path"];
+		}
+
 		$data["all_other_albums_data"] = $this->get_all_other_albums_data($data["current_album_data"]["album_details"]->label, $parent_id);
 		$data["subalbum_data"] = $this->get_sub_albums($album_id);
 		$this->load->template_client("album", "album", $data);
