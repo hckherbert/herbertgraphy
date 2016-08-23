@@ -11,6 +11,6 @@ class About extends MY_Common
     {
         $data = $this->getInfoPanelBaseData();
         $data["main_title"] = "About HerbertGraphy";
-        $this->load->template_client("about", "basic", $data);
+        $this->load->template_client("about", "base", $data);
     }
 }
