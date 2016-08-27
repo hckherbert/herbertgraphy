@@ -110,17 +110,22 @@ a
 }
 
 
-@media (max-width: 1023px)
+@media (min-width: 768px) and (max-width: 1024px)
 {
-	.sDesktop .homeSubTitle_c,
 	.sDesktop .homeSubTitle_d
 	{
 		padding: 0 20px;
+		right:0;
 	}
 
 	.sDesktop .homeSubTitle_c
 	{
-		width:560px;
+		right: 20px;
+		text-align: right;
+		font-size: 22px;
+		padding: 0;
+		width: 480px;
+		bottom: 70px;
 	}
 
 	.sDesktop .homeSubTitle_c .second_line
@@ -129,7 +134,7 @@ a
 	}
 }
 
-@media (min-width: 1024px)
+@media (min-width: 1025px) and (max-width:1279px)
 {
 	.sDesktop .homeSubTitle_c,
 	.sDesktop .homeSubTitle_d
@@ -154,6 +159,7 @@ a
 	{
 		font-size:35px;
 		width:750px;
+		padding:0 20px;
 	}
 
 	.sDesktop .homeSubTitle_c .second_line {
@@ -685,7 +691,7 @@ a
 	height:100%;
 }
 
-@media (min-width: 768px) and (max-width: 960px) {
+@media (min-width: 768px) and (max-width: 1024px) {
 	.wrapperBase .mainPanel
 	{
 		position: fixed !important;
