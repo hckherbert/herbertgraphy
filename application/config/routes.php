@@ -50,7 +50,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 
-//$route['default_controller'] = 'archive';
-$route['default_controller'] = 'home'; //used when revamp is launched!
+//changed to always set to home when ready!
+if (ENVIRONMENT !== 'production')
+{
+    $route['default_controller'] = 'home'; //used when revamp is launched!
+}
+else
+{
+    $route['default_controller'] = 'archive';
+}
 $route['404_override'] = 'home/not_found';
 $route['translate_uri_dashes'] = FALSE;

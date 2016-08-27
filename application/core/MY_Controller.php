@@ -37,7 +37,7 @@ class MY_Common extends CI_Controller
             $data["main_title"] = "Opps";
         }
 
-        $this->load->template_client("base", "basic", $data);
+        $this->load->template_client("base", "base", $data);
         return;
     }
 }

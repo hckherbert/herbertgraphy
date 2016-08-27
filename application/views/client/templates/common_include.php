@@ -6,6 +6,9 @@
     <meta name="format-detection" content="telephone=no" />
     <meta name="description" content="">
     <meta name="keywords" content="">
+    <?php if (isset($meta_tags)){
+        $this->load->view($meta_tags);
+    } ?>
     <title></title>
     <!-- ICON -->
     <link href="<?php echo base_url("assets/images/apple-touch-icon.png"); ?>" rel="apple-touch-icon" />
