@@ -6,6 +6,7 @@
         <br>
         <p>I am glad to have received very positive impressions on the photographs from my friends. . I’ll keep HerbretGraphy up-to-date, and bring more surprises from time to time. I enjoy most when I’m asked to take portrait photos. If you wanna become one of the lucky ones to appear here, try to reach me at:</p>
         <div class="contacts">
+            <p class="name">Herbert Ho</p>
             <span class="simple_icon">&#9993;</span>
             <p></p>info@herbertgraphy.com</p>
             <span class="simple_icon">&#9990;</span>

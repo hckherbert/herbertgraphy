@@ -1151,7 +1151,7 @@ a
 	display:inline-block;
 }
 
-.sDesktop .section_about  article p:first-child:first-letter
+.sDesktop .section_about  article > p:first-child:first-letter
 {
 	float: left;
 	font-family: 'Merriweather', serif;
@@ -1162,7 +1162,7 @@ a
 	color:#99827d;
 }
 
-.sMobile .section_about  article p:first-child:first-letter
+.sMobile .section_about  article > p:first-child:first-letter
 {
 	float: left;
 	font-family: 'Merriweather', serif;
@@ -1183,13 +1183,19 @@ a
 .section_about .contacts
 {
 	border-radius: 50%;
-	width: 200px;
-	height: 200px;
+	width: 240px;
+	height: 240px;
 	padding:10px;
 	background:#f4f3e9;
 	margin:50px auto;
 	text-align: center;
 	color:#94b5b5;
+}
+
+.section_about .contacts .name
+{
+	font-size:22px;
+	margin: 20px 0 0 0;
 }
 
 
