@@ -179,7 +179,6 @@ a
 .sMobile .homeSubTitle_c,
 .sMobile .homeSubTitle_d
 {
-	padding: 0 20px;
 	text-align:left;
 }
 
@@ -201,6 +200,7 @@ a
 	color: #fffff0;
 	font-size: 20px;
 	opacity: 0.7;
+	padding:0 20px;
 	font-family: 'Merriweather', serif;
 }
 
@@ -269,7 +269,7 @@ a
 {
 	font-family: 'Merriweather', serif;
 	font-size:70px;
-	margin:5px 0 -5px 0; 
+	margin:5px 0 -5px 0;
 	padding:0 .1em 0 0; 
 	height:.7em; 
 	line-height:.85em; 
@@ -359,7 +359,7 @@ a
 .sMobile .mainMenuClose
 {
 	/*top:-360px !important;*/
-	opacity:0.5 !important;
+	opacity:0 !important;
 }
 
 .sDesktop .mainMenuClose
@@ -1160,7 +1160,7 @@ a
 	font-size: 240px;
 	line-height: 0.85em;
 	margin-right: 0.03em;
-	margin-bottom:-0.1em;
+	margin-bottom:-0.05em;
 	color:#99827d;
 }
 
@@ -1171,7 +1171,7 @@ a
 	font-size: 100px;
 	line-height: 0.85em;
 	margin-right: 0.03em;
-	margin-bottom:-0.1em;
+	margin-bottom:-0.05em;
 	color:#99827d;
 }
 
