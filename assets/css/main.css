@@ -105,6 +105,11 @@ a
 	padding:20px;
 }
 
+.sMobile .homeSubTitle_c
+{
+	bottom:50px;
+}
+
 .homeSubTitle_c .cap
 {
 	font-size:120%;
