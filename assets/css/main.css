@@ -388,7 +388,7 @@ a
 
 .infoPanel .subAlbumMenus li a
 {
-	color:#5f5a56;
+	color:#968d87;
 }
 
 .infoPanel .subAlbumMenus li.active a
@@ -445,12 +445,21 @@ a
 
 .infoPanel .otherAlbumMenus li a
 {
-	color:#a39a92;
 	-webkit-transition: all .3s ease;
 	-moz-transition: all .3s ease;
 	-ms-transition: all .3s ease;
 	-o-transition: all .3s ease;
 	transition: all .3s ease;
+}
+
+.wrapperAlbum .infoPanel .otherAlbumMenus li a
+{
+	color: #968d87;
+}
+
+.wrapperBase .infoPanel .otherAlbumMenus li a
+{
+	color: #655d57;
 }
 
 .sDesktop .wrapperAlbum .infoPanel li a:hover
@@ -489,8 +498,7 @@ a
 .sDesktop .infoPanel .otherAlbumMenus li.parent a,
 .sDesktop .infoPanel .otherAlbumMenus li.siblings a,
 .sDesktop .subAlbumMenus a
-{
-	border-right: 1px solid #605854;
+{ 
 	padding: 0 10px 0 0;
 	margin:0 -10px 0 0;
 }
