@@ -276,7 +276,7 @@ a
 	height:.7em; 
 	line-height:.85em; 
 	float:left;
-	color:#99827d;
+	color:#c3aba6;
 }
 
 .sDesktop .infoPanel .intro
@@ -293,7 +293,7 @@ a
     text-align: justify;
     font-size: 15px;
     line-height: 1.2em;
-	color:#a29c93;
+	color:#887b79;
 	margin:0 0 20px 0;
 }
 
@@ -388,7 +388,7 @@ a
 
 .infoPanel .subAlbumMenus li a
 {
-	color:#6d6864;
+	color:#5f5a56;
 }
 
 .infoPanel .subAlbumMenus li.active a
@@ -445,7 +445,7 @@ a
 
 .infoPanel .otherAlbumMenus li a
 {
-	color:#6d6864;
+	color:#a39a92;
 	-webkit-transition: all .3s ease;
 	-moz-transition: all .3s ease;
 	-ms-transition: all .3s ease;
@@ -460,7 +460,7 @@ a
 
 .sDesktop .wrapperBase .infoPanel li a:hover
 {
-	color:#b2a59d;
+	color:#988a81;
 }
 
 .sMobile .infoPanel li a:hover
@@ -533,7 +533,7 @@ a
 
 .infoPanel .menuLinks li a
 {
-	color:#6d6864;
+	color:#5f5a56;
 	-webkit-transition: all .3s ease;
 	-moz-transition: all .3s ease;
 	-ms-transition: all .3s ease;
