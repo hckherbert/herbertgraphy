@@ -55,16 +55,13 @@ function windowOnResized()
     if ($("body").hasClass("sMobile"))
     {
         $(".sMobile .mainMenuClose").css("top", -1 * $(".menuContainer").outerHeight() + "px");
-    }
-
-    if ($("body").hasClass("sMobile"))
-    {
         $("html").addClass("vScrollOn");
     }
     else
     {
         $("html").removeClass("vScrollOn");
     }
+
 
 }
 

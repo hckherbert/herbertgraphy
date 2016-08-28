@@ -582,6 +582,11 @@ a
 	transition: all 3s ease;
 }
 
+.section_about ~ .footer
+{
+	z-index:1;
+}
+
 .footer .bg
 {
 	background:#625652;
