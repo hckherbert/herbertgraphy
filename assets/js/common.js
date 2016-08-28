@@ -45,6 +45,11 @@ function toggleMenu(pEvent)
 
         $(".menuContainer").toggleClass("mainMenuClose");
 
+        if ($(".menuContainer").hasClass("mainMenuClose"))
+        {
+            $(".menuContainer").css("top", -1 * $(".menuContainer").height() + "px");
+        }
+
         $(".menuMask").toggleClass("show");
 
     }

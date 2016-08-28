@@ -76,7 +76,7 @@ a
 
 .sMobile.bgBrown  .infoPanel .menuContainer
 {
-	background:#ede1b5;
+	background:#d9cfc0;
 }
 
 .bgBase .infoPanel h1
@@ -498,7 +498,7 @@ a
 .sDesktop .infoPanel .otherAlbumMenus li.parent a,
 .sDesktop .infoPanel .otherAlbumMenus li.siblings a,
 .sDesktop .subAlbumMenus a
-{ 
+{
 	padding: 0 10px 0 0;
 	margin:0 -10px 0 0;
 }
