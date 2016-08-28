@@ -5,10 +5,12 @@
         <p>All of the photographs here, except those in the travel category,  are taken in Hong Kong. I particularly like the <em>magic hours</em> in Hong Kong, and you can find how captivating it is here, especially when you accidentally googled HerbertGraphy from somewhere else. My camera has also followed me to Japan, Turkey, Nepal, Poland, France, Italy and Australia.</p>
         <br>
         <p>I am glad to have received very positive impressions on the photographs from my friends. . I’ll keep HerbretGraphy up-to-date, and bring more surprises from time to time. I enjoy most when I’m asked to take portrait photos. If you wanna become one of the lucky ones to appear here, try to reach me at:</p>
-        <br>
-        <br>
-        <p><span class="simple_icon">&#9993;</span>info@herbertgraphy.com</p>
-        <p><span class="simple_icon">&#9990;</span>95851099</p>
+        <div class="contacts">
+            <span class="simple_icon">&#9993;</span>
+            <p></p>info@herbertgraphy.com</p>
+            <span class="simple_icon">&#9990;</span>
+            <p></p>95851099</p>
+        </div>
         <div class="clear"></div>
     </article>
 </div>

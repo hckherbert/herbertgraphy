@@ -1076,8 +1076,8 @@ a
 .sMobile .section_about .mainPanel
 {
 	position: relative !important;
-	height:auto;
-
+ 
+	height:100%;
 }
 
 .sDesktop .section_about .mainPanel
@@ -1149,8 +1149,9 @@ a
 
 .section_about .simple_icon
 {
-	color:#94b5b5;
-	margin:0 5px 0 0;
+	margin:15px 0 0 0;
+	font-size:60px;
+	display:inline-block;
 }
 
 .sDesktop .section_about  article p:first-child:first-letter
@@ -1180,6 +1181,18 @@ a
 .sDesktop .section_about .albumTitle
 {
 	display:none;
+}
+
+.section_about .contacts
+{
+	border-radius: 50%;
+	width: 200px;
+	height: 200px;
+	padding:10px;
+	background:#f4f3e9;
+	margin:50px auto;
+	text-align: center;
+	color:#94b5b5;
 }
 
 
