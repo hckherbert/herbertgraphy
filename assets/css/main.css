@@ -574,7 +574,7 @@ a
 	width:100%;
 	bottom:0;
 	opacity:0;
-	z-index:1;
+	z-index:0;
 	-webkit-transition: all 3s ease;
 	-moz-transition: all 3s ease;
 	-ms-transition: all 3s ease;
@@ -715,7 +715,7 @@ a
 		z-index:1;
 	}
 
-	.albumTitle
+	.wrapperBase .albumTitle
 	{
 		background:rgba(208, 187, 178, 0.8) !important;
 	}
@@ -727,7 +727,7 @@ a
 		background:transparent !important;
 	}
 
-	.menuContainer
+	.wrapperBase .menuContainer
 	{
 		background:rgba(208, 187, 178, 0.8) !important;
 		padding:0 0 10px 0;
