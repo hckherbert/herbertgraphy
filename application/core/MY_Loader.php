@@ -9,6 +9,7 @@ class MY_Loader extends CI_Loader
 {
     public function template_client($main_view_name, $template_name = "base", $data = array())
     {
+
         if ($template_name == "base")
         {
             $data["is_base"] = true;
@@ -35,7 +36,7 @@ class MY_Loader extends CI_Loader
 
             $data["js_includes"] = $js_includes;
             $data["class_main_color"] = "bgBase";
-            $data["meta_tags"] = "client/".$template_name."/meta_tags";
+            $data["meta_tags"] = "client/".$main_view_name."/meta_tags";
 
             $this->view("client/templates/common_include", $data);
             $this->view("client/base", $data);
