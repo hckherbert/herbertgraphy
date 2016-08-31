@@ -105,7 +105,7 @@
 	<?php if ($album_details->parentId == NULL) { ?>
 	<div class="section">
 		<h1 class="pageHeading">Sub-album List</h1>
-		<div class="hintArea">
+		<div class="hintArea hide">
 			<p>Drag the row upper to make the album positioned higher in the client side.</p>
 		</div>
 		<?php

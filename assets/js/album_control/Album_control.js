@@ -177,6 +177,7 @@ Album_control.prototype.init_upload = function()
             }
             else
             {
+                _self.hideLoading();
                 _self.displayFail(_self.mErrorMsgUpload);
             }
 
@@ -443,6 +444,8 @@ Album_control.prototype.submit_handler = function()
     //Click the Add button, upload photos if any, or add direct album
     $("#sectionAddAlbum input[name='submit']").on("click", function()
     {
+        _self.showLoading();
+
         if ($("#page_album_list").length || $("#page_add_subalbum").length)
         {
             $.ajax(
@@ -471,6 +474,8 @@ Album_control.prototype.submit_handler = function()
                     {
                         $("#formAddAlbum").find(".error").empty();
 
+                        _self.hideLoading();
+
                         if (pData["responseJSON"]["error_messages"]["validation_error"])
                         {
                             for (var err_label in pData["responseJSON"]["error_messages"])
@@ -487,6 +492,7 @@ Album_control.prototype.submit_handler = function()
                         {
                             _self.displayFail();
                         }
+
                     }
                 }
             );
@@ -537,10 +543,15 @@ Album_control.prototype.submit_handler = function()
 									if ($(".uploadifive-queue-item").length)
 									{
 										$('#file_upload').uploadifive('upload');
-									}	
+									}
+                                    else
+                                    {
+                                        _self.hideLoading();
+                                    }
 								},
 								error: function (jqxhr, status)
 								{
+                                    _self.hideLoading();
 									_self.displayFail();
 								}
 							}
@@ -674,6 +685,10 @@ Album_control.prototype.submit_handler = function()
                         {
                             _self.displayFail();
                         }
+                    },
+                    complete:function()
+                    {
+                        _self.hideLoading();
                     }
                 }
             );
@@ -723,7 +738,10 @@ Album_control.prototype.submit_handler = function()
                         {
                             _self.displayFail();
                         }
-
+                    },
+                    complete:function()
+                    {
+                        _self.hideLoading();
                     }
                 }
             );
@@ -737,6 +755,8 @@ Album_control.prototype.submit_handler = function()
         function(pEvent)
         {
             pEvent.preventDefault();
+            _self.showLoading();
+
             var _postData = $(this).serializeArray();
             var _formInstance = $(this);
 
@@ -770,6 +790,10 @@ Album_control.prototype.submit_handler = function()
                     error: function (pData, jqxhr, status)
                     {
                         _self.displayFail();
+                    },
+                    complete: function()
+                    {
+                        _self.hideLoading();
                     }
                 }
             );
@@ -782,6 +806,8 @@ Album_control.prototype.submit_handler = function()
         function(pEvent)
         {
             pEvent.preventDefault();
+            _self.showLoading();
+
             var _formInstance = $(this);
             var _postData = $(this).serializeArray();
             var _isValidated = true;
@@ -792,7 +818,6 @@ Album_control.prototype.submit_handler = function()
                 if (!$(this).hasClass("hide"))
                 {
                     _isValidated = false;
-                    console.log('ya');
                     return false;
                 }
             });
@@ -800,7 +825,6 @@ Album_control.prototype.submit_handler = function()
             if (!_isValidated)
             {
                 _self.displayFail(_self.mErrorMsgUpload);
-                console.log("not passed...");
                 return;
             }
 
@@ -818,6 +842,10 @@ Album_control.prototype.submit_handler = function()
                     error: function (jqxhr, status)
                     {
                         _self.displayFail();
+                    },
+                    complete:function()
+                    {
+                        _self.hideLoading();
                     }
                 }
             );
@@ -884,6 +912,7 @@ Album_control.prototype.onFormInfoFieldOnKeyDown = function(pEvent)
 Album_control.prototype.get_all_parent_albums = function()
 {
     var _self = this;
+    _self.showLoading();
 
     $.ajax
     (
@@ -905,14 +934,14 @@ Album_control.prototype.get_all_parent_albums = function()
                         $(".label_no_album").removeClass("hide");
                     }
                 }
-                else
-                {
-
-                }
             },
             error: function()
             {
                 _self.displayFail();
+            },
+            complete:function()
+            {
+                _self.hideLoading();
             }
         }
     );
@@ -922,6 +951,7 @@ Album_control.prototype.get_all_parent_albums = function()
 Album_control.prototype.get_sub_album_list = function(pAlbumId)
 {
     var _self = this;
+    _self.showLoading();
 
     $.ajax
     (
@@ -935,6 +965,7 @@ Album_control.prototype.get_sub_album_list = function(pAlbumId)
                 {
                     if (pData["response"].length)
                     {
+                        $("#formSubAlbumList").prev(".hintArea").removeClass("hide");
                         _self.render_album_list(pData["response"]);
                     }
                     else
@@ -951,6 +982,10 @@ Album_control.prototype.get_sub_album_list = function(pAlbumId)
             error: function()
             {
                 _self.displayFail();
+            },
+            complete:function()
+            {
+                _self.hideLoading();
             }
         }
     );
@@ -1132,4 +1167,22 @@ Album_control.prototype.onAjaxFailDisplayTransEnd = function()
     {
         $(".ajaxFailDisplay").addClass("hide");
     }
+}
+
+Album_control.prototype.showLoading = function()
+{
+    $(".loading").removeClass("hide");
+    setTimeout(function()
+    {
+        $(".loading").addClass("fadeIn");
+    }, 200);
+}
+
+Album_control.prototype.hideLoading = function()
+{
+    $(".loading").removeClass("fadeIn");
+    setTimeout(function()
+    {
+        $(".loading").addClass("hide");
+    }, 200);
 }

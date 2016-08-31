@@ -26,10 +26,6 @@
 	</div>
 	<div class="section" id="sectionAddAlbum">
 		<h1 class="pageHeading">Add New Album</h1>
-		<div class="hintArea">
-			<p>Hints:</p>
-			<p>If you choose to remove the currently featured photo, the album will remain no featured photo.</p>
-		</div>
 		<?php echo form_open('admin/album_control/add_album', 'class="formInfo" id="formAddAlbum"'); ?>
 		<table>
 			<tr>
