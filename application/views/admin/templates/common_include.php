@@ -28,6 +28,8 @@
     <!-- Javascript -->
     <script>
         GLOBAL_SITE_URL = "<?php echo site_url(); ?>";
+        CONFIG_FILE_SIZE_LIMIT = "<?php echo $this->config->item("photo_upload_file_size_limit"); ?>";
+        CONFIG_FILE_NAME_REGEX = <?php echo $this->config->item("photo_file_name_regex"); ?>";
         var mTimeStamp = "<?php echo $timestamp;?>";
         var mToken = "<?php echo md5('unique_salt' . $timestamp);?>";
     </script>

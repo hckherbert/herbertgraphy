@@ -1,13 +1,9 @@
 Album_control.prototype.mParentId = null;
-Album_control.prototype.mParentLabel = null;
 Album_control.prototype.mQueueItemCount = 0;
 Album_control.prototype.mIsValidatedUpload = true;
-Album_control.prototype.mSimUploadLimit = 10;
-Album_control.prototype.mFileSizeLimit = "4MB";
 Album_control.prototype.mErrorMsgUpload = "";
 Album_control.prototype.mUploadFormData = null;
 Album_control.prototype.mOriginalPhotoData = null;
-Album_control.prototype.mFileNameRegexPattern = "^[a-zA-Z0-9-_]+$";
 
 function Album_control(pAlbumId, pParentId, pParentLabel)
 {
@@ -27,7 +23,6 @@ function Album_control(pAlbumId, pParentId, pParentLabel)
         //case for parent album details
         else
         {
-            this.mParentLabel = pParentLabel;
             this.get_sub_album_list(pAlbumId);
         }
     }
@@ -70,7 +65,7 @@ Album_control.prototype.init_upload = function()
 	_itemTemplate += "<label><input type='radio' name='featured' value='1'>Featured</label>";
     _itemTemplate += "</div>";
 
-    this.mErrorMsgUpload = "Upload cannot be started. Please check that: <br> - Each file is under " + _self.mFileSizeLimit + ".<br> - Each time only " + _self.mSimUploadLimit + " photos can be selected.<br>- Files are image type.<br>Also check the error notices (if any) about the input fields.";
+    this.mErrorMsgUpload = "Upload cannot be started. Please check that: <br> - Each file is under " + CONFIG_FILE_SIZE_LIMIT + ".<br>- Files are image type.<br>Also check the error notices (if any) about the input fields.";
 
     if ($("#page_album_list").length || $("#page_add_subalbum").length)
     {
@@ -92,15 +87,12 @@ Album_control.prototype.init_upload = function()
         'auto'             : false,
         'buttonText'		: _uploadButtonText,
         'buttonClass'		:  "dropButton",
-        //'checkScript'      : 'check-exists.php',
-        //'checkScript'      : '<?php echo site_url(); ?>admin/album_control/check_exist',
         'dnd': true,
-        'fileSizeLimit': _self.mFileSizeLimit,
+        'fileSizeLimit': CONFIG_FILE_SIZE_LIMIT,
         'formData'         : _self.mUploadFormData,
         'itemTemplate'	   : _itemTemplate,
         'queueID'          : 'queue',
         'uploadScript'     : GLOBAL_SITE_URL + "admin/album_control/upload/",
-        'simUploadLimit'      : _self.mSimUploadLimit,
         'fileType'         : "image/png, image/gif, image/jpg",
         'removeCompleted': true,
         'onAddQueueItem'       : function(file)
@@ -272,7 +264,7 @@ Album_control.prototype.init_upload = function()
                 }
 
             }
-            else if (_value.match( new RegExp(_self.mFileNameRegexPattern)))
+            else if (_value.match( new RegExp(CONFIG_FILE_NAME_REGEX)))
             {
                 $(this).next(".error").addClass("hide");
                 $(this).closest(".uploadifive-queue-item").removeClass("error");
@@ -302,7 +294,7 @@ Album_control.prototype.init_upload = function()
         {
             var _value =$(this).val();
 
-            if (_value == "" || _value.match( new RegExp(_self.mFileNameRegexPattern)))
+            if (_value == "" || _value.match( new RegExp(CONFIG_FILE_NAME_REGEX)))
             {
                 $(this).next(".error").addClass("hide");
 
@@ -327,7 +319,7 @@ Album_control.prototype.isValidSourceFileNamePattern = function(pFileName)
 {
     var _lastDotIndex = pFileName.lastIndexOf(".");
     var _filenameOnly = pFileName.substr(0,_lastDotIndex);
-    return _filenameOnly.match(new RegExp(this.mFileNameRegexPattern));
+    return _filenameOnly.match(new RegExp(CONFIG_FILE_NAME_REGEX));
 }
 
 Album_control.prototype.isValidUploadFileExtension = function(pFileName)
