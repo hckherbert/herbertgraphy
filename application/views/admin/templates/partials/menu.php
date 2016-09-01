@@ -4,7 +4,7 @@
     <p>Please <a href="<?php echo $authUrl; ?>">sign in</a> to continue.</p>
 <?php } else { ?>
 <div class="adminHeader">
-    <a class='menu_link' href='http://localhost:8002/dev/hg/admin/album_control/logout'>Logout</a>
+    <a class='menu_link' href='<?php echo base_url("admin/album_control/logout"); ?>'>Logout</a>
     <?php if (isset($album_details) && $album_details) { ?>
         <a class="menu_link" href="<?php echo site_url("admin/album_control"); ?>">Back to album list</a>
     <?php if ($album_details->parentId !== NULL) { ?>
