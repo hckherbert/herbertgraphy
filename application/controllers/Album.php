@@ -29,8 +29,14 @@ class Album extends MY_Common
 		$data["featured_photo"] = "";
 		$parent_id = $this->album_model->get_parent_album_id($album_id);
 		$data["current_album_data"] = $this->album_model->get_album_details($album_id);
+		$data["subalbum_data"] = $this->get_sub_albums($album_id);
 		$has_photos = count($data["current_album_data"]["photo_data"]) ? true : false;
 
+		if (!$has_photos && count($data["subalbum_data"]))
+		{
+			redirect("/album/".$data["subalbum_data"][0]["label"]);
+			return;
+		}
 
 		foreach ($data["current_album_data"]["photo_data"] as $photo)
 		{
@@ -46,7 +52,6 @@ class Album extends MY_Common
 		}
 
 		$data["all_other_albums_data"] = $this->get_all_other_albums_data($data["current_album_data"]["album_details"]->label, $parent_id);
-		$data["subalbum_data"] = $this->get_sub_albums($album_id);
 
 		if ($has_photos)
 		{
