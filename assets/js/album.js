@@ -27,11 +27,14 @@ $(document).ready
             }
         }
 
+        renderIntro();
+
         $(window).on("resize", windowOnResized);
     }
 );
 
-function windowOnResized() {
+function windowOnResized()
+{
     mPhotoOverlay.centerPhoto();
 
     //on tablets, scrolling will trigger resize events.. so
@@ -65,5 +68,14 @@ function windowOnResized() {
 
 
     mGridControl.positionGrids();
+
+}
+
+function renderIntro()
+{
+    if ($(".infoPanel p").text().length >= 500)
+    {
+        $(".infoPanel .intro p").addClass("hasInitialCap");
+    }
 
 }
