@@ -29,6 +29,8 @@ class Album extends MY_Common
 		$data["featured_photo"] = "";
 		$parent_id = $this->album_model->get_parent_album_id($album_id);
 		$data["current_album_data"] = $this->album_model->get_album_details($album_id);
+		$has_photos = count($data["current_album_data"]["photo_data"]) ? true : false;
+
 
 		foreach ($data["current_album_data"]["photo_data"] as $photo)
 		{
@@ -38,14 +40,23 @@ class Album extends MY_Common
 			}
 		}
 
-		if ($data["featured_photo"] == "")
+		if ($data["featured_photo"] == "" && $has_photos)
 		{
 			$data["featured_photo"] = base_url()."assets/photos/".$data["current_album_data"]["album_details"]->label."/".$data["current_album_data"]["photo_data"][0]["file_thumb_path"];
 		}
 
 		$data["all_other_albums_data"] = $this->get_all_other_albums_data($data["current_album_data"]["album_details"]->label, $parent_id);
 		$data["subalbum_data"] = $this->get_sub_albums($album_id);
-		$this->load->template_client("album", "album", $data);
+
+		if ($has_photos)
+		{
+			$this->load->template_client("album", "album", $data);
+		}
+		else
+		{
+			$this->load->template_client("coming_soon", "base", $data);
+		}
+
 
 	}
 	

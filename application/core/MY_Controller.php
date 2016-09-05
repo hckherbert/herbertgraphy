@@ -28,14 +28,7 @@ class MY_Common extends CI_Controller
     {
         $data["all_parent_albums"] = $this->all_parent_albums;
 
-        if (ENVIRONMENT == "dev_cp")
-        {
-            $data["main_title"] = "Not found";
-        }
-        else
-        {
-            $data["main_title"] = "Opps";
-        }
+        $data["main_title"] = "Opps";
 
         $this->load->template_client("base", "base", $data);
         return;

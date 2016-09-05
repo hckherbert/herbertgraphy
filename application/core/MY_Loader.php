@@ -24,19 +24,25 @@ class MY_Loader extends CI_Loader
             }
             else if ($main_view_name == "home")
             {
-                $js_includes[] = "home.js";
+                $data["meta_tags"] = "client/".$main_view_name."/meta_tags";
                 $data["main_content_path"] = "client/home/main";
+                $js_includes[] = "home.js";
             }
             else if ($main_view_name == "about")
             {
                 $data["main_content_path"] = "client/about/main";
                 $data["section"] = "section_about";
+                $data["meta_tags"] = "client/".$main_view_name."/meta_tags";
                 $js_includes[] = "about.js";
+            }
+            else if ($main_view_name == "coming_soon")
+            {
+                $data["main_content_path"] = "client/coming_soon/main";
+                $data["section"] = "section_coming_soon";
             }
 
             $data["js_includes"] = $js_includes;
             $data["class_main_color"] = "bgBase";
-            $data["meta_tags"] = "client/".$main_view_name."/meta_tags";
 
             $this->view("client/templates/common_include", $data);
             $this->view("client/base", $data);

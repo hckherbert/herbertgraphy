@@ -32,6 +32,7 @@ class Album_control extends CI_Controller
 
 		$client = new Google_Client();
 		$client->setClientId($client_id);
+		$client->setAccessType('offline');
 		$client->setClientSecret($client_secret);
 		$client->setRedirectUri($redirect_uri);
 		$client->setScopes('email');
@@ -49,8 +50,6 @@ class Album_control extends CI_Controller
 
 		if (isset($_SESSION['access_token']) && $_SESSION['access_token'])
 		{
-			$client->setAccessType('offline');
-			$client->setApprovalPrompt('force');
 			$client->setAccessToken($_SESSION['access_token']);
 			$userData = $objOAuthService->userinfo->get();
 			$this->auth_data["userData"] = $userData;
