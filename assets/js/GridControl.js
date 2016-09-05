@@ -287,7 +287,6 @@ GridControl.prototype.positionGrids = function()
 		
 	}
 
-	// TODO: Change to detect when mboile only? test for ipad also
 	if ($("body").hasClass("sDesktop"))
 	{
 		if (!this.mGridstaggered)
@@ -379,12 +378,12 @@ GridControl.prototype.onStaggeredAll = function()
 
 GridControl.prototype.updateGridInfoHeight = function()
 {
-	//if (this.mColCount_num > 3)
 	if ($("body").hasClass("sDesktop"))
 	{
 		var _i = 0;
-		var _maxLastGridHeight_num = this.mGrid_array[this.mGridCount_num-1].getSize()["height"];
+		var _maxLastGridHeight_num = 0;
 		var _gridPanelHeight_num = this.mGrid_array[this.mGridCount_num-1].getPosition()["y"];
+		console.log("_gridPanelHeight_num: " + _gridPanelHeight_num);
 		var _startLastRowIndex = this.mGridCount_num - this.mColCount_num;
 
 		if (_startLastRowIndex  > 0)
@@ -399,11 +398,7 @@ GridControl.prototype.updateGridInfoHeight = function()
 
 			_gridPanelHeight_num +=  _maxLastGridHeight_num;
 
-			if (_gridPanelHeight_num > $(".infoPanel").height())
-			{
-				$(".infoPanel").css("height", _gridPanelHeight_num + "px");
-			}
-			else
+			if (_gridPanelHeight_num < $(".infoPanel").height())
 			{
 				$(".infoPanel").css("height", "auto");
 			}
