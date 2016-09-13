@@ -94,20 +94,20 @@ a
 .homeSubTitle_c
 {
 	position: absolute;
-	bottom: 85px;
+	bottom: 65px;
 	color: #fffff0;
 	font-size: 26px;
 	opacity: 0.8;
 	font-family: 'Merriweather', serif;
 	text-align:left;
 	font-weight:300;
-	line-height:1.4em;
 	padding:20px;
+	font-style:italic;
 }
 
 .sMobile .homeSubTitle_c
 {
-	bottom:50px;
+	bottom:45px;
 }
 
 .homeSubTitle_c .cap
@@ -128,10 +128,10 @@ a
 	{
 		right: 20px;
 		text-align: right;
-		font-size: 26px;
+		font-size: 32px;
 		padding: 0;
 		width: 490px;
-		bottom: 70px;
+		bottom: 65px;
 	}
 
 	.sDesktop .homeSubTitle_c .second_line
@@ -142,17 +142,12 @@ a
 
 @media (min-width: 1025px) and (max-width:1279px)
 {
-	.sDesktop .homeSubTitle_c,
-	.sDesktop .homeSubTitle_d
-	{
-		left: 30px;
-	}
 
 	.sDesktop .homeSubTitle_c
 	{
 		width: 570px;
-		font-size: 30px;
-		bottom: 60px;
+		font-size: 35px;
+		bottom: 40px;
 	}
 
 	.sDesktop .homeSubTitle_c .second_line {
@@ -165,7 +160,7 @@ a
 {
 	.sDesktop .homeSubTitle_c
 	{
-		font-size:35px;
+		font-size:40px;
 		width:660px;
 		padding:0 20px;
 	}
