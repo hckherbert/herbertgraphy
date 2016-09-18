@@ -58,10 +58,16 @@ a
 	background:#383432;
 }
 
-.bgBase,
+.sDesktop .bgBase,
+.sDesktop.bgBase .infoPanel,
+.sMobile .mainPanel
+{
+	background:#322c2b;
+}
+
 .sMobile.bgBase .infoPanel .menuContainer
 {
-	background:#d0bbb2;
+	background:#d4e2dc;
 }
 
 .sDesktop .infoPanel .menuContainer
@@ -71,7 +77,7 @@ a
 
 .bgBrown .infoPanel h1
 {
-	color:#d0c4c0;
+	color:#ecdfd1;
 }
 
 .sMobile.bgBrown  .infoPanel .menuContainer
@@ -81,12 +87,12 @@ a
 
 .bgBase .infoPanel h1
 {
-	color:#4c3c3a;
+	color:#e0cebf;
 }
 
 .sMobile.bgBase .albumTitle
 {
-	background:#dbe7e7;
+	background:#ac9695;
 }
 
 
@@ -324,7 +330,7 @@ a
 
 .graphy
 {
-	color:#809d9f;
+	color:#acc2b9;
 }
 
 .sDesktop .infoPanel .subAlbumMenus
@@ -362,7 +368,7 @@ a
 
 .sDesktop .mainMenuClose
 {
-	opacity:1 !important;;
+	opacity:1 !important;
 }
 
 
@@ -455,7 +461,7 @@ a
 
 .wrapperBase .infoPanel .otherAlbumMenus li a
 {
-	color: #655d57;
+	color: #988a81;
 }
 
 .sDesktop .wrapperAlbum .infoPanel li a:hover
@@ -465,7 +471,7 @@ a
 
 .sDesktop .wrapperBase .infoPanel li a:hover
 {
-	color:#988a81;
+	color:#c5bdb7;
 }
 
 .sMobile .infoPanel li a:hover
@@ -476,13 +482,7 @@ a
 .sDesktop .infoPanel .otherAlbumMenus li.parent
 {
 	font-size:18px;
-	font-style:italic;
 	margin:0 0 3px 0;
-}
-
-.sMobile .infoPanel .otherAlbumMenus li.parent
-{
-	font-style:italic;
 }
 
 .sDesktop .infoPanel .otherAlbumMenus li.siblings
@@ -509,10 +509,10 @@ a
 	margin:0 0 20px;
 }
 
-.infoPanel .otherAlbumMenus li.siblings.current
+.infoPanel .otherAlbumMenus li.siblings.current a
 {
 	font-weight:bold;
-	color:#a79b94;
+	color:#a8bab6;
 }
 
 .sDesktop .infoPanel .menuLinks
@@ -714,11 +714,12 @@ a
 	.infoPanel
 	{
 		z-index:1;
+		background:transparent !important;
 	}
 
 	.wrapperBase .albumTitle
 	{
-		background:rgba(208, 187, 178, 0.8) !important;
+		background:rgba(50, 44, 43, 0.9) !important;
 	}
 
 	.albumTitle h1
@@ -730,7 +731,7 @@ a
 
 	.wrapperBase .menuContainer
 	{
-		background:rgba(208, 187, 178, 0.8) !important;
+		background:rgba(50, 44, 43, 0.9) !important;
 		padding:0 0 10px 0;
 	}
 
