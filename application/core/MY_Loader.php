@@ -24,6 +24,7 @@ class MY_Loader extends CI_Loader
             }
             else if ($main_view_name == "home")
             {
+                $data["home_title"] = "Herbert Ho's Photography Showcase";
                 $data["meta_tags"] = "client/".$main_view_name."/meta_tags";
                 $data["main_content_path"] = "client/home/main";
                 $js_includes[] = "home.js";

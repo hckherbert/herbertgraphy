@@ -24,7 +24,13 @@
     <?php if (isset($meta_tags)){
         $this->load->view($meta_tags);
     } ?>
-    <title>HerbertGraphy<?php if (isset($main_title) && $main_title !=NULL) { echo " - ".$main_title;} ?></title>
+    <title>
+        <?php if (isset($home_title) && $home_title !=NULL) { ?>
+        HerbertGraphy<?php echo " - ".$home_title;?>
+        <?php } else { ?>
+        HerbertGraphy<?php if (isset($main_title) && $main_title !=NULL) { echo " - ".$main_title;} ?>
+        <?php } ?>
+    </title>
     <!-- ICON -->
     <link href="<?php echo base_url("assets/images/apple-touch-icon.png"); ?>" rel="apple-touch-icon" />
     <link href="<?php echo base_url("assets/images/apple-touch-icon-76x76.png"); ?>" rel="apple-touch-icon" sizes="76x76" />
