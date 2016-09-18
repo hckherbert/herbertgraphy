@@ -62,12 +62,12 @@ a
 .sDesktop.bgBase .infoPanel,
 .sMobile .mainPanel
 {
-	background:#322c2b;
+	background-color:#322c2b;
 }
 
 .sMobile.bgBase .infoPanel .menuContainer
 {
-	background:#d4e2dc;
+	background:#c7dccc;
 }
 
 .sDesktop .infoPanel .menuContainer
@@ -90,9 +90,9 @@ a
 	color:#e0cebf;
 }
 
-.sMobile.bgBase .albumTitle
+.albumTitle
 {
-	background:#ac9695;
+	background:#1e1a19;
 }
 
 
@@ -454,12 +454,12 @@ a
 	transition: all .3s ease;
 }
 
-.wrapperAlbum .infoPanel .otherAlbumMenus li a
+.sDesktop .wrapperAlbum .infoPanel .otherAlbumMenus li a
 {
 	color: #968d87;
 }
 
-.wrapperBase .infoPanel .otherAlbumMenus li a
+.sDesktop .wrapperBase .infoPanel .otherAlbumMenus li a
 {
 	color: #988a81;
 }
@@ -474,9 +474,24 @@ a
 	color:#c5bdb7;
 }
 
-.sMobile .infoPanel li a:hover
+.sMobile .wrapperAlbum .infoPanel .otherAlbumMenus li a
 {
-	color:#b5a69d;
+	color: #6a605b;
+}
+
+.sMobile .wrapperBase .infoPanel .otherAlbumMenus li a
+{
+	color: #6a605b;
+}
+
+.sMobile .wrapperAlbum .infoPanel li a:hover
+{
+	color:#c5bdb7;
+}
+
+.sMobile .wrapperBase .infoPanel li a:hover
+{
+	color:#9e938c;
 }
 
 .sDesktop .infoPanel .otherAlbumMenus li.parent
@@ -509,10 +524,16 @@ a
 	margin:0 0 20px;
 }
 
-.infoPanel .otherAlbumMenus li.siblings.current a
+.sDesktop .infoPanel .otherAlbumMenus li.siblings.current a
 {
 	font-weight:bold;
 	color:#a8bab6;
+}
+
+.sMobile .infoPanel .otherAlbumMenus li.siblings.current a
+{
+	font-weight:bold;
+	color:#88aaa2;
 }
 
 .sDesktop .infoPanel .menuLinks
@@ -570,7 +591,7 @@ a
 	width:100%;
 	bottom:0;
 	opacity:0;
-	z-index:0;
+	z-index:1;
 	-webkit-transition: all 3s ease;
 	-moz-transition: all 3s ease;
 	-ms-transition: all 3s ease;
@@ -716,8 +737,8 @@ a
 		z-index:1;
 		background:transparent !important;
 	}
-
-	.wrapperBase .albumTitle
+	
+	.wrapperBase.section_home .albumTitle
 	{
 		background:rgba(50, 44, 43, 0.9) !important;
 	}
@@ -733,6 +754,11 @@ a
 	{
 		background:rgba(50, 44, 43, 0.9) !important;
 		padding:0 0 10px 0;
+		-webkit-transition: none !important;
+		-moz-transition:  none !important;
+		-ms-transition:  none !important;
+		-o-transition:  none !important;
+		transition:  none !important;
 	}
 
 	html
@@ -798,8 +824,8 @@ a
 
 .sMobile .infoPanel .btnMenuToggle:hover
 {
-	-webkit-filter: brightness(120%);
-	filter: brightness(120%);
+	-webkit-filter: brightness(115%);
+	filter: brightness(115%);
 }
 
 .sDesktop .wrapperBase .infoPanel
@@ -1072,6 +1098,11 @@ a
 
 }
 
+.section_about .albumTitle
+{
+	background:#baa7a0;
+}
+
 .section_about .aboutContainer
 {
 	width:100%;
@@ -1113,7 +1144,7 @@ a
 
 .section_about .infoPanel
 {
-	background: url(../images/herbert.jpg) transparent center top no-repeat;
+	background: url(../images/herbert.jpg) transparent center top no-repeat !important;
 	background-size:cover;
 }
 
