@@ -60,6 +60,9 @@
     <link href='https://fonts.googleapis.com/css?family=Catamaran:400,700,300,200' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700" rel="stylesheet">
     <!-- Javascript -->
+    <script>
+        GLOBAL_SITE_URL = "<?php echo site_url(); ?>";
+    </script>
     <script src="<?php echo base_url("assets/js/jquery-3.1.0.min.js"); ?>"></script>
     <script src="<?php echo base_url("assets/js/jquery-migrate-3.0.0.min.js"); ?>"></script>
     <script src="<?php echo base_url("assets/js/jquery.jscrollpane.min.js"); ?>"></script>

@@ -25,15 +25,15 @@ class Album extends MY_Common
 	{
 		$data = array();
 		$album_label = trim(strtolower($method));
-		
+
 		if ($params)
 		{
-			$direct_photo_slug = trim(strtolower($params[0]));
+			$data["direct_photo_slug"] = trim(strtolower($params[0]));
 		}
 
 		$album_id = $this->album_model->get_album_id($album_label);
 
-		if ($album_id === FALSE)
+		if ($album_id === FALSE || count($params)>1)
 		{
 			$this->not_found();
 			return;

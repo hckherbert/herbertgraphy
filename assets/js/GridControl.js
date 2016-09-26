@@ -15,6 +15,7 @@ GridControl.prototype.mOverlayPopSpeed_num = 0.5;
 GridControl.prototype.mTimerReposition = null;
 GridControl.prototype.mBaseBreakPoint_array = null;
 GridControl.prototype.mWideScreenBreakPoint_num = null;
+GridControl.prototype.mDirectPhotoSlug = null;
 
 function GridControl(pGridControl, pPhotoOverlay)
 {
@@ -25,6 +26,12 @@ function GridControl(pGridControl, pPhotoOverlay)
 	this.mPhotoOverlay = pPhotoOverlay;
 	this.mPhotoOverlay.setOnHideStart(function(){_self.photoOverlayOnHideStart();});
 	this.mGridCount_num = this.mGridControl.children(".grid").length;
+	this.mDirectPhotoSlug  = $("body").data("direct_photo_slug");
+
+	if (!$(".grid[data-slug='" + this.mDirectPhotoSlug + "']").length)
+	{
+		location.href= GLOBAL_SITE_URL + "not_found";
+	}
 	
 	this.mGridControl.children(".grid").each
 	(
@@ -305,7 +312,8 @@ GridControl.prototype.positionGrids = function()
 						"top": Math.round($(window).height()) + "px",
 						ease: Back.easeInOut
 					}, 0.8 / _self.mGridCount_num, function () {
-						_self.onStaggeredAll()
+						_self.onStaggeredAll();
+						_self.handleDirectPhotoLink();
 					});
 
 				},400);
@@ -326,6 +334,7 @@ GridControl.prototype.positionGrids = function()
 			_self.transitLoadingAndAlbumStart();
 			//_self.onStaggeredAll();
 			_self.updateGridPanelAndWinScroll();
+			_self.handleDirectPhotoLink();
 		}, 400);
 
 	}
@@ -336,6 +345,14 @@ GridControl.prototype.fadeOutPageLoadingElements = function()
 	$(".loadingText").addClass("show");
 	$(".camera").addClass("cameraZoom vaporizing");
 	$(".blink").addClass("blinkInit");
+}
+
+GridControl.prototype.handleDirectPhotoLink = function()
+{
+	if (this.mDirectPhotoSlug!=null)
+	{
+		$(".grid[data-slug='" + this.mDirectPhotoSlug + "']").trigger("click");
+	}
 }
 
 GridControl.prototype.transitLoadingAndAlbumStart = function()

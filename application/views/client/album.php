@@ -1,5 +1,10 @@
 <?php ?>
-<body class="<?php echo $class_main_color; ?>">
+<body
+	class="<?php echo $class_main_color; ?>"
+	<?php if (isset($direct_photo_slug) && $direct_photo_slug!=NULL) { ?>
+		data-direct_photo_slug = "<?php echo $direct_photo_slug; ?>"
+	<?php } ?>
+>
 <?php $this->load->partials("client/templates/analyticstracking"); ?>
 <?php $this->load->partials("client/templates/partials/page_loading"); ?>
 <?php $this->load->partials("client/templates/partials/simple_loading"); ?>
@@ -9,8 +14,9 @@
 		 <div class="gridPanel">
 			<?php foreach($current_album_data["photo_data"] as $photo){ ?>
 				<div class="grid"
-					 data-filename="../assets/photos/<?php echo $current_album_data["album_details"]->label; ?>/<?php echo $photo["hash_filename"]; ?>"
-					 data-file_zoom_size="<?php echo $photo["file_zoom_size"]; ?>"
+					 data-filename = "<?php echo base_url("assets/photos/".$current_album_data["album_details"]->label."/".$photo["hash_filename"]); ?>"
+					 data-file_zoom_size = "<?php echo $photo["file_zoom_size"]; ?>"
+					 data-slug = "<?php echo $photo["slug_filename"]; ?>"
 					 <?php if ($photo["featured"] == "1"){ ?>data-featured="true"<?php } ?>
 				>
 					<img src="<?php echo base_url("assets/photos/".$current_album_data["album_details"]->label); ?>/<?php echo $photo["file_thumb_path"]; ?>">
