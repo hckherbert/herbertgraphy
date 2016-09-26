@@ -13,7 +13,7 @@
 					 data-file_zoom_size="<?php echo $photo["file_zoom_size"]; ?>"
 					 <?php if ($photo["featured"] == "1"){ ?>data-featured="true"<?php } ?>
 				>
-					<img src="../assets/photos/<?php echo $current_album_data["album_details"]->label; ?>/<?php echo $photo["file_thumb_path"]; ?>">
+					<img src="<?php echo base_url("assets/photos/".$current_album_data["album_details"]->label); ?>/<?php echo $photo["file_thumb_path"]; ?>">
 					<div class="titleOverlay">
 						<div class="bg"></div>
 						<div class="title"><?php echo $photo['title']; ?></div>
