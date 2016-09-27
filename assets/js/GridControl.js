@@ -296,33 +296,48 @@ GridControl.prototype.positionGrids = function()
 
 	if ($("body").hasClass("sDesktop"))
 	{
-		if (!this.mGridstaggered)
+		if (this.mDirectPhotoSlug != null)
 		{
-			if (!this.mGridstaggering)
+			this.handleDirectPhotoLink();
+			this.fadeOutPageLoadingElements();
+			setTimeout(function ()
 			{
-				this.mGridstaggering = true;
-				this.fadeOutPageLoadingElements();
+				_self.transitLoadingAndAlbumStart();
+				_self.onStaggeredAll();
 
-				setTimeout(function()
-				{
-					_self.transitLoadingAndAlbumStart();
-					_self.mGridTween = TweenMax.staggerFrom($(".grid"), 0.8, {
-						opacity: 0.5,
-						"left": Math.round(Math.random() * $(".gridPanel").width()) + "px",
-						"top": Math.round($(window).height()) + "px",
-						ease: Back.easeInOut
-					}, 0.8 / _self.mGridCount_num, function () {
-						_self.onStaggeredAll();
-						_self.handleDirectPhotoLink();
-					});
-
-				},400);
-
-			}
+			}, 400);
 		}
 		else
 		{
-			this.updateGridInfoHeight();
+			if (!this.mGridstaggered)
+			{
+				if (!this.mGridstaggering)
+				{
+					this.mGridstaggering = true;
+					this.fadeOutPageLoadingElements();
+
+					setTimeout(function ()
+					{
+						_self.transitLoadingAndAlbumStart();
+
+						_self.mGridTween = TweenMax.staggerFrom($(".grid"), 0.8, {
+							opacity: 0.5,
+							"left": Math.round(Math.random() * $(".gridPanel").width()) + "px",
+							"top": Math.round($(window).height()) + "px",
+							ease: Back.easeInOut
+						}, 0.8 / _self.mGridCount_num, function ()
+						{
+							_self.onStaggeredAll();
+						});
+
+					}, 400);
+
+				}
+			}
+			else
+			{
+				this.updateGridInfoHeight();
+			}
 		}
 	}
 	else
@@ -334,7 +349,12 @@ GridControl.prototype.positionGrids = function()
 			_self.transitLoadingAndAlbumStart();
 			//_self.onStaggeredAll();
 			_self.updateGridPanelAndWinScroll();
-			_self.handleDirectPhotoLink();
+
+			if (_self.mDirectPhotoSlug!=null)
+			{
+				_self.handleDirectPhotoLink();
+			}
+
 		}, 400);
 
 	}
@@ -349,10 +369,7 @@ GridControl.prototype.fadeOutPageLoadingElements = function()
 
 GridControl.prototype.handleDirectPhotoLink = function()
 {
-	if (this.mDirectPhotoSlug!=null)
-	{
-		$(".grid[data-slug='" + this.mDirectPhotoSlug + "']").trigger("click");
-	}
+	$(".grid[data-slug='" + this.mDirectPhotoSlug + "']").trigger("click");
 }
 
 GridControl.prototype.transitLoadingAndAlbumStart = function()
