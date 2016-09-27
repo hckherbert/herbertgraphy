@@ -28,7 +28,7 @@ function GridControl(pGridControl, pPhotoOverlay)
 	this.mGridCount_num = this.mGridControl.children(".grid").length;
 	this.mDirectPhotoSlug  = $("body").data("direct_photo_slug");
 
-	if (!$(".grid[data-slug='" + this.mDirectPhotoSlug + "']").length)
+	if (this.mDirectPhotoSlug && !$(".grid[data-slug='" + this.mDirectPhotoSlug + "']").length)
 	{
 		location.href= GLOBAL_SITE_URL + "not_found";
 	}
