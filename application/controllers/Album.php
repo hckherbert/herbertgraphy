@@ -29,6 +29,7 @@ class Album extends MY_Common
 		if ($params)
 		{
 			$data["direct_photo_slug"] = trim(strtolower($params[0]));
+			$data["album_path"] = base_url()."album/".$method;
 		}
 
 		$album_id = $this->album_model->get_album_id($album_label);
@@ -57,6 +58,15 @@ class Album extends MY_Common
 			{
 				$data["featured_photo"]= base_url()."assets/photos/".$data["current_album_data"]["album_details"]->label."/".$photo["file_thumb_path"];
 			}
+
+			if (array_key_exists("direct_photo_slug", $data ))
+			{
+				if (strtolower($photo["slug_filename"]) == $data["direct_photo_slug"])
+				{
+					$data["direct_photo_path"]= base_url()."assets/photos/".$data["current_album_data"]["album_details"]->label."/".$photo["file_thumb_path"];
+				}
+			}
+
 		}
 
 		if ($data["featured_photo"] == "" && $has_photos)

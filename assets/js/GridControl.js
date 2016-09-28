@@ -590,6 +590,12 @@ GridControl.prototype.onPhotoOverlayHidden = function(pActiveGridTop_num)
 {
 	console.log("onPhotoOverlayHidden; " + pActiveGridTop_num);
 
+	if (this.mDirectPhotoSlug)
+	{
+		location.href= $("body").data("album_path");
+		return;
+	}
+
 	this.mGrid_array[this.mActiveGridIndex_num].setOpacity(1);
 
 	if (this.mWinWidthBeforeOpen_num!=$(window).width()) 
@@ -598,6 +604,7 @@ GridControl.prototype.onPhotoOverlayHidden = function(pActiveGridTop_num)
 		$("html, body").stop().animate({scrollTop:pActiveGridTop_num}, '50', 'swing');
 
 	}
+
 
 	$("html").css("overflow-y", "auto");
 }

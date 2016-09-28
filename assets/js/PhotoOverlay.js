@@ -88,7 +88,7 @@ PhotoOverlay.prototype.show = function(pSpeed_num, pFileName_str, pFileZoomSize,
 }
 
 PhotoOverlay.prototype.readyHide = function()
-{	
+{
 	$(".btnClose" , this.mPhotoOverlay).hide();
 	//$(".descContainer", this.mPhotoOverlay).hide();
 	this.mOnHideStart_fn.apply(null);

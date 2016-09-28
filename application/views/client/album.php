@@ -3,6 +3,7 @@
 	class="<?php echo $class_main_color; ?>"
 	<?php if (isset($direct_photo_slug) && $direct_photo_slug!=NULL) { ?>
 		data-direct_photo_slug = "<?php echo $direct_photo_slug; ?>"
+		data-album_path = "<?php echo $album_path; ?>"
 	<?php } ?>
 >
 <?php $this->load->partials("client/templates/analyticstracking"); ?>
