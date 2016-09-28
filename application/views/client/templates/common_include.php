@@ -16,7 +16,7 @@
     <meta name="format-detection" content="telephone=no" />
     <meta name="description" content="HerbertGraphy - Herbert Ho's photography showcase">
     <meta name="keywords" content="HerbertGraphy<?php  if (isset($title) && $title !=NULL) { echo " - ".$title;} ?>">
-    <!--<meta property="og:url" content="<?php echo site_url(); ?>" />-->
+    <meta property="og:url" content="<?php echo current_url(); ?>" />
     <meta property="og:description" content="HerbertGraphy - Herbert Ho's photography showcase" />
     <meta property="og:title" content="HerbertGraphy<?php if (isset($title) && $title !=NULL) { echo " - ".$title;} ?>" />
     <?php if (isset($meta_tags)){
