@@ -524,9 +524,10 @@ class Album_control extends CI_Controller
 			{
 				if (move_uploaded_file($tempFile, $target_file))
 				{
-					foreach($this->config->item("photo_long_side") as $value)
+					foreach($this->config->item("photo_long_side") as $key=>$value)
 					{
-						$this->resize_photo($value, $target_file);
+						$quality = $this->config->item("photo_quality")[$key];
+						$this->resize_photo($value, $quality, $target_file);
 					}
 
 					JSONAPI::echo_json_successful_response();
@@ -560,7 +561,7 @@ class Album_control extends CI_Controller
 		}
 	}
 
-	private function resize_photo($long_side, $target_file)
+	private function resize_photo($long_side, $quality, $target_file)
 	{
 		$this->load->library('image_lib');
 
@@ -570,7 +571,7 @@ class Album_control extends CI_Controller
 		$config['source_image'] = $target_file;
 		$config['create_thumb'] = TRUE;
 		$config['maintain_ratio'] = TRUE;
-		$config['quality'] = '100%';
+		$config['quality'] = $quality;
 
 		if ($width < $this->config->item("photo_long_side")[0] &&  $height < $this->config->item("photo_long_side")[0])
 		{
