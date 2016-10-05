@@ -58,10 +58,16 @@ a
 	background:#383432;
 }
 
-.bgBase,
+.sDesktop .bgBase,
+.sDesktop.bgBase .infoPanel,
+.sMobile .mainPanel
+{
+	background-color:#322c2b;
+}
+
 .sMobile.bgBase .infoPanel .menuContainer
 {
-	background:#d0bbb2;
+	background:#d9cfc0;
 }
 
 .sDesktop .infoPanel .menuContainer
@@ -71,7 +77,7 @@ a
 
 .bgBrown .infoPanel h1
 {
-	color:#d0c4c0;
+	color:#ecdfd1;
 }
 
 .sMobile.bgBrown  .infoPanel .menuContainer
@@ -81,12 +87,12 @@ a
 
 .bgBase .infoPanel h1
 {
-	color:#4c3c3a;
+	color:#e0cebf;
 }
 
-.sMobile.bgBase .albumTitle
+.sMobile .albumTitle
 {
-	background:#dbe7e7;
+	background:#1e1a19;
 }
 
 
@@ -94,20 +100,20 @@ a
 .homeSubTitle_c
 {
 	position: absolute;
-	bottom: 85px;
+	bottom: 65px;
 	color: #fffff0;
 	font-size: 26px;
 	opacity: 0.8;
 	font-family: 'Merriweather', serif;
 	text-align:left;
 	font-weight:300;
-	line-height:1.4em;
 	padding:20px;
+	font-style:italic;
 }
 
 .sMobile .homeSubTitle_c
 {
-	bottom:50px;
+	bottom:42px;
 }
 
 .homeSubTitle_c .cap
@@ -128,10 +134,10 @@ a
 	{
 		right: 20px;
 		text-align: right;
-		font-size: 26px;
+		font-size: 32px;
 		padding: 0;
 		width: 490px;
-		bottom: 70px;
+		bottom: 65px;
 	}
 
 	.sDesktop .homeSubTitle_c .second_line
@@ -142,17 +148,12 @@ a
 
 @media (min-width: 1025px) and (max-width:1279px)
 {
-	.sDesktop .homeSubTitle_c,
-	.sDesktop .homeSubTitle_d
-	{
-		left: 30px;
-	}
 
 	.sDesktop .homeSubTitle_c
 	{
 		width: 570px;
-		font-size: 30px;
-		bottom: 60px;
+		font-size: 35px;
+		bottom: 44px;
 	}
 
 	.sDesktop .homeSubTitle_c .second_line {
@@ -165,7 +166,7 @@ a
 {
 	.sDesktop .homeSubTitle_c
 	{
-		font-size:35px;
+		font-size:40px;
 		width:660px;
 		padding:0 20px;
 	}
@@ -329,7 +330,7 @@ a
 
 .graphy
 {
-	color:#809d9f;
+	color:#acc2b9;
 }
 
 .sDesktop .infoPanel .subAlbumMenus
@@ -367,7 +368,7 @@ a
 
 .sDesktop .mainMenuClose
 {
-	opacity:1 !important;;
+	opacity:1 !important;
 }
 
 
@@ -453,14 +454,14 @@ a
 	transition: all .3s ease;
 }
 
-.wrapperAlbum .infoPanel .otherAlbumMenus li a
+.sDesktop .wrapperAlbum .infoPanel .otherAlbumMenus li a
 {
 	color: #968d87;
 }
 
-.wrapperBase .infoPanel .otherAlbumMenus li a
+.sDesktop .wrapperBase .infoPanel .otherAlbumMenus li a
 {
-	color: #655d57;
+	color: #988a81;
 }
 
 .sDesktop .wrapperAlbum .infoPanel li a:hover
@@ -470,24 +471,33 @@ a
 
 .sDesktop .wrapperBase .infoPanel li a:hover
 {
-	color:#988a81;
+	color:#c5bdb7;
 }
 
-.sMobile .infoPanel li a:hover
+.sMobile .wrapperAlbum .infoPanel .otherAlbumMenus li a
 {
-	color:#b5a69d;
+	color: #6a605b;
+}
+
+.sMobile .wrapperBase .infoPanel .otherAlbumMenus li a
+{
+	color: #6a605b;
+}
+
+.sMobile .wrapperAlbum .infoPanel li a:hover
+{
+	color:#c5bdb7;
+}
+
+.sMobile .wrapperBase .infoPanel li a:hover
+{
+	color:#9e938c;
 }
 
 .sDesktop .infoPanel .otherAlbumMenus li.parent
 {
 	font-size:18px;
-	font-style:italic;
 	margin:0 0 3px 0;
-}
-
-.sMobile .infoPanel .otherAlbumMenus li.parent
-{
-	font-style:italic;
 }
 
 .sDesktop .infoPanel .otherAlbumMenus li.siblings
@@ -514,10 +524,16 @@ a
 	margin:0 0 20px;
 }
 
-.infoPanel .otherAlbumMenus li.siblings.current
+.sDesktop .infoPanel .otherAlbumMenus li.siblings.current a
 {
 	font-weight:bold;
-	color:#a79b94;
+	color:#a8bab6;
+}
+
+.sMobile .infoPanel .otherAlbumMenus li.siblings.current a
+{
+	font-weight:bold;
+	color:#88aaa2;
 }
 
 .sDesktop .infoPanel .menuLinks
@@ -575,7 +591,7 @@ a
 	width:100%;
 	bottom:0;
 	opacity:0;
-	z-index:0;
+	z-index:1;
 	-webkit-transition: all 3s ease;
 	-moz-transition: all 3s ease;
 	-ms-transition: all 3s ease;
@@ -590,7 +606,7 @@ a
 
 .footer .bg
 {
-	background:#625652;
+	background:#8c7777;
 	width:100%;
 	height:100%;
 	opacity:0.8;
@@ -719,14 +735,15 @@ a
 	.infoPanel
 	{
 		z-index:1;
+		background:transparent !important;
 	}
 
-	.wrapperBase .albumTitle
+	.wrapperBase.section_home .albumTitle
 	{
-		background:rgba(208, 187, 178, 0.8) !important;
+		background:rgba(50, 44, 43, 0.9) !important;
 	}
 
-	.albumTitle h1
+	.wrapperBase.section_home .albumTitle h1
 	{
 		padding: 10px 20px !important;
 		margin-top: 200px;
@@ -735,8 +752,13 @@ a
 
 	.wrapperBase .menuContainer
 	{
-		background:rgba(208, 187, 178, 0.8) !important;
+		background:rgba(50, 44, 43, 0.9) !important;
 		padding:0 0 10px 0;
+		-webkit-transition: none !important;
+		-moz-transition:  none !important;
+		-ms-transition:  none !important;
+		-o-transition:  none !important;
+		transition:  none !important;
 	}
 
 	html
@@ -802,8 +824,8 @@ a
 
 .sMobile .infoPanel .btnMenuToggle:hover
 {
-	-webkit-filter: brightness(120%);
-	filter: brightness(120%);
+	-webkit-filter: brightness(115%);
+	filter: brightness(115%);
 }
 
 .sDesktop .wrapperBase .infoPanel
@@ -1076,6 +1098,12 @@ a
 
 }
 
+.section_about .albumTitle
+{
+	background:#baa7a0;
+	height:40px !important;
+}
+
 .section_about .aboutContainer
 {
 	width:100%;
@@ -1117,7 +1145,7 @@ a
 
 .section_about .infoPanel
 {
-	background: url(../images/herbert.jpg) transparent center top no-repeat;
+	background: url(../images/herbert.jpg) transparent center top no-repeat !important;
 	background-size:cover;
 }
 

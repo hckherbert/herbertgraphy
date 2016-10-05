@@ -16,15 +16,21 @@
     <meta name="format-detection" content="telephone=no" />
     <meta name="description" content="HerbertGraphy - Herbert Ho's photography showcase">
     <meta name="keywords" content="HerbertGraphy<?php  if (isset($title) && $title !=NULL) { echo " - ".$title;} ?>">
-    <meta property="og:url" content="<?php echo site_url(); ?>" />
+    <meta property="og:url" content="<?php echo current_url(); ?>" />
     <meta property="og:description" content="HerbertGraphy - Herbert Ho's photography showcase" />
     <meta property="og:title" content="HerbertGraphy<?php if (isset($title) && $title !=NULL) { echo " - ".$title;} ?>" />
-    <meta name="twitter:description" content="HerbertGraphy - Herbert Ho's photography showcase" />
-    <meta name="twitter:title" content="HerbertGraphy<?php if (isset($title) && $title !=NULL) { echo " - ".$title;} ?>" />
     <?php if (isset($meta_tags)){
         $this->load->view($meta_tags);
     } ?>
-    <title>HerbertGraphy<?php if (isset($main_title) && $main_title !=NULL) { echo " - ".$main_title;} ?></title>
+    <meta name="twitter:description" content="HerbertGraphy - Herbert Ho's photography showcase" />
+    <meta name="twitter:title" content="HerbertGraphy<?php if (isset($title) && $title !=NULL) { echo " - ".$title;} ?>" />
+    <title>
+        <?php if (isset($home_title) && $home_title !=NULL) { ?>
+        HerbertGraphy<?php echo " - ".$home_title;?>
+        <?php } else { ?>
+        HerbertGraphy<?php if (isset($main_title) && $main_title !=NULL) { echo " - ".$main_title;} ?>
+        <?php } ?>
+    </title>
     <!-- ICON -->
     <link href="<?php echo base_url("assets/images/apple-touch-icon.png"); ?>" rel="apple-touch-icon" />
     <link href="<?php echo base_url("assets/images/apple-touch-icon-76x76.png"); ?>" rel="apple-touch-icon" sizes="76x76" />
@@ -54,6 +60,9 @@
     <link href='https://fonts.googleapis.com/css?family=Catamaran:400,700,300,200' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700" rel="stylesheet">
     <!-- Javascript -->
+    <script>
+        GLOBAL_SITE_URL = "<?php echo site_url(); ?>";
+    </script>
     <script src="<?php echo base_url("assets/js/jquery-3.1.0.min.js"); ?>"></script>
     <script src="<?php echo base_url("assets/js/jquery-migrate-3.0.0.min.js"); ?>"></script>
     <script src="<?php echo base_url("assets/js/jquery.jscrollpane.min.js"); ?>"></script>

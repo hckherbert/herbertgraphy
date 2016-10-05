@@ -15,6 +15,7 @@ GridControl.prototype.mOverlayPopSpeed_num = 0.5;
 GridControl.prototype.mTimerReposition = null;
 GridControl.prototype.mBaseBreakPoint_array = null;
 GridControl.prototype.mWideScreenBreakPoint_num = null;
+GridControl.prototype.mDirectPhotoSlug = null;
 
 function GridControl(pGridControl, pPhotoOverlay)
 {
@@ -25,6 +26,12 @@ function GridControl(pGridControl, pPhotoOverlay)
 	this.mPhotoOverlay = pPhotoOverlay;
 	this.mPhotoOverlay.setOnHideStart(function(){_self.photoOverlayOnHideStart();});
 	this.mGridCount_num = this.mGridControl.children(".grid").length;
+	this.mDirectPhotoSlug  = $("body").data("direct_photo_slug");
+
+	if (this.mDirectPhotoSlug && !$(".grid[data-slug='" + this.mDirectPhotoSlug + "']").length)
+	{
+		location.href= GLOBAL_SITE_URL + "not_found";
+	}
 	
 	this.mGridControl.children(".grid").each
 	(
@@ -289,32 +296,48 @@ GridControl.prototype.positionGrids = function()
 
 	if ($("body").hasClass("sDesktop"))
 	{
-		if (!this.mGridstaggered)
+		if (this.mDirectPhotoSlug != null)
 		{
-			if (!this.mGridstaggering)
+			this.handleDirectPhotoLink();
+			this.fadeOutPageLoadingElements();
+			setTimeout(function ()
 			{
-				this.mGridstaggering = true;
-				this.fadeOutPageLoadingElements();
+				_self.transitLoadingAndAlbumStart();
+				_self.onStaggeredAll();
 
-				setTimeout(function()
-				{
-					_self.transitLoadingAndAlbumStart();
-					_self.mGridTween = TweenMax.staggerFrom($(".grid"), 0.8, {
-						opacity: 0.5,
-						"left": Math.round(Math.random() * $(".gridPanel").width()) + "px",
-						"top": Math.round($(window).height()) + "px",
-						ease: Back.easeInOut
-					}, 0.8 / _self.mGridCount_num, function () {
-						_self.onStaggeredAll()
-					});
-
-				},400);
-
-			}
+			}, 400);
 		}
 		else
 		{
-			this.updateGridInfoHeight();
+			if (!this.mGridstaggered)
+			{
+				if (!this.mGridstaggering)
+				{
+					this.mGridstaggering = true;
+					this.fadeOutPageLoadingElements();
+
+					setTimeout(function ()
+					{
+						_self.transitLoadingAndAlbumStart();
+
+						_self.mGridTween = TweenMax.staggerFrom($(".grid"), 0.8, {
+							opacity: 0.5,
+							"left": Math.round(Math.random() * $(".gridPanel").width()) + "px",
+							"top": Math.round($(window).height()) + "px",
+							ease: Back.easeInOut
+						}, 0.8 / _self.mGridCount_num, function ()
+						{
+							_self.onStaggeredAll();
+						});
+
+					}, 400);
+
+				}
+			}
+			else
+			{
+				this.updateGridInfoHeight();
+			}
 		}
 	}
 	else
@@ -326,6 +349,12 @@ GridControl.prototype.positionGrids = function()
 			_self.transitLoadingAndAlbumStart();
 			//_self.onStaggeredAll();
 			_self.updateGridPanelAndWinScroll();
+
+			if (_self.mDirectPhotoSlug!=null)
+			{
+				_self.handleDirectPhotoLink();
+			}
+
 		}, 400);
 
 	}
@@ -336,6 +365,11 @@ GridControl.prototype.fadeOutPageLoadingElements = function()
 	$(".loadingText").addClass("show");
 	$(".camera").addClass("cameraZoom vaporizing");
 	$(".blink").addClass("blinkInit");
+}
+
+GridControl.prototype.handleDirectPhotoLink = function()
+{
+	$(".grid[data-slug='" + this.mDirectPhotoSlug + "']").trigger("click");
 }
 
 GridControl.prototype.transitLoadingAndAlbumStart = function()
@@ -556,6 +590,12 @@ GridControl.prototype.onPhotoOverlayHidden = function(pActiveGridTop_num)
 {
 	console.log("onPhotoOverlayHidden; " + pActiveGridTop_num);
 
+	if (this.mDirectPhotoSlug)
+	{
+		location.href= $("body").data("album_path");
+		return;
+	}
+
 	this.mGrid_array[this.mActiveGridIndex_num].setOpacity(1);
 
 	if (this.mWinWidthBeforeOpen_num!=$(window).width()) 
@@ -564,6 +604,7 @@ GridControl.prototype.onPhotoOverlayHidden = function(pActiveGridTop_num)
 		$("html, body").stop().animate({scrollTop:pActiveGridTop_num}, '50', 'swing');
 
 	}
+
 
 	$("html").css("overflow-y", "auto");
 }

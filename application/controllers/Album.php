@@ -7,20 +7,34 @@ class Album extends MY_Common
 		parent::__construct();
 	}
 
-
-	function _remap($param)
+	public function _remap($method, $params = array())
 	{
-		$this->index($param);
+		if (method_exists($this, $method))
+		{
+			return call_user_func_array(array($this, $method), $params);
+		}
+		else
+		{
+			//$method is actually the album name; note that $params will be of type array.
+			$this->index($method, $params);
+		}
 	}
- 
 
-	public function index($album_label = NULL)
+	//public function index($album_label, $direct_photo_slug = NULL)
+	public function index($method, $params)
 	{
 		$data = array();
-		$album_label = trim(strtolower($album_label));
+		$album_label = trim(strtolower($method));
+
+		if ($params)
+		{
+			$data["direct_photo_slug"] = trim(strtolower($params[0]));
+			$data["album_path"] = base_url()."album/".$method;
+		}
+
 		$album_id = $this->album_model->get_album_id($album_label);
 
-		if ($album_id === FALSE)
+		if ($album_id === FALSE || count($params)>1)
 		{
 			$this->not_found();
 			return;
@@ -44,6 +58,15 @@ class Album extends MY_Common
 			{
 				$data["featured_photo"]= base_url()."assets/photos/".$data["current_album_data"]["album_details"]->label."/".$photo["file_thumb_path"];
 			}
+
+			if (array_key_exists("direct_photo_slug", $data ))
+			{
+				if (strtolower($photo["slug_filename"]) == $data["direct_photo_slug"])
+				{
+					$data["direct_photo_path"]= base_url()."assets/photos/".$data["current_album_data"]["album_details"]->label."/".$photo["file_thumb_path"];
+				}
+			}
+
 		}
 
 		if ($data["featured_photo"] == "" && $has_photos)
