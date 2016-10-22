@@ -1125,6 +1125,20 @@ a
 	background:#e6d1c8;
 }
 
+
+.sMobile .section_about .aboutContainer,
+.sMobile .section_about .mainPanel,
+.sMobile .section_about article
+{
+	background:transparent;
+}
+
+.sMobile .aboutContainer
+{
+	background: url(../images/herbert.jpg) transparent 40% top no-repeat !important;
+	background-size: cover !important
+}
+
 .sMobile .section_about .mainPanel
 {
 	position: relative !important;
@@ -1151,7 +1165,7 @@ a
 	.sDesktop .section_about .infoPanel
 	{
 		width:100%;
-		opacity:0.9;
+		opacity:0.8;
 		background-position: 70% top;
 	}
 }
@@ -1159,15 +1173,23 @@ a
 .section_about .infoPanel
 {
 	background: url(../images/herbert.jpg) transparent center top no-repeat !important;
-	background-size:cover;
+	background-size:cover !important;
 }
-
 
 .sDesktop .section_about .infoPanel h1
 {
 	display:none;
 }
 
+.sMobile .section_about .btnMenuToggle
+{
+	display:none;
+}
+
+.sMobile .section_about .infoPanel
+{
+	background:none !important;
+}
 
 .sMobile .section_about .infoPanel h1
 {
@@ -1178,12 +1200,23 @@ a
 .sDesktop .section_about  article
 {
 	width: 60vw;
-	padding: 10% 20% 20% 10%;
+	padding: 10% 20% 10% 10%;
 }
+
+@media (min-width: 1025px) and (max-width: 1439px)
+{
+	.section_about  article
+	{
+		width: 50vw  !important;
+	}
+}
+
 
 .sMobile .section_about  article
 {
 	padding: 25px 25px 50px 25px;
+	overflow: auto;
+	height: 100%;
 }
 
 .section_about  article

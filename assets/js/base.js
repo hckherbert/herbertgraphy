@@ -52,16 +52,16 @@ function windowOnResized()
 
     }
 
-    if ($("body").hasClass("sMobile"))
+    if (!$(".section_about ").length)
     {
-        $(".sMobile .mainMenuClose").css("top", -1 * $(".menuContainer").outerHeight() + "px");
-        $("html").addClass("vScrollOn");
+        if ($("body").hasClass("sMobile")) {
+            $(".sMobile .mainMenuClose").css("top", -1 * $(".menuContainer").outerHeight() + "px");
+            $("html").addClass("vScrollOn");
+        }
+        else {
+            $("html").removeClass("vScrollOn");
+        }
     }
-    else
-    {
-        $("html").removeClass("vScrollOn");
-    }
-
 
 }
 
