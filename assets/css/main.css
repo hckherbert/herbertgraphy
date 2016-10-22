@@ -1098,6 +1098,14 @@ a
 
 }
 
+@media (min-width: 768px) and (max-width: 1439px)
+{
+	.section_about, .section_about .aboutContainer, .section_about .mainPanel, .section_about article
+	{
+		background:transparent !important;
+	}
+}
+
 .section_about .albumTitle
 {
 	background:#baa7a0;
@@ -1131,15 +1139,20 @@ a
 	position: relative !important;
 }
 
-@media (max-width: 1439px) {
+@media (min-width: 768px) and (max-width: 1439px)
+{
 	.sDesktop .section_about .mainPanel
 	{
-		width:55% !important;
+		position: absolute !important;
+		z-index: 1;
+		width:100%;
 	}
 
 	.sDesktop .section_about .infoPanel
 	{
-		width:45%;
+		width:100%;
+		opacity:0.9;
+		background-position: 70% top;
 	}
 }
 
@@ -1184,6 +1197,17 @@ a
 	display: inline-block;
 	float: left;
 }
+
+@media (min-width: 768px) and (max-width: 1439px)
+{
+	.sDesktop .section_about  article
+	{
+		padding: 80px 5% 10% 15%;
+		float: right;
+		color: #000;
+	}
+}
+
 
 .section_about article p
 {
