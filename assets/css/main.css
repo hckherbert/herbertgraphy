@@ -731,13 +731,6 @@ a
 		top: 0;
 		width:100% !important;
 	}
-
-	.infoPanel
-	{
-		z-index:1;
-		background:transparent !important;
-	}
-
 	.wrapperBase.section_home .albumTitle
 	{
 		background:rgba(50, 44, 43, 0.9) !important;
@@ -1104,6 +1097,13 @@ a
 	{
 		background:transparent !important;
 	}
+
+	.section_about .infoPanel
+	{
+		z-index:1;
+		background:transparent !important;
+	}
+
 }
 
 .section_about .albumTitle
