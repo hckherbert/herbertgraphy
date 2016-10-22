@@ -1200,7 +1200,8 @@ a
 .sDesktop .section_about  article
 {
 	width: 60vw;
-	padding: 10% 20% 10% 10%;
+	padding: 16% 20% 10% 10%;
+	background:url(../images/camera.png) 42% 10%  no-repeat;
 }
 
 @media (min-width: 1025px) and (max-width: 1439px)
@@ -1287,7 +1288,6 @@ a
 		color:#695a54 !important;
 	}
 }
-
 
 .sDesktop .section_about .menuContainer,
 .sDesktop .section_about .albumTitle
