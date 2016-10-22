@@ -1217,7 +1217,7 @@ a
 {
 	overflow: auto;
 	height: 60%;
-	color:#000;
+	color:#695a54;
 	position:relative;
 	top:40%;
 	padding:0 25px 50px 25px;
@@ -1255,7 +1255,7 @@ a
 .section_about .simple_icon
 {
 	margin:10px 0 0 0;
-	font-size:40px;
+	font-size:30px;
 	display:inline-block;
 }
 
@@ -1298,20 +1298,35 @@ a
 .section_about .contacts
 {
 	border-radius: 50%;
-	width: 180px;
-	height: 180px;
+	width: 400px;
+	height: 400px;
 	padding: 10px;
 	/* background: #f4f3e9; */
-	background: url(../images/contact.jpg) center center no-repeat;
-	margin: 50px auto;
+	background: url(../images/contact.png) center center no-repeat;
+	margin: 0 auto;
 	text-align: center;
-	color: #94b5b5;
+	color: #75a8a8;
 }
+
+@media (min-width: 768px) and (max-width: 1439px)
+{
+	.section_about .contacts
+	{
+		color:#527c7c;
+	}
+}
+
+.sMobile .section_about .contacts
+{
+	background: url(../images/contact_m.png) center center no-repeat;
+	color:#527c7c;
+}
+
 
 .section_about .contacts .name
 {
 	font-size: 18px;
-	margin: 20px 0 0 0;
+	margin: 110px 0 0 0;
 }
 
 
