@@ -4,7 +4,7 @@
         <br>
         <p>All of the photographs here, except those in the travel category, are taken in Hong Kong. I particularly like the <em>magic hours</em> in Hong Kong, and you can find how captivating it is here, especially when you reach accidentally by googling <em>HerbertGraphy</em> from outside Hong Kong.</p>
         <br>
-        <p>I am glad to have received very positive impressions on the photographs from my friends. I’ll keep HerbretGraphy up-to-date, and bring more surprises from time to time. I enjoy most when taking portrait photos. I would like to give special thanks to my friend Hammy, who helped capture this cool profile photo of me. If you wanna become one of the lucky ones to appear here, or if you come up with great ideas, just reach me at:</p>
+        <p>I am glad to have received very positive impressions on the photographs from my friends. I’ll keep HerbretGraphy up-to-date, and bring more surprises from time to time. I enjoy most when taking portrait photos. If you wanna become one of the lucky ones to appear here, or if you come up with great ideas, just reach me at:</p>
         <div class="contacts">
             <p class="name">Herbert Ho</p>
             <span class="simple_icon">&#9993;</span>
