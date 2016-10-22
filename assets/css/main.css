@@ -1167,13 +1167,13 @@ a
 		width:100%;
 		opacity:0.8;
 		background-position: 70% top;
+		background-size:cover !important;
 	}
 }
 
 .section_about .infoPanel
 {
 	background: url(../images/herbert.jpg) transparent center top no-repeat !important;
-	background-size:cover !important;
 }
 
 .sDesktop .section_about .infoPanel h1
@@ -1254,8 +1254,8 @@ a
 
 .section_about .simple_icon
 {
-	margin:15px 0 0 0;
-	font-size:60px;
+	margin:10px 0 0 0;
+	font-size:40px;
 	display:inline-block;
 }
 
@@ -1298,18 +1298,19 @@ a
 .section_about .contacts
 {
 	border-radius: 50%;
-	width: 240px;
-	height: 240px;
-	padding:10px;
-	background:#f4f3e9;
-	margin:50px auto;
+	width: 180px;
+	height: 180px;
+	padding: 10px;
+	/* background: #f4f3e9; */
+	background: url(../images/contact.jpg) center center no-repeat;
+	margin: 50px auto;
 	text-align: center;
-	color:#94b5b5;
+	color: #94b5b5;
 }
 
 .section_about .contacts .name
 {
-	font-size:22px;
+	font-size: 18px;
 	margin: 20px 0 0 0;
 }
 
