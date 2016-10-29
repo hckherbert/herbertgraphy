@@ -8,7 +8,7 @@ $(document).ready
     {
 
         mPhotoOverlay = new PhotoOverlay($(".photoZoomOverlay"));
-        mPhotoOverlay.initBreakPoints(mBaseBreakPoint_array, mWideScreenBreakPoint_num);
+        mPhotoOverlay.initBreakPoints(mBaseBreakPoint_array, mMediumBreakPoint_num,mWideScreenBreakPoint_num);
         mGridControl = new GridControl($(".gridPanel"), mPhotoOverlay);
         mGridControl.initBreakPoints(mBaseBreakPoint_array, mMediumBreakPoint_num, mWideScreenBreakPoint_num);
 
@@ -35,26 +35,15 @@ $(document).ready
         renderIntro();
 
         $(window).on("resize", windowOnResized);
-        $(window).on("scroll", winOnScrolled);
-
     }
 );
 
-function  winOnScrolled() {
-
-}
-
 function windowOnResized()
 {
-
-    //alert("on resize");
-
     mPhotoOverlay.centerPhoto();
-
 
     //on tablets, scrolling will trigger resize events.. so
     //check window width has actually changed and it's not just iOS triggering a resize event on scroll
-
     if ($(window).width() != mWinWidth )
     {
         // Update the window width for next time
@@ -80,12 +69,7 @@ function windowOnResized()
             $(".albumTitle").css("height", "auto");
         }
     }
-    else {
-        //mGridControl.updateDensity("medium");
-        //$(".albumTitle").css("height", "auto");
-    }
-
-
+    
     mGridControl.positionGrids();
 
 }
