@@ -1127,6 +1127,12 @@ a
 	height:100%;
 }
 
+.sMobile .aboutContainer
+{
+	padding: 25px;
+	width: auto;
+}
+
 .section_about .aboutContainer,
 .section_about .mainPanel,
 .section_about article
@@ -1221,16 +1227,15 @@ a
 	}
 }
 
-
-.sMobile .section_about  article
+.sMobile .section_about article
 {
-	overflow: auto;
 	height: 60%;
-	color:#695a54;
-	position:relative;
-	top:40%;
-	padding:0 25px 50px 25px;
-
+	color: #695a54;
+	position: relative;
+	top: 40%;
+	overflow: auto;
+	width: 100%;
+	overflow-x:hidden;
 }
 
 .section_about  article
@@ -1327,10 +1332,11 @@ a
 
 .sMobile .section_about .contacts
 {
-	background: url(../images/contact_m.png) center center no-repeat;
+	background: url(../images/contact_m.png) center 0 no-repeat;
 	color:#527c7c;
+	width: 100%;
+	padding: 0;
 }
-
 
 .section_about .contacts .name
 {
@@ -1338,6 +1344,11 @@ a
 	margin: 110px 0 0 0;
 }
 
+.sMobile .section_about .contacts .name
+{
+	font-size: 16px;
+	margin: 70px 0 0 0;
+}
 
 /******** SIMPLE LOADING **********/
 #simple-loading
