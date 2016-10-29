@@ -391,7 +391,6 @@ GridControl.prototype.transitLoadingAndAlbumStart = function()
 
 	$(".wrapperAlbum").addClass("show");
 	$(".footer").addClass("show");
-
 }
 
 GridControl.prototype.onStaggeredAll = function()
