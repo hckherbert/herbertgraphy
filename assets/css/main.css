@@ -304,6 +304,15 @@ a
 	display:none;
 }
 
+@media (min-width: 768px) and (max-width: 1024px)
+{
+	.infoPanel
+	{
+		z-index:1;
+		background:none !important;
+	}
+}
+
 @media (max-width: 1439px)
 {
 	.sDesktop .infoPanel h1 {
@@ -738,7 +747,7 @@ a
 
 	.wrapperBase.section_home .albumTitle h1
 	{
-		padding: 10px 20px !important;
+		padding: 15px 20px 10px 20px !important;
 		margin-top: 200px;
 		background:transparent !important;
 	}
