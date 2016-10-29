@@ -4,6 +4,7 @@
 
 var mResponsive = null;
 var mBaseBreakPoint_array  = [0,768];
+var mMediumBreakPoint_num = 1440;
 var mWideScreenBreakPoint_num = 1680;
 
 $(document).ready(
