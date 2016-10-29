@@ -15,6 +15,7 @@ GridControl.prototype.mOverlayPopSpeed_num = 0.5;
 GridControl.prototype.mTimerReposition = null;
 GridControl.prototype.mBaseBreakPoint_array = null;
 GridControl.prototype.mWideScreenBreakPoint_num = null;
+GridControl.prototype.mMediumBreakPoint_num = null;
 GridControl.prototype.mDirectPhotoSlug = null;
 
 function GridControl(pGridControl, pPhotoOverlay)
@@ -61,9 +62,10 @@ function GridControl(pGridControl, pPhotoOverlay)
 
 }
 
-GridControl.prototype.initBreakPoints = function(pBaseBreakPoint_array, pWideScreenBreakPoint_num)
+GridControl.prototype.initBreakPoints = function(pBaseBreakPoint_array, pMediumBreakPoint_num, pWideScreenBreakPoint_num)
 {
 	this.mBaseBreakPoint_array = pBaseBreakPoint_array;
+	this.mMediumBreakPoint_num = pMediumBreakPoint_num;
 	this.mWideScreenBreakPoint_num = pWideScreenBreakPoint_num;
 }
 
@@ -104,6 +106,10 @@ GridControl.prototype.updateDensity = function(pDensity_str)
 		this.mColCount_num = 3;
 	}
 	else if (pDensity_str == "medium")
+	{
+		this.mColCount_num = 4;
+	}
+	else if (pDensity_str == "higher")
 	{
 		this.mColCount_num = 5;
 	}
@@ -190,9 +196,13 @@ GridControl.prototype.rePositionGrid = function()
 	{
 		this.updateDensity("low");
 	}
-	else if ($(window).width()>mBaseBreakPoint_array[1] && $(window).width()<=this.mWideScreenBreakPoint_num)
+	else if ($(window).width()>mBaseBreakPoint_array[1] && $(window).width()<=this.mMediumBreakPoint_num)
 	{
 		this.updateDensity("medium");
+	}
+	else if ($(window).width()>mBaseBreakPoint_array[1] && $(window).width()<=this.mWideScreenBreakPoint_num)
+	{
+		this.updateDensity("higher");
 	}
 	else
 	{
@@ -263,7 +273,6 @@ GridControl.prototype.positionGrids = function()
 			{
 				_widthFactor_num = 2;
 				_finalGridWidth_num = _gridWidth_num*_widthFactor_num;
-				//_finalGridHeight_num = _finalGridWidth_num * this.mAspectRatio_num;
 				_finalGridHeight_num = _finalGridWidth_num  / this.mAspectRatio_num * 2;
 			}
 		}
@@ -279,7 +288,6 @@ GridControl.prototype.positionGrids = function()
 			{
 				_widthFactor_num = 1;
 				_finalGridWidth_num = _gridWidth_num*_widthFactor_num;
-				//_finalGridHeight_num = _finalGridWidth_num * this.mAspectRatio_num;
 				_finalGridHeight_num = _finalGridWidth_num / this.mAspectRatio_num * 2;
 			}
 		}
