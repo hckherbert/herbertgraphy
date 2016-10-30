@@ -62,10 +62,22 @@ function toggleMenu(pEvent)
         {
             $(".menuContainer").css("top", -1 * $(".menuContainer").height() + "px");
             $(".btnMenuToggle").removeClass("hvr-grow-rotated");
+
+            if ($(".section_about").length)
+            {
+                $(".aboutContainer").removeClass("inactive");
+                $(".bg").removeClass("inactive");
+            }
         }
         else
         {
             $(".btnMenuToggle").addClass("hvr-grow-rotated");
+
+            if ($(".section_about").length)
+            {
+                $(".aboutContainer").addClass("inactive");
+                $(".bg").addClass("inactive");
+            }
         }
 
         $(".menuMask").toggleClass("show");

@@ -493,6 +493,12 @@ a
 	color:#998f89;
 }
 
+.sMobile .wrapperBase .infoPanel .otherAlbumMenus li a
+{
+	color: #6a605b;
+}
+
+
 .sMobile .wrapperBase .infoPanel li a:hover
 {
 	color:#9e938c;
@@ -1109,6 +1115,12 @@ a
 	width: auto;
 }
 
+.sMobile .aboutContainer.inactive
+{
+	z-index:0 !important;
+	overflow-y:hidden !important;
+}
+
 .sMobile .section_about .mainPanel
 {
 	position: relative !important;
@@ -1150,11 +1162,6 @@ a
 	display:none;
 }
 
-.sMobile .section_about .btnMenuToggle
-{
-	display:none;
-}
-
 .sMobile .section_about .infoPanel
 {
 	background:none !important;
@@ -1180,6 +1187,11 @@ a
 	left: 0;
 	top: 0;
 	display:block;
+}
+
+.sMobile .section_about .bg.inactive
+{
+	position: static !important;
 }
 
 .sDesktop .section_about  article
