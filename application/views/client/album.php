@@ -41,7 +41,7 @@
 			<span class="desc"></span>
 			<div class="clear"></div>
 		</div>
-		<a class="btnClose" href="javascript:void(0)"></a>
+		<a class="btnClose hvr-grow" href="javascript:void(0)"></a>
 	</div>
 </div>
 </body>

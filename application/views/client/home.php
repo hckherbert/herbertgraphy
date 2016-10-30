@@ -11,16 +11,5 @@
 		</div>
 	</div>
 </div>
-<div class="photoZoomOverlay">
-	<div class="bg"></div>
-	<div class="photoContainer">
-		<!--<img class="photo" src="images/dummyLargeH.jpg">-->
-		<div class="descContainer">
-			<div class="bg"></div>
-			<span class="desc"></span>
-		</div>
-		<a class="btnClose" href="javascript:void(0)"></a>
-	</div>
-</div>
 </body>
 </html>
