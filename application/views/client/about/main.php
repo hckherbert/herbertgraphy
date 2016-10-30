@@ -15,4 +15,5 @@
         <div class="clear"></div>
     </article>
 </div>
+<div class="bg"></div>
 
