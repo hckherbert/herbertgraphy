@@ -488,14 +488,9 @@ a
 	color: #6a605b;
 }
 
-.sMobile .wrapperBase .infoPanel .otherAlbumMenus li a
-{
-	color: #6a605b;
-}
-
 .sMobile .wrapperAlbum .infoPanel li a:hover
 {
-	color:#c5bdb7;
+	color:#998f89;
 }
 
 .sMobile .wrapperBase .infoPanel li a:hover
