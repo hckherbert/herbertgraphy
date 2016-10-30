@@ -38,7 +38,6 @@ function toggleMenu(pEvent)
     }
     else
     {
-        $(".btnMenuToggle").toggleClass("btnMenuToggleRotate");
 
         $(".menuContainer").addClass("menuTransition");
 
@@ -49,6 +48,11 @@ function toggleMenu(pEvent)
         if ($(".menuContainer").hasClass("mainMenuClose"))
         {
             $(".menuContainer").css("top", -1 * $(".menuContainer").height() + "px");
+            $(".btnMenuToggle").removeClass("hvr-grow-rotate");
+        }
+        else
+        {
+            $(".btnMenuToggle").addClass("hvr-grow-rotate");
         }
 
         $(".menuMask").toggleClass("show");
