@@ -4,6 +4,7 @@ PhotoOverlay.prototype.mOrientation_str = null;
 PhotoOverlay.prototype.mAspectRatio_num = null;
 PhotoOverlay.prototype.mOnHideStart_fn = null;
 PhotoOverlay.prototype.mBaseBreakPoint_array = null;
+PhotoOverlay.prototype.mMediumBreakPoint_num = null;
 PhotoOverlay.prototype.mWideScreenBreakPoint_num = null;
 PhotoOverlay.zoomFactorDesktop = 0.85;
 PhotoOverlay.zoomFactorMobile = 0.75;
@@ -19,9 +20,10 @@ function PhotoOverlay(pPhotoOverlay)
 	$(".bg", this.mPhotoOverlay).on("click", function(){_self.readyHide();})
 }
 
-PhotoOverlay.prototype.initBreakPoints = function(pBaseBreakPoint_array, pWideScreenBreakPoint_num)
+PhotoOverlay.prototype.initBreakPoints = function(pBaseBreakPoint_array, pMediumBreakPoint_num,pWideScreenBreakPoint_num)
 {
 	this.mBaseBreakPoint_array = pBaseBreakPoint_array;
+	this.mMediumBreakPoint_num = pWideScreenBreakPoint_num;
 	this.mWideScreenBreakPoint_num = pWideScreenBreakPoint_num;
 }
 
@@ -145,7 +147,7 @@ PhotoOverlay.prototype.centerPhoto = function()
 
 	if ($("body").hasClass("sDesktop"))
 	{
-		if ( $(window).width() >= this.mWideScreenBreakPoint_num)
+		if ( $(window).width() >= this.mMediumBreakPoint_num)
 		{
 			_zoomFactor = PhotoOverlay.zoomFactorDesktop;
 		}
