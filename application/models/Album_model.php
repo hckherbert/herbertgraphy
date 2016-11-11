@@ -204,7 +204,8 @@ class Album_model extends CI_Model
 		$insert_id = $this->db->insert_id();
 		$data = array
 		(
-			"albumId"=>$insert_id
+			"albumId"=>$insert_id,
+			"album_code"=>$this->get_album_code($insert_id)
 		);
 		$this->db->where("albumId", 0);
 		$this->db->update("photos", $data);
