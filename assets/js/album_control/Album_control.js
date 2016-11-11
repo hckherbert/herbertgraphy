@@ -903,6 +903,18 @@ Album_control.prototype.prepare_listeners = function()
                 $(this).val("0");
             }
         });
+
+        $("#formUpdatePhotoData input[name='highlighted[]']").on("click", function(pEvent)
+        {
+            if ($(this).is(":checked"))
+            {
+                $(this).val($(this).closest(".photo_data").attr("data-photoId"));
+            }
+            else
+            {
+                $(this).val("0");
+            }
+        });
     }
 
 
