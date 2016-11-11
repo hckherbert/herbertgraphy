@@ -63,6 +63,7 @@ Album_control.prototype.init_upload = function()
     _itemTemplate += "<input name='title' value='' type='text' placeholder='Give me a title if you wish' maxlength='100'>";
     _itemTemplate += "<textarea name='desc' value='' placeholder='Say something about me if you wish' maxlength='500'></textarea>";
 	_itemTemplate += "<label><input type='radio' name='featured' value='1'>Featured</label>";
+    _itemTemplate += "<label><input type='checkbox' name='highlighted' value='1'>Highlighted</label>";
     _itemTemplate += "</div>";
 
     this.mErrorMsgUpload = "Upload cannot be started. Please check that: <br> - Each file is under " + CONFIG_FILE_SIZE_LIMIT + ".<br>- Files are image type.<br>Also check the error notices (if any) about the input fields.";
@@ -150,10 +151,16 @@ Album_control.prototype.init_upload = function()
             {
                 _onCancelCount++;
 
-                if (_onCancelCount == _itemToUploadCount && !$("#page_album_list").length)
+                /*
+                 if (_onCancelCount == _itemToUploadCount && !$("#page_album_list").length)
+                 {
+                 console.log("upload all success!");
+                 _self.displaySuccess("Photos are uploaded successfully.", "_self");
+                 }
+                 */
+                if ($("#page_album_details").length)
                 {
-                    console.log("upload all success!");
-                   _self.displaySuccess("Photos are uploaded successfully.", "_self");
+                    _self.displaySuccess("Photos are uploaded successfully.", "_self");
                 }
             }
 
@@ -194,6 +201,7 @@ Album_control.prototype.init_upload = function()
             _photo_user_data["desc"] = [];
             _photo_user_data["title"] = [];
 			_photo_user_data["featured"] = [];
+            _photo_user_data["highlighted"] = [];
 
             $(".uploadifive-queue-item").each(
                 function(i,e)
@@ -202,6 +210,7 @@ Album_control.prototype.init_upload = function()
                     _photo_user_data["original_filename"].push($(e).find(".filename").text());
                     _photo_user_data["desc"].push($(e).find("textarea[name='desc']").val());
                     _photo_user_data["title"].push($(e).find("input[name='title']").val());
+
 					if ($(e).find("input[name='featured']").is(":checked"))
 					{
 						_photo_user_data["featured"].push("1");
@@ -210,6 +219,15 @@ Album_control.prototype.init_upload = function()
 					{
 						_photo_user_data["featured"].push("0");
 					}
+
+                    if ($(e).find("input[name='highlighted']").is(":checked"))
+                    {
+                        _photo_user_data["highlighted"].push("1");
+                    }
+                    else
+                    {
+                        _photo_user_data["highlighted"].push("0");
+                    }
                 }
             );
 
@@ -885,6 +903,18 @@ Album_control.prototype.prepare_listeners = function()
                 console.log("photoid: " + $(this).closest(".photo_data").attr("data-photoId"));
                 $(this).val($(this).closest(".photo_data").attr("data-photoId"));
                 $(this).closest(".photo_data").addClass("featured");
+            }
+            else
+            {
+                $(this).val("0");
+            }
+        });
+
+        $("#formUpdatePhotoData input[name='highlighted[]']").on("click", function(pEvent)
+        {
+            if ($(this).is(":checked"))
+            {
+                $(this).val($(this).closest(".photo_data").attr("data-photoId"));
             }
             else
             {

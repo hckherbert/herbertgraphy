@@ -24,7 +24,7 @@ class Photo_model extends CI_Model
         $photo_base_dir = FCPATH."/assets/photos/";
         $album_label = $this->get_photo_folder($album_id);
 
-		$this->db->select("photoId,slug_filename,hash_filename,title,desc,featured");
+		$this->db->select("photoId,slug_filename,hash_filename,title,desc,featured,highlighted");
 		$this->db->where("albumId", $album_id);
 		$this->db->order_by("featured", "DESC");
 		$this->db->order_by("created_date", "DESC");
@@ -159,7 +159,8 @@ class Photo_model extends CI_Model
                 "hash_filename"=>  $data["hash_filename"][0][$i],
                 "title"=> $data["title"][0][$i],
                 "desc"=> $data["desc"][0][$i],
-                "featured"=>$data["featured"][0][$i]
+                "featured"=>$data["featured"][0][$i],
+                "highlighted"=>$data["highlighted"][0][$i]
             );
         }
 

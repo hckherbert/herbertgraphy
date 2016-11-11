@@ -68,6 +68,7 @@
 			<label><input name="del_id[]" type="checkbox" value="<?php echo $row["photoId"]; ?>">Remove</label>
 			<br>
 			<label><input name="featured[]" type="radio" value="<?php echo ($row["featured"] == "1") ? $row["photoId"] : "0" ?>" <?php if ($row["featured"] == 1) { ?>checked<?php } ?>>Featured</label>
+			<label><input name="highlighted[]" type="checkbox" value="<?php echo ($row["highlighted"] == "1") ? $row["photoId"] : "0" ?>" <?php if ($row["highlighted"] == 1) { ?>checked<?php } ?>>Highlighted</label>
 			<input name="photo_id[]" type="hidden" value="<?php echo $row["photoId"]; ?>">
 		</div>
 		<?php } ?>
