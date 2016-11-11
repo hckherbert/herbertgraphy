@@ -497,6 +497,7 @@ class Album_control extends CI_Controller
 
 		if (!empty($_FILES) && $_POST['token'] == $verifyToken && $photo_user_data )
 		{
+			$albumId = $_POST["albumId"];
 			$post_data_index = -1;
 			$slug_filename_only = "";
 			$desc = "";
@@ -555,7 +556,7 @@ class Album_control extends CI_Controller
 				}
 
 				$data = array(
-					"albumId" => $_POST["albumId"],
+					"albumId" => $albumId,
 					"photo_code"=>DBCodeGenerator::generate_db_code("p", true),
 					"slug_filename" => $slug_filename_only,
 					"hash_filename" => $hash_filename,
@@ -566,6 +567,11 @@ class Album_control extends CI_Controller
 					"created_date" => DateUtils::current_db_datetime(),
 					"exif"=>$exif
 				);
+
+				if ($albumId)
+				{
+					$data["album_code"] = $this->album_model->get_album_code($albumId);
+				}
 
 				$this->photo_model->add_uploaded_file_records($data);
 
