@@ -158,7 +158,7 @@ Album_control.prototype.init_upload = function()
                  _self.displaySuccess("Photos are uploaded successfully.", "_self");
                  }
                  */
-                if (!$("#page_album_list").length)
+                if ($("#page_album_details").length)
                 {
                     _self.displaySuccess("Photos are uploaded successfully.", "_self");
                 }
