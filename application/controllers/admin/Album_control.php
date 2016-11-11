@@ -361,7 +361,6 @@ class Album_control extends CI_Controller
 
 	public function update_photo_data($album_id)
 	{
-		$featuredId = $this->input->post("featured")[0];
 		$del_data = array();
 		$update_data = array();
 		$update_data["slug_filename"] = array();
@@ -371,7 +370,11 @@ class Album_control extends CI_Controller
 		$update_data["desc"] = array();
 		$update_data["photoId"] = array();
 		$update_data["featured"] = array();
+		$update_data["highlighted"] = array();
 		$featured_array = array();
+		$highlighted_array =   array();
+		$featuredId = $this->input->post("featured")[0];
+		$highlightedIds =  $this->input->post("highlighted");
 
 		foreach($this->input->post() as $key=>$value)
 		{
@@ -405,9 +408,21 @@ class Album_control extends CI_Controller
 					{
 						array_push($featured_array, "0");
 					}
+
+
+					if (in_array($photoId, $highlightedIds))
+					{
+						array_push($highlighted_array, "1");
+					}
+					else
+					{
+						array_push($highlighted_array, "0");
+					}
+
 				}
 
 				array_push($update_data["featured"], $featured_array);
+				array_push($update_data["highlighted"], $highlighted_array);
 
 			}
 			else if ($key == "original_filename")
@@ -482,6 +497,7 @@ class Album_control extends CI_Controller
 
 		if (!empty($_FILES) && $_POST['token'] == $verifyToken && $photo_user_data )
 		{
+			$albumId = $_POST["albumId"];
 			$post_data_index = -1;
 			$slug_filename_only = "";
 			$desc = "";
@@ -516,6 +532,7 @@ class Album_control extends CI_Controller
 			$desc = $photo_user_data["desc"][$post_data_index];
 			$title = $photo_user_data["title"][$post_data_index];
 			$featured = $photo_user_data["featured"][$post_data_index];
+			$highlighted = $photo_user_data["highlighted"][$post_data_index];
 			$hash = hash("sha256", $slug_filename_only .time()."herbertgraphyalbumadmin");
 			$hash_filename = $slug_filename_only."-".$hash.".".$extension;
 			$target_file = $uploadDir.$hash_filename;
@@ -539,16 +556,22 @@ class Album_control extends CI_Controller
 				}
 
 				$data = array(
-					"albumId" => $_POST["albumId"],
+					"albumId" => $albumId,
 					"photo_code"=>DBCodeGenerator::generate_db_code("p", true),
 					"slug_filename" => $slug_filename_only,
 					"hash_filename" => $hash_filename,
 					"title" => $title,
 					"desc" => $desc,
 					"featured" => $featured,
+					"highlighted" => $highlighted,
 					"created_date" => DateUtils::current_db_datetime(),
 					"exif"=>$exif
 				);
+
+				if ($albumId)
+				{
+					$data["album_code"] = $this->album_model->get_album_code($albumId);
+				}
 
 				$this->photo_model->add_uploaded_file_records($data);
 
