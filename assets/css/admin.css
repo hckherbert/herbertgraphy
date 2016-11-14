@@ -302,7 +302,7 @@ input[type='button']
 	margin:2px 0;
 }
 
-.photo_data.featured
+.photo_data.featured, .uploadifive-queue-item.featured
 {
 	background:#fec384;
 }

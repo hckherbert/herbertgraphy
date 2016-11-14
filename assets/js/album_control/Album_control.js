@@ -891,6 +891,7 @@ Album_control.prototype.prepare_listeners = function()
         _self.onFormInfoFieldOnKeyDown(pEvent);
     });
 
+    //when in update photo mode
     if ($("#formUpdatePhotoData").length)
     {
         $("#formUpdatePhotoData input[name='featured[]']").on("click", function(pEvent)
@@ -898,30 +899,69 @@ Album_control.prototype.prepare_listeners = function()
             $("#formUpdatePhotoData input[name='featured[]']").val("0");
             $("#formUpdatePhotoData .photo_data.featured").removeClass("featured");
 
+            var _photoId = $(this).closest(".photo_data").attr("data-photoId");
+
             if ($(this).is(":checked"))
             {
-                console.log("photoid: " + $(this).closest(".photo_data").attr("data-photoId"));
-                $(this).val($(this).closest(".photo_data").attr("data-photoId"));
+                $(this).val(_photoId);
+                $(this).closest(".photo_data").find("input[name='highlighted[]']").val(0);
+                $(this).closest(".photo_data").find("input[name='highlighted[]']").prop("checked", false);
+                $(this).closest(".photo_data").find("input[name='highlighted[]']").prop("disabled", true);
                 $(this).closest(".photo_data").addClass("featured");
             }
             else
             {
                 $(this).val("0");
+                $(this).closest(".photo_data").find("input[name='highlighted[]']").prop("disabled", false);
             }
         });
 
         $("#formUpdatePhotoData input[name='highlighted[]']").on("click", function(pEvent)
         {
+            var _photoId = $(this).closest(".photo_data").attr("data-photoId");
+
             if ($(this).is(":checked"))
             {
-                $(this).val($(this).closest(".photo_data").attr("data-photoId"));
+                $(this).val(_photoId);
+                $(this).closest(".photo_data").find("input[name='featured[]']").val(0);
+                $(this).closest(".photo_data").find("input[name='featured[]']").prop("disabled", true);
             }
             else
             {
                 $(this).val("0");
+                $(this).closest(".photo_data").find("input[name='featured[]']").prop("disabled", false);
             }
         });
     }
+
+    //when in upload photo form
+    $(document).on("click", "input[name='featured']", function(pEvent)
+    {
+        $(".uploadifive-queue-item.featured").removeClass("featured");
+        $("input[name='highlighted']").prop("disabled", false);
+
+        if ($(this).is(":checked"))
+        {
+            $(this).closest(".uploadifive-queue-item").addClass("featured");
+            $(this).closest(".uploadifive-queue-item").find("input[name='highlighted']").prop("checked", false);
+            $(this).closest(".uploadifive-queue-item").find("input[name='highlighted']").prop("disabled", true);
+        }
+    });
+
+    //when in upload photo form
+    $(document).on("click", "input[name='highlighted']", function(pEvent)
+    {
+
+        if ($(this).is(":checked"))
+        {
+            $(this).closest(".uploadifive-queue-item").find("input[name='featured']").prop("disabled", true);
+        }
+        else
+        {
+            $(this).closest(".uploadifive-queue-item").find("input[name='featured']").prop("disabled", false);
+        }
+    });
+
 
 
 }
