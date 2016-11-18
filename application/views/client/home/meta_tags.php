@@ -1,1 +1,1 @@
-<meta property="og:image" content="<?php echo base_url("assets/images/cover.jpg"); ?>" />
+<meta property="og:image" content="<?php echo assets_image("cover.jpg"); ?>" />

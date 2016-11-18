@@ -3,7 +3,6 @@ $(document).ready
     function()
     {
         //TODO: probably move loading stuff to common
-
         $(window).on("resize", windowOnResized);
         windowOnResized();
    
