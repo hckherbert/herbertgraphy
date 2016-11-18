@@ -11,6 +11,7 @@ var uglify = require('gulp-uglify');
 
 var vendor = {
     jquery: "assets/components/jquery/",
+    jquery_ui: "assets/components/jquery-ui/",
     "gsap": "assets/components/gsap/"
 };
 
@@ -31,6 +32,13 @@ var src = {
             "assets/css/zindex.css",
             "assets/css/page_loading.css",
             "assets/css/main.css"
+        ],
+        "admin_main.css":
+        [
+            "assets/css/reset.css",
+            "assets/css/zindex.css",
+            "assets/css/uploadifive.css",
+            "assets/css/admin.css"
         ]
     },
     js_sub_group:
@@ -59,6 +67,15 @@ var src = {
         "album.js":
         [
             "assets/js/album.js"
+        ],
+        "admin_main.js":
+        [
+            vendor.jquery + "dist/jquery.js",
+            "assets/js/jquery-migrate-3.0.0.min.js",
+            vendor.jquery_ui + "jquery-ui.js",
+            "assets/js/album_control/jquery.uploadifive.js",
+            "assets/js/album_control/OriginalPhotoData.js",
+            "assets/js/album_control/Album_control.js"
         ]
     }
 };
