@@ -5,7 +5,7 @@
             <?php if (isset($current_album_data) && $current_album_data!=NULL) {echo $current_album_data["album_details"]->name;} else ?>
             <?php if (isset($main_title) && $main_title !=NULL) { echo $main_title; } ?>
         </h1>
-        <a class="btnMenuToggle hvr-grow-rotate" href="javascript:void(0)"><img src="<?php echo base_url("assets/images/btnMenuToggle.png"); ?>"></a>
+        <a class="btnMenuToggle hvr-grow-rotate" href="javascript:void(0)"><img src="<?php echo assets_image("btnMenuToggle.png"); ?>"></a>
     </div>
     <div class="menuContainer mainMenuClose">
         <?php if (isset($subalbum_data) && $subalbum_data!=NULL) { ?>
