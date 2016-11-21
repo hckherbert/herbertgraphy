@@ -1,0 +1,28 @@
+{
+  "name": "herbertgraphy",
+  "version": "0.0.1",
+  "authors": [
+    "Herbert Ho <herberthck@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "assets/components"
+  ],
+  "dependencies": {
+    "gsap": "^1.19.0",
+    "jquery": "^3.1.0",
+    "jquery-ui": "^1.11.0",
+    "magnific-popup": "^1.1.0",
+    "jquery-touchswipe":"^1.6.17",
+    "jScrollPane": "~2.0.23",
+    "jquery-mousewheel":"https://github.com/jquery/jquery-mousewheel.git#3.1.13"
+  }
+}

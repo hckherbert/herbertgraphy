@@ -1,0 +1,28 @@
+{
+  "name": "ci_web",
+  "private": true,
+  "version": "1.0.0",
+  "description": "herbergraphy package json file",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "bower": "^1.7.9",
+    "gulp": "^3.9.1",
+    "gulp-bower": "0.0.13",
+    "gulp-clean-css": "^2.0.13",
+    "gulp-concat": "^2.6.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-rev": "^7.0.0",
+    "gulp-rev-collector": "^1.0.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.3",
+    "gulp-util": "^3.0.7",
+    "gulp-watch": "^4.3.5",
+    "rev-del": "^1.0.5",
+    "run-sequence": "^1.2.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
