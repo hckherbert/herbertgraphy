@@ -136,7 +136,7 @@ GridControl.prototype.resetOccupy = function(pAspectRatio_num)
 	}
 }
 
-GridControl.prototype.setFeaturedtOccupy = function()
+GridControl.prototype.setFeaturedOccupy = function()
 {
 	if (this.mGrid_array[0].getOrientation() == "h")
 	{
@@ -193,9 +193,66 @@ GridControl.prototype.setFeaturedtOccupy = function()
 	}
 }
 
-GridControl.prototype.setHighlightedOccupy = function()
+GridControl.prototype.setHighlightedOccupy = function(pGridIndex, pTargetIndex)
 {
+	if (this.mGrid_array[pGridIndex].getOrientation() == "h")
+	{
+		var _occupyIndex0 = pTargetIndex;
+		var _occupyIndex1 = pTargetIndex + 1;
+		var _occupyIndex2 = pTargetIndex + this.mColCount_num;
+		var _occupyIndex3 = pTargetIndex + this.mColCount_num + 1;
 
+		console.log("@sethighlighted init: " + ((pGridIndex + 1) % this.mColCount_num) + " ; " + pGridIndex);
+
+		//case 1 if index is not at the last column
+		if ((pGridIndex + 1) % this.mColCount_num != 0)
+		{
+			//simply set highlighted if the target positions are all not occupied, set them to occupied
+			if (this.mIsOccupied_array[_occupyIndex0] && !this.mIsOccupied_array[_occupyIndex1] && !this.mIsOccupied_array[_occupyIndex2] && !this.mIsOccupied_array[_occupyIndex3])
+			{
+				console.log("setHighlightedOccupy case 1: " + _occupyIndex0 + " ; "   + _occupyIndex1 + " ; " + _occupyIndex2 + " ; " + _occupyIndex3);
+
+				this.mIsOccupied_array[_occupyIndex0] = true;
+				this.mIsOccupied_array[_occupyIndex1] = true;
+				this.mIsOccupied_array[_occupyIndex2] = true;
+				this.mIsOccupied_array[_occupyIndex3] = true;
+			}
+		}
+		//case 2 if index is at the last column
+		else
+		{
+
+			_occupyIndex0 = _occupyIndex0 + 1;
+			_occupyIndex1 = _occupyIndex0 + 2;
+			_occupyIndex2 = _occupyIndex0 + 1 +  this.mColCount_num;
+			_occupyIndex3 = _occupyIndex0 + 2 +  this.mColCount_num;
+
+			//if the next target indices in the next 2 rows are not occupied, set them to occupied
+			if (this.mIsOccupied_array[_occupyIndex0] && !this.mIsOccupied_array[_occupyIndex1] && !this.mIsOccupied_array[_occupyIndex2] && !this.mIsOccupied_array[_occupyIndex3])
+			{
+
+				console.log("setHighlightedOccupy case 2: " + _occupyIndex0 + " ; "   + _occupyIndex1 + " ; " + _occupyIndex2 + " ; " + _occupyIndex3);
+
+
+				this.mIsOccupied_array[_occupyIndex0] = true;
+				this.mIsOccupied_array[_occupyIndex1] = true;
+				this.mIsOccupied_array[_occupyIndex2] = true;
+				this.mIsOccupied_array[_occupyIndex3] = true;
+			}
+			else
+			{
+
+			}
+		}
+
+
+		//we expand mIsOccupied_array as the highlighted photos occupy more space now
+		for (var _j=0; _j<3; _j++)
+		{
+			this.mIsOccupied_array.push(false);
+		}
+
+	}
 }
 
 GridControl.prototype.rePositionGrid = function()
@@ -239,59 +296,71 @@ GridControl.prototype.positionGrids = function()
 	for (_i = 0; _i< this.mGridCount_num; _i++)
 	{
 		var _nextAvailableFound = false;
-		
+
 		_j = _nextAvailableIndex_num;
 		_widthFactor_num = 1;
-		
+
 		while (!_nextAvailableFound)
 		{
 			if (!this.mIsOccupied_array[_j])
 			{
 				_nextAvailableFound = true;
 				_nextAvailableIndex_num = _j;
-				this.mIsOccupied_array[_nextAvailableIndex_num] = true;	
+				this.mIsOccupied_array[_nextAvailableIndex_num] = true;
 			}
-			
+
 			_j++;
 		}
 
 		if (this.mGrid_array[_i].isFeatured())
 		{
-			this.setFeaturedtOccupy();
+			this.setFeaturedOccupy();
 		}
 
-		if (this.mGrid_array[_i].isHighlighted())
+		if (this.mGrid_array[_i].isHighlighted(_i))
 		{
-			this.setHighlightedOccupy();
+			this.setHighlightedOccupy(_i,_nextAvailableIndex_num);
 		}
-		
-		_gridWidth_num = Math.floor($(".gridPanel").width()/this.mColCount_num);
-		
-		console.log("grid panel offset: " + ($(".gridPanel").width() - (_gridWidth_num * this.mColCount_num)));
+
+		_gridWidth_num = Math.floor($(".gridPanel").width() / this.mColCount_num);
 		_gridHeight_num = Math.round(_gridWidth_num / this.mAspectRatio_num);
 
 		if (this.mGrid_array[_i].getOrientation() == "v")
 		{
-			this.mIsOccupied_array[_nextAvailableIndex_num+this.mColCount_num] = true;
-			
+			this.mIsOccupied_array[_nextAvailableIndex_num + this.mColCount_num] = true;
+
 		}
-		
+
 		if (this.mGrid_array[_i].isFeatured())
 		{
 			if (this.mGrid_array[_i].getOrientation() == "h")
 			{
 				_widthFactor_num = ($("body").hasClass("sDesktop")) ? 4 : 3;
-				_finalGridWidth_num = _gridWidth_num*_widthFactor_num;
+				_finalGridWidth_num = _gridWidth_num * _widthFactor_num;
 				_finalGridHeight_num = Math.round(_finalGridWidth_num / this.mAspectRatio_num);
 			}
 			else if (this.mGrid_array[_i].getOrientation() == "v")
 			{
 				_widthFactor_num = 3;
-				_finalGridWidth_num = _gridWidth_num*_widthFactor_num;
-				_finalGridHeight_num = _finalGridWidth_num  / this.mAspectRatio_num * 2;
+				_finalGridWidth_num = _gridWidth_num * _widthFactor_num;
+				_finalGridHeight_num = _finalGridWidth_num / this.mAspectRatio_num * 2;
 			}
 		}
-
+		else if (this.mGrid_array[_i].isHighlighted())
+		{
+			if (this.mGrid_array[_i].getOrientation() == "h")
+			{
+				_widthFactor_num = 2;
+				_finalGridWidth_num = _gridWidth_num*_widthFactor_num;
+				_finalGridHeight_num = Math.round(_finalGridWidth_num / this.mAspectRatio_num);
+			}
+			else
+			{
+				_widthFactor_num = 2;
+				_finalGridWidth_num = _gridWidth_num*_widthFactor_num;
+				_finalGridHeight_num = _finalGridWidth_num / this.mAspectRatio_num * 2;
+			}
+		}
 		else
 		{
 			if (this.mGrid_array[_i].getOrientation() == "h")
@@ -333,8 +402,8 @@ GridControl.prototype.positionGrids = function()
 		}
 		else
 		{
-			if (!this.mGridstaggered)
-			{
+			//if (!this.mGridstaggered)
+			//{
 				if (!this.mGridstaggering)
 				{
 					this.mGridstaggering = true;
@@ -344,23 +413,21 @@ GridControl.prototype.positionGrids = function()
 					{
 						_self.transitLoadingAndAlbumStart();
 
-						var _fromLeft =  Math.round(Math.random() * $(".gridPanel").width());
-						var _fromTop = Math.round( $(window).height());
-
 						_self.mGridTween = TweenMax.staggerFrom($(".grid"), 0.8, {
 							opacity: 0.5,
-							"left": _fromLeft + "px",
-							"top": _fromTop + "px",
+							"left":  Math.round(Math.random() * $(".gridPanel").width()) + "px",
+							"top": $(window).height() + 200 + "px", //add some buffer to prevent the starting staggers from being seen!
 							ease: Back.easeInOut
 						}, 0.8 / _self.mGridCount_num, function ()
 						{
 							_self.onStaggeredAll();
+
 						});
 
 					}, 400);
 
 				}
-			}
+			//}
 			else
 			{
 				this.updateGridInfoHeight();
@@ -416,13 +483,11 @@ GridControl.prototype.onStaggeredAll = function()
 {
 	var _self = this;
 	
-	console.log("staggered all!");
-	console.log("before starggered: " + this.mWinWidthBeforeStaggered_num + " ; after staggered: " + $(window).width());
+	//console.log("staggered all!");
 	this.mGridstaggered = true;
 
 	if (this.mWinWidthBeforeStaggered_num  != $(window).width())
-	{	
-		console.log("go to reposition!");
+	{
 		this.mTimerReposition = setTimeout
 		( 
 			function()
@@ -443,7 +508,6 @@ GridControl.prototype.updateGridInfoHeight = function()
 		var _i = 0;
 		var _maxLastGridHeight_num = 0;
 		var _gridPanelHeight_num = this.mGrid_array[this.mGridCount_num-1].getPosition()["y"];
-		console.log("_gridPanelHeight_num: " + _gridPanelHeight_num);
 		var _startLastRowIndex = this.mGridCount_num - this.mColCount_num;
 
 		if (_startLastRowIndex  > 0)
@@ -481,7 +545,6 @@ GridControl.prototype.updateGridPanelAndWinScroll = function()
 	var _gridWidth_num = Math.floor($(".gridPanel").width()/this.mColCount_num);
 	var _gridPanelWidth_num = Math.floor($(".gridPanel").width());
 	var _offset_num = _gridWidth_num * this.mColCount_num - _gridPanelWidth_num;
-	console.log("_offset_num: " + _offset_num);
 	$(".gridPanel").css("right", _offset_num + "px");
 
 	$("html").addClass("vScrollOn");
@@ -500,9 +563,7 @@ GridControl.prototype.onClick = function(pObj)
 	var _zoomFactor = 0;
 	
 	this.mActiveGridIndex_num = pObj.getIndex();
-	console.log("active index on click: " +  pObj.getIndex());
 	this.mWinWidthBeforeOpen_num = $(window).width();
-	console.log("active index: " + this.mActiveGridIndex_num);
 	 
 	if (this.mColCount_num == 3)
 	{
@@ -597,25 +658,18 @@ GridControl.prototype.photoOverlayOnHideStart = function()
 	}
 	
 	_activeGridTop_num =  Math.round(_activeGridTop_num - 0.5 * Math.round($(window).height()));
- 
-	console.log(_activeGridTop_num);
-	
+
 	if (_activeGridTop_num < 0)
 	{
 		_activeGridTop_num = 0;
 	}
 
 	TweenMax.fromTo(this.mPhotoOverlay.getPhotoContainer(), this.mOverlayPopSpeed_num, {left:_fromX_num, top:_fromY_num, width:this.mPhotoOverlay.getPhotoContainer().width(), height:this.mPhotoOverlay.getPhotoContainer().height(), ease:Back.easeOut}, {left:_toX_num, top:_toY_num, width: _toWidth_num, height: _toHeight_num, ease:Back.easeOut});
-	
-	console.log(_self.mWinWidthBeforeOpen_num + " ; " + $(window).width());
-
 	this.mPhotoOverlay.hide(function(){_self.onPhotoOverlayHidden(_activeGridTop_num);});
 }
 
 GridControl.prototype.onPhotoOverlayHidden = function(pActiveGridTop_num)
 {
-	console.log("onPhotoOverlayHidden; " + pActiveGridTop_num);
-
 	if (this.mDirectPhotoSlug)
 	{
 		location.href= $("body").data("album_path");
