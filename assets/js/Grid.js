@@ -2,6 +2,7 @@ Grid.prototype.mGrid = null;
 Grid.prototype.mIndex_num = -1;
 Grid.prototype.mOrientation_str = "";
 Grid.prototype.mIsFeatured = false;
+Grid.prototype.mIsHighlighted = false;
 Grid.prototype.mDesc_str = null;
  
 
@@ -94,9 +95,19 @@ Grid.prototype.setFeatured =  function(pIsFeatured)
 	this.mIsFeatured = pIsFeatured
 }
 
+Grid.prototype.setHighlighted = function(pIsHighlighted)
+{
+	this.mIsHighlighted = pIsHighlighted;
+}
+
 Grid.prototype.isFeatured =  function()
 {
 	return this.mIsFeatured;
+}
+
+Grid.prototype.isHighlighted =  function()
+{
+	return this.mIsHighlighted;
 }
 
 Grid.prototype.setOpacity = function(pOpacity)

@@ -46,6 +46,11 @@ function GridControl(pGridControl, pPhotoOverlay)
 			{
 				_grid.setFeatured(true);
 			}
+
+			if ($(this).attr("data-highlighted") == "true")
+			{
+				_grid.setHighlighted(true);
+			}
 			
 			var _imgObj = new Image();
 			_imgObj.onload = function()
@@ -164,28 +169,33 @@ GridControl.prototype.setFeaturedtOccupy = function()
 	{
 		this.mIsOccupied_array[0] = true;
 		this.mIsOccupied_array[1] = true;
-		//this.mIsOccupied_array[2] = true;
+		this.mIsOccupied_array[2] = true;
 		
 		this.mIsOccupied_array[this.mColCount_num] = true;
 		this.mIsOccupied_array[this.mColCount_num+1] = true;
-		//this.mIsOccupied_array[this.mColCount_num+2] = true;
+		this.mIsOccupied_array[this.mColCount_num+2] = true;
 		
 		this.mIsOccupied_array[this.mColCount_num*2] = true;
 		this.mIsOccupied_array[this.mColCount_num*2+1] = true;
-		//this.mIsOccupied_array[this.mColCount_num*2+2] = true;
+		this.mIsOccupied_array[this.mColCount_num*2+2] = true;
 		
 		this.mIsOccupied_array[this.mColCount_num*3] = true;
 		this.mIsOccupied_array[this.mColCount_num*3+1] = true;
-		//this.mIsOccupied_array[this.mColCount_num*3+2] = true;
+		this.mIsOccupied_array[this.mColCount_num*3+2] = true;
 		
-		//this.mIsOccupied_array[this.mColCount_num*4] = true;
-		//this.mIsOccupied_array[this.mColCount_num*4+1] = true;
-		//this.mIsOccupied_array[this.mColCount_num*4+2] = true;
+		this.mIsOccupied_array[this.mColCount_num*4] = true;
+		this.mIsOccupied_array[this.mColCount_num*4+1] = true;
+		this.mIsOccupied_array[this.mColCount_num*4+2] = true;
 		
-		//this.mIsOccupied_array[this.mColCount_num*5] = true;
-		//this.mIsOccupied_array[this.mColCount_num*5+1] = true;
-		//this.mIsOccupied_array[this.mColCount_num*5+2] = true;
+		this.mIsOccupied_array[this.mColCount_num*5] = true;
+		this.mIsOccupied_array[this.mColCount_num*5+1] = true;
+		this.mIsOccupied_array[this.mColCount_num*5+2] = true;
 	}
+}
+
+GridControl.prototype.setHighlightedOccupy = function()
+{
+
 }
 
 GridControl.prototype.rePositionGrid = function()
@@ -249,6 +259,11 @@ GridControl.prototype.positionGrids = function()
 		{
 			this.setFeaturedtOccupy();
 		}
+
+		if (this.mGrid_array[_i].isHighlighted())
+		{
+			this.setHighlightedOccupy();
+		}
 		
 		_gridWidth_num = Math.floor($(".gridPanel").width()/this.mColCount_num);
 		
@@ -271,11 +286,12 @@ GridControl.prototype.positionGrids = function()
 			}
 			else if (this.mGrid_array[_i].getOrientation() == "v")
 			{
-				_widthFactor_num = 2;
+				_widthFactor_num = 3;
 				_finalGridWidth_num = _gridWidth_num*_widthFactor_num;
 				_finalGridHeight_num = _finalGridWidth_num  / this.mAspectRatio_num * 2;
 			}
 		}
+
 		else
 		{
 			if (this.mGrid_array[_i].getOrientation() == "h")
@@ -328,10 +344,13 @@ GridControl.prototype.positionGrids = function()
 					{
 						_self.transitLoadingAndAlbumStart();
 
+						var _fromLeft =  Math.round(Math.random() * $(".gridPanel").width());
+						var _fromTop = Math.round( $(window).height());
+
 						_self.mGridTween = TweenMax.staggerFrom($(".grid"), 0.8, {
 							opacity: 0.5,
-							"left": Math.round(Math.random() * $(".gridPanel").width()) + "px",
-							"top": Math.round($(window).height()) + "px",
+							"left": _fromLeft + "px",
+							"top": _fromTop + "px",
 							ease: Back.easeInOut
 						}, 0.8 / _self.mGridCount_num, function ()
 						{
