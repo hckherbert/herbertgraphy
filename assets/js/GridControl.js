@@ -61,9 +61,15 @@ function GridControl(pGridControl, pPhotoOverlay)
 			_imgObj.src = $(this).find("img").attr("src") + "?r=" + Math.random() + "id=" + i;
 			
 			_self.mGrid_array.push(_grid);
-			_self.mIsOccupied_array.push(false);
 		}
 	)
+
+	var _isOccupiedSetLength = this.mGridCount_num * 4; //give some values large enough to detect if occupied
+
+	for (var _i=0; _i<_isOccupiedSetLength; _i++)
+	{
+		_self.mIsOccupied_array.push(false);
+	}
 
 }
 
@@ -195,6 +201,9 @@ GridControl.prototype.setFeaturedOccupy = function()
 
 GridControl.prototype.setHighlightedOccupy = function(pGridIndex, pTargetIndex)
 {
+	var _j = 0;
+	var _nextAvailableFound;
+
 	if (this.mGrid_array[pGridIndex].getOrientation() == "h")
 	{
 		var _occupyIndex0 = pTargetIndex;
@@ -202,12 +211,12 @@ GridControl.prototype.setHighlightedOccupy = function(pGridIndex, pTargetIndex)
 		var _occupyIndex2 = pTargetIndex + this.mColCount_num;
 		var _occupyIndex3 = pTargetIndex + this.mColCount_num + 1;
 
-		console.log("@sethighlighted init: " + ((pGridIndex + 1) % this.mColCount_num) + " ; " + pGridIndex);
-
 		//case 1 if index is not at the last column
 		if ((pGridIndex + 1) % this.mColCount_num != 0)
 		{
 			//simply set highlighted if the target positions are all not occupied, set them to occupied
+			console.log("case1" + " ; " + pGridIndex);
+
 			if (this.mIsOccupied_array[_occupyIndex0] && !this.mIsOccupied_array[_occupyIndex1] && !this.mIsOccupied_array[_occupyIndex2] && !this.mIsOccupied_array[_occupyIndex3])
 			{
 				console.log("setHighlightedOccupy case 1: " + _occupyIndex0 + " ; "   + _occupyIndex1 + " ; " + _occupyIndex2 + " ; " + _occupyIndex3);
@@ -217,15 +226,37 @@ GridControl.prototype.setHighlightedOccupy = function(pGridIndex, pTargetIndex)
 				this.mIsOccupied_array[_occupyIndex2] = true;
 				this.mIsOccupied_array[_occupyIndex3] = true;
 			}
+			else
+			{
+				/*
+				 _nextAvailableFound = false;
+				 _j = pTargetIndex;
+
+				while (!_nextAvailableFound)
+				{
+					if (!this.mIsOccupied_array[_j])
+					{
+						_nextAvailableFound = true;
+						this.mIsOccupied_array[_j] = true;
+					}
+
+					_j++;
+				}
+
+				this.setHighlightedOccupy(pGridIndex, _j);
+				*/
+
+			}
 		}
 		//case 2 if index is at the last column
 		else
 		{
-
 			_occupyIndex0 = _occupyIndex0 + 1;
 			_occupyIndex1 = _occupyIndex0 + 2;
 			_occupyIndex2 = _occupyIndex0 + 1 +  this.mColCount_num;
 			_occupyIndex3 = _occupyIndex0 + 2 +  this.mColCount_num;
+
+			console.log("case2" + " ; " + pGridIndex);
 
 			//if the next target indices in the next 2 rows are not occupied, set them to occupied
 			if (this.mIsOccupied_array[_occupyIndex0] && !this.mIsOccupied_array[_occupyIndex1] && !this.mIsOccupied_array[_occupyIndex2] && !this.mIsOccupied_array[_occupyIndex3])
@@ -241,15 +272,24 @@ GridControl.prototype.setHighlightedOccupy = function(pGridIndex, pTargetIndex)
 			}
 			else
 			{
+				/*
+				_nextAvailableFound = false;
+				 _j = pTargetIndex;
 
+				while (!_nextAvailableFound)
+				{
+					if (!this.mIsOccupied_array[_j])
+					{
+						_nextAvailableFound = true;
+						this.mIsOccupied_array[_j] = true;
+					}
+
+					_j++;
+				}
+
+				this.setHighlightedOccupy(pGridIndex, _j);
+				*/
 			}
-		}
-
-
-		//we expand mIsOccupied_array as the highlighted photos occupy more space now
-		for (var _j=0; _j<3; _j++)
-		{
-			this.mIsOccupied_array.push(false);
 		}
 
 	}
