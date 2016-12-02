@@ -25,10 +25,14 @@
     <meta name="twitter:description" content="HerbertGraphy - Herbert Ho's photography showcase" />
     <meta name="twitter:title" content="HerbertGraphy<?php if (isset($title) && $title !=NULL) { echo " - ".$title;} ?>" />
     <title>
-        <?php if (isset($home_title) && $home_title !=NULL) { ?>
-        HerbertGraphy<?php echo " - ".$home_title;?>
-        <?php } else { ?>
-        HerbertGraphy<?php if (isset($main_title) && $main_title !=NULL) { echo " - ".$main_title;} ?>
+        <?php if (ENVIRONMENT != "dev_cp") { ?>
+            <?php if (isset($home_title) && $home_title !=NULL) { ?>
+            HerbertGraphy<?php echo " - ".$home_title;?>
+            <?php } else { ?>
+            HerbertGraphy<?php if (isset($main_title) && $main_title !=NULL) { echo " - ".$main_title;} ?>
+            <?php } ?>
+        <?php } else {?>
+            demo
         <?php } ?>
     </title>
     <!-- ICON -->
