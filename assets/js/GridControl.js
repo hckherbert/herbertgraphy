@@ -17,6 +17,7 @@ GridControl.prototype.mBaseBreakPoint_array = null;
 GridControl.prototype.mWideScreenBreakPoint_num = null;
 GridControl.prototype.mMediumBreakPoint_num = null;
 GridControl.prototype.mDirectPhotoSlug = null;
+GridControl.prototype.mNextAvailableIndex_num = 0;
 
 function GridControl(pGridControl, pPhotoOverlay)
 {
@@ -201,6 +202,7 @@ GridControl.prototype.setFeaturedOccupy = function()
 
 GridControl.prototype.setHighlightedOccupy = function(pGridIndex, pTargetIndex)
 {
+	var _i = 0;
 	var _j = 0;
 	var _nextAvailableFound;
 
@@ -225,27 +227,33 @@ GridControl.prototype.setHighlightedOccupy = function(pGridIndex, pTargetIndex)
 				this.mIsOccupied_array[_occupyIndex1] = true;
 				this.mIsOccupied_array[_occupyIndex2] = true;
 				this.mIsOccupied_array[_occupyIndex3] = true;
+
 			}
 			else
 			{
-				/*
-				 _nextAvailableFound = false;
-				 _j = pTargetIndex;
 
-				while (!_nextAvailableFound)
+				console.log("case1 else " + " ; " + pGridIndex + " ; " + pTargetIndex);
+
+				 _nextAvailableFound = false;
+				 _j = pTargetIndex+1;
+
+				for (_i=_j; _i < this.mIsOccupied_array.length; _i++)
 				{
-					if (!this.mIsOccupied_array[_j])
+					if (!this.mIsOccupied_array[_i]  && !this.mIsOccupied_array[_i+1] && !this.mIsOccupied_array[_i+ this.mColCount_num] && !this.mIsOccupied_array[_i+this.mColCount_num + 1])
 					{
 						_nextAvailableFound = true;
-						this.mIsOccupied_array[_j] = true;
+						console.log("case1  next avialable found!: " + _i);
+						this.mIsOccupied_array[_i] = true;
+						this.mIsOccupied_array[_i+1] = true;
+						this.mIsOccupied_array[_i+ this.mColCount_num] = true;
+						this.mIsOccupied_array[_i+this.mColCount_num + 1] = true;
+						break;
 					}
-
-					_j++;
 				}
 
-				this.setHighlightedOccupy(pGridIndex, _j);
-				*/
 
+				this.mIsOccupied_array[_occupyIndex0]= false;
+				this.mNextAvailableIndex_num = _i;
 			}
 		}
 		//case 2 if index is at the last column
@@ -259,8 +267,11 @@ GridControl.prototype.setHighlightedOccupy = function(pGridIndex, pTargetIndex)
 			console.log("case2" + " ; " + pGridIndex);
 
 			//if the next target indices in the next 2 rows are not occupied, set them to occupied
-			if (this.mIsOccupied_array[_occupyIndex0] && !this.mIsOccupied_array[_occupyIndex1] && !this.mIsOccupied_array[_occupyIndex2] && !this.mIsOccupied_array[_occupyIndex3])
+			if (!this.mIsOccupied_array[_occupyIndex0] && !this.mIsOccupied_array[_occupyIndex1] && !this.mIsOccupied_array[_occupyIndex2] && !this.mIsOccupied_array[_occupyIndex3])
 			{
+
+				//the current index is now shifted to the first column of the next row, so , set it to false;
+				this.mIsOccupied_array[_occupyIndex0-1] = false;
 
 				console.log("setHighlightedOccupy case 2: " + _occupyIndex0 + " ; "   + _occupyIndex1 + " ; " + _occupyIndex2 + " ; " + _occupyIndex3);
 
@@ -269,29 +280,34 @@ GridControl.prototype.setHighlightedOccupy = function(pGridIndex, pTargetIndex)
 				this.mIsOccupied_array[_occupyIndex1] = true;
 				this.mIsOccupied_array[_occupyIndex2] = true;
 				this.mIsOccupied_array[_occupyIndex3] = true;
+
 			}
 			else
 			{
-				/*
-				_nextAvailableFound = false;
-				 _j = pTargetIndex;
 
-				while (!_nextAvailableFound)
+				console.log("case2 else " + " ; " + pGridIndex + " ; " + pTargetIndex);
+
+				_nextAvailableFound = false;
+				_j = pTargetIndex+1;
+
+				for (_i=_j; _i < this.mIsOccupied_array.length; _i++)
 				{
-					if (!this.mIsOccupied_array[_j])
+					if (!this.mIsOccupied_array[_i]  && !this.mIsOccupied_array[_i+1] && !this.mIsOccupied_array[_i+ this.mColCount_num] && !this.mIsOccupied_array[_i+this.mColCount_num + 1])
 					{
 						_nextAvailableFound = true;
-						this.mIsOccupied_array[_j] = true;
+						console.log("case2 next avialable found!: " + _i);
+						this.mIsOccupied_array[_i] = true;
+						this.mIsOccupied_array[_i+1] = true;
+						this.mIsOccupied_array[_i+ this.mColCount_num] = true;
+						this.mIsOccupied_array[_i+this.mColCount_num + 1] = true;
+						break;
 					}
-
-					_j++;
 				}
 
-				this.setHighlightedOccupy(pGridIndex, _j);
-				*/
+				this.mIsOccupied_array[_occupyIndex0]= false;
+				this.mNextAvailableIndex_num = _i;
 			}
 		}
-
 	}
 }
 
@@ -326,10 +342,10 @@ GridControl.prototype.positionGrids = function()
 	var _j = 0;
 	var _gridWidth_num = 0;
 	var _gridHeight_num = 0;
-	var _nextAvailableIndex_num = 0;
 	var _widthFactor_num = 1;
 	var _finalGridWidth_num = 0;
 	var _finalGridHeight_num = 0;
+	this.mNextAvailableIndex_num = 0;
 
 	this.resetOccupy();
 
@@ -337,7 +353,7 @@ GridControl.prototype.positionGrids = function()
 	{
 		var _nextAvailableFound = false;
 
-		_j = _nextAvailableIndex_num;
+		_j = this.mNextAvailableIndex_num;
 		_widthFactor_num = 1;
 
 		while (!_nextAvailableFound)
@@ -345,21 +361,21 @@ GridControl.prototype.positionGrids = function()
 			if (!this.mIsOccupied_array[_j])
 			{
 				_nextAvailableFound = true;
-				_nextAvailableIndex_num = _j;
-				this.mIsOccupied_array[_nextAvailableIndex_num] = true;
+				this.mNextAvailableIndex_num = _j;
+				this.mIsOccupied_array[this.mNextAvailableIndex_num] = true;
 			}
 
 			_j++;
 		}
 
-		if (this.mGrid_array[_i].isFeatured())
+		if (_i==0 && this.mGrid_array[0].isFeatured())
 		{
 			this.setFeaturedOccupy();
 		}
 
 		if (this.mGrid_array[_i].isHighlighted(_i))
 		{
-			this.setHighlightedOccupy(_i,_nextAvailableIndex_num);
+			this.setHighlightedOccupy(_i, this.mNextAvailableIndex_num);
 		}
 
 		_gridWidth_num = Math.floor($(".gridPanel").width() / this.mColCount_num);
@@ -367,7 +383,7 @@ GridControl.prototype.positionGrids = function()
 
 		if (this.mGrid_array[_i].getOrientation() == "v")
 		{
-			this.mIsOccupied_array[_nextAvailableIndex_num + this.mColCount_num] = true;
+			this.mIsOccupied_array[this.mNextAvailableIndex_num  + this.mColCount_num] = true;
 
 		}
 
@@ -418,7 +434,7 @@ GridControl.prototype.positionGrids = function()
 		}
 
 		this.mGrid_array[_i].setSize(_finalGridWidth_num, _finalGridHeight_num);
-		this.mGrid_array[_i].setPosition((_nextAvailableIndex_num % this.mColCount_num) *_gridWidth_num, Math.floor(_nextAvailableIndex_num / this.mColCount_num) * _gridHeight_num);
+		this.mGrid_array[_i].setPosition((this.mNextAvailableIndex_num  % this.mColCount_num) *_gridWidth_num, Math.floor(this.mNextAvailableIndex_num  / this.mColCount_num) * _gridHeight_num);
 		
 		if (this.mGrid_array[_i].getOrientation() == "v")
 		{
