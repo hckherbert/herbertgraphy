@@ -72,6 +72,10 @@ function GridControl(pGridControl, pPhotoOverlay)
 		_self.mIsOccupied_array.push(false);
 	}
 
+
+	//TO BE REMOVED! SET OPACITY SO IT'S LESS OBVIOUS IN CP...
+	$(".grid").css("opacity", 0.3);
+
 }
 
 GridControl.prototype.initBreakPoints = function(pBaseBreakPoint_array, pMediumBreakPoint_num, pWideScreenBreakPoint_num)
@@ -204,6 +208,7 @@ GridControl.prototype.setHighlightedOccupy = function(pGridIndex, pTargetIndex)
 {
 	var _i = 0;
 	var _j = 0;
+	var _isLastRow = pGridIndex>= this.mColCount_num*(Math.ceil(pGridIndex/this.mColCount_num)-1);
 
 	if (this.mGrid_array[pGridIndex].getOrientation() == "h")
 	{
@@ -213,12 +218,20 @@ GridControl.prototype.setHighlightedOccupy = function(pGridIndex, pTargetIndex)
 		var _occupyIndex3 = pTargetIndex + this.mColCount_num + 1;
 
 		//case 1 if index is not at the last column
-		if ((pGridIndex + 1) % this.mColCount_num != 0)
+		//if ((pGridIndex + 1) % this.mColCount_num != 0)
+		if ((pTargetIndex+1)  % this.mColCount_num != 0)
 		{
 			//simply set highlighted if the target positions are all not occupied, set them to occupied
 			console.log("case1" + " ; " + pGridIndex);
 
-			if (this.mIsOccupied_array[_occupyIndex0] && !this.mIsOccupied_array[_occupyIndex1] && !this.mIsOccupied_array[_occupyIndex2] && !this.mIsOccupied_array[_occupyIndex3])
+			if
+			(
+				this.mIsOccupied_array[_occupyIndex0] &&
+				!this.mIsOccupied_array[_occupyIndex1] &&
+				!this.mIsOccupied_array[_occupyIndex2] &&
+				!this.mIsOccupied_array[_occupyIndex3] &&
+				!_isLastRow
+			)
 			{
 				console.log("setHighlightedOccupy case 1: " + _occupyIndex0 + " ; "   + _occupyIndex1 + " ; " + _occupyIndex2 + " ; " + _occupyIndex3);
 
@@ -243,10 +256,9 @@ GridControl.prototype.setHighlightedOccupy = function(pGridIndex, pTargetIndex)
 						!this.mIsOccupied_array[_i+1] &&
 						!this.mIsOccupied_array[_i+ this.mColCount_num] &&
 						!this.mIsOccupied_array[_i+this.mColCount_num + 1] &&
-						!this.mIsOccupied_array[_i+1]  % this.mColCount_num != 0
+						(_i+1) % this.mColCount_num != 0
 					)
 					{
-						_nextAvailableFound = true;
 						console.log("case1  next available found!: " + _i);
 						this.mIsOccupied_array[_i] = true;
 						this.mIsOccupied_array[_i+1] = true;
@@ -256,8 +268,8 @@ GridControl.prototype.setHighlightedOccupy = function(pGridIndex, pTargetIndex)
 					}
 				}
 
-
-				this.mIsOccupied_array[_occupyIndex0]= false;
+				///the nextAvailableIndex is now updated , set it to false;
+				this.mIsOccupied_array[pTargetIndex]= false;
 				this.mNextAvailableIndex_num = _i;
 			}
 		}
@@ -265,21 +277,27 @@ GridControl.prototype.setHighlightedOccupy = function(pGridIndex, pTargetIndex)
 		else
 		{
 			_occupyIndex0 = _occupyIndex0 + 1;
-			_occupyIndex1 = _occupyIndex0 + 2;
-			_occupyIndex2 = _occupyIndex0 + 1 +  this.mColCount_num;
-			_occupyIndex3 = _occupyIndex0 + 2 +  this.mColCount_num;
+			_occupyIndex1 = _occupyIndex0 + 1;
+			_occupyIndex2 = _occupyIndex0 + this.mColCount_num;
+			_occupyIndex3 = _occupyIndex0 + this.mColCount_num + 1;
 
 			console.log("case2" + " ; " + pGridIndex);
 
 			//if the next target indices in the next 2 rows are not occupied, set them to occupied
-			if (!this.mIsOccupied_array[_occupyIndex0] && !this.mIsOccupied_array[_occupyIndex1] && !this.mIsOccupied_array[_occupyIndex2] && !this.mIsOccupied_array[_occupyIndex3])
+			if
+			(
+				this.mIsOccupied_array[_occupyIndex0] &&
+				!this.mIsOccupied_array[_occupyIndex1] &&
+				!this.mIsOccupied_array[_occupyIndex2] &&
+				!this.mIsOccupied_array[_occupyIndex3] &&
+				!_isLastRow
+			)
 			{
 
-				//the current index is now shifted to the first column of the next row, so , set it to false;
-				this.mIsOccupied_array[_occupyIndex0-1] = false;
+				//the nextAvailableIndex is now shifted to the first column of the next row, so , set it to false;
+				this.mIsOccupied_array[pTargetIndex] = false;
 
 				console.log("setHighlightedOccupy case 2: " + _occupyIndex0 + " ; "   + _occupyIndex1 + " ; " + _occupyIndex2 + " ; " + _occupyIndex3);
-
 
 				this.mIsOccupied_array[_occupyIndex0] = true;
 				this.mIsOccupied_array[_occupyIndex1] = true;
@@ -302,7 +320,7 @@ GridControl.prototype.setHighlightedOccupy = function(pGridIndex, pTargetIndex)
 						!this.mIsOccupied_array[_i+1] &&
 						!this.mIsOccupied_array[_i+ this.mColCount_num] &&
 						!this.mIsOccupied_array[_i+this.mColCount_num + 1] &&
-						!this.mIsOccupied_array[_i+1]  % this.mColCount_num != 0
+						(_i+1) % this.mColCount_num != 0
 					)
 					{
 						console.log("case2 next available found!: " + _i);
@@ -314,7 +332,8 @@ GridControl.prototype.setHighlightedOccupy = function(pGridIndex, pTargetIndex)
 					}
 				}
 
-				this.mIsOccupied_array[_occupyIndex0]= false;
+				///the nextAvailableIndex is now updated , set it to false;
+				this.mIsOccupied_array[pTargetIndex]= false;
 				this.mNextAvailableIndex_num = _i;
 			}
 		}
@@ -355,7 +374,7 @@ GridControl.prototype.positionGrids = function()
 	var _widthFactor_num = 1;
 	var _finalGridWidth_num = 0;
 	var _finalGridHeight_num = 0;
-	this.mNextAvailableIndex_num = 0;
+	//this.mNextAvailableIndex_num = 0;
 
 	this.resetOccupy();
 
@@ -393,7 +412,25 @@ GridControl.prototype.positionGrids = function()
 
 		if (this.mGrid_array[_i].getOrientation() == "v")
 		{
-			this.mIsOccupied_array[this.mNextAvailableIndex_num  + this.mColCount_num] = true;
+			_nextAvailableFound = false;
+			_j = this.mNextAvailableIndex_num+1;
+
+			while (!_nextAvailableFound)
+			{
+				if (!this.mIsOccupied_array[_j] && !this.mIsOccupied_array[_j  + this.mColCount_num])
+				{
+					_nextAvailableFound = true;
+					this.mNextAvailableIndex_num = _j;
+
+					this.mIsOccupied_array[_j] = true;
+					this.mIsOccupied_array[_j  + this.mColCount_num] = true;
+				}
+
+				_j++;
+			}
+
+			//Further checking is needed as long as highlighted is implemented, so we won't simply set the next row occupied
+			//this.mIsOccupied_array[this.mNextAvailableIndex_num  + this.mColCount_num] = true;
 
 		}
 
