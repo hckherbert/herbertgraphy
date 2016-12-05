@@ -204,7 +204,6 @@ GridControl.prototype.setHighlightedOccupy = function(pGridIndex, pTargetIndex)
 {
 	var _i = 0;
 	var _j = 0;
-	var _nextAvailableFound;
 
 	if (this.mGrid_array[pGridIndex].getOrientation() == "h")
 	{
@@ -234,15 +233,21 @@ GridControl.prototype.setHighlightedOccupy = function(pGridIndex, pTargetIndex)
 
 				console.log("case1 else " + " ; " + pGridIndex + " ; " + pTargetIndex);
 
-				 _nextAvailableFound = false;
 				 _j = pTargetIndex+1;
 
 				for (_i=_j; _i < this.mIsOccupied_array.length; _i++)
 				{
-					if (!this.mIsOccupied_array[_i]  && !this.mIsOccupied_array[_i+1] && !this.mIsOccupied_array[_i+ this.mColCount_num] && !this.mIsOccupied_array[_i+this.mColCount_num + 1])
+					if
+					(
+						!this.mIsOccupied_array[_i]  &&
+						!this.mIsOccupied_array[_i+1] &&
+						!this.mIsOccupied_array[_i+ this.mColCount_num] &&
+						!this.mIsOccupied_array[_i+this.mColCount_num + 1] &&
+						!this.mIsOccupied_array[_i+1]  % this.mColCount_num != 0
+					)
 					{
 						_nextAvailableFound = true;
-						console.log("case1  next avialable found!: " + _i);
+						console.log("case1  next available found!: " + _i);
 						this.mIsOccupied_array[_i] = true;
 						this.mIsOccupied_array[_i+1] = true;
 						this.mIsOccupied_array[_i+ this.mColCount_num] = true;
@@ -287,15 +292,20 @@ GridControl.prototype.setHighlightedOccupy = function(pGridIndex, pTargetIndex)
 
 				console.log("case2 else " + " ; " + pGridIndex + " ; " + pTargetIndex);
 
-				_nextAvailableFound = false;
 				_j = pTargetIndex+1;
 
 				for (_i=_j; _i < this.mIsOccupied_array.length; _i++)
 				{
-					if (!this.mIsOccupied_array[_i]  && !this.mIsOccupied_array[_i+1] && !this.mIsOccupied_array[_i+ this.mColCount_num] && !this.mIsOccupied_array[_i+this.mColCount_num + 1])
+					if
+					(
+						!this.mIsOccupied_array[_i]  &&
+						!this.mIsOccupied_array[_i+1] &&
+						!this.mIsOccupied_array[_i+ this.mColCount_num] &&
+						!this.mIsOccupied_array[_i+this.mColCount_num + 1] &&
+						!this.mIsOccupied_array[_i+1]  % this.mColCount_num != 0
+					)
 					{
-						_nextAvailableFound = true;
-						console.log("case2 next avialable found!: " + _i);
+						console.log("case2 next available found!: " + _i);
 						this.mIsOccupied_array[_i] = true;
 						this.mIsOccupied_array[_i+1] = true;
 						this.mIsOccupied_array[_i+ this.mColCount_num] = true;
