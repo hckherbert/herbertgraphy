@@ -72,9 +72,10 @@ function GridControl(pGridControl, pPhotoOverlay)
 		_self.mIsOccupied_array.push(false);
 	}
 
+	$(window).scrollTop(0);
 
 	//TO BE REMOVED! SET OPACITY SO IT'S LESS OBVIOUS IN CP...
-	$(".grid").css("opacity", 0.3);
+	//$(".grid").css("opacity", 0.3);
 
 }
 
@@ -667,6 +668,9 @@ GridControl.prototype.positionGrids = function()
 			//{
 				if (!this.mGridstaggering)
 				{
+					//add some buffer to prevent the starting staggers from being seen!
+					var  _staggerHeightOffset = $(window).height() + 400;
+
 					this.mGridstaggering = true;
 					this.fadeOutPageLoadingElements();
 
@@ -677,7 +681,7 @@ GridControl.prototype.positionGrids = function()
 						_self.mGridTween = TweenMax.staggerFrom($(".grid"), 0.8, {
 							opacity: 0.5,
 							"left":  Math.round(Math.random() * $(".gridPanel").width()) + "px",
-							"top": $(window).height() + 200 + "px", //add some buffer to prevent the starting staggers from being seen!
+							"top":  _staggerHeightOffset + "px",
 							ease: Back.easeInOut
 						}, 0.8 / _self.mGridCount_num, function ()
 						{
