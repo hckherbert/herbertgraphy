@@ -560,7 +560,7 @@ GridControl.prototype.positionGrids = function()
 			this.setFeaturedOccupy();
 		}
 
-		if (this.mGrid_array[_i].isHighlighted(_i))
+		if (this.mGrid_array[_i].isHighlighted())
 		{
 			this.setHighlightedOccupy(_i, this.mNextAvailableIndex_num);
 		}
@@ -568,7 +568,7 @@ GridControl.prototype.positionGrids = function()
 		_gridWidth_num = Math.floor($(".gridPanel").width() / this.mColCount_num);
 		_gridHeight_num = Math.round(_gridWidth_num / this.mAspectRatio_num);
 
-		if (this.mGrid_array[_i].getOrientation() == "v" && !this.mGrid_array[0].isFeatured() )
+		if (this.mGrid_array[_i].getOrientation() == "v" && !this.mGrid_array[_i].isHighlighted()  && !this.mGrid_array[_i].isFeatured())
 		{
 			_nextAvailableFound = false;
 			_j = this.mNextAvailableIndex_num;
@@ -648,9 +648,6 @@ GridControl.prototype.positionGrids = function()
 		}
 	}
 
-	//fill unoccupied space, if any, that featured photos may cause.
-	//this.fillUnoccupied();
-
 	if ($("body").hasClass("sDesktop"))
 	{
 		if (this.mDirectPhotoSlug != null)
@@ -717,47 +714,6 @@ GridControl.prototype.positionGrids = function()
 
 	}
 }
-
-/*
-GridControl.prototype.fillUnoccupied = function()
-{
-	var _i =0;
-	var _j = 0;
-	var _gridWidth_num = Math.floor($(".gridPanel").width() / this.mColCount_num);
-	var _gridHeight_num = Math.round(_gridWidth_num / this.mAspectRatio_num);
-
-
-	for (_i = 0; _i<this.mNextAvailableIndex_num; _i++)
-	{
-		if (!this.mIsOccupied_array[_i])
-		{
-			for (_j= this.mGridCount_num-1; _j>=0; _j--)
-			{
-				if (this.mGrid_array[_j].getOrientation() == "h" &&  !this.mGrid_array[_j].isHighlighted())
-				{
-					this.mGrid_array[_j].setPosition((_i % this.mColCount_num) *_gridWidth_num, Math.floor(_i / this.mColCount_num) * _gridHeight_num);
-				}
-				else if (this.mGrid_array[_j].getOrientation() == "v" &&  !this.mGrid_array[_j].isHighlighted())
-				{
-					if (!this.mIsOccupied_array[_i+this.mColCount_num])
-					{
-						this.mGrid_array[_j].setPosition((_i % this.mColCount_num) *_gridWidth_num, Math.floor(_i / this.mColCount_num) * _gridHeight_num);
-					}
-				}
-			}
-		}
-	}
-
-
-	for (_i = 0; _i<this.mNextAvailableIndex_num; _i++)
-	{
-		if (!this.mIsOccupied_array[_i])
-		{
-			console.log(_i + " is not occupied");
-		}
-	}
-}
-*/
 
 GridControl.prototype.fadeOutPageLoadingElements = function()
 {
