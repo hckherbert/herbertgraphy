@@ -242,7 +242,6 @@ a
 }
 
 /********** Info Panel *************/
-
 .sMobile .infoPanel
 {
 	display:block;
@@ -267,7 +266,6 @@ a
 	position:relative;
 }
 
-
 .sDesktop .infoPanel .intro p.hasInitialCap:first-child:first-letter
 {
 	font-family: 'Merriweather', serif;
@@ -279,7 +277,6 @@ a
 	float:left;
 	color:#c3aba6;
 }
-
 
 .sDesktop .infoPanel .intro
 {
@@ -709,6 +706,15 @@ a
 	-o-transition: all 0.4s ease-in-out;
 	transition: all 0.4s ease-in-out;
 }
+
+.mainPanel #cover
+{
+	position:absolute !important;
+	top:0;
+	left:0;
+	width:100% !important;
+}
+
 
 .sDesktop .wrapperBase .mainPanel
 {

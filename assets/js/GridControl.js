@@ -74,9 +74,6 @@ function GridControl(pGridControl, pPhotoOverlay)
 
 	$(window).scrollTop(0);
 
-	//TO BE REMOVED! SET OPACITY SO IT'S LESS OBVIOUS IN CP...
-	//$(".grid").css("opacity", 0.3);
-
 }
 
 GridControl.prototype.initBreakPoints = function(pBaseBreakPoint_array, pMediumBreakPoint_num, pWideScreenBreakPoint_num)
@@ -222,8 +219,6 @@ GridControl.prototype.setHighlightedOccupy = function(pGridIndex, pTargetIndex)
 		if ((pTargetIndex+1)  % this.mColCount_num != 0)
 		{
 			//simply set highlighted if the target positions are all not occupied, set them to occupied
-			console.log("case1" + " ; " + pGridIndex);
-
 			if
 			(
 				this.mIsOccupied_array[_occupyIndex0] &&
@@ -240,13 +235,9 @@ GridControl.prototype.setHighlightedOccupy = function(pGridIndex, pTargetIndex)
 				this.mIsOccupied_array[_occupyIndex2] = true;
 				this.mIsOccupied_array[_occupyIndex3] = true;
 				this.mNextAvailableIndex_num = pTargetIndex;
-
 			}
 			else
 			{
-
-				console.log("case1 else " + " ; " + pGridIndex + " ; " + pTargetIndex);
-
 				 _j = pTargetIndex+1;
 
 				for (_i=_j; _i < this.mIsOccupied_array.length; _i++)
@@ -282,8 +273,6 @@ GridControl.prototype.setHighlightedOccupy = function(pGridIndex, pTargetIndex)
 			_occupyIndex2 = _occupyIndex0 + this.mColCount_num;
 			_occupyIndex3 = _occupyIndex0 + this.mColCount_num + 1;
 
-			console.log("case2" + " ; " + pGridIndex);
-
 			//if the next target indices in the next 2 rows are not occupied, set them to occupied
 			if
 			(
@@ -297,9 +286,6 @@ GridControl.prototype.setHighlightedOccupy = function(pGridIndex, pTargetIndex)
 
 				//the nextAvailableIndex is now shifted to the first column of the next row, so , set it to false;
 				this.mIsOccupied_array[pTargetIndex] = false;
-
-				console.log("setHighlightedOccupy case 2: " + _occupyIndex0 + " ; "   + _occupyIndex1 + " ; " + _occupyIndex2 + " ; " + _occupyIndex3);
-
 				this.mIsOccupied_array[_occupyIndex0] = true;
 				this.mIsOccupied_array[_occupyIndex1] = true;
 				this.mIsOccupied_array[_occupyIndex2] = true;
@@ -309,9 +295,6 @@ GridControl.prototype.setHighlightedOccupy = function(pGridIndex, pTargetIndex)
 			}
 			else
 			{
-
-				console.log("case2 else " + " ; " + pGridIndex + " ; " + pTargetIndex);
-
 				_j = pTargetIndex+1;
 
 				for (_i=_j; _i < this.mIsOccupied_array.length; _i++)
@@ -355,8 +338,6 @@ GridControl.prototype.setHighlightedOccupy = function(pGridIndex, pTargetIndex)
 		if ((pTargetIndex + 1) % this.mColCount_num != 0)
 		{
 			//simply set highlighted if the target positions are all not occupied, set them to occupied
-			console.log("case1" + " ; " + pGridIndex);
-
 			if
 			(
 				this.mIsOccupied_array[_occupyIndex0] &&
@@ -427,8 +408,6 @@ GridControl.prototype.setHighlightedOccupy = function(pGridIndex, pTargetIndex)
 			_occupyIndex6 = _occupyIndex0 + this.mColCount_num * 3;
 			_occupyIndex7 = _occupyIndex0 + this.mColCount_num * 3+ 1;
 
-			console.log("case2" + " ; " + pGridIndex);
-
 			//if the next target indices in the next 2 rows are not occupied, set them to occupied
 			if
 			(
@@ -494,9 +473,7 @@ GridControl.prototype.setHighlightedOccupy = function(pGridIndex, pTargetIndex)
 				}
 			}
 		}
-
 	}
-
 }
 
 GridControl.prototype.rePositionGrid = function()

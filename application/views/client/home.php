@@ -7,7 +7,7 @@
 	<div class="wrapperBase">
 		<?php $this->load->partials("client/templates/menu_info_panel"); ?>
 		<div class="mainPanel">
-			<img id="cover" src="<?php echo base_url("assets/test/sopot.jpg"); ?>" style="position:absolute;top:0;left:0;width:100%;">
+			<img id="cover" src="<?php echo base_url("assets/test/sopot.jpg"); ?>">
 		</div>
 	</div>
 </div>
