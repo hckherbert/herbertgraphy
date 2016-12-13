@@ -6,7 +6,6 @@ GridControl.prototype.mGrid_array = null;
 GridControl.prototype.mImageLoadedCount_num = 0;
 GridControl.prototype.mIsOccupied_array = null;
 GridControl.prototype.mGridstaggering = false;
-GridControl.prototype.mGridstaggered = false;
 GridControl.prototype.mPhotoOverlay = null;
 GridControl.prototype.mActiveGridIndex_num = -1;
 GridControl.prototype.mWinWidthBeforeOpen_num = 0;
@@ -18,6 +17,7 @@ GridControl.prototype.mWideScreenBreakPoint_num = null;
 GridControl.prototype.mMediumBreakPoint_num = null;
 GridControl.prototype.mDirectPhotoSlug = null;
 GridControl.prototype.mNextAvailableIndex_num = 0;
+GridControl.prototype.mIsDirectPhotoLinkInit = false;
 
 function GridControl(pGridControl, pPhotoOverlay)
 {
@@ -228,8 +228,6 @@ GridControl.prototype.setHighlightedOccupy = function(pGridIndex, pTargetIndex)
 				!_isLastRow
 			)
 			{
-				console.log("setHighlightedOccupy case 1: " + _occupyIndex0 + " ; "   + _occupyIndex1 + " ; " + _occupyIndex2 + " ; " + _occupyIndex3);
-
 				this.mIsOccupied_array[_occupyIndex0] = true;
 				this.mIsOccupied_array[_occupyIndex1] = true;
 				this.mIsOccupied_array[_occupyIndex2] = true;
@@ -251,7 +249,6 @@ GridControl.prototype.setHighlightedOccupy = function(pGridIndex, pTargetIndex)
 						(_i+1) % this.mColCount_num != 0
 					)
 					{
-						console.log("case1  next available found!: " + _i);
 						this.mIsOccupied_array[_i] = true;
 						this.mIsOccupied_array[_i+1] = true;
 						this.mIsOccupied_array[_i+ this.mColCount_num] = true;
@@ -308,7 +305,6 @@ GridControl.prototype.setHighlightedOccupy = function(pGridIndex, pTargetIndex)
 						(_i+1) % this.mColCount_num != 0
 					)
 					{
-						console.log("case2 next available found!: " + _i);
 						this.mIsOccupied_array[_i] = true;
 						this.mIsOccupied_array[_i+1] = true;
 						this.mIsOccupied_array[_i+ this.mColCount_num] = true;
@@ -566,9 +562,6 @@ GridControl.prototype.positionGrids = function()
 
 				_j++;
 			}
-
-			//Further checking is needed as long as highlighted is implemented, so we won't simply set the next row occupied
-			//this.mIsOccupied_array[this.mNextAvailableIndex_num  + this.mColCount_num] = true;
 		}
 
 		if (this.mGrid_array[_i].isFeatured())
@@ -641,35 +634,30 @@ GridControl.prototype.positionGrids = function()
 		}
 		else
 		{
-			//if (!this.mGridstaggered)
-			//{
-				if (!this.mGridstaggering)
+			if (!this.mGridstaggering)
+			{
+				//add some buffer to prevent the starting staggers from being seen!
+				var  _staggerHeightOffset = $(window).height() + 400;
+
+				this.mGridstaggering = true;
+				this.fadeOutPageLoadingElements();
+
+				setTimeout(function ()
 				{
-					//add some buffer to prevent the starting staggers from being seen!
-					var  _staggerHeightOffset = $(window).height() + 400;
+					_self.transitLoadingAndAlbumStart();
 
-					this.mGridstaggering = true;
-					this.fadeOutPageLoadingElements();
-
-					setTimeout(function ()
+					_self.mGridTween = TweenMax.staggerFrom($(".grid"), 0.8, {
+						opacity: 0.5,
+						"left":  Math.round(Math.random() * $(".gridPanel").width()) + "px",
+						"top":  _staggerHeightOffset + "px",
+						ease: Back.easeInOut
+					}, 0.8 / _self.mGridCount_num, function ()
 					{
-						_self.transitLoadingAndAlbumStart();
+						_self.onStaggeredAll();
 
-						_self.mGridTween = TweenMax.staggerFrom($(".grid"), 0.8, {
-							opacity: 0.5,
-							"left":  Math.round(Math.random() * $(".gridPanel").width()) + "px",
-							"top":  _staggerHeightOffset + "px",
-							ease: Back.easeInOut
-						}, 0.8 / _self.mGridCount_num, function ()
-						{
-							_self.onStaggeredAll();
-
-						});
-
-					}, 400);
-
-				}
-			//}
+					});
+				}, 400);
+			}
 			else
 			{
 				this.updateGridInfoHeight();
@@ -705,7 +693,11 @@ GridControl.prototype.fadeOutPageLoadingElements = function()
 
 GridControl.prototype.handleDirectPhotoLink = function()
 {
-	$(".grid[data-slug='" + this.mDirectPhotoSlug + "']").trigger("click");
+	if (!this.mIsDirectPhotoLinkInit)
+	{
+		this.mIsDirectPhotoLinkInit = true;
+		$(".grid[data-slug='" + this.mDirectPhotoSlug + "']").trigger("click");
+	}
 }
 
 GridControl.prototype.transitLoadingAndAlbumStart = function()
@@ -726,8 +718,6 @@ GridControl.prototype.onStaggeredAll = function()
 	var _self = this;
 	
 	//console.log("staggered all!");
-	this.mGridstaggered = true;
-
 	if (this.mWinWidthBeforeStaggered_num  != $(window).width())
 	{
 		this.mTimerReposition = setTimeout
@@ -926,7 +916,5 @@ GridControl.prototype.onPhotoOverlayHidden = function(pActiveGridTop_num)
 		$("html, body").stop().animate({scrollTop:pActiveGridTop_num}, '50', 'swing');
 
 	}
-
-
 	$("html").css("overflow-y", "auto");
 }

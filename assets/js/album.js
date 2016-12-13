@@ -40,6 +40,7 @@ $(document).ready
 
 function windowOnResized()
 {
+
     mPhotoOverlay.centerPhoto();
 
     //on tablets, scrolling will trigger resize events.. so
