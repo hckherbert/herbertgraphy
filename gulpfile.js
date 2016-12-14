@@ -1,6 +1,7 @@
 var bower = require('gulp-bower');
 var cleanCSS = require('gulp-clean-css');
 var concat = require('gulp-concat');
+var clean = require('gulp-clean');
 var gulp = require('gulp');
 var rev = require('gulp-rev');
 var revDel = require('rev-del');
@@ -88,11 +89,13 @@ var version_css = [];
 for (var css_file in src.css_sub_group) {
     version_css.push(dist_dir + "/css/" + css_file);
 }
+
 version_css.push(dist_dir +  "/css/**/*.css");
 
 for (var js_file in src.js_sub_group) {
     version_js.push(dist_dir + "/js/" + js_file);
 }
+
 version_js.push(dist_dir +  "/js/**/*.js");
 
 
@@ -144,7 +147,7 @@ function buildGroupCSS(compress) {
 function buildCompressCSS() {
     return gulp.src(src["css_path"])
         .pipe(sourcemaps.init())
-        .pipe(cleanCSS({processImport: false}))
+        .pipe(cleanCSS({processImport: false, force:true}))
         .pipe(sourcemaps.write('../maps'))
         .pipe(gulp.dest(dist.css));
 }
@@ -155,7 +158,7 @@ function revCSS() {
         .pipe(rev())
         .pipe(gulp.dest('public/css'))
         .pipe(rev.manifest())
-        .pipe(revDel({dest: 'public/css'}))
+        .pipe(revDel({dest: 'public/css', force:true}))
         .pipe(gulp.dest('public/css'));
 }
 
@@ -232,7 +235,14 @@ function gulpWatch() {
     });
 }
 
+function delDest() {
+    return gulp.src(dist_dir, {read: false})
+        .pipe(clean());
+}
+
 gulp.task('watch', gulpWatch);
+
+gulp.task('del', delDest);
 
 gulp.task('css_main', buildCSS);
 gulp.task('js_main', buildJS);
@@ -257,6 +267,7 @@ gulp.task('default', function () {
     runSequence
     (
         'bower',
+        'del',
         'css_main',
         'css_group',
         'js_main',
@@ -273,6 +284,7 @@ gulp.task('build', function () {
     runSequence
     (
         'bower',
+        'del',
         'compress_css_main',
         'compress_css_group',
         'compress_js_main',
