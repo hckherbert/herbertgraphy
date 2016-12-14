@@ -88,10 +88,13 @@ var version_css = [];
 for (var css_file in src.css_sub_group) {
     version_css.push(dist_dir + "/css/" + css_file);
 }
+version_css.push(dist_dir +  "/css/**/*.css");
 
 for (var js_file in src.js_sub_group) {
     version_js.push(dist_dir + "/js/" + js_file);
 }
+version_js.push(dist_dir +  "/js/**/*.js");
+
 
 var dist = {
     css: dist_dir + '/css/',
