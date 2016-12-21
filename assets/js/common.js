@@ -11,7 +11,7 @@ $(document).ready(
     function()
     {
         commonSetUpResponsive();
-        commonBindUIEvents();
+        commonBindUIEvents(); 
     }
 );
 

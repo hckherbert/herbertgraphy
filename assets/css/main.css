@@ -97,7 +97,7 @@ a
 
 
 /********** HOME ***************/
-.homeSubTitle_c
+.homeSubTitle_a
 {
 	position: absolute;
 	bottom: 65px;
@@ -111,12 +111,13 @@ a
 	font-style:italic;
 }
 
-.sMobile .homeSubTitle_c
+.sMobile .homeSubTitle_a
 {
-	bottom:42px;
+	bottom:40px;
+	position:fixed;
 }
 
-.homeSubTitle_c .cap
+.homeSubTitle_a .cap
 {
 	font-size:120%;
 }
@@ -124,13 +125,13 @@ a
 
 @media (min-width: 768px) and (max-width: 1024px)
 {
-	.sDesktop .homeSubTitle_d
+	.sDesktop .homeSubTitle_b
 	{
 		padding: 0 20px;
 		right:0;
 	}
 
-	.sDesktop .homeSubTitle_c
+	.sDesktop .homeSubTitle_a
 	{
 		right: 20px;
 		text-align: right;
@@ -140,7 +141,7 @@ a
 		bottom: 65px;
 	}
 
-	.sDesktop .homeSubTitle_c .second_line
+	.sDesktop .homeSubTitle_a .second_line
 	{
 		margin-left:30px;
 	}
@@ -149,14 +150,14 @@ a
 @media (min-width: 1025px) and (max-width:1279px)
 {
 
-	.sDesktop .homeSubTitle_c
+	.sDesktop .homeSubTitle_a
 	{
 		width: 570px;
 		font-size: 35px;
 		bottom: 44px;
 	}
 
-	.sDesktop .homeSubTitle_c .second_line {
+	.sDesktop .homeSubTitle_a .second_line {
 		margin-left: 30px;
 	}
 
@@ -164,39 +165,40 @@ a
 
 @media (min-width: 1280px)
 {
-	.sDesktop .homeSubTitle_c
+	.sDesktop .homeSubTitle_a
 	{
 		font-size:40px;
 		width:660px;
 		padding:0 20px;
 	}
 
-	.sDesktop .homeSubTitle_c .second_line {
+	.sDesktop .homeSubTitle_a .second_line {
 		margin-left: 38px;
 	}
 }
 
 @media (max-height:400px)
 {
-	.homeSubTitle_c,
-	.homeSubTitle_d
+	.homeSubTitle_a,
+	.homeSubTitle_b
 	{
 		display:none;
 	}
 }
 
-.sDesktop .homeSubTitle_d
+.sDesktop .homeSubTitle_b
 {
 	font-size:18px;
 	font-weight:300;
 }
 
-.sMobile .homeSubTitle_d
+.sMobile .homeSubTitle_b
 {
 	font-size:15px;
+	position:fixed;
 }
 
-.homeSubTitle_d
+.homeSubTitle_b
 {
 	position: absolute;
 	bottom: 40px;
@@ -207,7 +209,7 @@ a
 	font-family: 'Merriweather', serif;
 }
 
-.homeSubTitle_e
+.homeSubTitle_c
 {
 	position: absolute;
 	bottom: 40px;
@@ -220,7 +222,7 @@ a
 }
 
 
-.homeSubTitle_e
+.homeSubTitle_c
 {
 	font-family: 'Catamaran', sans-serif;
 	position: absolute;
@@ -231,18 +233,17 @@ a
 	font-size:12px;
 }
 
-.sDesktop .homeSubTitle_e
+.sDesktop .homeSubTitle_c
 {
 	top:4px;
 }
 
-.sMobile .homeSubTitle_e
+.sMobile .homeSubTitle_c
 {
 	top:4px;
 }
 
 /********** Info Panel *************/
-
 .sMobile .infoPanel
 {
 	display:block;
@@ -267,7 +268,6 @@ a
 	position:relative;
 }
 
-
 .sDesktop .infoPanel .intro p.hasInitialCap:first-child:first-letter
 {
 	font-family: 'Merriweather', serif;
@@ -279,7 +279,6 @@ a
 	float:left;
 	color:#c3aba6;
 }
-
 
 .sDesktop .infoPanel .intro
 {
@@ -710,6 +709,15 @@ a
 	transition: all 0.4s ease-in-out;
 }
 
+.mainPanel #cover
+{
+	position:absolute !important;
+	top:0;
+	left:0;
+	width:100% !important;
+}
+
+
 .sDesktop .wrapperBase .mainPanel
 {
 	width: 65%;
@@ -917,6 +925,7 @@ a
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
 }
 
+/*Don't show title on grid overlay now, just make display:none */
 .wrapperAlbum .grid  .titleOverlay .title
 {
 	text-align:center;
@@ -926,6 +935,7 @@ a
 	margin:8px;
 	text-shadow: 1px 1px 6px #413b3b;
 	width:100%;
+	display:none;
 }
 
 .wrapperAlbum .grid  .titleOverlay .desc
@@ -982,6 +992,8 @@ a
 	width:100%;
 	color: #f2e6e4;
 	font-size:14px;
+	border-radius: 0 0 15px 0;
+	overflow: hidden;
 	-webkit-transition: all 0.3s  ease-in-out;
 	-moz-transition: all 0.3s ease-in-out;
 	-ms-transition: all 0.3s ease-in-out;

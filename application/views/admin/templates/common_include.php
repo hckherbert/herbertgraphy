@@ -8,7 +8,13 @@
     <meta name="format-detection" content="telephone=no" />
     <meta name="description" content="">
     <meta name="keywords" content="">
-    <title>HerbertGraphy Admin Control - Album List</title>
+    <title>
+        <?php if (ENVIRONMENT != "dev_cp") { ?>
+        HerbertGraphy Admin Control - Album List
+        <?php } else {?>
+        Admin control demo
+        <?php } ?>
+    </title>
     <!-- ICON -->
     <link href="<?php echo assets_image("apple-touch-icon.png"); ?>" rel="apple-touch-icon" />
     <link href="<?php echo assets_image("apple-touch-icon-76x76.png"); ?>" rel="apple-touch-icon" sizes="76x76" />

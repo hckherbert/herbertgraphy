@@ -2,6 +2,7 @@ Grid.prototype.mGrid = null;
 Grid.prototype.mIndex_num = -1;
 Grid.prototype.mOrientation_str = "";
 Grid.prototype.mIsFeatured = false;
+Grid.prototype.mIsHighlighted = false;
 Grid.prototype.mDesc_str = null;
  
 
@@ -20,7 +21,7 @@ Grid.prototype.setSize = function(pWidth_num, pHeight_num)
 	
 	this.mDesc_str =  $(".desc", this.mGrid).text();
 	this.mTitle_str =  $(".title", this.mGrid).text();
-	
+
 	this.mGrid.on("mouseover", function() { _self.onMouseOver();});
 	this.mGrid.on("mouseout", function() { _self.onMouseOut();});
 }
@@ -94,9 +95,19 @@ Grid.prototype.setFeatured =  function(pIsFeatured)
 	this.mIsFeatured = pIsFeatured
 }
 
+Grid.prototype.setHighlighted = function(pIsHighlighted)
+{
+	this.mIsHighlighted = pIsHighlighted;
+}
+
 Grid.prototype.isFeatured =  function()
 {
 	return this.mIsFeatured;
+}
+
+Grid.prototype.isHighlighted =  function()
+{
+	return this.mIsHighlighted;
 }
 
 Grid.prototype.setOpacity = function(pOpacity)
@@ -119,6 +130,7 @@ Grid.prototype.addEventListener =  function(pEvent_str, pCallBack_fn)
 	var _self = this;
 	this.mGrid.on(pEvent_str, function() { _self.mGrid.css("opacity", 0.5); pCallBack_fn.apply(null)});
 }
+
 
 Grid.prototype.onMouseOver = function()
 {

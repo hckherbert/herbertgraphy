@@ -9,6 +9,8 @@ class MY_Loader extends CI_Loader
 {
     public function template_client($main_view_name, $template_name = "base", $data = array())
     {
+        $ci = &get_instance();
+        $data["site_tagline"] = $ci->config->item("site_tagline");
 
         if ($template_name == "base")
         {
