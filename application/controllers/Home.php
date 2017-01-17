@@ -26,7 +26,7 @@ class Home extends MY_Common
 
 		if (ENVIRONMENT == "dev_cp")
 		{
-			$data["main_title"] = "Commercial<span class='graphy'>Press</span>";
+			$data["main_title"] = "Test<span class='graphy'></span>";
 		}
 		else
 		{
