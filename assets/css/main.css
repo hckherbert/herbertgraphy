@@ -308,7 +308,7 @@ a
 	.infoPanel
 	{
 		z-index:1;
-		background:none !important;
+		/*background:none !important;*/
 	}
 }
 
@@ -318,6 +318,11 @@ a
 		font-size: 3vw;
 		padding: 210px 20px 10px 20px;
 		font-weight: 200;
+	}
+
+	.infoPanel
+	{
+		height:auto;
 	}
 }
 
@@ -714,7 +719,7 @@ a
 	position:absolute !important;
 	top:0;
 	left:0;
-	width:100% !important;
+	width:100%;
 }
 
 
