@@ -7,7 +7,8 @@
 		<h1 class="pageHeading">Add a sub-album</h1>
 		<div class="hintArea">
 			<p>Hints:</p>
-			<p>If you choose to remove the currently featured photo, the album will remain no featured photo.</p>
+			<p>- If you choose to remove the currently featured photo, the album will remain no featured photo.</p>
+			<p>- Aspect ratio will apply to <em>every</em> photo of this album. Please </p>
 		</div>
 		<?php echo form_open('admin/album_control/do_add_subalbum', 'class="formInfo" id="formAddAlbum"'); ?>
 		<table>
@@ -36,6 +37,16 @@
 				<td>
 					<textarea name="intro" placeholder="Type something to describe this album"></textarea>
 					<div class="error"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>Aspect Ratio:</td>
+				<td>
+					<select name="aspect_ratio">
+						<option value="1.5">4:3</option>
+						<option value="1.0">1:1</option>
+						<option value="1.77">16:9</option>
+					</select>
 				</td>
 			</tr>
 		</table>
