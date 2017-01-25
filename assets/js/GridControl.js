@@ -148,58 +148,63 @@ GridControl.prototype.resetOccupy = function(pAspectRatio_num)
 
 GridControl.prototype.setFeaturedOccupy = function()
 {
-	if (this.mGrid_array[0].getOrientation() == "h")
+	if (this.mAspectRatio_num == 1)
 	{
 		this.mIsOccupied_array[0] = true;
 		this.mIsOccupied_array[1] = true;
 		this.mIsOccupied_array[2] = true;
-		
+
 		this.mIsOccupied_array[this.mColCount_num] = true;
-		this.mIsOccupied_array[this.mColCount_num+1] = true;
-		this.mIsOccupied_array[this.mColCount_num+2] = true;
+		this.mIsOccupied_array[this.mColCount_num + 1] = true;
+		this.mIsOccupied_array[this.mColCount_num + 2] = true;
 
-		this.mIsOccupied_array[this.mColCount_num*2] = true;
-		this.mIsOccupied_array[this.mColCount_num*2+1] = true;
-		this.mIsOccupied_array[this.mColCount_num*2+2] = true;
-
-		if (this.mColCount_num > 3)
-		{
-			this.mIsOccupied_array[this.mColCount_num*3] = true;
-			this.mIsOccupied_array[this.mColCount_num*3+1] = true;
-			this.mIsOccupied_array[this.mColCount_num*3+2] = true;
-
-			this.mIsOccupied_array[3] = true;
-			this.mIsOccupied_array[this.mColCount_num+3] = true;
-			this.mIsOccupied_array[this.mColCount_num*2+3] = true;
-			this.mIsOccupied_array[this.mColCount_num*3+3] = true;
-		}
-		
+		this.mIsOccupied_array[this.mColCount_num * 2] = true;
+		this.mIsOccupied_array[this.mColCount_num * 2 + 1] = true;
+		this.mIsOccupied_array[this.mColCount_num * 2 + 2] = true;
 	}
-	else if (this.mGrid_array[0].getOrientation() == "v")
+	else
 	{
-		this.mIsOccupied_array[0] = true;
-		this.mIsOccupied_array[1] = true;
-		this.mIsOccupied_array[2] = true;
-		
-		this.mIsOccupied_array[this.mColCount_num] = true;
-		this.mIsOccupied_array[this.mColCount_num+1] = true;
-		this.mIsOccupied_array[this.mColCount_num+2] = true;
-		
-		this.mIsOccupied_array[this.mColCount_num*2] = true;
-		this.mIsOccupied_array[this.mColCount_num*2+1] = true;
-		this.mIsOccupied_array[this.mColCount_num*2+2] = true;
-		
-		this.mIsOccupied_array[this.mColCount_num*3] = true;
-		this.mIsOccupied_array[this.mColCount_num*3+1] = true;
-		this.mIsOccupied_array[this.mColCount_num*3+2] = true;
-		
-		this.mIsOccupied_array[this.mColCount_num*4] = true;
-		this.mIsOccupied_array[this.mColCount_num*4+1] = true;
-		this.mIsOccupied_array[this.mColCount_num*4+2] = true;
-		
-		this.mIsOccupied_array[this.mColCount_num*5] = true;
-		this.mIsOccupied_array[this.mColCount_num*5+1] = true;
-		this.mIsOccupied_array[this.mColCount_num*5+2] = true;
+		if (this.mGrid_array[0].getOrientation() == "h")
+		{
+			this.mIsOccupied_array[0] = true;
+			this.mIsOccupied_array[1] = true;
+			this.mIsOccupied_array[2] = true;
+
+			this.mIsOccupied_array[this.mColCount_num] = true;
+			this.mIsOccupied_array[this.mColCount_num + 1] = true;
+			this.mIsOccupied_array[this.mColCount_num + 2] = true;
+
+			this.mIsOccupied_array[this.mColCount_num * 2] = true;
+			this.mIsOccupied_array[this.mColCount_num * 2 + 1] = true;
+			this.mIsOccupied_array[this.mColCount_num * 2 + 2] = true;
+
+		}
+		else if (this.mGrid_array[0].getOrientation() == "v")
+		{
+			this.mIsOccupied_array[0] = true;
+			this.mIsOccupied_array[1] = true;
+			this.mIsOccupied_array[2] = true;
+
+			this.mIsOccupied_array[this.mColCount_num] = true;
+			this.mIsOccupied_array[this.mColCount_num + 1] = true;
+			this.mIsOccupied_array[this.mColCount_num + 2] = true;
+
+			this.mIsOccupied_array[this.mColCount_num * 2] = true;
+			this.mIsOccupied_array[this.mColCount_num * 2 + 1] = true;
+			this.mIsOccupied_array[this.mColCount_num * 2 + 2] = true;
+
+			this.mIsOccupied_array[this.mColCount_num * 3] = true;
+			this.mIsOccupied_array[this.mColCount_num * 3 + 1] = true;
+			this.mIsOccupied_array[this.mColCount_num * 3 + 2] = true;
+
+			this.mIsOccupied_array[this.mColCount_num * 4] = true;
+			this.mIsOccupied_array[this.mColCount_num * 4 + 1] = true;
+			this.mIsOccupied_array[this.mColCount_num * 4 + 2] = true;
+
+			this.mIsOccupied_array[this.mColCount_num * 5] = true;
+			this.mIsOccupied_array[this.mColCount_num * 5 + 1] = true;
+			this.mIsOccupied_array[this.mColCount_num * 5 + 2] = true;
+		}
 	}
 }
 
