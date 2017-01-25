@@ -409,14 +409,15 @@ class Album_control extends CI_Controller
 						array_push($featured_array, "0");
 					}
 
-
-					if (in_array($photoId, $highlightedIds))
+					if ($highlightedIds)
 					{
-						array_push($highlighted_array, "1");
-					}
-					else
-					{
-						array_push($highlighted_array, "0");
+						if (in_array($photoId, $highlightedIds))
+						{
+							array_push($highlighted_array, "1");
+						} else
+						{
+							array_push($highlighted_array, "0");
+						}
 					}
 
 				}
@@ -508,6 +509,9 @@ class Album_control extends CI_Controller
 			$tempFile   = $_FILES['Filedata']['tmp_name'];
 			$exif = JSONAPI::encode(EXIFReader::getData($_FILES['Filedata']['tmp_name']));
 
+			$img_info = getimagesize($tempFile);
+			$width = $img_info[0];
+			$height = $img_info[1];
 
 			foreach($photo_user_data["original_filename"] as $index=>$value)
 			{
@@ -534,12 +538,31 @@ class Album_control extends CI_Controller
 			$featured = $photo_user_data["featured"][$post_data_index];
 			$highlighted = $photo_user_data["highlighted"][$post_data_index];
 			$hash = hash("sha256", $slug_filename_only .time()."herbertgraphyalbumadmin");
-			$hash_filename = $slug_filename_only."-".$hash.".".$extension;
+			//$hash_filename = $slug_filename_only."-".$hash.".".$extension;
+			$hash_filename = $slug_filename_only."-".$hash.".jpg";
 			$target_file = $uploadDir.$hash_filename;
 
-			if (in_array($extension, $fileTypes))
+			if ($extension == "jpg")
 			{
-				if (move_uploaded_file($tempFile, $target_file))
+				$src = imagecreatefromgif($tempFile);
+			}
+			else if ($extension == "gif")
+			{
+				$src = imagecreatefromjpeg($tempFile);
+			}
+			else if ($extension == "png")
+			{
+				$src = imagecreatefrompng($tempFile);
+			}
+			$result_image_truecolor = imagecreatetruecolor($width, $height);
+			imagecopyresampled($result_image_truecolor, $src, 0, 0, 0, 0, $width, $height, $width, $height);
+			$result_imagejpeg = imagejpeg($result_image_truecolor, $target_file);
+
+
+		if (in_array($extension, $fileTypes))
+			{
+				//if (move_uploaded_file($tempFile, $target_file))
+				if ($result_imagejpeg)
 				{
 					foreach($this->config->item("photo_long_side") as $key=>$value)
 					{

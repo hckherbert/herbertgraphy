@@ -1,4 +1,4 @@
-GridControl.prototype.mAspectRatio_num = 1.5;
+GridControl.prototype.mAspectRatio_num = 1;
 GridControl.prototype.mGridControl = null;
 GridControl.prototype.mGridCount_num = 0;
 GridControl.prototype.mColCount_num = 0;
@@ -89,7 +89,7 @@ GridControl.prototype.imageOnLoaded = function(pImgObj)
 	
 	this.mImageLoadedCount_num++;
 	
-	if (pImgObj.width > pImgObj.height)
+	if (pImgObj.width >= pImgObj.height)
 	{
 		this.mGridControl.find(".grid:eq(" + _id + ")").attr("data-orientation", "h");
 		this.mGrid_array[_id].setOrientation("h");

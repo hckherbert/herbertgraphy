@@ -5,6 +5,10 @@
 	<?php if (!isset($authUrl)) { ?>
 	<div class="section">
 		<h1 class="pageHeading">Album details</h1>
+		<div class="hintArea">
+			<p>Hints:</p>
+			<p>Changing aspect ratio will override the rendering of the entire album!</p>
+		</div>
 		<?php echo form_open('admin/album_control/update_album_info', 'class="formInfo" id="formUpdateAlbumInfo"'); ?>
 		<table>
 			<?php if (isset($album_details->parentName)) { ?>
@@ -37,6 +41,16 @@
 				</td>
 			</tr>
 			<tr>
+				<td>Aspect Ratio:</td>
+				<td>
+					<select name="aspect_ratio">
+						<option value="1.5">4:3</option>
+						<option value="1.0">1:1</option>
+						<option value="1.77">16:9</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
 				<td></td>
 				<td>
 					<input name="submit" type="submit" value="Update">
@@ -51,7 +65,7 @@
 	<div class="section">
 		<h1 class="pageHeading">Photo list</h1>
 		<div class="hintArea">
-			<p>Hints:</p>
+			<p>Notes:</p>
 			<p>If you choose to remove the currently featured photo, the album will remain no featured photo.</p>
 		</div>
 		<?php echo form_open('admin/album_control/update_photo_data', 'class="formUpdatePhotoData" id="formUpdatePhotoData"'); ?>
@@ -83,8 +97,9 @@
 		<h1 class="pageHeading">Add more photos</h1>
 		<div class="hintArea">
 		<p>Hints:</p>
-			<p>1. Setting any additional featured will remove the current assignment of the featured photo, if any, and vise versa.</p>
-			<p>2. If you choose to remove the currently featured photo, the album will remain no featured photo.</p>
+			<p>- Setting any additional photo featured will remove the current assignment of the featured photo.</p>
+			<p>- If you choose to remove the currently featured photo, the album will remain no featured photo.</p>
+			<p>- Additional photos are expected to have the same aspect ratio of those existing ones.</p>
 		</div>
 		<?php } else {?>
 		<h1 class="pageHeading">Upload photos</h1>
