@@ -1,10 +1,12 @@
 <?php ?>
+
 <body
 	class="<?php echo $class_main_color; ?>"
 	<?php if (isset($direct_photo_slug) && $direct_photo_slug!=NULL) { ?>
 		data-direct_photo_slug = "<?php echo $direct_photo_slug; ?>"
 		data-album_path = "<?php echo $album_path; ?>"
 	<?php } ?>
+	data-aspect_ratio = "<?php echo $current_album_data["album_details"]->aspect_ratio; ?>"
 >
 <?php $this->load->partials("client/templates/analyticstracking"); ?>
 <?php $this->load->partials("client/templates/partials/page_loading"); ?>

@@ -1,4 +1,4 @@
-GridControl.prototype.mAspectRatio_num = 1;
+GridControl.prototype.mAspectRatio_num = null;
 GridControl.prototype.mGridControl = null;
 GridControl.prototype.mGridCount_num = 0;
 GridControl.prototype.mColCount_num = 0;
@@ -29,6 +29,7 @@ function GridControl(pGridControl, pPhotoOverlay)
 	this.mPhotoOverlay.setOnHideStart(function(){_self.photoOverlayOnHideStart();});
 	this.mGridCount_num = this.mGridControl.children(".grid").length;
 	this.mDirectPhotoSlug  = $("body").data("direct_photo_slug");
+	this.mAspectRatio_num = parseFloat($("body").data("aspect_ratio"));
 
 	if (this.mDirectPhotoSlug && !$(".grid[data-slug='" + this.mDirectPhotoSlug + "']").length)
 	{
