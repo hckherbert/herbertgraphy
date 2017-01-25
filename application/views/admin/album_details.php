@@ -44,9 +44,9 @@
 				<td>Aspect Ratio:</td>
 				<td>
 					<select name="aspect_ratio">
-						<option value="1.5">4:3</option>
-						<option value="1.0">1:1</option>
-						<option value="1.77">16:9</option>
+						<option value="1.5" <?php if ($album_details->aspect_ratio == 1.5) {?>selected<?php } ?> >4:3</option>
+						<option value="1.0" <?php if ($album_details->aspect_ratio == 1.0) {?>selected<?php } ?> >1:1</option>
+						<option value="1.77" <?php if ($album_details->aspect_ratio == 1.77) {?>selected<?php } ?> >16:9</option>
 					</select>
 				</td>
 			</tr>

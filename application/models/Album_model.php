@@ -217,7 +217,7 @@ class Album_model extends CI_Model
 	public function get_album_details($pAlbum_id, $pIsShuffle=true)
 	{
 		$data = array();
-		$this->db->select("id, parentId, order, name, label, intro");
+		$this->db->select("id, parentId, order, name, label, intro, aspect_ratio");
 		$this->db->where("id", $pAlbum_id);
 		$query = $this->db->get("album");
 
