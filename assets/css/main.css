@@ -308,7 +308,7 @@ a
 	.infoPanel
 	{
 		z-index:1;
-		/*background:none !important;*/
+		background:none !important;
 	}
 }
 
