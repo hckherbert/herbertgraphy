@@ -40,8 +40,16 @@ function windowOnResized()
 
         if ($("body").hasClass("sDesktop"))
         {
-            $(".mainPanel").css("position", "fixed");
-            $(".mainPanel").css("left", "35%");
+
+            if ($(window).width()<=1024)
+            {
+                $(".mainPanel").css("position", "fixed");
+                $(".mainPanel").css("left", "0");
+            }
+            else
+            {
+                $(".mainPanel").css("position", "relative");
+            }
         }
         else
         {
