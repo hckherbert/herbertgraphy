@@ -58,5 +58,12 @@
             <p><?php echo $current_album_data["album_details"]->intro; ?></p>
         </div>
     <?php } ?>
+    <img id="front_lamp" src="<?php echo assets_image("card.png"); ?>"  style="width: 250px;
+    opacity: 1;
+    transform: rotate(-5deg);
+    position: absolute;
+    left: 70%;
+    bottom: 110px;
+    z-index: 1;">
     <div class="clear"></div>
 </div>

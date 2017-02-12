@@ -102,13 +102,14 @@ a
 	position: absolute;
 	bottom: 65px;
 	color: #fffff0;
-	font-size: 26px;
+	font-size: 30px;
 	opacity: 0.8;
 	font-family: 'Merriweather', serif;
 	text-align:left;
 	font-weight:300;
 	padding:20px;
-	font-style:italic;
+	line-height:1.2em;
+	width:290px;
 }
 
 .sMobile .homeSubTitle_a
@@ -137,7 +138,7 @@ a
 		text-align: right;
 		font-size: 32px;
 		padding: 0;
-		width: 490px;
+		width: 390px;
 		bottom: 65px;
 	}
 
@@ -152,7 +153,7 @@ a
 
 	.sDesktop .homeSubTitle_a
 	{
-		width: 570px;
+		width: 590px;
 		font-size: 35px;
 		bottom: 44px;
 	}
@@ -168,7 +169,7 @@ a
 	.sDesktop .homeSubTitle_a
 	{
 		font-size:40px;
-		width:660px;
+		width:670px;
 		padding:0 20px;
 	}
 
@@ -209,7 +210,7 @@ a
 	font-family: 'Merriweather', serif;
 }
 
-.homeSubTitle_c
+.homeCoverMeta
 {
 	position: absolute;
 	bottom: 40px;
@@ -222,7 +223,7 @@ a
 }
 
 
-.homeSubTitle_c
+.homeCoverMeta
 {
 	font-family: 'Catamaran', sans-serif;
 	position: absolute;
@@ -233,12 +234,12 @@ a
 	font-size:12px;
 }
 
-.sDesktop .homeSubTitle_c
+.sDesktop .homeCoverMeta
 {
 	top:4px;
 }
 
-.sMobile .homeSubTitle_c
+.sMobile .homeCoverMeta
 {
 	top:4px;
 }
