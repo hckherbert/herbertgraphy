@@ -59,6 +59,7 @@
     <!-- FONT -->
     <link href='https://fonts.googleapis.com/css?family=Catamaran:400,700,300,200' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=BenchNine:300" rel="stylesheet">
     <!-- Javascript -->
     <script>
         GLOBAL_SITE_URL = "<?php echo site_url(); ?>";

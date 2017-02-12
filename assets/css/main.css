@@ -597,6 +597,36 @@ a
 	padding:4px 0;
 }
 
+/******** Home Elements *******/
+#home_card
+{
+	position: absolute;
+	padding:20px;
+	width:210px;
+	height:100px;
+	background:url(../images/home_card.png) 0 0 no-repeat;
+	font-family:"BenchNine", serif;
+	left: 70%;
+	z-index: 1;
+	bottom: 130px;
+	transform:rotate(-2deg);
+	-webkit-transform: rotate(-2deg);
+	background-size:250px 140px;
+}
+
+@media (max-height: 800px) {
+	#home_card {
+		display: none;
+	}
+}
+
+#home_card .home_card_name
+{
+	font-size:20px;
+	font-weight:bold;
+	margin-bottom:45px;
+}
+
 /******** Footer ********/
 .footer
 {
