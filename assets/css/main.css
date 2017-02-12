@@ -613,7 +613,14 @@ a
 	background-size:250px 140px;
 }
 
-@media (max-height: 800px)
+@media (min-width:1025px) and (max-height: 860px)
+{
+	.sDesktop #home_card {
+		display: none;
+	}
+}
+
+@media (max-width:1024px) and (max-height: 400px)
 {
 	.sDesktop #home_card {
 		display: none;
