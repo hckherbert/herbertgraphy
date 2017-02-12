@@ -606,17 +606,44 @@ a
 	height:100px;
 	background:url(../images/home_card.png) 0 0 no-repeat;
 	font-family:"BenchNine", serif;
-	left: 70%;
 	z-index: 1;
-	bottom: 130px;
+
 	transform:rotate(-2deg);
 	-webkit-transform: rotate(-2deg);
 	background-size:250px 140px;
 }
 
-@media (max-height: 800px) {
+@media (max-height: 800px)
+{
 	#home_card {
 		display: none;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 1024px)
+{
+	#home_card
+	{
+		right:-180%;
+		bottom: 150px;
+	}
+}
+
+@media (min-width: 1025px) and (max-width: 1439px)
+{
+	#home_card
+	{
+		left:50%;
+		bottom: 130px;
+	}
+}
+
+@media (min-width: 1440px)
+{
+	#home_card
+	{
+		left: 70%;
+		bottom: 130px;
 	}
 }
 
