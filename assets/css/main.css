@@ -613,6 +613,11 @@ a
 	background-size:250px 140px;
 }
 
+.wrapperAlbum #home_card
+{
+	display:none;
+}
+
 @media (min-width:1025px) and (max-height: 860px)
 {
 	.sDesktop #home_card {
@@ -620,7 +625,7 @@ a
 	}
 }
 
-@media (max-width:1024px) and (max-height: 400px)
+@media (max-width:1024px) and (max-height: 768px)
 {
 	.sDesktop #home_card {
 		display: none;
