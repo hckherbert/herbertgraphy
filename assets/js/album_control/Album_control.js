@@ -448,6 +448,7 @@ Album_control.prototype.is_validate_upload_new_photo_data = function()
 
     if (_self.mIsValidatedUpload == false || _is_photo_input_validated == false)
     {
+        _self.hideLoading();
         _self.displayFail(_self.mErrorMsgUpload);
         return false;
     }
