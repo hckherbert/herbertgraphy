@@ -59,6 +59,18 @@ class Photo_model extends CI_Model
                     }
 
                 }
+                else  if ($record["highlighted"] == "1")
+                {
+                    if (file_exists($photo_base_dir . $album_label . "/" . $file_name_without_ext . "_" . $this->config->item("photo_long_side")[1] . ".jpg"))
+                    {
+                        $result[$key]["file_thumb_path"] = $file_name_without_ext . "_" . $this->config->item("photo_long_side")[1] . ".jpg";
+                    }
+                    //if 1280 not found, use default (won't happen in normal case)
+                    else
+                    {
+                        $result[$key]["file_thumb_path"] = $result[$key]["hash_filename"] . ".jpg";
+                    }
+                }
                 else
                 {
                     //if non-featured, use 640
@@ -66,7 +78,7 @@ class Photo_model extends CI_Model
                     {
                         $result[$key]["file_thumb_path"] = $file_name_without_ext . "_" . $this->config->item("photo_long_side")[0] . ".jpg";
                     }
-                    //if 640 not found, use default (won't happen in normal case)
+                    //if 640 not found, use default (this unlikely happens because normally album will have one photo set featured)
                     else
                     {
                         $result[$key]["file_thumb_path"] = $result[$key]["hash_filename"] . ".jpg";
