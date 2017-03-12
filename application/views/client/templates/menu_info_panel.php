@@ -58,10 +58,5 @@
             <p><?php echo $current_album_data["album_details"]->intro; ?></p>
         </div>
     <?php } ?>
-    <div id="home_card">
-        <div class="home_card_name">Herbert Ho</div>
-        <div class="home_card_data">95851099</div>
-        <div class="home_card_data">info@herbertgraphy.com</div>
-    </div>
     <div class="clear"></div>
 </div>
