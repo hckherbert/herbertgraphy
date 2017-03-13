@@ -116,7 +116,7 @@ a
 {
 	bottom:36px;
 	position:fixed;
-	z-index:10;
+	z-index:1;
 }
 
 .homeSubTitle_a .cap
@@ -199,7 +199,7 @@ a
 {
 	font-size:13px;
 	position:fixed;
-	z-index:10;
+	z-index:1;
 }
 
 .homeSubTitle_b

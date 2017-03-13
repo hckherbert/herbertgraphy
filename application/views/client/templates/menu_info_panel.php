@@ -1,4 +1,5 @@
 <div class="infoPanel">
+    <div id="home_canvas"><img src="assets/images/canvas.png"></div>
     <div class="menuMask"></div>
     <div class="albumTitle <?php echo $class_main_color; ?>">
         <h1>
@@ -53,6 +54,6 @@
             <p><?php echo $current_album_data["album_details"]->intro; ?></p>
         </div>
     <?php } ?>
-    <div id="home_canvas"><img src="assets/images/canvas.png"></div>
+
     <div class="clear"></div>
 </div>
