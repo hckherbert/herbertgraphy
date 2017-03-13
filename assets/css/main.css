@@ -608,22 +608,17 @@ a
 
 
 @media (min-width: 1280px) {
-	#home_canvas {
+	.section_home #home_canvas {
 		position: absolute;
 		left: 10%;
 		bottom: 0;
 		display:block;
 		width:180px;
 	}
-
-	#home_canvas img
-	{
-		width:100%;
-	}
 }
 
 
-.sMobile #home_canvas
+.sMobile .section_home #home_canvas
 {
 	position: fixed;
 	right:10px;
@@ -1305,6 +1300,16 @@ a
 	line-height:1.2em;
 }
 
+.section_about article p a
+{
+	color:#ac9682;
+}
+
+.section_about article p a:hover
+{
+	color:#6e5e4e;
+}
+
 .section_about .simple_icon
 {
 	margin:10px 0 0 0;
@@ -1354,11 +1359,17 @@ a
 	width: 400px;
 	height: 400px;
 	padding: 10px;
-	/* background: #f4f3e9; */
-	background: url(../images/contact.png) center center no-repeat;
-	margin: 0 auto;
+	margin: 20px auto;
 	text-align: center;
 	color: #75a8a8;
+	-ms-transform: rotate(-5deg);
+	-webkit-transform: rotate(-5deg);
+	transform: rotate(-5deg);
+}
+
+.section_about .contacts img
+{
+	width:220px;
 }
 
 @media (min-width: 768px) and (max-width: 1439px)
@@ -1372,7 +1383,6 @@ a
 
 .sMobile .section_about .contacts
 {
-	background: url(../images/contact_m.png) center 0 no-repeat;
 	color:#527c7c;
 	width: 100%;
 	padding: 20px 0;
