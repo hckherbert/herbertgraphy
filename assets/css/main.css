@@ -1310,6 +1310,12 @@ a
 	color:#6e5e4e;
 }
 
+.sMobile .section_about article p a
+{
+	color:#000;
+	text-decoration:underline;
+}
+
 .section_about .simple_icon
 {
 	margin:10px 0 0 0;

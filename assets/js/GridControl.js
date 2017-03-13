@@ -18,12 +18,14 @@ GridControl.prototype.mMediumBreakPoint_num = null;
 GridControl.prototype.mDirectPhotoSlug = null;
 GridControl.prototype.mNextAvailableIndex_num = 0;
 GridControl.prototype.mIsDirectPhotoLinkInit = false;
+GridControl.prototype.mHistState_obj = null;
 
 function GridControl(pGridControl, pPhotoOverlay)
 {
 	var _self = this;
 	this.mGrid_array = [];
 	this.mIsOccupied_array = [];
+	this.mHistState_obj = {};
 	this.mGridControl = pGridControl;
 	this.mPhotoOverlay = pPhotoOverlay;
 	this.mPhotoOverlay.setOnHideStart(function(){_self.photoOverlayOnHideStart();});
@@ -161,6 +163,10 @@ GridControl.prototype.setFeaturedOccupy = function()
 		this.mIsOccupied_array[this.mColCount_num * 2] = true;
 		this.mIsOccupied_array[this.mColCount_num * 2 + 1] = true;
 		this.mIsOccupied_array[this.mColCount_num * 2 + 2] = true;
+
+		this.mIsOccupied_array[this.mColCount_num * 3] = true;
+		this.mIsOccupied_array[this.mColCount_num * 3 + 1] = true;
+		this.mIsOccupied_array[this.mColCount_num * 3 + 2] = true;
 	}
 	else
 	{
@@ -169,14 +175,22 @@ GridControl.prototype.setFeaturedOccupy = function()
 			this.mIsOccupied_array[0] = true;
 			this.mIsOccupied_array[1] = true;
 			this.mIsOccupied_array[2] = true;
+			this.mIsOccupied_array[3] = true;
 
 			this.mIsOccupied_array[this.mColCount_num] = true;
 			this.mIsOccupied_array[this.mColCount_num + 1] = true;
 			this.mIsOccupied_array[this.mColCount_num + 2] = true;
+			this.mIsOccupied_array[this.mColCount_num + 3] = true;
 
 			this.mIsOccupied_array[this.mColCount_num * 2] = true;
 			this.mIsOccupied_array[this.mColCount_num * 2 + 1] = true;
 			this.mIsOccupied_array[this.mColCount_num * 2 + 2] = true;
+			this.mIsOccupied_array[this.mColCount_num * 2 + 3] = true;
+
+			this.mIsOccupied_array[this.mColCount_num * 3] = true;
+			this.mIsOccupied_array[this.mColCount_num * 3 + 1] = true;
+			this.mIsOccupied_array[this.mColCount_num * 3 + 2] = true;
+			this.mIsOccupied_array[this.mColCount_num * 3 + 3] = true;
 
 		}
 		else if (this.mGrid_array[0].getOrientation() == "v")
@@ -791,6 +805,8 @@ GridControl.prototype.updateGridPanelAndWinScroll = function()
 GridControl.prototype.onClick = function(pObj)
 {
 	$("html").css("overflow-y", "hidden");
+
+	var _history_state_href = $("body").data("album_path") + "/" + pObj.getSlug();
 	var _scrollTop = $(window).scrollTop();
 	var _fromX_num = 0;
 	var _fromY_num = 0;
@@ -832,7 +848,7 @@ GridControl.prototype.onClick = function(pObj)
 
 	if ($(window).width() <= $(window).height())
 	{
-		_toWidth_num = Math.round($(window).width() * _zoomFactor );
+		_toWidth_num = Math.round($(window).width() * _zoomFactor);
 
 		if (pObj.getOrientation() == "h")
 		{
@@ -863,6 +879,8 @@ GridControl.prototype.onClick = function(pObj)
 	
 	this.mPhotoOverlay.setSizeData(pObj.getOrientation(), this.mAspectRatio_num);
 	this.mPhotoOverlay.show(this.mOverlayPopSpeed_num*1000, pObj.getFileName(), pObj.getFileZoomSize(), pObj.getDesc(), pObj.getTitle());
+
+	history.pushState(this.mHistState_obj, $(".albumTitle h1").text(), _history_state_href);
 }
 
 
@@ -908,11 +926,13 @@ GridControl.prototype.photoOverlayOnHideStart = function()
 
 GridControl.prototype.onPhotoOverlayHidden = function(pActiveGridTop_num)
 {
+	/*
 	if (this.mDirectPhotoSlug)
 	{
 		location.href= $("body").data("album_path");
 		return;
 	}
+	*/
 
 	this.mGrid_array[this.mActiveGridIndex_num].setOpacity(1);
 
@@ -922,5 +942,7 @@ GridControl.prototype.onPhotoOverlayHidden = function(pActiveGridTop_num)
 		$("html, body").stop().animate({scrollTop:pActiveGridTop_num}, '50', 'swing');
 
 	}
+
+	history.pushState(this.mHistState_obj, $(".albumTitle h1").text(), $("body").data("album_path"));
 	$("html").css("overflow-y", "auto");
 }

@@ -1,5 +1,5 @@
 <div class="infoPanel">
-    <div id="home_canvas"><img src="<?php echo assets_image("canvas.png"); ?>></div>
+    <div id="home_canvas"><img src="<?php echo assets_image("canvas.png"); ?>"></div>
     <div class="menuMask"></div>
     <div class="albumTitle <?php echo $class_main_color; ?>">
         <h1>
