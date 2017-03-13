@@ -114,8 +114,9 @@ a
 
 .sMobile .homeSubTitle_a
 {
-	bottom:40px;
+	bottom:36px;
 	position:fixed;
+	z-index:10;
 }
 
 .homeSubTitle_a .cap
@@ -155,7 +156,7 @@ a
 	{
 		width: 590px;
 		font-size: 35px;
-		bottom: 44px;
+		bottom: 40px;
 	}
 
 	.sDesktop .homeSubTitle_a .second_line {
@@ -168,9 +169,10 @@ a
 {
 	.sDesktop .homeSubTitle_a
 	{
-		font-size:40px;
+		font-size:45px;
 		width:670px;
 		padding:0 20px;
+		bottom:58px;
 	}
 
 	.sDesktop .homeSubTitle_a .second_line {
@@ -195,8 +197,9 @@ a
 
 .sMobile .homeSubTitle_b
 {
-	font-size:15px;
+	font-size:13px;
 	position:fixed;
+	z-index:10;
 }
 
 .homeSubTitle_b
@@ -596,6 +599,44 @@ a
 	background:#e1d8d3;
 	padding:4px 0;
 }
+
+
+/******** Home elements ******/
+#home_canvas {
+	display:none;
+}
+
+
+@media (min-width: 1280px) {
+	#home_canvas {
+		position: absolute;
+		left: 10%;
+		bottom: 0;
+		display:block;
+		width:180px;
+	}
+
+	#home_canvas img
+	{
+		width:100%;
+	}
+}
+
+
+.sMobile #home_canvas
+{
+	position: fixed;
+	right:10px;
+	bottom: 0;
+	display:block !important;
+	width:130px;
+}
+
+#home_canvas img
+{
+	width:100%;
+}
+
 
 /******** Footer ********/
 .footer

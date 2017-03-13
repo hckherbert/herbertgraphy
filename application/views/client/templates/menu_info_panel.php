@@ -47,16 +47,12 @@
             <?php } ?>
             </ul>
         <?php } ?>
-        <!--<ul class="menuLinks">
-            <li><a href="javascript:void(0)">Why <em>Herbertgraphy</em></a></li>
-            <li><a href="javascript:void(0)">Herbertbloggy</a></li>
-        </ul>
-        -->
     </div>
     <?php if (isset($current_album_data["album_details"]->intro) && $current_album_data["album_details"]->intro!=NULL) { ?>
         <div class="intro">
             <p><?php echo $current_album_data["album_details"]->intro; ?></p>
         </div>
     <?php } ?>
+    <div id="home_canvas"><img src="assets/images/canvas.png"></div>
     <div class="clear"></div>
 </div>
