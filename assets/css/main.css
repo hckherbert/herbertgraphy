@@ -607,7 +607,7 @@ a
 }
 
 
-@media (min-width: 1280px) {
+@media (min-width: 1280px) and (min-height:400px) {
 	.section_home #home_canvas {
 		position: absolute;
 		left: 10%;
