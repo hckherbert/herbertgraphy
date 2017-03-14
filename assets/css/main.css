@@ -1208,6 +1208,7 @@ a
 .section_about .infoPanel
 {
 	background: url(../images/herbert.jpg) transparent center top no-repeat !important;
+	background-size:cover !important;
 }
 
 .sDesktop .section_about .infoPanel h1
@@ -1250,8 +1251,8 @@ a
 .sDesktop .section_about  article
 {
 	width: 60vw;
-	padding: 16% 20% 10% 10%;
-	background:url(../images/camera.png) 42% 10%  no-repeat;
+	padding: 22% 20% 10% 10%;
+	background:url(../images/camera.png) 44% -10%  no-repeat;
 }
 
 .sMobile .section_about  article
@@ -1274,7 +1275,7 @@ a
 
 .section_about  article
 {
-	color: #8c8884;
+	color: #7a7066;
 	text-align: justify;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -1296,21 +1297,18 @@ a
 
 .section_about article p
 {
-	font-size:16px;
+	font-size:15px;
 	line-height:1.2em;
 }
 
-.section_about article p a
-{
-	color:#ac9682;
-}
 
 .section_about article p a:hover
 {
 	color:#6e5e4e;
+	text-decoration:underline;
 }
 
-.sMobile .section_about article p a
+.section_about article p a
 {
 	color:#000;
 	text-decoration:underline;
@@ -1327,7 +1325,7 @@ a
 {
 	float: left;
 	font-family: 'Merriweather', serif;
-	font-size: 240px;
+	font-size: 220px;
 	line-height: 0.85em;
 	margin-right: 0.03em;
 	margin-bottom:-0.05em;
@@ -1361,13 +1359,11 @@ a
 
 .section_about .contacts
 {
-	border-radius: 50%;
-	width: 400px;
-	height: 400px;
-	padding: 10px;
-	margin: 20px auto;
+	width:220px;
+	height:143px;
+	margin: 40px auto;
 	text-align: center;
-	color: #75a8a8;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	-ms-transform: rotate(-5deg);
 	-webkit-transform: rotate(-5deg);
 	transform: rotate(-5deg);
@@ -1383,17 +1379,12 @@ a
 	.section_about .contacts
 	{
 		color:#527c7c;
-		width:100%;
 	}
 }
 
 .sMobile .section_about .contacts
 {
-	color:#527c7c;
-	width: 100%;
-	padding: 20px 0;
-	height: 260px;
-	margin: 0 0 50px;
+	margin: 40px auto 140px auto;
 }
 
 .section_about .contacts .name
