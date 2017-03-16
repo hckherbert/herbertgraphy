@@ -1359,27 +1359,41 @@ a
 
 .section_about .contacts
 {
-	width:220px;
-	height:143px;
-	margin: 40px auto;
-	text-align: center;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	-ms-transform: rotate(-5deg);
-	-webkit-transform: rotate(-5deg);
-	transform: rotate(-5deg);
+	-ms-transform: rotate(-6deg);
+	-webkit-transform: rotate(-6deg);
+	transform: rotate(-6deg);
+	width: 220px;
+	margin:50px auto 30px auto;
+	color:#000;
 }
 
-.section_about .contacts img
+.section_about .contacts p
 {
-	width:220px;
+	text-align:center;
 }
 
-@media (min-width: 768px) and (max-width: 1439px)
+.section_about .contacts .myName
 {
-	.section_about .contacts
-	{
-		color:#527c7c;
-	}
+	font-size:20px;
+}
+
+.section_about .contacts .mobile
+{
+	font-size:40px;
+}
+
+.section_about .contacts .mobile img
+{
+	width: 40px;
+	height: 40px;
+	vertical-align: middle;
+	display: inline-block;
+}
+
+.section_about .contacts .mobile span
+{
+	display:inline-block;
+	vertical-align:middle;
 }
 
 .sMobile .section_about .contacts

@@ -4,9 +4,11 @@
         <br>
         <p>All of the photographs here, except those in the <a href="../album/travel/">travel</a> category, are taken in Hong Kong. I particularly like the <em>magic hours</em> in Hong Kong, and you can find how captivating it is here, especially when you reach here accidentally by googling maybe <em>Herbert photography</em> from outside Hong Kong.</p>
         <br>
-        <p>I’ll keep HerbretGraphy up-to-date, and give you surprises from time to time. I enjoy most when taking portrait photos. If you wanna become one of the lucky ones to appear here, or if you come up with great ideas, just reach me at:</p>
+        <p>I’ll keep HerbretGraphy up-to-date, and give you surprises from time to time. I enjoy most when taking portrait photos. If you wanna become one of the lucky ones to appear here, or if you come up with great ideas, don't hesitate to reach me at:</p>
         <div class="contacts">
-            <img src="<?php echo assets_image("card.jpg"); ?>">
+            <p class="myName">Herbert Ho</p>
+            <p class="mobile"><span>9585</span><span><img src="<?php echo assets_image("mobile.png"); ?>" data-pin-nopin="true"></span><span>1099</span></p>
+            <p class="email">info@herbertgraphy.com</p>
         </div>
         <div class="clear"></div>
     </article>
