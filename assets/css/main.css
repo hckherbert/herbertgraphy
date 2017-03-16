@@ -783,12 +783,12 @@ a
 		top: 0;
 		width:100% !important;
 	}
-	.wrapperBase.section_home .albumTitle
+	.wrapperBase .albumTitle
 	{
 		background:rgba(50, 44, 43, 0.9) !important;
 	}
 
-	.wrapperBase.section_home .albumTitle h1
+	.wrapperBase .albumTitle h1
 	{
 		padding: 15px 20px 10px 20px !important;
 		margin-top: 200px;
@@ -1202,6 +1202,22 @@ a
 		opacity:0.8;
 		background-position: 70% top;
 		background-size:cover !important;
+	}
+
+}
+
+@media (min-width: 768px) and (max-width: 1025px)
+{
+
+	.wrapperBase.section_about .albumTitle
+	{
+		background:#baa7a0 !important;
+	}
+
+	.wrapperBase.section_about .albumTitle h1
+	{
+		margin-top:0 !important;
+		padding: 8px 60px 6px 6px !important;
 	}
 }
 

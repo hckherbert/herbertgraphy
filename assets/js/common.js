@@ -92,4 +92,6 @@ function closeMenu()
 {
     $(".menuContainer").addClass("mainMenuClose");
     $(".menuMask").removeClass("show");
+    $(".bg").removeClass("inactive");
+    $(".aboutContainer").removeClass("inactive");
 }
