@@ -95,12 +95,16 @@ if (!function_exists('js_source')) {
 }
 
 if (!function_exists('assets_image')) {
-    function assets_image($path)
+    function assets_image($path, $append_version = true)
     {
+
+        $hash = hash("sha256", $path .time()."herbertgraphy");
+        $output_path = ($append_version == true) ?  sprintf("%s?v=%s", $path,$hash) : $path;
+
         return base_url(sprintf(join("/", array(
             "public",
             "images",
-            $path
+            $output_path
         ))));
     }
 }

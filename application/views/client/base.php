@@ -1,4 +1,4 @@
-<body class="<?php echo $class_main_color; ?>">
+<body class="<?php echo $class_main_color; ?> <?php if (isset($section) && $section==="section_about") { echo "vScrollOff"; } ?>">
 <?php $this->load->partials("client/templates/analyticstracking"); ?>
 <?php $this->load->partials("client/templates/partials/page_loading"); ?>
 <?php $this->load->partials("client/templates/partials/simple_loading"); ?>

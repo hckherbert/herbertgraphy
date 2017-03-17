@@ -51,6 +51,13 @@ Grid.prototype.getFileName = function()
 	return this.mGrid.attr("data-filename");
 }
 
+
+Grid.prototype.getSlug = function()
+{
+	return this.mGrid.attr("data-slug");
+}
+
+
 Grid.prototype.getFileZoomSize = function()
 {
 	return this.mGrid.attr("data-file_zoom_size");

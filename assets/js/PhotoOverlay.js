@@ -111,7 +111,7 @@ PhotoOverlay.prototype.hide = function(pCallBack_fn)
 			pCallBack_fn.apply(null);
 		},
 		150
-	)
+	);
 
 }
 

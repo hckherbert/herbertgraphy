@@ -544,11 +544,11 @@ class Album_control extends CI_Controller
 
 			if ($extension == "jpg")
 			{
-				$src = imagecreatefromgif($tempFile);
+				$src = imagecreatefromjpeg($tempFile);
 			}
 			else if ($extension == "gif")
 			{
-				$src = imagecreatefromjpeg($tempFile);
+				$src = imagecreatefromgif($tempFile);
 			}
 			else if ($extension == "png")
 			{
