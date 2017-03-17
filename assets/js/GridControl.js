@@ -170,7 +170,7 @@ GridControl.prototype.setFeaturedOccupy = function()
 	}
 	else
 	{
-		if (this.mGrid_array[0].getOrientation() == "h")
+		if (this.mGrid_array[0].getOrientation() == "h" && this.mColCount_num>3)
 		{
 			this.mIsOccupied_array[0] = true;
 			this.mIsOccupied_array[1] = true;
@@ -218,6 +218,13 @@ GridControl.prototype.setFeaturedOccupy = function()
 			this.mIsOccupied_array[this.mColCount_num * 5] = true;
 			this.mIsOccupied_array[this.mColCount_num * 5 + 1] = true;
 			this.mIsOccupied_array[this.mColCount_num * 5 + 2] = true;
+		}
+		else if (this.mGrid_array[0].getOrientation() == "h")
+		{
+			for (var _i=0; _i<=8; _i++)
+			{
+				this.mIsOccupied_array[_i] = true;
+			}
 		}
 	}
 }
