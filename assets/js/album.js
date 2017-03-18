@@ -77,7 +77,7 @@ function windowOnResized()
 
 function renderIntro()
 {
-    if ($(".infoPanel p").text().length >= 500)
+    if ($(".infoPanel p").text().length >= 100)
     {
         $(".infoPanel .intro p").addClass("hasInitialCap");
     }
