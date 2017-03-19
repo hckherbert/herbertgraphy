@@ -74,12 +74,3 @@ function windowOnResized()
     mGridControl.positionGrids();
 
 }
-
-function renderIntro()
-{
-    if ($(".infoPanel p").text().length >= 100)
-    {
-        $(".infoPanel .intro p").addClass("hasInitialCap");
-    }
-
-}
