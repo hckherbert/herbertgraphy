@@ -664,9 +664,6 @@ GridControl.prototype.positionGrids = function()
 		{
 			if (!this.mGridstaggering)
 			{
-				//add some buffer to prevent the starting staggers from being seen!
-				var  _staggerHeightOffset = $(window).height() + 800;
-
 				this.mGridstaggering = true;
 				this.fadeOutPageLoadingElements();
 
@@ -674,10 +671,10 @@ GridControl.prototype.positionGrids = function()
 				{
 					_self.transitLoadingAndAlbumStart();
 
-					_self.mGridTween = TweenMax.staggerFrom($(".grid"), 0.8, {
+					_self.mGridTween = TweenMax.staggerFrom($(".grid"), 0.7, {
 						opacity: 0.5,
 						"left":  Math.round(Math.random() * $(".gridPanel").width()) + "px",
-						"top":  _staggerHeightOffset + "px",
+						"top":  1200+ "px",
 						ease: Back.easeInOut
 					}, 0.8 / _self.mGridCount_num, function ()
 					{
@@ -755,6 +752,8 @@ GridControl.prototype.onStaggeredAll = function()
 			100
 		)
 	}
+
+	TweenMax.killAll();
 
 	this.updateGridInfoHeight();
 }
