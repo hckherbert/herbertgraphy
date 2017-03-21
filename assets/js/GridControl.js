@@ -19,6 +19,7 @@ GridControl.prototype.mDirectPhotoSlug = null;
 GridControl.prototype.mNextAvailableIndex_num = 0;
 GridControl.prototype.mIsDirectPhotoLinkInit = false;
 GridControl.prototype.mHistState_obj = null;
+GridControl.prototype.mGridTween  = null;
 
 function GridControl(pGridControl, pPhotoOverlay)
 {
@@ -664,7 +665,7 @@ GridControl.prototype.positionGrids = function()
 			if (!this.mGridstaggering)
 			{
 				//add some buffer to prevent the starting staggers from being seen!
-				var  _staggerHeightOffset = $(window).height() + 400;
+				var  _staggerHeightOffset = $(window).height() + 800;
 
 				this.mGridstaggering = true;
 				this.fadeOutPageLoadingElements();
@@ -698,7 +699,6 @@ GridControl.prototype.positionGrids = function()
 		setTimeout(function()
 		{
 			_self.transitLoadingAndAlbumStart();
-			//_self.onStaggeredAll();
 			_self.updateGridPanelAndWinScroll();
 
 			if (_self.mDirectPhotoSlug!=null)
@@ -743,8 +743,7 @@ GridControl.prototype.transitLoadingAndAlbumStart = function()
 GridControl.prototype.onStaggeredAll = function()
 {
 	var _self = this;
-	
-	//console.log("staggered all!");
+
 	if (this.mWinWidthBeforeStaggered_num  != $(window).width())
 	{
 		this.mTimerReposition = setTimeout
@@ -933,13 +932,6 @@ GridControl.prototype.photoOverlayOnHideStart = function()
 
 GridControl.prototype.onPhotoOverlayHidden = function(pActiveGridTop_num)
 {
-	/*
-	if (this.mDirectPhotoSlug)
-	{
-		location.href= $("body").data("album_path");
-		return;
-	}
-	*/
 
 	this.mGrid_array[this.mActiveGridIndex_num].setOpacity(1);
 

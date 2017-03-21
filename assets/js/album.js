@@ -32,8 +32,6 @@ $(document).ready
             }
         }
 
-        renderIntro();
-
         $(window).on("resize", windowOnResized);
     }
 );
