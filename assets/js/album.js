@@ -32,8 +32,6 @@ $(document).ready
             }
         }
 
-        renderIntro();
-
         $(window).on("resize", windowOnResized);
     }
 );
@@ -72,14 +70,5 @@ function windowOnResized()
     }
     
     mGridControl.positionGrids();
-
-}
-
-function renderIntro()
-{
-    if ($(".infoPanel p").text().length >= 500)
-    {
-        $(".infoPanel .intro p").addClass("hasInitialCap");
-    }
 
 }

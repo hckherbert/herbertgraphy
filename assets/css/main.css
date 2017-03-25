@@ -272,16 +272,26 @@ a
 	position:relative;
 }
 
-.sDesktop .infoPanel .intro p.hasInitialCap:first-child:first-letter
+.sDesktop .infoPanel .intro .useCap
 {
 	font-family: 'Merriweather', serif;
 	font-size:70px;
-	margin:5px 0 -5px 0;
+	margin:5px 0 5px 0;
 	padding:0 .1em 0 0;
 	height:.7em;
 	line-height:.85em;
 	float:left;
 	color:#c3aba6;
+}
+
+.sDesktop .infoPanel .intro .alignRight
+{
+	text-align:right;
+}
+
+.sDesktop .infoPanel .intro .bold
+{
+	font-weight:bold;
 }
 
 .sDesktop .infoPanel .intro
@@ -1320,13 +1330,14 @@ a
 
 .section_about article p a:hover
 {
-	color:#6e5e4e;
+	color:#000;
 	text-decoration:underline;
 }
 
 .section_about article p a
 {
-	color:#000;
+	color:#6e5e4e;
+	font-weight:bold;
 	text-decoration:underline;
 }
 

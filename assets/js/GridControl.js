@@ -19,6 +19,7 @@ GridControl.prototype.mDirectPhotoSlug = null;
 GridControl.prototype.mNextAvailableIndex_num = 0;
 GridControl.prototype.mIsDirectPhotoLinkInit = false;
 GridControl.prototype.mHistState_obj = null;
+GridControl.prototype.mGridTween  = null;
 
 function GridControl(pGridControl, pPhotoOverlay)
 {
@@ -663,20 +664,20 @@ GridControl.prototype.positionGrids = function()
 		{
 			if (!this.mGridstaggering)
 			{
-				//add some buffer to prevent the starting staggers from being seen!
-				var  _staggerHeightOffset = $(window).height() + 400;
-
 				this.mGridstaggering = true;
 				this.fadeOutPageLoadingElements();
+
+				var  _staggerHeightOffset = $(window).height() + 1200;
+				var _gridPanelWidth  = $(".gridPanel").width();
 
 				setTimeout(function ()
 				{
 					_self.transitLoadingAndAlbumStart();
 
-					_self.mGridTween = TweenMax.staggerFrom($(".grid"), 0.8, {
+					_self.mGridTween = TweenMax.staggerFrom($(".grid"), 0.7, {
 						opacity: 0.5,
-						"left":  Math.round(Math.random() * $(".gridPanel").width()) + "px",
-						"top":  _staggerHeightOffset + "px",
+						"left":  Math.round(Math.random() * _gridPanelWidth) + "px",
+						"top":  Math.round(Math.random() * _staggerHeightOffset) + "px",
 						ease: Back.easeInOut
 					}, 0.8 / _self.mGridCount_num, function ()
 					{
@@ -698,7 +699,6 @@ GridControl.prototype.positionGrids = function()
 		setTimeout(function()
 		{
 			_self.transitLoadingAndAlbumStart();
-			//_self.onStaggeredAll();
 			_self.updateGridPanelAndWinScroll();
 
 			if (_self.mDirectPhotoSlug!=null)
@@ -743,8 +743,7 @@ GridControl.prototype.transitLoadingAndAlbumStart = function()
 GridControl.prototype.onStaggeredAll = function()
 {
 	var _self = this;
-	
-	//console.log("staggered all!");
+
 	if (this.mWinWidthBeforeStaggered_num  != $(window).width())
 	{
 		this.mTimerReposition = setTimeout
@@ -756,6 +755,8 @@ GridControl.prototype.onStaggeredAll = function()
 			100
 		)
 	}
+
+	TweenMax.killAll();
 
 	this.updateGridInfoHeight();
 }
@@ -933,13 +934,6 @@ GridControl.prototype.photoOverlayOnHideStart = function()
 
 GridControl.prototype.onPhotoOverlayHidden = function(pActiveGridTop_num)
 {
-	/*
-	if (this.mDirectPhotoSlug)
-	{
-		location.href= $("body").data("album_path");
-		return;
-	}
-	*/
 
 	this.mGrid_array[this.mActiveGridIndex_num].setOpacity(1);
 
