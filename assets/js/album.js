@@ -33,8 +33,6 @@ $(document).ready
         }
 
         $(window).on("resize", windowOnResized);
-
-        windowOnResized();
     }
 );
 

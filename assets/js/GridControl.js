@@ -667,14 +667,17 @@ GridControl.prototype.positionGrids = function()
 				this.mGridstaggering = true;
 				this.fadeOutPageLoadingElements();
 
+				var  _staggerHeightOffset = $(window).height() + 1200;
+				var _gridPanelWidth  = $(".gridPanel").width();
+
 				setTimeout(function ()
 				{
 					_self.transitLoadingAndAlbumStart();
 
 					_self.mGridTween = TweenMax.staggerFrom($(".grid"), 0.7, {
 						opacity: 0.5,
-						"left":  Math.round(Math.random() * $(".gridPanel").width()) + "px",
-						"top":  1200+ "px",
+						"left":  Math.round(Math.random() * _gridPanelWidth) + "px",
+						"top":  Math.round(Math.random() * _staggerHeightOffset) + "px",
 						ease: Back.easeInOut
 					}, 0.8 / _self.mGridCount_num, function ()
 					{
