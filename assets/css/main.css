@@ -1330,13 +1330,14 @@ a
 
 .section_about article p a:hover
 {
-	color:#6e5e4e;
+	color:#000;
 	text-decoration:underline;
 }
 
 .section_about article p a
 {
-	color:#000;
+	color:#6e5e4e;
+	font-weight:bold;
 	text-decoration:underline;
 }
 
