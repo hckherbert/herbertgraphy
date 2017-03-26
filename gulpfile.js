@@ -9,6 +9,7 @@ var runSequence = require('run-sequence');
 var sourcemaps = require('gulp-sourcemaps');
 var gutil = require('gulp-util');
 var uglify = require('gulp-uglify');
+var urlAdjuster = require('gulp-css-url-adjuster');
 
 var vendor = {
     jquery: "assets/components/jquery/",
@@ -240,6 +241,28 @@ function delDest() {
         .pipe(clean());
 }
 
+/**
+ * Append version to url in main.css only!
+ * Likely we only change main.css, so we just do in this css file
+ * @returns {*}
+ */
+function adjustCssUrl(){
+
+    var _version = getNewBuildVersion();
+
+    return gulp.src('public/css/client_main.css').
+        pipe(urlAdjuster({
+            append: "?v=" + _version
+        }))
+        .pipe(gulp.dest('public/css'));
+}
+
+function getNewBuildVersion ()
+{
+    var date = new Date();
+    return date.getFullYear() +""+ date.getMonth()+1 +""+ date.getDate() + date.getHours() + date.getMinutes() + date.getSeconds();
+}
+
 gulp.task('watch', gulpWatch);
 
 gulp.task('del', delDest);
@@ -262,6 +285,8 @@ gulp.task('compress_js_main', buildCompressJS);
 gulp.task('compress_css_group', buildGroupCSS(true));
 gulp.task('compress_js_group', buildGroupJS(true));
 
+gulp.task('adjustCssUrl',  adjustCssUrl);
+
 // development
 gulp.task('default', function () {
     runSequence
@@ -274,6 +299,7 @@ gulp.task('default', function () {
         'js_group',
         'copy_main_images',
         'copy_css_images',
+        'adjustCssUrl',
         'rev-css',
         'rev-js'
     );

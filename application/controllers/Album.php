@@ -29,9 +29,9 @@ class Album extends MY_Common
 		if ($params)
 		{
 			$data["direct_photo_slug"] = trim(strtolower($params[0]));
-			$data["album_path"] = base_url()."album/".$method;
 		}
 
+		$data["album_path"] = base_url()."album/".$method;
 		$album_id = $this->album_model->get_album_id($album_label);
 
 		if ($album_id === FALSE || count($params)>1)

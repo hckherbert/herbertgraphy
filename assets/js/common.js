@@ -62,6 +62,8 @@ function toggleMenu(pEvent)
         {
             $(".menuContainer").css("top", -1 * $(".menuContainer").height() + "px");
             $(".btnMenuToggle").removeClass("hvr-grow-rotated");
+            $(".homeSubTitle_b, .homeSubTitle_a").css("z-index", 1);
+
 
             if ($(".section_about").length)
             {
@@ -72,6 +74,7 @@ function toggleMenu(pEvent)
         else
         {
             $(".btnMenuToggle").addClass("hvr-grow-rotated");
+            $(".homeSubTitle_b, .homeSubTitle_a").css("z-index", 0);
 
             if ($(".section_about").length)
             {
@@ -89,4 +92,6 @@ function closeMenu()
 {
     $(".menuContainer").addClass("mainMenuClose");
     $(".menuMask").removeClass("show");
+    $(".bg").removeClass("inactive");
+    $(".aboutContainer").removeClass("inactive");
 }

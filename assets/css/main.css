@@ -108,13 +108,15 @@ a
 	text-align:left;
 	font-weight:300;
 	padding:20px;
-	font-style:italic;
+	line-height:1.2em;
+	width:290px;
 }
 
 .sMobile .homeSubTitle_a
 {
-	bottom:40px;
+	bottom:36px;
 	position:fixed;
+	z-index:1;
 }
 
 .homeSubTitle_a .cap
@@ -137,7 +139,7 @@ a
 		text-align: right;
 		font-size: 32px;
 		padding: 0;
-		width: 490px;
+		width: 390px;
 		bottom: 65px;
 	}
 
@@ -152,9 +154,9 @@ a
 
 	.sDesktop .homeSubTitle_a
 	{
-		width: 570px;
+		width: 590px;
 		font-size: 35px;
-		bottom: 44px;
+		bottom: 40px;
 	}
 
 	.sDesktop .homeSubTitle_a .second_line {
@@ -167,9 +169,10 @@ a
 {
 	.sDesktop .homeSubTitle_a
 	{
-		font-size:40px;
-		width:660px;
+		font-size:45px;
+		width:670px;
 		padding:0 20px;
+		bottom:58px;
 	}
 
 	.sDesktop .homeSubTitle_a .second_line {
@@ -194,8 +197,9 @@ a
 
 .sMobile .homeSubTitle_b
 {
-	font-size:15px;
+	font-size:13px;
 	position:fixed;
+	z-index:1;
 }
 
 .homeSubTitle_b
@@ -209,7 +213,7 @@ a
 	font-family: 'Merriweather', serif;
 }
 
-.homeSubTitle_c
+.homeCoverMeta
 {
 	position: absolute;
 	bottom: 40px;
@@ -222,7 +226,7 @@ a
 }
 
 
-.homeSubTitle_c
+.homeCoverMeta
 {
 	font-family: 'Catamaran', sans-serif;
 	position: absolute;
@@ -233,12 +237,12 @@ a
 	font-size:12px;
 }
 
-.sDesktop .homeSubTitle_c
+.sDesktop .homeCoverMeta
 {
 	top:4px;
 }
 
-.sMobile .homeSubTitle_c
+.sMobile .homeCoverMeta
 {
 	top:4px;
 }
@@ -268,16 +272,26 @@ a
 	position:relative;
 }
 
-.sDesktop .infoPanel .intro p.hasInitialCap:first-child:first-letter
+.sDesktop .infoPanel .intro .useCap
 {
 	font-family: 'Merriweather', serif;
 	font-size:70px;
-	margin:5px 0 -5px 0;
+	margin:5px 0 5px 0;
 	padding:0 .1em 0 0;
 	height:.7em;
 	line-height:.85em;
 	float:left;
 	color:#c3aba6;
+}
+
+.sDesktop .infoPanel .intro .alignRight
+{
+	text-align:right;
+}
+
+.sDesktop .infoPanel .intro .bold
+{
+	font-weight:bold;
 }
 
 .sDesktop .infoPanel .intro
@@ -308,7 +322,7 @@ a
 	.infoPanel
 	{
 		z-index:1;
-		/*background:none !important;*/
+		background:none !important;
 	}
 }
 
@@ -596,6 +610,39 @@ a
 	padding:4px 0;
 }
 
+
+/******** Home elements ******/
+#home_canvas {
+	display:none;
+}
+
+
+@media (min-width: 1280px) and (min-height:400px) {
+	.section_home #home_canvas {
+		position: absolute;
+		left: 10%;
+		bottom: 0;
+		display:block;
+		width:180px;
+	}
+}
+
+
+.sMobile .section_home #home_canvas
+{
+	position: fixed;
+	right:10px;
+	bottom: 0;
+	display:block !important;
+	width:130px;
+}
+
+#home_canvas img
+{
+	width:100%;
+}
+
+
 /******** Footer ********/
 .footer
 {
@@ -746,12 +793,12 @@ a
 		top: 0;
 		width:100% !important;
 	}
-	.wrapperBase.section_home .albumTitle
+	.wrapperBase .albumTitle
 	{
 		background:rgba(50, 44, 43, 0.9) !important;
 	}
 
-	.wrapperBase.section_home .albumTitle h1
+	.wrapperBase .albumTitle h1
 	{
 		padding: 15px 20px 10px 20px !important;
 		margin-top: 200px;
@@ -774,7 +821,6 @@ a
 		overflow-y:auto !important;
 	}
 }
-
 
 /******** Album ********/
 .wrapperAlbum
@@ -1167,11 +1213,28 @@ a
 		background-position: 70% top;
 		background-size:cover !important;
 	}
+
+}
+
+@media (min-width: 768px) and (max-width: 1025px)
+{
+
+	.wrapperBase.section_about .albumTitle
+	{
+		background:#baa7a0 !important;
+	}
+
+	.wrapperBase.section_about .albumTitle h1
+	{
+		margin-top:0 !important;
+		padding: 8px 60px 6px 6px !important;
+	}
 }
 
 .section_about .infoPanel
 {
 	background: url(../images/herbert.jpg) transparent center top no-repeat !important;
+	background-size:cover !important;
 }
 
 .sDesktop .section_about .infoPanel h1
@@ -1214,8 +1277,8 @@ a
 .sDesktop .section_about  article
 {
 	width: 60vw;
-	padding: 16% 20% 10% 10%;
-	background:url(../images/camera.png) 42% 10%  no-repeat;
+	padding: 22% 20% 10% 10%;
+	background:url(../images/camera.png) 44% -10%  no-repeat;
 }
 
 .sMobile .section_about  article
@@ -1238,7 +1301,7 @@ a
 
 .section_about  article
 {
-	color: #8c8884;
+	color: #7a7066;
 	text-align: justify;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -1260,8 +1323,22 @@ a
 
 .section_about article p
 {
-	font-size:16px;
+	font-size:15px;
 	line-height:1.2em;
+}
+
+
+.section_about article p a:hover
+{
+	color:#000;
+	text-decoration:underline;
+}
+
+.section_about article p a
+{
+	color:#6e5e4e;
+	font-weight:bold;
+	text-decoration:underline;
 }
 
 .section_about .simple_icon
@@ -1275,7 +1352,7 @@ a
 {
 	float: left;
 	font-family: 'Merriweather', serif;
-	font-size: 240px;
+	font-size: 220px;
 	line-height: 0.85em;
 	margin-right: 0.03em;
 	margin-bottom:-0.05em;
@@ -1309,45 +1386,57 @@ a
 
 .section_about .contacts
 {
-	border-radius: 50%;
-	width: 400px;
-	height: 400px;
-	padding: 10px;
-	/* background: #f4f3e9; */
-	background: url(../images/contact.png) center center no-repeat;
-	margin: 0 auto;
-	text-align: center;
-	color: #75a8a8;
+	-ms-transform: rotate(-6deg);
+	-webkit-transform: rotate(-6deg);
+	transform: rotate(-6deg);
+	width: 220px;
+	margin:50px auto 30px auto;
+	color:#000;
 }
 
-@media (min-width: 768px) and (max-width: 1439px)
+.section_about .contacts p
 {
-	.section_about .contacts
-	{
-		color:#527c7c;
-		width:100%;
-	}
+	text-align:center;
+}
+
+.section_about .contacts .myName
+{
+	font-size:20px;
+}
+
+.section_about .contacts .mobile
+{
+	font-size:40px;
+}
+
+.section_about .contacts .mobile img
+{
+	width: 40px;
+	height: 40px;
+	vertical-align: middle;
+	display: inline-block;
+}
+
+.section_about .contacts .mobile span
+{
+	display:inline-block;
+	vertical-align:middle;
 }
 
 .sMobile .section_about .contacts
 {
-	background: url(../images/contact_m.png) center 0 no-repeat;
-	color:#527c7c;
-	width: 100%;
-	padding: 20px 0;
-	height: 260px;
-	margin: 0 0 50px;
+	margin: 40px auto 140px auto;
 }
 
 .section_about .contacts .name
 {
-	font-size: 18px;
+	font-size: 22px;
 	margin: 110px 0 0 0;
 }
 
 .sMobile .section_about .contacts .name
 {
-	font-size: 16px;
+	font-size: 20px;
 	margin: 70px 0 0 0;
 }
 
