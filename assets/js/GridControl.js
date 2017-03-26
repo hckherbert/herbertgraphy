@@ -20,6 +20,7 @@ GridControl.prototype.mNextAvailableIndex_num = 0;
 GridControl.prototype.mIsDirectPhotoLinkInit = false;
 GridControl.prototype.mHistState_obj = null;
 GridControl.prototype.mGridTween  = null;
+GridControl.prototype.mStaggerTimeout = 0;
 
 function GridControl(pGridControl, pPhotoOverlay)
 {
@@ -667,17 +668,17 @@ GridControl.prototype.positionGrids = function()
 				this.mGridstaggering = true;
 				this.fadeOutPageLoadingElements();
 
-				var  _staggerHeightOffset = $(window).height() + 1200;
+				var  _staggerHeightOffset = $(window).height() + 400;
 				var _gridPanelWidth  = $(".gridPanel").width();
 
-				setTimeout(function ()
+				_self.mStaggerTimeout = setTimeout(function ()
 				{
 					_self.transitLoadingAndAlbumStart();
 
-					_self.mGridTween = TweenMax.staggerFrom($(".grid"), 0.7, {
+					_self.mGridTween = TweenMax.staggerFrom($(".grid"), 0.8, {
 						opacity: 0.5,
 						"left":  Math.round(Math.random() * _gridPanelWidth) + "px",
-						"top":  Math.round(Math.random() * _staggerHeightOffset) + "px",
+						"top":  _staggerHeightOffset + "px",
 						ease: Back.easeInOut
 					}, 0.8 / _self.mGridCount_num, function ()
 					{
@@ -744,6 +745,8 @@ GridControl.prototype.onStaggeredAll = function()
 {
 	var _self = this;
 
+	clearTimeout(_self.mStaggerTimeout);
+
 	if (this.mWinWidthBeforeStaggered_num  != $(window).width())
 	{
 		this.mTimerReposition = setTimeout
@@ -756,7 +759,8 @@ GridControl.prototype.onStaggeredAll = function()
 		)
 	}
 
-	TweenMax.killAll();
+	TweenMax.killChildTweensOf($(".grid"));
+	_self.mGridTween = null;
 
 	this.updateGridInfoHeight();
 }
