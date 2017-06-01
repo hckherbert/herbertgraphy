@@ -1,0 +1,344 @@
+.pageLoading
+{
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  z-index: 4;
+}
+
+.pageLoading .loadingText
+{
+  color:#d3cfc7;
+  width:100%;
+  text-align:center;
+  font-size:10px;
+  position:relative;
+  top:50%;
+  margin-top:35px;
+  opacity:1;
+  transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+}
+
+.camera
+{
+  transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out; /** Chrome & Safari **/
+  -moz-transition: all 0.2s ease-in-out; /** Firefox **/
+  -o-transition: all 0.2s ease-in-out; /** Opera **/
+  transform:scale(0.7,0.7);
+
+}
+
+.camera:after, .camera:before, .shot:before, .shot:after, [class^=lens]:after, .light:after {
+  content: ' ';
+  position: absolute;
+  display: block;
+}
+
+.camera {
+  position: absolute;
+  height: 60px;
+  width: 70px;
+  left: calc(50% - 70px / 2);
+  top: calc(50% - 60px /2);
+  background: #706061;
+  border-radius: 6px;
+  box-shadow: 1px 2px 10px 1px #211a22;
+}
+
+.camera:after {
+  background: #f6e1ce;
+  right: 5px;
+  top: 5px;
+  height: 3px;
+  width: 8px;
+  border-radius: 1px;
+  z-index: 1;
+}
+.camera:before {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  left: calc(50% - 50px / 2);
+  top: calc(50% - 50px / 2);
+  background: #f6e1ce;
+  z-index: 1;
+}
+
+.shot {
+  position: absolute;
+  height: 44px;
+  width: 44px;
+  border-radius: 50%;
+  left: calc(50% - 44px / 2);
+  top: calc(50% - 44px / 2);
+  animation-name: rotate;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-duration: 1s;
+  animation-delay: 0s;
+  animation-direction: alternate;
+  background: #282739;
+  z-index: 3;
+  overflow: hidden;
+}
+.shot:before {
+  height: 36px;
+  width: 36px;
+  border-radius: 50%;
+  left: calc(50% - 36px / 2);
+  top: calc(50% - 36px / 2);
+  background: #5b4842;
+}
+.shot:after {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  left: calc(50% - 20px / 2);
+  top: calc(50% - 20px / 2);
+  animation-name: eye;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-duration: 1s;
+  animation-delay: 0s;
+  animation-direction: alternate;
+  background: #282633;
+}
+
+[class^=lens] {
+  position: absolute;
+  display: block;
+  left: 50%;
+  top: 50%;
+  height: 1px;
+  width: 10px;
+  animation-name: blinkZ;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-duration: 1s;
+  animation-delay: 0s;
+  animation-direction: alternate;
+  transform-origin: 0% 50%;
+}
+[class^=lens]:after {
+  width: 8px;
+  animation-name: blink;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-duration: 1s;
+  animation-delay: 0s;
+  animation-direction: alternate;
+  height: 1px;
+  left: 100%;
+  top: 0;
+  background: #715957;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.1) 0%, #715957 50%, #5b4842 100%);
+  box-shadow: 3px -1px 4px 0px rgba(0, 0, 0, 0.8);
+  transform-origin: 0% 50%;
+  transform: rotate(45deg);
+}
+
+.lens-1 {
+  transform: rotate(40deg);
+}
+
+.lens-2 {
+  transform: rotate(80deg);
+}
+
+.lens-3 {
+  transform: rotate(120deg);
+}
+
+.lens-4 {
+  transform: rotate(160deg);
+}
+
+.lens-5 {
+  transform: rotate(200deg);
+}
+
+.lens-6 {
+  transform: rotate(240deg);
+}
+
+.lens-7 {
+  transform: rotate(280deg);
+}
+
+.lens-8 {
+  transform: rotate(320deg);
+}
+
+.lens-9 {
+  transform: rotate(360deg);
+}
+
+.light {
+  position: absolute;
+  display: block;
+  left: 50%;
+  top: 50%;
+  height: 1px;
+  width: 10px;
+  z-index: 10;
+  animation-name: blinkZ;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-duration: 1s;
+  animation-delay: 0s;
+  animation-direction: alternate;
+  transform-origin: 0% 50%;
+  transform: rotate(-45deg);
+}
+.light:after {
+  width: 8px;
+  height: 8px;
+  animation-name: light;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-duration: 1s;
+  animation-delay: 0s;
+  animation-direction: alternate;
+  background: #d1ccc9;
+  left: calc(100% - 8px / 2);
+  border-radius: 50%;
+  top: -4px;
+}
+
+@keyframes blink {
+  100% {
+    width: 13px;
+  }
+}
+@keyframes eye {
+  100% {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    left: calc(50% - 10px / 2);
+    top: calc(50% - 10px / 2);
+  }
+}
+@keyframes blinkZ {
+  100% {
+    width: 5px;
+  }
+}
+@keyframes rotate {
+  100% {
+    transform: rotate(137.5deg);
+  }
+}
+@keyframes light {
+  100% {
+    width: 3px;
+    height: 3px;
+    left: 100%;
+    top: -1.5px;
+  }
+}
+@keyframes flash {
+  97% {
+    background: none;
+  }
+  98% {
+    background: rgba(255, 255, 255, 0.8);
+  }
+  99% {
+    background: none;
+  }
+  100% {
+    background: rgba(255, 255, 255, 0.8);
+  }
+}
+
+.vaporizing
+{
+  animation-name: vapor;
+  animation-duration:0.8s;
+  animation-timing-function: ease-in-out;;
+  animation-iteration-count: 1;
+  animation-delay: 0.4s;
+}
+
+.down
+{
+  -ms-transform: translate(0, 150%); /* IE 9 */
+  -webkit-transform: translate(0, 150%); /* Safari */
+  transform: translate(0, 150%);
+
+}
+
+@keyframes vapor {
+  0% { margin-top: 0; opacity:1 }
+  100% { margin-top: -30%; opacity:0}
+}
+
+@-webkit-keyframes blinker {
+  0% { margin-top: 0; opacity:1 }
+  100% { margin-top: -30%; opacity:0}
+}
+
+@keyframes blinker {
+  0% { margin-top: 0; opacity:1 }
+  100% { margin-top: -30%; opacity:0}
+}
+
+
+.blink {
+
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index:1;
+}
+
+.blinkInit
+{
+
+  -webkit-animation-name: blinker;
+  -webkit-animation-duration: 0.3s;
+  -webkit-animation-timing-function: ease-in-out;;
+  -webkit-animation-iteration-count: 1;
+
+  -moz-animation-name: blinker;
+  -moz-animation-duration: 0.3s;
+  -moz-animation-timing-function: ease-in-out;;
+  -moz-animation-iteration-count: 1;
+
+  animation-name: blinker;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-in-out;;
+  animation-iteration-count: 1;
+
+  background:#fff;
+  opacity:0;
+
+}
+
+@-moz-keyframes blinker {
+  0% { opacity: 0.0; }
+  50% { opacity: 1.0; }
+  100% { opacity: 0.0; }
+}
+
+@-webkit-keyframes blinker {
+  0% { opacity: 0.0; }
+  50% { opacity: 1.0; }
+  100% { opacity: 0.0; }
+}
+
+@keyframes blinker {
+  0% { opacity: 0.0; }
+  50% { opacity: 1.0; }
+  100% { opacity: 0.0;}
+}
+
+.cameraZoom
+{
+  transform:scale(0.9,0.9);
+}

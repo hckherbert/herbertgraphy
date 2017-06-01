@@ -74,22 +74,6 @@ class JSONAPI
 		self::echo_json_error_response($message,404);
 	}
 
-    public static function log_and_echo_api_error_response($e,$message=NULL){
-        $ci_instance =& get_instance();
-        $ci_instance->load->model("log_model");
-        $current_user_id = CurrentUserIDProvider::get_current_user_id();
-        $ci_instance->log_model->create_api_error_exception_log($current_user_id,$e);
-        self::echo_api_error_response($message);
-    }
-
-    public static function echo_api_error_response($message=NULL,$default_header=503){
-        $ci_instance =& get_instance();
-        if($message === NULL){
-            $message = $ci_instance->lang->line("api_server_error");
-        }
-        return self::echo_json_error_response($message,$default_header);
-    }
-
     public static function echo_json_error_response($message = "",$default_header=400)
     {
         $defaultErrorArray = array(JSONAPIEnum::SUCCESSCODE => JSONAPIEnum::SUCCESSCODE_FAIL);
@@ -124,5 +108,29 @@ class JSONAPI
         }
         $ci_instance =& get_instance();
         $ci_instance->output->set_content_type('application/json', 'utf-8')->set_output(json_encode($default_array, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS));
+    }
+
+    public static function decode($json)
+    {
+        return json_decode($json, self::get_json_decode_assoc(), self::get_json_decode_default_depth(), self::get_json_decode_options());
+    }
+
+    public static function encode($data){
+        return json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    }
+
+    private static function get_json_decode_assoc()
+    {
+        return TRUE;
+    }
+
+    private static function get_json_decode_default_depth()
+    {
+        return 512;
+    }
+
+    private static function get_json_decode_options()
+    {
+        return JSON_NUMERIC_CHECK & JSON_FORCE_OBJECT & JSON_UNESCAPED_SLASHES;
     }
 }

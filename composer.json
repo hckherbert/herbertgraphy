@@ -1,0 +1,8 @@
+{
+    "require": {
+        "google/apiclient": "1.0.*@beta"
+    },
+    "require-dev": {
+        "kenjis/codeigniter-cli": "^0.1.0"
+    }
+}
