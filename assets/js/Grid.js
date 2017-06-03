@@ -148,7 +148,13 @@ Grid.prototype.onMouseOut = function()
 {
 	$(".titleOverlay", this.mGrid).removeClass("titleOverlayShow");
 }
- 
+
+/*
+Grid.prototype.setDebug = function(_i)
+{
+	this.mGrid.append("<div class='debug' style='position:absolute;left:0;top:0; color:red; font-size:20px;'>" + _i + "</div>");
+}
+*/
 
 
  
