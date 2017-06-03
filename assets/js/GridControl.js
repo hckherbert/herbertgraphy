@@ -701,6 +701,9 @@ GridControl.prototype.positionGrids = function()
 				{
 					_self.transitLoadingAndAlbumStart();
 
+					//Important: scroll to top to avoid grids overlapping at the window bottom!
+					$(window).scrollTop(0);
+
 					_self.mGridTween = TweenMax.staggerFrom($(".grid"), 0.8, {
 						opacity: 0.5,
 						"left":  Math.round(Math.random() * _gridPanelWidth) + "px",
