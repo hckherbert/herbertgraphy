@@ -1440,6 +1440,18 @@ a
 	margin: 70px 0 0 0;
 }
 
+/*********** FEATURED *************/
+.featuredContainer
+{
+
+}
+
+.featuredContainer + .footer
+{
+	opacity:1;
+}
+
+
 /******** SIMPLE LOADING **********/
 #simple-loading
 {
