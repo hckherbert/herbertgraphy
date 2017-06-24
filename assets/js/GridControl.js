@@ -64,7 +64,7 @@ function GridControl(pGridControl, pPhotoOverlay)
 				_self.imageOnLoaded(_imgObj);
 			}
 
-			_imgObj.src = $(this).find("img").attr("src") + "?r=" + Math.random() + "id=" + i;
+			_imgObj.src = $(this).find("img").attr("src") + "?id=" + i;
 
 			_self.mGrid_array.push(_grid);
 		}
@@ -90,7 +90,7 @@ GridControl.prototype.initBreakPoints = function(pBaseBreakPoint_array, pMediumB
 
 GridControl.prototype.imageOnLoaded = function(pImgObj)
 {
-	var _id = pImgObj.src.split("id=")[1];
+	var _id = pImgObj.src.split("?id=")[1];
 
 	this.mImageLoadedCount_num++;
 
