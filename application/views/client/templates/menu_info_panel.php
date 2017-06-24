@@ -24,13 +24,18 @@
             <ul class="otherAlbumMenus">
                 <?php foreach ($all_other_albums_data as $other_albums) { ?>
                     <li <?php if ($other_albums["siblings"]!==NULL) { ?> class="parent" <?php } ?>>
-                        <a href="<?php echo $other_albums["label"]; ?>"><?php echo $other_albums["name"]?>
+                        <a href="<?php echo $other_albums["label"]; ?>">
+                            <?php if ($other_albums["siblings"]!==NULL) { ?>
+                                <strong>&ndash; <?php echo $other_albums["name"]?></strong>
+                            <?php } else {
+                                echo $other_albums["name"];
+                             } ?>
                         </a>
                     </li>
                     <?php if ($other_albums["siblings"]!==NULL) { ?>
                         <?php foreach ($other_albums["siblings"] as $sibling) { ?>
                             <li class="siblings<?php if (end($other_albums["siblings"]) == $sibling) {?> last<?php } ?><?php if ($sibling["name"] == $current_album_data["album_details"]->name) {?> current<?php } ?>">
-                                <a href="<?php echo $sibling["label"]; ?>">- <?php echo $sibling["name"]?>
+                                <a href="<?php echo $sibling["label"]; ?>"><?php echo $sibling["name"]?>
                                 </a>
                             </li>
                         <?php } ?>
