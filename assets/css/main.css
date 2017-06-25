@@ -545,6 +545,7 @@ a
 .sMobile .infoPanel .otherAlbumMenus li.siblings
 {
 	font-style:italic;
+	padding:4px 8px 4px 16px;
 }
 
 .sDesktop .infoPanel .otherAlbumMenus li.siblings.last
