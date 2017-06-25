@@ -39,6 +39,14 @@ function GridControl(pGridControl, pPhotoOverlay)
 	{
 		location.href= GLOBAL_SITE_URL + "not_found";
 	}
+
+	var _isOccupiedSetLength = this.mGridCount_num * 4; //give some values large enough to detect if occupied
+
+	for (var _i=0; _i<_isOccupiedSetLength; _i++)
+	{
+		this.mIsOccupied_array.push(false);
+	}
+
 	$(window).scrollTop(0);
 
 }
@@ -84,13 +92,6 @@ GridControl.prototype.initGrid = function()
 	this.mWinWidthBeforeStaggered_num = $(window).width();
 	this.positionGrids();
 
-	var _isOccupiedSetLength = this.mGridCount_num * 4; //give some values large enough to detect if occupied
-
-	for (var _i=0; _i<_isOccupiedSetLength; _i++)
-	{
-		_self.mIsOccupied_array.push(false);
-	}
-
 }
 
 GridControl.prototype.initBreakPoints = function(pBaseBreakPoint_array, pMediumBreakPoint_num, pWideScreenBreakPoint_num)
@@ -100,12 +101,6 @@ GridControl.prototype.initBreakPoints = function(pBaseBreakPoint_array, pMediumB
 	this.mWideScreenBreakPoint_num = pWideScreenBreakPoint_num;
 }
 
-GridControl.prototype.onAllImageLoaded = function()
-{
-	var _self = this;
-	this.mWinWidthBeforeStaggered_num = $(window).width();
-	this.positionGrids();
-}
 
 GridControl.prototype.updateDensity = function(pDensity_str)
 {
@@ -128,7 +123,7 @@ GridControl.prototype.updateDensity = function(pDensity_str)
 }
 
 
-GridControl.prototype.resetOccupy = function(pAspectRatio_num)
+GridControl.prototype.resetOccupy = function()
 {
 	var _i = 0;
 
