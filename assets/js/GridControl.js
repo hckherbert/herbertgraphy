@@ -39,6 +39,13 @@ function GridControl(pGridControl, pPhotoOverlay)
 	{
 		location.href= GLOBAL_SITE_URL + "not_found";
 	}
+	$(window).scrollTop(0);
+
+}
+
+GridControl.prototype.initGrid = function()
+{
+	var _self = this;
 
 	this.mGridControl.children(".grid").each
 	(
@@ -58,17 +65,24 @@ function GridControl(pGridControl, pPhotoOverlay)
 				_grid.setHighlighted(true);
 			}
 
-			var _imgObj = new Image();
-			_imgObj.onload = function()
-			{
-				_self.imageOnLoaded(_imgObj);
-			}
+			var _width =  parseInt($(this).data("width"));
+			var _height =  parseInt($(this).data("height"));
 
-			_imgObj.src = $(this).find("img").attr("src") + "?id=" + i;
+			if (_width >= _height)
+			{
+				_grid.setOrientation("h");
+			}
+			else
+			{
+				_grid.setOrientation("v");
+			}
 
 			_self.mGrid_array.push(_grid);
 		}
 	)
+
+	this.mWinWidthBeforeStaggered_num = $(window).width();
+	this.positionGrids();
 
 	var _isOccupiedSetLength = this.mGridCount_num * 4; //give some values large enough to detect if occupied
 
@@ -77,8 +91,6 @@ function GridControl(pGridControl, pPhotoOverlay)
 		_self.mIsOccupied_array.push(false);
 	}
 
-	$(window).scrollTop(0);
-
 }
 
 GridControl.prototype.initBreakPoints = function(pBaseBreakPoint_array, pMediumBreakPoint_num, pWideScreenBreakPoint_num)
@@ -86,29 +98,6 @@ GridControl.prototype.initBreakPoints = function(pBaseBreakPoint_array, pMediumB
 	this.mBaseBreakPoint_array = pBaseBreakPoint_array;
 	this.mMediumBreakPoint_num = pMediumBreakPoint_num;
 	this.mWideScreenBreakPoint_num = pWideScreenBreakPoint_num;
-}
-
-GridControl.prototype.imageOnLoaded = function(pImgObj)
-{
-	var _id = pImgObj.src.split("?id=")[1];
-
-	this.mImageLoadedCount_num++;
-
-	if (pImgObj.width >= pImgObj.height)
-	{
-		this.mGridControl.find(".grid:eq(" + _id + ")").attr("data-orientation", "h");
-		this.mGrid_array[_id].setOrientation("h");
-	}
-	else if (pImgObj.width < pImgObj.height)
-	{
-		this.mGridControl.find(".grid:eq(" + _id + ")").attr("data-orientation", "v");
-		this.mGrid_array[_id].setOrientation("v");
-	}
-
-	if (this.mImageLoadedCount_num == this.mGridCount_num)
-	{
-		this.onAllImageLoaded();
-	}
 }
 
 GridControl.prototype.onAllImageLoaded = function()

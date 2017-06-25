@@ -93,6 +93,10 @@ class Photo_model extends CI_Model
                     $result[$key]["priority"] = mt_rand() / mt_getrandmax();
                 }
 
+                list($width, $height, $type, $attr) = getimagesize($photo_base_dir . $album_label . "/" .$result[$key]["file_thumb_path"]);
+
+                $result[$key]["width"] = $width;
+                $result[$key]["height"] = $height;
                 $result[$key]["file_zoom_size"] = "";
 
                 foreach ($this->config->item("photo_long_side") as $value)
