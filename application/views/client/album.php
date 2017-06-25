@@ -20,6 +20,8 @@
 					 data-filename = "<?php echo base_url("assets/photos/".$current_album_data["album_details"]->label."/".$photo["hash_filename"]); ?>"
 					 data-file_zoom_size = "<?php echo $photo["file_zoom_size"]; ?>"
 					 data-slug = "<?php echo $photo["slug_filename"]; ?>"
+					 data-width = "<?php echo $photo["width"]; ?>"
+					 data-height = "<?php echo $photo["height"]; ?>"
 					 <?php if ($photo["featured"] == "1"){ ?>data-featured="true"<?php } ?>
 					 <?php if ($photo["highlighted"] == "1"){ ?>data-highlighted="true"<?php } ?>
 				>
