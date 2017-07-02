@@ -70,6 +70,10 @@ var src = {
         [
             "assets/js/album.js"
         ],
+        "featured.js":
+        [
+            "assets/js/featured.js"
+        ],
         "admin_main.js":
         [
             vendor.jquery + "dist/jquery.js",

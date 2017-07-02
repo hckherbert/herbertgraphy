@@ -69,7 +69,11 @@ class MY_Loader extends CI_Loader
         {
             if ($main_view_name  === "featured")
             {
-                $data["class_main_color"] = "bgBrown";
+                $data["class_main_color"] = "bgBlack";
+
+                $data["js_includes"] = array(
+                    "featured.js"
+                );
 
                 $data["meta_tags"] = "client/" . $main_view_name . "/meta_tags";
 
