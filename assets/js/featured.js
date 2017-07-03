@@ -10,8 +10,7 @@ var mTotalSlide = 0;
 var mIsSliding = false;
 var wordArray = [];
 var words = document.getElementsByClassName("title");
-
-var currentWord = 0;
+var currentWord = mActiveIndex -1;
 
 $(document).ready(
     function()
@@ -19,10 +18,12 @@ $(document).ready(
         //desktop mode
         if ($("body").hasClass("sDesktop"))
         {
-            animateText();
+           // animateText();
 
             mTotalSlide = $(".featuredList img").length;
             windowOnResized();
+            animateText();
+
             $(window).on("resize", windowOnResized);
 
             $(".navigator .btn_prev").on("click", function(pEvent)
@@ -56,9 +57,11 @@ $(document).ready(
 
                 _timeLineCarousel.to($(".featuredList"),mTweenDurationSliding,{css:{left:  _targetLeftPos + "px"},ease:Circ.easeOut, onComplete: onSlideComplete});
                 _timeLineImageOpacity.to(_currentItem, mTweenDurationImgOpacity, {css:{opacity:0.3},ease:Circ.easeOut})
-                         .to(_nextItem, mTweenDurationImgOpacity, {css:{opacity:1},ease:Circ.easeIn})
+                         .to(_nextItem, mTweenDurationImgOpacity, {css:{opacity:1},ease:Circ.easeIn});
 
-               // _timeLineTitle.to($(".title"), 0.1, {css:{opacity:0},ease:Circ.easeIn});
+                _timeLineTitle.to($(".title:eq("  + mActiveIndex + ")"), 0.3, {css:{opacity:0},ease:Circ.easeIn});
+               //     .to($(".title:eq("  + (mActiveIndex+1) + ")"), 0.3, {css:{opacity:1},ease:Circ.easeIn});
+
 
                 mActiveIndex++;
 
@@ -129,25 +132,30 @@ function windowOnResized()
         if (i == 0)
         {
             $(e).css("left", "0");
+            $(".title:eq(" + i + ")").css("left", "0");
         }
         else
         {
             $(e).css("left", _accumulatedWidth + "px");
+            $(".title:eq(" + i + ")").css("left", _accumulatedWidth + "px");
         }
 
         var _currentWidth = Math.round(_winHeight * parseInt($(e).data("width")) / parseInt($(e).data("height")));
 
+        $(".title:eq(" + i + ")").css("width", _currentWidth + "px");
+
         if (i == mActiveIndex)
         {
             $(e).css("opacity", "1");
+            TweenMax.to( $(".title:eq(" + i + ")", 0.3, {css:{opacity:1},ease:Circ.easeIn}));
 
             var _expectedActiveLeftPos = mWinWidthMidPoint - Math.round(_currentWidth * 0.5);
             var _diff = _expectedActiveLeftPos - _accumulatedWidth;
             $(".featuredList").css("left", _diff + "px");
 
 
-            $(".title").css("width", _currentWidth + "px");
-            $(".title").css("margin-left", Math.round(-0.5 * _currentWidth) + "px");
+//            $(".title").css("width", _currentWidth + "px");
+//            $(".title").css("margin-left", Math.round(-0.5 * _currentWidth) + "px");
 
         }
 
@@ -159,19 +167,12 @@ function windowOnResized()
 function onSlideComplete()
 {
     mIsSliding = false;
-    wordArray = [];
-
 
     var _winHeight = $(window).height();
     var _currentWidth = Math.round(_winHeight * parseInt($(".featuredList img:eq(" + mActiveIndex + ")").data("width")) / parseInt($(".featuredList img:eq(" + mActiveIndex + ")").data("height")));
 
-    $(".title").css("width", _currentWidth + "px");
-    $(".title").css("margin-left", Math.round(-0.5 * _currentWidth) + "px");
-
-    $(".title").empty().text("Fairy Tallinn");
-    animateText();
-
-
+    currentWord++;
+    changeWord();
 
     //TweenMax.to($(".title"), 0.2, {css:{opacity:1},ease:Circ.easeIn});
 }
@@ -179,8 +180,7 @@ function onSlideComplete()
 
 function animateText()
 {
-
-    words[currentWord].style.opacity = 1;
+   // words[currentWord+1].style.opacity = 1;
 
     for (var i = 0; i < words.length; i++) {
         splitLetters(words[i]);
@@ -202,7 +202,10 @@ function changeWord() {
 
     for (var i = 0; i < nw.length; i++) {
         nw[i].className = 'letter behind';
-        nw[0].parentElement.style.opacity = 1;
+        //nw[0].parentElement.style.opacity = 1;
+
+        //var _timeLine = new TimelineLite();
+        TweenMax.to(nw[0].parentElement, 0.3, {css:{opacity:1},ease:Circ.easeIn});
         animateLetterIn(nw, i);
     }
 
