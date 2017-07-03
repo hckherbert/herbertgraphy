@@ -43,6 +43,7 @@ $(document).ready(
 
                 var _timeLineCarousel = new TimelineLite();
                 var _timeLineImageOpacity = new TimelineLite();
+                var _timeLineTitle = new TimelineLite();
 
                 var _currentItem = $(".featuredList img:eq(" + mActiveIndex + ")");
                 var _nextItem = $(".featuredList img:eq(" + (mActiveIndex + 1) + ")");
@@ -55,7 +56,9 @@ $(document).ready(
 
                 _timeLineCarousel.to($(".featuredList"),mTweenDurationSliding,{css:{left:  _targetLeftPos + "px"},ease:Circ.easeOut, onComplete: onSlideComplete});
                 _timeLineImageOpacity.to(_currentItem, mTweenDurationImgOpacity, {css:{opacity:0.3},ease:Circ.easeOut})
-                         .to(_nextItem, mTweenDurationImgOpacity, {css:{opacity:1},ease:Circ.easeIn});
+                         .to(_nextItem, mTweenDurationImgOpacity, {css:{opacity:1},ease:Circ.easeIn})
+
+               // _timeLineTitle.to($(".title"), 0.1, {css:{opacity:0},ease:Circ.easeIn});
 
                 mActiveIndex++;
 
@@ -156,6 +159,21 @@ function windowOnResized()
 function onSlideComplete()
 {
     mIsSliding = false;
+    wordArray = [];
+
+
+    var _winHeight = $(window).height();
+    var _currentWidth = Math.round(_winHeight * parseInt($(".featuredList img:eq(" + mActiveIndex + ")").data("width")) / parseInt($(".featuredList img:eq(" + mActiveIndex + ")").data("height")));
+
+    $(".title").css("width", _currentWidth + "px");
+    $(".title").css("margin-left", Math.round(-0.5 * _currentWidth) + "px");
+
+    $(".title").empty().text("Fairy Tallinn");
+    animateText();
+
+
+
+    //TweenMax.to($(".title"), 0.2, {css:{opacity:1},ease:Circ.easeIn});
 }
 
 
@@ -163,9 +181,11 @@ function animateText()
 {
 
     words[currentWord].style.opacity = 1;
+
     for (var i = 0; i < words.length; i++) {
         splitLetters(words[i]);
     }
+
 
     changeWord();
     //setInterval(changeWord, 4000);
@@ -175,6 +195,7 @@ function animateText()
 function changeWord() {
     var cw = wordArray[currentWord];
     var nw = currentWord == words.length - 1 ? wordArray[0] : wordArray[currentWord + 1];
+
     for (var i = 0; i < cw.length; i++) {
         animateLetterOut(cw, i);
     }
@@ -185,7 +206,8 @@ function changeWord() {
         animateLetterIn(nw, i);
     }
 
-    currentWord = (currentWord == wordArray.length - 1) ? 0 : currentWord + 1;
+
+    //currentWord = (currentWord == wordArray.length - 1) ? 0 : currentWord + 1;
 }
 
 function animateLetterOut(cw, i) {
