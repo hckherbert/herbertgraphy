@@ -5,7 +5,7 @@
         <?php } ?>
     </div>
     <div class="navigator">
-        <a class="btn_prev" href="javascript:void(0)"><span><</span></a>
-        <a class="btn_next" href="javascript:void(0)"><span>></span></a>
+        <a class="btn_prev"><span><</span></a>
+        <a class="btn_next"><span>></span></a>
     </div>
 </div>

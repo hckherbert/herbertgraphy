@@ -1491,6 +1491,7 @@ a
 	border-radius: 15px;
 	display:inline-block;
 	margin:5px;
+	cursor:pointer;
 }
 
 .navigator a span {
@@ -1500,6 +1501,12 @@ a
 	width: 30px;
 	text-align: center;
 	font-size: 30px;
+}
+
+.navigator a.disable
+{
+	opacity:0.4 !important;
+	cursor:default !important;
 }
 
 /******** SIMPLE LOADING **********/

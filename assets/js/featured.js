@@ -5,6 +5,8 @@
 var mActiveIndex = 7;
 var mTweenDurationSliding = 0.7;
 var mTweenDurationImgOpacity = 0.2;
+var mWinWidthMidPoint = 0;
+var mTotalSlide = 0;
 
 $(document).ready(
     function()
@@ -12,6 +14,7 @@ $(document).ready(
         //desktop mode
         if ($("body").hasClass("sDesktop"))
         {
+            mTotalSlide = $(".featuredList img").length;
             windowOnResized();
             $(window).on("resize", windowOnResized);
 
@@ -28,14 +31,29 @@ $(document).ready(
                 var _timeLineImageOpacity = new TimelineLite();
 
                 var _currentItem = $(".featuredList img:eq(" + mActiveIndex + ")");
-                var _nextItem =  $(".featuredList img:eq(" + (mActiveIndex+1) + ")");
-                var _moveDistance = Math.round(_nextItem.width());
+                var _nextItem = $(".featuredList img:eq(" + (mActiveIndex + 1) + ")");
                 var _currentLeft = $(".featuredList").position().left;
-                _timeLineCarousel.to($(".featuredList"),mTweenDurationSliding,{css:{left: (_currentLeft - _moveDistance) + "px"},ease:Circ.easeOut});
+
+                //shift half the currentItem width first
+                var _nextItemToLeft = _currentLeft  - _currentItem.width()* 0.5;
+                //The shift half the targetItem width
+                var _targetLeftPos = _nextItemToLeft - _nextItem.width()* 0.5;
+
+
+                _timeLineCarousel.to($(".featuredList"),mTweenDurationSliding,{css:{left:  _targetLeftPos + "px"},ease:Circ.easeOut});
                 _timeLineImageOpacity.to(_currentItem, mTweenDurationImgOpacity, {css:{opacity:0.3},ease:Circ.easeOut})
                          .to(_nextItem, mTweenDurationImgOpacity, {css:{opacity:1},ease:Circ.easeIn});
 
                 mActiveIndex++;
+
+                if (mTotalSlide == mActiveIndex+1)
+                {
+                    $(this).addClass("disable");
+                }
+                else
+                {
+                    $(this).removeClass("disable");
+                }
 
             });
         }
@@ -47,7 +65,7 @@ function windowOnResized()
     var _winHeight = $(window).height();
     var _accumulatedWidth = 0;
 
-    var _winWidthMidPoint = $(window).width() * 0.5;
+    mWinWidthMidPoint = $(window).width() * 0.5;
 
     $(".featuredList img").each(function (i, e)
     {
@@ -66,7 +84,7 @@ function windowOnResized()
         {
             $(e).css("opacity", "1");
 
-            var _expectedActiveLeftPos = _winWidthMidPoint - _currentWidth * 0.5;
+            var _expectedActiveLeftPos = mWinWidthMidPoint - _currentWidth * 0.5;
             var _diff = _expectedActiveLeftPos - _accumulatedWidth;
             $(".featuredList").css("left", _diff + "px");
         }
