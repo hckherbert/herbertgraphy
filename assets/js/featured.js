@@ -11,6 +11,7 @@ var mIsSliding = false;
 var wordArray = [];
 var words = document.getElementsByClassName("title");
 var currentWord = mActiveIndex -1;
+var mSlideDirection = "";
 
 $(document).ready(
     function()
@@ -41,6 +42,7 @@ $(document).ready(
                 }
 
                 mIsSliding = true;
+                mSlideDirection = "next";
 
                 var _timeLineCarousel = new TimelineLite();
                 var _timeLineImageOpacity = new TimelineLite();
@@ -60,8 +62,6 @@ $(document).ready(
                          .to(_nextItem, mTweenDurationImgOpacity, {css:{opacity:1},ease:Circ.easeIn});
 
                 _timeLineTitle.to($(".title:eq("  + mActiveIndex + ")"), 0.3, {css:{opacity:0},ease:Circ.easeIn});
-               //     .to($(".title:eq("  + (mActiveIndex+1) + ")"), 0.3, {css:{opacity:1},ease:Circ.easeIn});
-
 
                 mActiveIndex++;
 
@@ -87,9 +87,11 @@ $(document).ready(
                 }
 
                 mIsSliding = true;
+                mSlideDirection = "prev";
 
                 var _timeLineCarousel = new TimelineLite();
                 var _timeLineImageOpacity = new TimelineLite();
+                var _timeLineTitle = new TimelineLite();
 
                 var _currentItem = $(".featuredList img:eq(" + mActiveIndex + ")");
                 var _nextItem = $(".featuredList img:eq(" + (mActiveIndex - 1) + ")");
@@ -103,6 +105,8 @@ $(document).ready(
                 _timeLineCarousel.to($(".featuredList"),mTweenDurationSliding,{css:{left:  _targetLeftPos + "px"},ease:Circ.easeOut, onComplete: onSlideComplete});
                 _timeLineImageOpacity.to(_currentItem, mTweenDurationImgOpacity, {css:{opacity:0.3},ease:Circ.easeOut})
                     .to(_nextItem, mTweenDurationImgOpacity, {css:{opacity:1},ease:Circ.easeIn});
+
+                _timeLineTitle.to($(".title:eq("  + mActiveIndex + ")"), 0.3, {css:{opacity:0},ease:Circ.easeIn});
 
                 mActiveIndex--;
 
@@ -153,10 +157,6 @@ function windowOnResized()
             var _diff = _expectedActiveLeftPos - _accumulatedWidth;
             $(".featuredList").css("left", _diff + "px");
 
-
-//            $(".title").css("width", _currentWidth + "px");
-//            $(".title").css("margin-left", Math.round(-0.5 * _currentWidth) + "px");
-
         }
 
         _accumulatedWidth += _currentWidth;
@@ -168,13 +168,17 @@ function onSlideComplete()
 {
     mIsSliding = false;
 
-    var _winHeight = $(window).height();
-    var _currentWidth = Math.round(_winHeight * parseInt($(".featuredList img:eq(" + mActiveIndex + ")").data("width")) / parseInt($(".featuredList img:eq(" + mActiveIndex + ")").data("height")));
+    if (mSlideDirection == "prev")
+    {
+        currentWord--;
+    }
+    else if (mSlideDirection == "next")
+    {
+        currentWord++;
+    }
 
-    currentWord++;
     changeWord();
-
-    //TweenMax.to($(".title"), 0.2, {css:{opacity:1},ease:Circ.easeIn});
+    mSlideDirection = "";
 }
 
 
