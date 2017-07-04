@@ -5,7 +5,18 @@
         <?php } ?>
 
         <?php foreach ($image_list_data as $key=>$image_data) { ?>
-        <div class="title">La Senta de Voleitre</div>
+        <div class="title">Street Snapshot</div>
+        <div class="title">Sopot Molo</div>
+        <div class="title">Dance in the Rain</div>
+        <div class="title">Happy and Healthy</div>
+        <div class="title">Sense the World</div>
+        <div class="title">The Early Spring</div>
+        <div class="title">Charlina</div>
+        <div class="title">Old Man in the Snow</div>
+        <div class="title">Fairy Alley</div>
+        <div class="title">Palanga</div>
+        <div class="title">Alice</div>
+        <div class="title">Gisela</div>
         <?php } ?>
     </div>
     <div class="navigator">

@@ -223,6 +223,7 @@ function animateLetterIn(nw, i) {
     setTimeout(function() {
         nw[i].className = 'letter in';
     }, 200 + (i * 50));
+
 }
 
 function splitLetters(word) {
@@ -232,7 +233,16 @@ function splitLetters(word) {
     for (var i = 0; i < content.length; i++) {
         var letter = document.createElement('span');
         letter.className = 'letter';
-        letter.innerHTML = content.charAt(i);
+
+        if (content.charAt(i) == " ")
+        {
+            letter.innerHTML = "&nbsp;"
+        }
+        else
+        {
+            letter.innerHTML = content.charAt(i);
+        }
+
         word.appendChild(letter);
         letters.push(letter);
     }
