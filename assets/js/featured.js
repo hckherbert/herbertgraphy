@@ -74,6 +74,8 @@ $(document).ready(
                     $(this).removeClass("disable");
                 }
 
+                $(".navigator .btn_prev").removeClass("disable");
+
             });
 
 
@@ -118,6 +120,8 @@ $(document).ready(
                 {
                     $(this).removeClass("disable");
                 }
+
+                $(".navigator .btn_next").removeClass("disable");
 
             });
         }
