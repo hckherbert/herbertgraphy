@@ -5,6 +5,7 @@
 var mActiveIndex = 7;
 var mTweenDurationSliding = 0.7;
 var mTweenDurationImgOpacity = 0.2;
+var mTweenDurationTitle = 0.2;
 var mWinWidthMidPoint = 0;
 var mTotalSlide = 0;
 var mIsSliding = false;
@@ -19,8 +20,6 @@ $(document).ready(
         //desktop mode
         if ($("body").hasClass("sDesktop"))
         {
-           // animateText();
-
             mTotalSlide = $(".featuredList img").length;
             windowOnResized();
             animateText();
@@ -57,11 +56,11 @@ $(document).ready(
                 //The shift half the targetItem width
                 var _targetLeftPos = _nextItemToLeft - Math.round(_nextItem.width()* 0.5);
 
-                _timeLineCarousel.to($(".featuredList"),mTweenDurationSliding,{css:{left:  _targetLeftPos + "px"},ease:Circ.easeOut, onComplete: onSlideComplete});
+                _timeLineCarousel.to($(".featuredList"), mTweenDurationSliding,{css:{left:  _targetLeftPos + "px"},ease:Circ.easeOut, onComplete: onSlideComplete});
                 _timeLineImageOpacity.to(_currentItem, mTweenDurationImgOpacity, {css:{opacity:0.3},ease:Circ.easeOut})
                          .to(_nextItem, mTweenDurationImgOpacity, {css:{opacity:1},ease:Circ.easeIn});
 
-                _timeLineTitle.to($(".title:eq("  + mActiveIndex + ")"), 0.3, {css:{opacity:0},ease:Circ.easeIn});
+                _timeLineTitle.to($(".title:eq("  + mActiveIndex + ")"), mTweenDurationImgOpacity, {css:{opacity:0},ease:Circ.easeIn});
 
                 mActiveIndex++;
 
@@ -108,7 +107,7 @@ $(document).ready(
                 _timeLineImageOpacity.to(_currentItem, mTweenDurationImgOpacity, {css:{opacity:0.3},ease:Circ.easeOut})
                     .to(_nextItem, mTweenDurationImgOpacity, {css:{opacity:1},ease:Circ.easeIn});
 
-                _timeLineTitle.to($(".title:eq("  + mActiveIndex + ")"), 0.3, {css:{opacity:0},ease:Circ.easeIn});
+                _timeLineTitle.to($(".title:eq("  + mActiveIndex + ")"), mTweenDurationImgOpacity, {css:{opacity:0},ease:Circ.easeIn});
 
                 mActiveIndex--;
 
@@ -211,8 +210,6 @@ function changeWord() {
     for (var i = 0; i < nw.length; i++) {
         nw[i].className = 'letter behind';
         //nw[0].parentElement.style.opacity = 1;
-
-        //var _timeLine = new TimelineLite();
         TweenMax.to(nw[0].parentElement, 0.3, {css:{opacity:1},ease:Circ.easeIn});
         animateLetterIn(nw, i);
     }
@@ -230,7 +227,7 @@ function animateLetterOut(cw, i) {
 function animateLetterIn(nw, i) {
     setTimeout(function() {
         nw[i].className = 'letter in';
-    }, 200 + (i * 50));
+    }, 100 + (i * 50));
 
 }
 
