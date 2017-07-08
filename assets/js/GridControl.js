@@ -680,6 +680,7 @@ GridControl.prototype.positionGrids = function()
 
 				var  _staggerHeightOffset = $(window).height() + 400;
 				var _gridPanelWidth  = $(".gridPanel").width();
+				var transitionEvent = whichTransitionEvent();
 
 				_self.mStaggerTimeout = setTimeout(function ()
 				{
@@ -708,19 +709,20 @@ GridControl.prototype.positionGrids = function()
 	}
 	else
 	{
+		var transitionEvent = whichTransitionEvent();
+
+		$(".camera").on(transitionEvent,
+			function(pEvent) {
+				_self.transitLoadingAndAlbumStart();
+				_self.updateGridPanelAndWinScroll();
+
+				if (_self.mDirectPhotoSlug!=null)
+				{
+					_self.handleDirectPhotoLink();
+				}
+			});
+
 		this.fadeOutPageLoadingElements();
-
-		setTimeout(function()
-		{
-			_self.transitLoadingAndAlbumStart();
-			_self.updateGridPanelAndWinScroll();
-
-			if (_self.mDirectPhotoSlug!=null)
-			{
-				_self.handleDirectPhotoLink();
-			}
-
-		}, 400);
 	}
 }
 
@@ -735,7 +737,7 @@ GridControl.prototype.sortByHighlight = function(array) {
 
 GridControl.prototype.fadeOutPageLoadingElements = function()
 {
-	$(".loadingText").addClass("show");
+	$(".loadingText").addClass("down");
 	$(".camera").addClass("cameraZoom vaporizing");
 	$(".blink").addClass("blinkInit");
 }
@@ -751,9 +753,11 @@ GridControl.prototype.handleDirectPhotoLink = function()
 
 GridControl.prototype.transitLoadingAndAlbumStart = function()
 {
-	$(".loadingText").addClass("down");
-
-	$(".pageLoading").fadeTo(400, 0, function()
+	if (!$("body").hasClass("sDesktop"))
+	{
+		$(".camera").remove();
+	}
+	$(".pageLoading").fadeTo(500, 0, function()
 	{
 		$(this).remove();
 	});
