@@ -2,12 +2,13 @@
  * Created by herbert on 7/2/2017.
  */
 
-var mActiveIndex = 8; //Note now mActiveIndex is ONE based, not ZERO based for text animation
+var mActiveIndex = 4; //Note now mActiveIndex is ONE based, not ZERO based for text animation
 var mTweenDurationSliding = 0.6;
 var mTweenDurationImgOpacity = 0.2;
 var mTweenDurationTitle = 0.2;
 var mTweenStoryContent = 0.3;
 var mWinWidthMidPoint = 0;
+var mDesktopMinHeight;
 var mTotalSlide = 0;
 var mIsSliding = false;
 var wordArray = [];
@@ -22,6 +23,9 @@ $(document).ready(
         //desktop mode
         if ($("body").hasClass("sDesktop"))
         {
+            $("html").addClass("vScrollOn");
+            $("body, html").addClass("bgBlack");
+            mDesktopMinHeight = parseInt($(".featuredList").css("min-height").split("px")[0]);
             mTotalSlide = $(".featuredList img").length;
             windowOnResized();
             $(window).on("resize", windowOnResized);
@@ -144,6 +148,12 @@ $(document).ready(
 function windowOnResized()
 {
     var _winHeight = $(window).height();
+
+    if (_winHeight <= mDesktopMinHeight )
+    {
+        _winHeight = mDesktopMinHeight;
+    }
+
     var _accumulatedWidth = 0;
 
     mWinWidthMidPoint = $(window).width() * 0.5;
@@ -165,10 +175,15 @@ function windowOnResized()
 
         $(".title:eq(" + (i+1) + ")").css("width", _currentWidth + "px");
 
-        if (i == mActiveIndex-1)
-        {
+        if (i == mActiveIndex-1) {
             $(e).css("opacity", "1");
-            TweenMax.to( $(".title:eq(" + i + ")", mTweenDurationTitle, {css:{opacity:1},ease:Circ.easeIn, onComplete: animateText}));
+
+            TweenMax.to($(".title:eq(" + i + ")", mTweenDurationTitle, {
+                css: {opacity: 1},
+                ease: Circ.easeIn,
+                onComplete: animateText
+            }));
+
             var _expectedActiveLeftPos = mWinWidthMidPoint - Math.round(_currentWidth * 0.5);
             var _diff = _expectedActiveLeftPos - _accumulatedWidth;
             $(".featuredList").css("left", _diff + "px");
@@ -179,6 +194,17 @@ function windowOnResized()
         _accumulatedWidth += _currentWidth;
 
     });
+
+    if ($(".content").outerWidth() >= $(window).width() &&  $(window).width() <= 640)
+    {
+        $(".content").css("width", "100%");
+        $(".content").css("top", 0);
+    }
+    else
+    {
+       $(".content").css("width", "400px");
+        $(".content").css("top", "30%");
+    }
 }
 
 function onSlideComplete()
@@ -203,7 +229,6 @@ function animateText()
 {
    //words[currentWord+1].style.opacity = 1;
 
-     
     for (var i = 0; i < words.length; i++) {
         splitLetters(words[i]);
     }
