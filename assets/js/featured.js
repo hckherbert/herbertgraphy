@@ -195,7 +195,7 @@ function windowOnResized()
 
     });
 
-    if ($(".content").outerWidth() >= $(window).width() &&  $(window).width() <= 640)
+    if ($(".content").outerWidth() >= $(window).width() &&  $(window).width() <= 640 )
     {
         $(".content").css("width", "100%");
         $(".content").css("top", 0);
@@ -203,8 +203,12 @@ function windowOnResized()
     else
     {
        $(".content").css("width", "400px");
-        $(".content").css("top", "30%");
+       $(".content").css("top", "30%");
     }
+
+
+    
+
 }
 
 function onSlideComplete()
