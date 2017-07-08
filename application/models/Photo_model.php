@@ -23,18 +23,20 @@ class Photo_model extends CI_Model
     {
         $photo_base_dir = FCPATH."/assets/photos/";
         $album_label = $this->get_photo_folder($album_id);
+        $this->load->config("photo");
 
 		$this->db->select("photoId,slug_filename,hash_filename,title,desc,featured,highlighted");
 		$this->db->where("albumId", $album_id);
 		$this->db->order_by("featured", "DESC");
 		$this->db->order_by("created_date", "DESC");
 		$query = $this->db->get("photos");
+        $highlight_factor = $this->config->item("photo_highlight_priority_factor");
 
 		if ($pIsShuffle)
 		{
 			$featured_index = -1;
 			$result = $query->result_array();
-			shuffle($result);
+			//shuffle($result);
 
 			foreach($result as $key=>$record)
 			{
@@ -58,6 +60,8 @@ class Photo_model extends CI_Model
                         $result[$key]["file_thumb_path"] = $result[$key]["hash_filename"] . ".jpg";
                     }
 
+                    $result[$key]["priority"] = $highlight_factor + 0.1;
+
                 }
                 else  if ($record["highlighted"] == "1")
                 {
@@ -70,6 +74,8 @@ class Photo_model extends CI_Model
                     {
                         $result[$key]["file_thumb_path"] = $result[$key]["hash_filename"] . ".jpg";
                     }
+
+                    $result[$key]["priority"] = $highlight_factor * (mt_rand() / mt_getrandmax());
                 }
                 else
                 {
@@ -83,8 +89,14 @@ class Photo_model extends CI_Model
                     {
                         $result[$key]["file_thumb_path"] = $result[$key]["hash_filename"] . ".jpg";
                     }
+
+                    $result[$key]["priority"] = mt_rand() / mt_getrandmax();
                 }
 
+                list($width, $height, $type, $attr) = getimagesize($photo_base_dir . $album_label . "/" .$result[$key]["file_thumb_path"]);
+
+                $result[$key]["width"] = $width;
+                $result[$key]["height"] = $height;
                 $result[$key]["file_zoom_size"] = "";
 
                 foreach ($this->config->item("photo_long_side") as $value)
@@ -95,7 +107,23 @@ class Photo_model extends CI_Model
                     }
                 }
 			}
-			
+
+
+            $priority = array();
+
+            foreach ($result as $item)
+            {
+                foreach ($item as $key=>$value)
+                {
+                    if ($key === "priority")
+                    {
+                        $priority[] = $value;
+                    }
+                }
+            }
+
+            array_multisort($priority, SORT_DESC,  $result);
+
 			if ($featured_index>=0)
 			{
 				$featured_photo = $result[$featured_index];

@@ -3,7 +3,6 @@ GridControl.prototype.mGridControl = null;
 GridControl.prototype.mGridCount_num = 0;
 GridControl.prototype.mColCount_num = 0;
 GridControl.prototype.mGrid_array = null;
-GridControl.prototype.mImageLoadedCount_num = 0;
 GridControl.prototype.mIsOccupied_array = null;
 GridControl.prototype.mGridstaggering = false;
 GridControl.prototype.mPhotoOverlay = null;
@@ -21,6 +20,8 @@ GridControl.prototype.mIsDirectPhotoLinkInit = false;
 GridControl.prototype.mHistState_obj = null;
 GridControl.prototype.mGridTween  = null;
 GridControl.prototype.mStaggerTimeout = 0;
+GridControl.prototype.mCheckLoadTimer = null;
+GridControl.prototype.mSthNotLoaded = false;
 
 function GridControl(pGridControl, pPhotoOverlay)
 {
@@ -28,6 +29,7 @@ function GridControl(pGridControl, pPhotoOverlay)
 	this.mGrid_array = [];
 	this.mIsOccupied_array = [];
 	this.mHistState_obj = {};
+	this.mImgPath_array = [];
 	this.mGridControl = pGridControl;
 	this.mPhotoOverlay = pPhotoOverlay;
 	this.mPhotoOverlay.setOnHideStart(function(){_self.photoOverlayOnHideStart();});
@@ -39,7 +41,22 @@ function GridControl(pGridControl, pPhotoOverlay)
 	{
 		location.href= GLOBAL_SITE_URL + "not_found";
 	}
-	
+
+	var _isOccupiedSetLength = this.mGridCount_num * 4; //give some values large enough to detect if occupied
+
+	for (var _i=0; _i<_isOccupiedSetLength; _i++)
+	{
+		this.mIsOccupied_array.push(false);
+	}
+
+	$(window).scrollTop(0);
+
+}
+
+GridControl.prototype.initGrid = function()
+{
+	var _self = this;
+
 	this.mGridControl.children(".grid").each
 	(
 		function(i,e)
@@ -47,7 +64,7 @@ function GridControl(pGridControl, pPhotoOverlay)
 			var _grid = new Grid($(this));
 			_grid.addEventListener("click", function() { _self.onClick(_grid);});
 			_grid.setIndex(i);
-			
+
 			if ($(this).attr("data-featured") == "true")
 			{
 				_grid.setFeatured(true);
@@ -57,27 +74,28 @@ function GridControl(pGridControl, pPhotoOverlay)
 			{
 				_grid.setHighlighted(true);
 			}
-			
-			var _imgObj = new Image();
-			_imgObj.onload = function()
+
+			var _width =  parseInt($(this).data("width"));
+			var _height =  parseInt($(this).data("height"));
+
+			if (_width >= _height)
 			{
-				_self.imageOnLoaded(_imgObj);
+				_grid.setOrientation("h");
 			}
-			
-			_imgObj.src = $(this).find("img").attr("src") + "?r=" + Math.random() + "id=" + i;
-			
+			else
+			{
+				_grid.setOrientation("v");
+			}
+
 			_self.mGrid_array.push(_grid);
 		}
+
 	)
 
-	var _isOccupiedSetLength = this.mGridCount_num * 4; //give some values large enough to detect if occupied
-
-	for (var _i=0; _i<_isOccupiedSetLength; _i++)
-	{
-		_self.mIsOccupied_array.push(false);
-	}
-
-	$(window).scrollTop(0);
+	//Fix Image may never issue in mobile!
+	this.keepImageLoad();
+	this.mWinWidthBeforeStaggered_num = $(window).width();
+	this.positionGrids();
 
 }
 
@@ -88,40 +106,11 @@ GridControl.prototype.initBreakPoints = function(pBaseBreakPoint_array, pMediumB
 	this.mWideScreenBreakPoint_num = pWideScreenBreakPoint_num;
 }
 
-GridControl.prototype.imageOnLoaded = function(pImgObj)
-{
-	var _id = pImgObj.src.split("id=")[1];
-	
-	this.mImageLoadedCount_num++;
-	
-	if (pImgObj.width >= pImgObj.height)
-	{
-		this.mGridControl.find(".grid:eq(" + _id + ")").attr("data-orientation", "h");
-		this.mGrid_array[_id].setOrientation("h");
-	}
-	else if (pImgObj.width < pImgObj.height)
-	{
-		this.mGridControl.find(".grid:eq(" + _id + ")").attr("data-orientation", "v");
-		this.mGrid_array[_id].setOrientation("v");
-	}
-
-	if (this.mImageLoadedCount_num == this.mGridCount_num)
-	{
-		this.onAllImageLoaded();
-	}
-}
-
-GridControl.prototype.onAllImageLoaded = function()
-{
-	var _self = this;
-	this.mWinWidthBeforeStaggered_num = $(window).width();
-	this.positionGrids();
-}
 
 GridControl.prototype.updateDensity = function(pDensity_str)
 {
 	if (pDensity_str == "low")
-	{	
+	{
 		this.mColCount_num = 3;
 	}
 	else if (pDensity_str == "medium")
@@ -139,10 +128,10 @@ GridControl.prototype.updateDensity = function(pDensity_str)
 }
 
 
-GridControl.prototype.resetOccupy = function(pAspectRatio_num)
+GridControl.prototype.resetOccupy = function()
 {
 	var _i = 0;
-	
+
 	while (_i < this.mIsOccupied_array.length)
 	{
 		this.mIsOccupied_array[_i] = false;
@@ -265,7 +254,7 @@ GridControl.prototype.setHighlightedOccupy = function(pGridIndex, pTargetIndex)
 			}
 			else
 			{
-				 _j = pTargetIndex+1;
+				_j = pTargetIndex+1;
 
 				for (_i=_j; _i < this.mIsOccupied_array.length; _i++)
 				{
@@ -520,13 +509,13 @@ GridControl.prototype.rePositionGrid = function()
 	else
 	{
 		this.updateDensity("high");
-	}	 
-	
+	}
+
 	this.positionGrids();
 }
 
 GridControl.prototype.positionGrids = function()
-{	
+{
 	var _self = this;
 	var _i = 0;
 	var _j = 0;
@@ -544,6 +533,30 @@ GridControl.prototype.positionGrids = function()
 
 		_j = 0;
 		_widthFactor_num = 1;
+
+		//Rearrange the last two rows to avoid 'holes'!
+		if (_i == (Math.floor(this.mGridCount_num / this.mColCount_num) - 1) * this.mColCount_num -1 )
+		{
+			var _mTempGrid_array = [];
+
+			for (var _k=_i+1; _k < this.mGridCount_num; _k++ )
+			{
+				_mTempGrid_array.push(this.mGrid_array[_k]);
+			}
+
+			_mTempGrid_array = this.sortByHighlight(_mTempGrid_array);
+
+			for (_k = 0; _k < _mTempGrid_array.length; _k++)
+			{
+				this.mGrid_array[_k+ (_i+1)] =  _mTempGrid_array[_k];
+			}
+
+			while (_mTempGrid_array.length > 0)
+			{
+				_mTempGrid_array.splice(0,1);
+			}
+		}
+
 
 		while (!_nextAvailableFound)
 		{
@@ -571,20 +584,20 @@ GridControl.prototype.positionGrids = function()
 		_gridWidth_num = Math.floor($(".gridPanel").width() / this.mColCount_num);
 		_gridHeight_num = Math.round(_gridWidth_num / this.mAspectRatio_num);
 
-		if (this.mGrid_array[_i].getOrientation() == "v" && !this.mGrid_array[_i].isHighlighted()  && !this.mGrid_array[_i].isFeatured())
+		if (this.mGrid_array[_i].getOrientation() == "v" && !this.mGrid_array[_i].isHighlighted() && !this.mGrid_array[_i].isFeatured())
 		{
 			_nextAvailableFound = false;
 			_j = this.mNextAvailableIndex_num;
 
 			while (!_nextAvailableFound)
 			{
-				if (!this.mIsOccupied_array[_j] && !this.mIsOccupied_array[_j  + this.mColCount_num])
+				if (!this.mIsOccupied_array[_j] && !this.mIsOccupied_array[_j + this.mColCount_num])
 				{
 					_nextAvailableFound = true;
 
 					this.mIsOccupied_array[this.mNextAvailableIndex_num] = false;
 					this.mIsOccupied_array[_j] = true;
-					this.mIsOccupied_array[_j  + this.mColCount_num] = true;
+					this.mIsOccupied_array[_j + this.mColCount_num] = true;
 					this.mNextAvailableIndex_num = _j;
 					break;
 				}
@@ -592,6 +605,8 @@ GridControl.prototype.positionGrids = function()
 				_j++;
 			}
 		}
+
+
 
 		if (this.mGrid_array[_i].isFeatured())
 		{
@@ -641,7 +656,7 @@ GridControl.prototype.positionGrids = function()
 
 		this.mGrid_array[_i].setSize(_finalGridWidth_num, _finalGridHeight_num);
 		this.mGrid_array[_i].setPosition((this.mNextAvailableIndex_num  % this.mColCount_num) *_gridWidth_num, Math.floor(this.mNextAvailableIndex_num  / this.mColCount_num) * _gridHeight_num);
-		
+
 		if (this.mGrid_array[_i].getOrientation() == "v")
 		{
 			this.mGrid_array[_i].centerImageVertically(this.mAspectRatio_num);
@@ -670,10 +685,14 @@ GridControl.prototype.positionGrids = function()
 
 				var  _staggerHeightOffset = $(window).height() + 400;
 				var _gridPanelWidth  = $(".gridPanel").width();
+				var transitionEvent = whichTransitionEvent();
 
 				_self.mStaggerTimeout = setTimeout(function ()
 				{
 					_self.transitLoadingAndAlbumStart();
+
+					//Important: scroll to top to avoid grids overlapping at the window bottom!
+					$(window).scrollTop(0);
 
 					_self.mGridTween = TweenMax.staggerFrom($(".grid"), 0.8, {
 						opacity: 0.5,
@@ -695,26 +714,35 @@ GridControl.prototype.positionGrids = function()
 	}
 	else
 	{
+		var transitionEvent = whichTransitionEvent();
+
+		$(".camera").on(transitionEvent,
+			function(pEvent) {
+				_self.transitLoadingAndAlbumStart();
+				_self.updateGridPanelAndWinScroll();
+
+				if (_self.mDirectPhotoSlug!=null)
+				{
+					_self.handleDirectPhotoLink();
+				}
+			});
+
 		this.fadeOutPageLoadingElements();
-
-		setTimeout(function()
-		{
-			_self.transitLoadingAndAlbumStart();
-			_self.updateGridPanelAndWinScroll();
-
-			if (_self.mDirectPhotoSlug!=null)
-			{
-				_self.handleDirectPhotoLink();
-			}
-
-		}, 400);
-
 	}
 }
 
+/*We want to assign those highlight first*/
+GridControl.prototype.sortByHighlight = function(array) {
+	return array.sort(function(a, b) {
+		var x = a.isHighlighted(); var y = b.isHighlighted();
+		return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+	});
+}
+
+
 GridControl.prototype.fadeOutPageLoadingElements = function()
 {
-	$(".loadingText").addClass("show");
+	$(".loadingText").addClass("down");
 	$(".camera").addClass("cameraZoom vaporizing");
 	$(".blink").addClass("blinkInit");
 }
@@ -730,9 +758,11 @@ GridControl.prototype.handleDirectPhotoLink = function()
 
 GridControl.prototype.transitLoadingAndAlbumStart = function()
 {
-	$(".loadingText").addClass("down");
-
-	$(".pageLoading").fadeTo(400, 0, function()
+	if (!$("body").hasClass("sDesktop"))
+	{
+		$(".camera").remove();
+	}
+	$(".pageLoading").fadeTo(500, 0, function()
 	{
 		$(this).remove();
 	});
@@ -750,7 +780,7 @@ GridControl.prototype.onStaggeredAll = function()
 	if (this.mWinWidthBeforeStaggered_num  != $(window).width())
 	{
 		this.mTimerReposition = setTimeout
-		( 
+		(
 			function()
 			{
 				_self.rePositionGrid();
@@ -813,7 +843,7 @@ GridControl.prototype.updateGridPanelAndWinScroll = function()
 
 	$("html").addClass("vScrollOn");
 }
- 
+
 GridControl.prototype.onClick = function(pObj)
 {
 	$("html").css("overflow-y", "hidden");
@@ -827,10 +857,10 @@ GridControl.prototype.onClick = function(pObj)
 	var _toWidth_num = 0;
 	var _toHeight_num = 0;
 	var _zoomFactor = 0;
-	
+
 	this.mActiveGridIndex_num = pObj.getIndex();
 	this.mWinWidthBeforeOpen_num = $(window).width();
-	 
+
 	if (this.mColCount_num == 3)
 	{
 		_fromX_num = pObj.getPosition()["x"];
@@ -888,7 +918,7 @@ GridControl.prototype.onClick = function(pObj)
 	_toY_num =  0.5* (($(window).height() - _toHeight_num));
 
 	TweenMax.fromTo(this.mPhotoOverlay.getPhotoContainer(), this.mOverlayPopSpeed_num, {left:_fromX_num, top:_fromY_num, width:pObj.getSize()["width"], height:pObj.getSize()["height"], ease:Back.easeOut}, {left:_toX_num, top:_toY_num, width: _toWidth_num, height: _toHeight_num, ease:Back.easeOut});
-	
+
 	this.mPhotoOverlay.setSizeData(pObj.getOrientation(), this.mAspectRatio_num);
 	this.mPhotoOverlay.show(this.mOverlayPopSpeed_num*1000, pObj.getFileName(), pObj.getFileZoomSize(), pObj.getDesc(), pObj.getTitle());
 
@@ -899,7 +929,7 @@ GridControl.prototype.onClick = function(pObj)
 GridControl.prototype.photoOverlayOnHideStart = function()
 {
 	$("html").css("overflow-y", "auto");
-	
+
 	var _self = this;
 	var _activeGridTop_num = 0;
 	var _scrollTop = $(window).scrollTop();
@@ -909,9 +939,9 @@ GridControl.prototype.photoOverlayOnHideStart = function()
 	var _toY_num = this.mGrid_array[this.mActiveGridIndex_num].getPosition()["y"];
 	var _toWidth_num = this.mGrid_array[this.mActiveGridIndex_num].getSize()["width"];
 	var _toHeight_num =  this.mGrid_array[this.mActiveGridIndex_num].getSize()["height"];
-	
+
 	this.mActiveGridIndex_num = this.mGrid_array[this.mActiveGridIndex_num].getIndex();
-	 
+
 	if (this.mColCount_num == 3)
 	{
 		_toX_num = this.mGrid_array[this.mActiveGridIndex_num].getPosition()["x"];
@@ -922,9 +952,9 @@ GridControl.prototype.photoOverlayOnHideStart = function()
 	{
 		_toX_num = this.mGrid_array[this.mActiveGridIndex_num].getPosition()["x"] + $(".infoPanel").width();
 		_toY_num = this.mGrid_array[this.mActiveGridIndex_num].getPosition()["y"]- _scrollTop;
-		_activeGridTop_num =  this.mGrid_array[this.mActiveGridIndex_num].getPosition()["y"] 
+		_activeGridTop_num =  this.mGrid_array[this.mActiveGridIndex_num].getPosition()["y"]
 	}
-	
+
 	_activeGridTop_num =  Math.round(_activeGridTop_num - 0.5 * Math.round($(window).height()));
 
 	if (_activeGridTop_num < 0)
@@ -941,7 +971,7 @@ GridControl.prototype.onPhotoOverlayHidden = function(pActiveGridTop_num)
 
 	this.mGrid_array[this.mActiveGridIndex_num].setOpacity(1);
 
-	if (this.mWinWidthBeforeOpen_num!=$(window).width()) 
+	if (this.mWinWidthBeforeOpen_num!=$(window).width())
 	{
 		//$(window).scrollTop(pActiveGridTop_num);
 		$("html, body").stop().animate({scrollTop:pActiveGridTop_num}, '50', 'swing');
@@ -950,4 +980,37 @@ GridControl.prototype.onPhotoOverlayHidden = function(pActiveGridTop_num)
 
 	history.pushState(this.mHistState_obj, $(".albumTitle h1").text(), $("body").data("album_path"));
 	$("html").css("overflow-y", "auto");
+}
+
+GridControl.prototype.keepImageLoad = function()
+{
+	var _self = this;
+
+	$(".grid").each(function(i,e)
+	{
+		if (!$(this).find("img").width())
+		{
+			var _img = new Image();
+			_img.src = $(this).find("img").attr("src");
+			_self.mSthNotLoaded = true;
+		}
+	});
+
+	this.checkImageLoadTimer();
+
+}
+
+GridControl.prototype.checkImageLoadTimer = function()
+{
+	var _self = this;
+	this.mCheckLoadTimer = setTimeout(function () {
+		if (_self.mSthNotLoaded)
+		{
+			_self.keepImageLoad();
+		}
+		else
+		{
+			clearTimeout(_self.mCheckLoadTimer);
+		}
+	}, 2000);
 }

@@ -329,7 +329,7 @@ a
 @media (max-width: 1439px)
 {
 	.sDesktop .infoPanel h1 {
-		font-size: 3vw;
+		font-size: 3.3vw;
 		padding: 210px 20px 10px 20px;
 		font-weight: 200;
 	}
@@ -342,7 +342,7 @@ a
 
 @media (min-width: 1440px) {
 	.sDesktop .infoPanel h1 {
-		font-size: 2.3vw;
+		font-size: 2.5vw;
 		padding: 210px 20px 10px 20px;
 		font-weight: 200;
 	}
@@ -545,6 +545,7 @@ a
 .sMobile .infoPanel .otherAlbumMenus li.siblings
 {
 	font-style:italic;
+	padding:4px 8px 4px 16px;
 }
 
 .sDesktop .infoPanel .otherAlbumMenus li.siblings.last

@@ -16,19 +16,19 @@
   top:50%;
   margin-top:35px;
   opacity:1;
-  transition: all 0.2s ease-in-out;
-  -webkit-transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.8s ease-in;
+  -webkit-transition: all 0.8s ease-in;
+  -moz-transition: all 0.8s ease-in;
+  -o-transition: all 0.8s ease-in;
 }
 
 .camera
 {
-  transition: all 0.2s ease-in-out;
-  -webkit-transition: all 0.2s ease-in-out; /** Chrome & Safari **/
-  -moz-transition: all 0.2s ease-in-out; /** Firefox **/
-  -o-transition: all 0.2s ease-in-out; /** Opera **/
-  transform:scale(0.7,0.7);
+  transition: all 0.6s ease-out;
+  -webkit-transition: all 0.8s ease-out; /** Chrome & Safari **/
+  -moz-transition: all 0.8s ease-out; /** Firefox **/
+  -o-transition: all 0.8s ease-out; /** Opera **/
+  transform:scale(0.5,0.5);
 
 }
 
@@ -43,7 +43,7 @@
   height: 60px;
   width: 70px;
   left: calc(50% - 70px / 2);
-  top: calc(50% - 60px /2);
+  top: calc(50% - 40px /2);
   background: #706061;
   border-radius: 6px;
   box-shadow: 1px 2px 10px 1px #211a22;
@@ -263,29 +263,31 @@
   animation-timing-function: ease-in-out;;
   animation-iteration-count: 1;
   animation-delay: 0.4s;
+  -webkit-animation-delay: 0.4s;
 }
 
 .down
 {
-  -ms-transform: translate(0, 150%); /* IE 9 */
-  -webkit-transform: translate(0, 150%); /* Safari */
-  transform: translate(0, 150%);
+  opacity:0 !important;
+  -ms-transform: translate(0, 350%) scale(0.9,0.9);
+  -webkit-transform: translate(0, 350%) scale(0.9,0.9);
+  transform: translate(0, 350%) scale(0.9,0.9);
 
 }
 
 @keyframes vapor {
-  0% { margin-top: 0; opacity:1 }
-  100% { margin-top: -30%; opacity:0}
+  0% { margin-top: 0; opacity:1; }
+  100% { margin-top: -15%; opacity:0;}
 }
 
 @-webkit-keyframes blinker {
-  0% { margin-top: 0; opacity:1 }
-  100% { margin-top: -30%; opacity:0}
+  0% { margin-top: 0; opacity:1; }
+  100% { margin-top: -30%; opacity:0;}
 }
 
 @keyframes blinker {
-  0% { margin-top: 0; opacity:1 }
-  100% { margin-top: -30%; opacity:0}
+  0% { margin-top: 0; opacity:1; }
+  100% { margin-top: -30%; opacity:0;}
 }
 
 
@@ -340,5 +342,5 @@
 
 .cameraZoom
 {
-  transform:scale(0.9,0.9);
+  transform:scale(0.8,0.8);
 }
