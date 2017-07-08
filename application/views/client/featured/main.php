@@ -31,7 +31,7 @@
             <span class="useCap">I</span>t was a winter afternoon in <em>Wellington Street</em>, right in the middle of all hustle and bustle was this stare. What was he thinking? Waiting someone? Or he used to mediate at the corner of the restaurant? It could be self-portrait, if you name it. I turned the picture into sepia to further focus the object.
         </div>
         <div class="story hide">
-            <span class="useCap">I</span>t was a chilly morning. Snow was falling on <em>Mariacka Street</em>, which is one of the most charming streets in Poland. Shops and restaurants were mostly close,there were nothing to capture but waiting to see if something would happen. Then an old man in drak grey jacket passed the street; the trolley that he was taking with suggested that he was probably an old man in limited financial condition. While he was taking a glance at the camera, with the snow making a perfect color contrast with his jacket, I didn't hesitate to capture the frame, with a f/1.4 aperture to further enhance the snowy sight.
+            <span class="useCap">I</span> love wooden pier, I visited Gdańsk simply to explore the wooden pier. I spent hours wandering. I caught this pair of old couples with the Samyang 85 mm f/1.4 if lens; the sun casted clear line lights around their bodies, and the glare veiled perfectly at the couples
         </div>
         <div class="story hide">
             <span class="useCap">S</span>uch a photographing-friendly attraction is rare in Hong Kong. Water keeps pouring and kids keep running. I was lucky to capture the shades of three children, with their bodies aligned in a rhythmic manner. The rains eliminated the color of the dresses at the back effectively, while leaving the orange in the front. I was lucky to met a cloudy day, as the strong sunlight in the summer would create siuhoutetes. But now the mild backlight from behind just makes it perfect.
@@ -43,7 +43,20 @@
             <span class="useCap">H</span>umans are born with the tongues to sense the world. In 2015 I travelled to Nepal with friends. We did trekking and one day we stopped and had lunch in a little house. We found a cute little girl with big brown curious eyes, she probably has nothing to play with except the little green comb. She looked so happy to meet us, she was like introducing to us how great her friend was. I was waiting for a good opportunity to capture some great moments, and yes, when she was stretching her tongue and licking her friend, I welcomed her back with my camera.
         </div>
         <div class="story hide">
-            <span class="useCap">P</span>orvoo is like the heaven, you can enjoy the peace and tranquility there. It was in early spring by the Maari Lake, the town was still tinted with a slight blue tone. When I caught a glimpse of a lady riding a bicycle, I perceived some great moment would come. I was inspired by the big canvas of falling leaves under my feet, and I quickly turned on the multi-exposure mode to produce this oil-painting-like effect, without any retouching.
+            <span class="useCap">P</span>orvoo is like the heaven, you can enjoy the peace and tranquility there. It was in early spring by the <em>Maari Lake</em>, the town was still tinted with a slight blue tone. When I caught a glimpse of a lady riding a bicycle, I perceived some great moment would come. I was inspired by the big canvas of falling leaves under my feet, and I quickly turned on the multi-exposure mode to produce this oil-painting-like effect, without any retouching.
         </div>
+        <div class="story hide">
+            <span class="useCap">I</span> like imagining extending one space to another. A piano on the sea, A lamp inside a room... or whatever. It's a boiling summer day, I took a white dining chair to the grassland. I asked Charlina to pose on the chair; she looked well when she dressed in white and exposed her legs on the chair, surrounded by great portions of forest green.
+        </div>
+        <div class="story hide">
+            <span class="useCap">I</span>t was a chilly morning. Snow was falling on <em>Mariacka Street</em>, which is one of the most charming streets in Poland. Shops and restaurants were mostly close,there were nothing to capture but waiting to see if something would happen. Then an old man in drak grey jacket passed the street; the trolley that he was taking with suggested that he was probably an old man in limited financial condition. While he was taking a glance at the camera, with the snow making a perfect color contrast with his jacket, I didn't hesitate to capture the frame, with a f/1.4 aperture to further enhance the snowy sight.
+        </div>
+        <div class="story hide">
+            <span class="useCap">S</span>udden snow showers were falling in early May in Tallinn, romantically painted pictures of street scenes that you probably would see in fairy tale films. At that time, the Baltic towns were not filling with crowds and you could easily find a narrow street or alley without even one passer-by. When I reached this alley, I saw the little girl coming out from the Olde Hensa, the door were opened with snows attached on it, giving us room to imagine what the people were doing there? The door also led our eyes to view through the perspective of the street.
+        </div>
+        <div class="story hide">
+            <span class="useCap">O</span>ne of my favorite topics to photograph is sunset. This photo was taken in Palanga, a coastal town in the western side of Lithuania. It was in the mid of May at 9:00 pm, still bright enough to take a picture with hand-held as I didn't take the tripod at that time. The sky was like pastels over a big canvas. Tranquil, charming, romantic. At the start of the wooden pier, people were sitting on the benches and watched the sunset silently as if they were watching the movie in the cinema!
+        </div>
+    </div>
     </div>
 </div>

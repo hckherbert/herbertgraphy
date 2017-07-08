@@ -98,7 +98,7 @@ $(document).ready(
                 var _timeLineTitle = new TimelineLite();
 
                 var _currentItem = $(".featuredList img:eq(" + (mActiveIndex -1) + ")");
-                var _nextItem = $(".featuredList img:eq(" + (mActiveIndex - 2) + ")");
+                var _nextItem = $(".featuredList img:eq(" + (mActiveIndex -2) + ")");
                 var _currentLeft = $(".featuredList").position().left;
 
                 //shift half the currentItem width first
@@ -110,7 +110,7 @@ $(document).ready(
                 _timeLineImageOpacity.to(_currentItem, mTweenDurationImgOpacity, {css:{opacity:0.3},ease:Circ.easeOut})
                     .to(_nextItem, mTweenDurationImgOpacity, {css:{opacity:1},ease:Circ.easeIn});
 
-                _timeLineTitle.to($(".title:eq("  + (mActiveIndex-2) + ")"), mTweenDurationTitle, {css:{opacity:0},ease:Circ.easeIn});
+                _timeLineTitle.to($(".title:eq("  + mActiveIndex + ")"), mTweenDurationTitle, {css:{opacity:0},ease:Circ.easeIn});
                 mTimeLineStoryContent = TweenMax.to($(".content"), mTweenStoryContent, {css:{left:"-400px", opacity:0},ease: Expo.easeOut});
                 TweenLite.delayedCall(0.3, reverseStoryContentTween);
 
