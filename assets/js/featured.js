@@ -2,7 +2,7 @@
  * Created by herbert on 7/2/2017.
  */
 
-var mActiveIndex = 1; //Note now mActiveIndex is ONE based, not ZERO based for text animation
+var mActiveIndex = 11; //Note now mActiveIndex is ONE based, not ZERO based for text animation
 var mTweenDurationSliding = 0.6;
 var mTweenDurationImgOpacity = 0.2;
 var mTweenDurationTitle = 0.2;
@@ -172,6 +172,7 @@ function windowOnResized()
             var _expectedActiveLeftPos = mWinWidthMidPoint - Math.round(_currentWidth * 0.5);
             var _diff = _expectedActiveLeftPos - _accumulatedWidth;
             $(".featuredList").css("left", _diff + "px");
+            $(".story:eq(" + mActiveIndex + ")").removeClass("hide");
 
         }
 

@@ -27,7 +27,7 @@
     <div class="content">
 
         <div class="story"><!--NOTE: MUST LEAVE THIS BLANK! --></div>
-        <div class="story">
+        <div class="story hide">
             <span class="useCap">I</span>t was a winter afternoon in <em>Wellington Street</em>, right in the middle of all hustle and bustle was this stare. What was he thinking? Waiting someone? Or he used to mediate at the corner of the restaurant? It could be self-portrait, if you name it. I turned the picture into sepia to further focus the object.
         </div>
         <div class="story hide">
@@ -57,6 +57,8 @@
         <div class="story hide">
             <span class="useCap">O</span>ne of my favorite topics to photograph is sunset. This photo was taken in Palanga, a coastal town in the western side of Lithuania. It was in the mid of May at 9:00 pm, still bright enough to take a picture with hand-held as I didn't take the tripod at that time. The sky was like pastels over a big canvas. Tranquil, charming, romantic. At the start of the wooden pier, people were sitting on the benches and watched the sunset silently as if they were watching the movie in the cinema!
         </div>
-    </div>
+        <div class="story hide">
+            <span class="useCap">A</span>lice dressed in a retro style and was photographed in a hidden gem in the Northern New Territories. The red dress created a contrast with the grasses, with the strong backlight form behind adding a mysterious impression.
+        </div>
     </div>
 </div>
