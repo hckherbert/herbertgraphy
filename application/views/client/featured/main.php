@@ -60,5 +60,9 @@
         <div class="story hide">
             <span class="useCap">A</span>lice dressed in a retro style and was photographed in a hidden gem in the Northern New Territories. The red dress created a contrast with the grasses, with the strong backlight form behind adding a mysterious impression.
         </div>
+        <div class="story hide">
+            <span class="useCap">H</span>eraclitus quoted, <em>"As No man ever steps in the same river twice, for it's not the same river and he's not the same man."</em> Once you dip the oblivion into the water, it would never float. If it does, it must be another oblivion.
+
+        </div>
     </div>
 </div>
