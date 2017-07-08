@@ -13,7 +13,7 @@
         <div class="title">Sense the World</div>
         <div class="title">The Early Spring</div>
         <div class="title">Charlina</div>
-        <div class="title">Old Man in the Snow</div>
+        <div class="title">Into the Mariacka Street</div>
         <div class="title">Fairy Alley</div>
         <div class="title">Palanga</div>
         <div class="title">Alice</div>
@@ -49,13 +49,13 @@
             <span class="useCap">I</span> like imagining extending one space to another. A piano on the sea, A lamp inside a room... or whatever. It's a boiling summer day, I took a white dining chair to the grassland. I asked Charlina to pose on the chair; she looked well when she dressed in white and exposed her legs on the chair, surrounded by great portions of forest green.
         </div>
         <div class="story hide">
-            <span class="useCap">I</span>t was a chilly morning. Snow was falling on <em>Mariacka Street</em>, which is one of the most charming streets in Poland. Shops and restaurants were mostly close,there were nothing to capture but waiting to see if something would happen. Then an old man in drak grey jacket passed the street; the trolley that he was taking with suggested that he was probably an old man in limited financial condition. While he was taking a glance at the camera, with the snow making a perfect color contrast with his jacket, I didn't hesitate to capture the frame, with a f/1.4 aperture to further enhance the snowy sight.
+            <span class="useCap">I</span>t was a chilly morning. Snow was falling on the charming <em>Mariacka Street</em>. Shops and restaurants were mostly close,there were nothing to capture but waiting to see if something would happen. Then an old man in drak grey jacket passed the street; the trolley that he was taking with suggested that he was probably an old man in limited financial condition. While he was taking a glance at the camera, with the snow making a perfect color contrast with his jacket, I didn't hesitate to capture the frame, with a f/1.4 aperture to further enhance the snowy sight.
         </div>
         <div class="story hide">
             <span class="useCap">S</span>udden snow showers were falling in early May in Tallinn, romantically painted pictures of street scenes that you probably would see in fairy tale films. At that time, the Baltic towns were not filling with crowds and you could easily find a narrow street or alley without even one passer-by. When I reached this alley, I saw the little girl coming out from the Olde Hensa, the door were opened with snows attached on it, giving us room to imagine what the people were doing there? The door also led our eyes to view through the perspective of the street.
         </div>
         <div class="story hide">
-            <span class="useCap">O</span>ne of my favorite topics to photograph is sunset. This photo was taken in Palanga, a coastal town in the western side of Lithuania. It was in the mid of May at 9:00 pm, still bright enough to take a picture with hand-held as I didn't take the tripod at that time. The sky was like pastels over a big canvas. Tranquil, charming, romantic. At the start of the wooden pier, people were sitting on the benches and watched the sunset silently as if they were watching the movie in the cinema!
+            <span class="useCap">O</span>ne of my favorite topics to photograph is sunset. This photo was taken in Palanga, a coastal town in the western side of Lithuania. It was in the mid of May at 9:00 pm, still bright enough to take a picture with hand-held as I didn't take the tripod at that time. The sky was like pastels over a big canvas. Tranquil, enchanting, romantic. At the start of the wooden pier, people were sitting on the benches and watched the sunset silently as if they were watching the movie in the cinema!
         </div>
         <div class="story hide">
             <span class="useCap">A</span>lice dressed in a retro style and was photographed in a hidden gem in the Northern New Territories. The red dress created a contrast with the grasses, with the strong backlight form behind adding a mysterious impression.
