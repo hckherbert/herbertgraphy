@@ -6,6 +6,7 @@ var mActiveIndex = 7;
 var mTweenDurationSliding = 0.7;
 var mTweenDurationImgOpacity = 0.2;
 var mTweenDurationTitle = 0.2;
+var mTweenStoryContent = 0.3;
 var mWinWidthMidPoint = 0;
 var mTotalSlide = 0;
 var mIsSliding = false;
@@ -13,6 +14,7 @@ var wordArray = [];
 var words = document.getElementsByClassName("title");
 var currentWord = mActiveIndex -1;
 var mSlideDirection = "";
+var mTimeLineStoryContent;
 
 $(document).ready(
     function()
@@ -60,7 +62,9 @@ $(document).ready(
                 _timeLineImageOpacity.to(_currentItem, mTweenDurationImgOpacity, {css:{opacity:0.3},ease:Circ.easeOut})
                          .to(_nextItem, mTweenDurationImgOpacity, {css:{opacity:1},ease:Circ.easeIn});
 
-                _timeLineTitle.to($(".title:eq("  + mActiveIndex + ")"), mTweenDurationImgOpacity, {css:{opacity:0},ease:Circ.easeIn});
+                _timeLineTitle.to($(".title:eq("  + mActiveIndex + ")"), mTweenDurationTitle, {css:{opacity:0},ease:Circ.easeIn});
+                mTimeLineStoryContent = TweenMax.to($(".content"), mTweenStoryContent, {css:{left:"-300px", opacity:0},ease: Expo.easeInOut});
+                TweenLite.delayedCall(0.3, reverse);
 
                 mActiveIndex++;
 
@@ -107,7 +111,9 @@ $(document).ready(
                 _timeLineImageOpacity.to(_currentItem, mTweenDurationImgOpacity, {css:{opacity:0.3},ease:Circ.easeOut})
                     .to(_nextItem, mTweenDurationImgOpacity, {css:{opacity:1},ease:Circ.easeIn});
 
-                _timeLineTitle.to($(".title:eq("  + mActiveIndex + ")"), mTweenDurationImgOpacity, {css:{opacity:0},ease:Circ.easeIn});
+                _timeLineTitle.to($(".title:eq("  + mActiveIndex + ")"), mTweenDurationTitle, {css:{opacity:0},ease:Circ.easeIn});
+                mTimeLineStoryContent = TweenMax.to($(".content"), mTweenStoryContent, {css:{left:"-300px", opacity:0},ease: Expo.easeOut});
+                TweenLite.delayedCall(0.3, reverse);
 
                 mActiveIndex--;
 
@@ -255,3 +261,8 @@ function splitLetters(word) {
     wordArray.push(letters);
 }
 
+
+function reverse()
+{
+    mTimeLineStoryContent.reverse();
+}
