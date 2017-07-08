@@ -3,7 +3,6 @@ GridControl.prototype.mGridControl = null;
 GridControl.prototype.mGridCount_num = 0;
 GridControl.prototype.mColCount_num = 0;
 GridControl.prototype.mGrid_array = null;
-GridControl.prototype.mImageLoadedCount_num = 0;
 GridControl.prototype.mIsOccupied_array = null;
 GridControl.prototype.mGridstaggering = false;
 GridControl.prototype.mPhotoOverlay = null;
@@ -21,6 +20,8 @@ GridControl.prototype.mIsDirectPhotoLinkInit = false;
 GridControl.prototype.mHistState_obj = null;
 GridControl.prototype.mGridTween  = null;
 GridControl.prototype.mStaggerTimeout = 0;
+GridControl.prototype.mCheckLoadTimer = null;
+GridControl.prototype.mSthNotLoaded = false;
 
 function GridControl(pGridControl, pPhotoOverlay)
 {
@@ -28,6 +29,7 @@ function GridControl(pGridControl, pPhotoOverlay)
 	this.mGrid_array = [];
 	this.mIsOccupied_array = [];
 	this.mHistState_obj = {};
+	this.mImgPath_array = [];
 	this.mGridControl = pGridControl;
 	this.mPhotoOverlay = pPhotoOverlay;
 	this.mPhotoOverlay.setOnHideStart(function(){_self.photoOverlayOnHideStart();});
@@ -87,8 +89,11 @@ GridControl.prototype.initGrid = function()
 
 			_self.mGrid_array.push(_grid);
 		}
+
 	)
 
+	//Fix Image may never issue in mobile!
+	this.keepImageLoad();
 	this.mWinWidthBeforeStaggered_num = $(window).width();
 	this.positionGrids();
 
@@ -680,6 +685,7 @@ GridControl.prototype.positionGrids = function()
 
 				var  _staggerHeightOffset = $(window).height() + 400;
 				var _gridPanelWidth  = $(".gridPanel").width();
+				var transitionEvent = whichTransitionEvent();
 
 				_self.mStaggerTimeout = setTimeout(function ()
 				{
@@ -708,19 +714,20 @@ GridControl.prototype.positionGrids = function()
 	}
 	else
 	{
+		var transitionEvent = whichTransitionEvent();
+
+		$(".camera").on(transitionEvent,
+			function(pEvent) {
+				_self.transitLoadingAndAlbumStart();
+				_self.updateGridPanelAndWinScroll();
+
+				if (_self.mDirectPhotoSlug!=null)
+				{
+					_self.handleDirectPhotoLink();
+				}
+			});
+
 		this.fadeOutPageLoadingElements();
-
-		setTimeout(function()
-		{
-			_self.transitLoadingAndAlbumStart();
-			_self.updateGridPanelAndWinScroll();
-
-			if (_self.mDirectPhotoSlug!=null)
-			{
-				_self.handleDirectPhotoLink();
-			}
-
-		}, 400);
 	}
 }
 
@@ -735,7 +742,7 @@ GridControl.prototype.sortByHighlight = function(array) {
 
 GridControl.prototype.fadeOutPageLoadingElements = function()
 {
-	$(".loadingText").addClass("show");
+	$(".loadingText").addClass("down");
 	$(".camera").addClass("cameraZoom vaporizing");
 	$(".blink").addClass("blinkInit");
 }
@@ -751,9 +758,11 @@ GridControl.prototype.handleDirectPhotoLink = function()
 
 GridControl.prototype.transitLoadingAndAlbumStart = function()
 {
-	$(".loadingText").addClass("down");
-
-	$(".pageLoading").fadeTo(400, 0, function()
+	if (!$("body").hasClass("sDesktop"))
+	{
+		$(".camera").remove();
+	}
+	$(".pageLoading").fadeTo(500, 0, function()
 	{
 		$(this).remove();
 	});
@@ -971,4 +980,37 @@ GridControl.prototype.onPhotoOverlayHidden = function(pActiveGridTop_num)
 
 	history.pushState(this.mHistState_obj, $(".albumTitle h1").text(), $("body").data("album_path"));
 	$("html").css("overflow-y", "auto");
+}
+
+GridControl.prototype.keepImageLoad = function()
+{
+	var _self = this;
+
+	$(".grid").each(function(i,e)
+	{
+		if (!$(this).find("img").width())
+		{
+			var _img = new Image();
+			_img.src = $(this).find("img").attr("src");
+			_self.mSthNotLoaded = true;
+		}
+	});
+
+	this.checkImageLoadTimer();
+
+}
+
+GridControl.prototype.checkImageLoadTimer = function()
+{
+	var _self = this;
+	this.mCheckLoadTimer = setTimeout(function () {
+		if (_self.mSthNotLoaded)
+		{
+			_self.keepImageLoad();
+		}
+		else
+		{
+			clearTimeout(_self.mCheckLoadTimer);
+		}
+	}, 2000);
 }
