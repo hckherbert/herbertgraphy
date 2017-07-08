@@ -5,7 +5,7 @@
         <?php } ?>
 
         <?php foreach ($image_list_data as $key=>$image_data) { ?>
-        <div class="title"><!--NOT MUST LEAVE THIS BLANK! --></div>
+        <div class="title"><!--NOTE: MUST LEAVE THIS BLANK! --></div>
         <div class="title">The Stare</div>
         <div class="title">Sopot Molo</div>
         <div class="title">Dance in the Rain</div>
@@ -25,7 +25,12 @@
         <a class="btn_next"><span>></span></a>
     </div>
     <div class="content">
+
+        <div class="story"><!--NOTE: MUST LEAVE THIS BLANK! --></div>
         <div class="story">
+            <span class="useCap">I</span>t was a winter afternoon in Wellington Street, right in the middle of all hustle and bustle was this stare. What was he thinking? Waiting someone? Or he used to mediate at the corner of the restaurant? It could be self-portrait, if you name it. I turned the picture into sepia to further focus the object.
+        </div>
+        <div class="story hide">
             <span class="useCap">I</span>t was a chilly morning. Snow was falling on <em>Mariacka Street</em>, which is one of the most charming streets in Poland. Shops and restaurants were mostly close,there were nothing to capture but waiting to see if something would happen. Then an old man in drak grey jacket passed the street; the trolley that he was taking with suggested that he was probably an old man in limited financial condition. While he was taking a glance at the camera, with the snow making a perfect color contrast with his jacket, I didn't hesitate to capture the frame, with a f/1.4 aperture to further enhance the snowy sight.
         </div>
     </div>
