@@ -2,8 +2,8 @@
  * Created by herbert on 7/2/2017.
  */
 
-var mActiveIndex = 7;
-var mTweenDurationSliding = 0.7;
+var mActiveIndex = 1; //Note now mActiveIndex is ONE based, not ZERO based for text animation
+var mTweenDurationSliding = 0.6;
 var mTweenDurationImgOpacity = 0.2;
 var mTweenDurationTitle = 0.2;
 var mTweenStoryContent = 0.3;
@@ -12,9 +12,9 @@ var mTotalSlide = 0;
 var mIsSliding = false;
 var wordArray = [];
 var words = document.getElementsByClassName("title");
-var currentWord = mActiveIndex -1;
+var currentWord =  (mActiveIndex > 0) ? mActiveIndex -1 : 0;
 var mSlideDirection = "";
-var mTimeLineStoryContent;
+var mTimeLineStoryContent = null;
 
 $(document).ready(
     function()
@@ -24,9 +24,8 @@ $(document).ready(
         {
             mTotalSlide = $(".featuredList img").length;
             windowOnResized();
-            animateText();
-
             $(window).on("resize", windowOnResized);
+            animateText();
 
             $(".navigator .btn_prev").on("click", function(pEvent)
             {
@@ -37,7 +36,7 @@ $(document).ready(
             {
                 pEvent.preventDefault();
 
-                if (mTotalSlide == mActiveIndex+1 || mIsSliding)
+                if (mTotalSlide == mActiveIndex || mIsSliding)
                 {
                     return;
                 }
@@ -49,8 +48,8 @@ $(document).ready(
                 var _timeLineImageOpacity = new TimelineLite();
                 var _timeLineTitle = new TimelineLite();
 
-                var _currentItem = $(".featuredList img:eq(" + mActiveIndex + ")");
-                var _nextItem = $(".featuredList img:eq(" + (mActiveIndex + 1) + ")");
+                var _currentItem = $(".featuredList img:eq(" + (mActiveIndex -1 ) + ")");
+                var _nextItem = $(".featuredList img:eq(" + mActiveIndex + ")");
                 var _currentLeft = $(".featuredList").position().left;
 
                 //shift half the currentItem width first
@@ -63,12 +62,13 @@ $(document).ready(
                          .to(_nextItem, mTweenDurationImgOpacity, {css:{opacity:1},ease:Circ.easeIn});
 
                 _timeLineTitle.to($(".title:eq("  + mActiveIndex + ")"), mTweenDurationTitle, {css:{opacity:0},ease:Circ.easeIn});
+
                 mTimeLineStoryContent = TweenMax.to($(".content"), mTweenStoryContent, {css:{left:"-300px", opacity:0},ease: Expo.easeInOut});
-                TweenLite.delayedCall(0.3, reverse);
+                TweenLite.delayedCall(0.3, reverseStoryContentTween);
 
                 mActiveIndex++;
 
-                if (mTotalSlide == mActiveIndex+1)
+                if (mTotalSlide == mActiveIndex)
                 {
                     $(this).addClass("disable");
                 }
@@ -86,7 +86,7 @@ $(document).ready(
             {
                 pEvent.preventDefault();
 
-                if (mActiveIndex == 0 || mIsSliding)
+                if (mActiveIndex == 1 || mIsSliding)
                 {
                     return;
                 }
@@ -98,8 +98,8 @@ $(document).ready(
                 var _timeLineImageOpacity = new TimelineLite();
                 var _timeLineTitle = new TimelineLite();
 
-                var _currentItem = $(".featuredList img:eq(" + mActiveIndex + ")");
-                var _nextItem = $(".featuredList img:eq(" + (mActiveIndex - 1) + ")");
+                var _currentItem = $(".featuredList img:eq(" + (mActiveIndex -1) + ")");
+                var _nextItem = $(".featuredList img:eq(" + (mActiveIndex - 2) + ")");
                 var _currentLeft = $(".featuredList").position().left;
 
                 //shift half the currentItem width first
@@ -111,13 +111,15 @@ $(document).ready(
                 _timeLineImageOpacity.to(_currentItem, mTweenDurationImgOpacity, {css:{opacity:0.3},ease:Circ.easeOut})
                     .to(_nextItem, mTweenDurationImgOpacity, {css:{opacity:1},ease:Circ.easeIn});
 
-                _timeLineTitle.to($(".title:eq("  + mActiveIndex + ")"), mTweenDurationTitle, {css:{opacity:0},ease:Circ.easeIn});
+                _timeLineTitle.to($(".title:eq("  + (mActiveIndex-2) + ")"), mTweenDurationTitle, {css:{opacity:0},ease:Circ.easeIn});
+
+
                 mTimeLineStoryContent = TweenMax.to($(".content"), mTweenStoryContent, {css:{left:"-300px", opacity:0},ease: Expo.easeOut});
-                TweenLite.delayedCall(0.3, reverse);
+                TweenLite.delayedCall(0.3, reverseStoryContentTween);
 
                 mActiveIndex--;
 
-                if (mActiveIndex == 0)
+                if (mActiveIndex == 1)
                 {
                     $(this).addClass("disable");
                 }
@@ -129,6 +131,15 @@ $(document).ready(
                 $(".navigator .btn_next").removeClass("disable");
 
             });
+
+            if (mActiveIndex == mTotalSlide)
+            {
+                $(".navigator .btn_next").addClass("disable");
+            }
+            else if (mActiveIndex == 1)
+            {
+                $(".navigator .btn_prev").addClass("disable");
+            }
         }
     }
 )
@@ -145,23 +156,22 @@ function windowOnResized()
         if (i == 0)
         {
             $(e).css("left", "0");
-            $(".title:eq(" + i + ")").css("left", "0");
+            $(".title:eq(" + (i+1) + ")").css("left", "0");
         }
         else
         {
             $(e).css("left", _accumulatedWidth + "px");
-            $(".title:eq(" + i + ")").css("left", _accumulatedWidth + "px");
+            $(".title:eq(" + (i+1)+ ")").css("left", _accumulatedWidth + "px");
         }
 
         var _currentWidth = Math.round(_winHeight * parseInt($(e).data("width")) / parseInt($(e).data("height")));
 
-        $(".title:eq(" + i + ")").css("width", _currentWidth + "px");
+        $(".title:eq(" + (i+1) + ")").css("width", _currentWidth + "px");
 
-        if (i == mActiveIndex)
+        if (i == mActiveIndex-1)
         {
             $(e).css("opacity", "1");
-            TweenMax.to( $(".title:eq(" + i + ")", 0.3, {css:{opacity:1},ease:Circ.easeIn}));
-
+            TweenMax.to( $(".title:eq(" + i + ")", mTweenDurationTitle, {css:{opacity:1},ease:Circ.easeIn, onComplete: animateText}));
             var _expectedActiveLeftPos = mWinWidthMidPoint - Math.round(_currentWidth * 0.5);
             var _diff = _expectedActiveLeftPos - _accumulatedWidth;
             $(".featuredList").css("left", _diff + "px");
@@ -193,19 +203,19 @@ function onSlideComplete()
 
 function animateText()
 {
-   // words[currentWord+1].style.opacity = 1;
+   //words[currentWord+1].style.opacity = 1;
 
+     
     for (var i = 0; i < words.length; i++) {
         splitLetters(words[i]);
     }
 
-
     changeWord();
     //setInterval(changeWord, 4000);
-
 }
 
-function changeWord() {
+function changeWord()
+{
     var cw = wordArray[currentWord];
     var nw = currentWord == words.length - 1 ? wordArray[0] : wordArray[currentWord + 1];
 
@@ -219,7 +229,6 @@ function changeWord() {
         TweenMax.to(nw[0].parentElement, 0.3, {css:{opacity:1},ease:Circ.easeIn});
         animateLetterIn(nw, i);
     }
-
 
     //currentWord = (currentWord == wordArray.length - 1) ? 0 : currentWord + 1;
 }
@@ -262,7 +271,7 @@ function splitLetters(word) {
 }
 
 
-function reverse()
+function reverseStoryContentTween()
 {
     mTimeLineStoryContent.reverse();
 }
