@@ -62,9 +62,7 @@ $(document).ready(
                          .to(_nextItem, mTweenDurationImgOpacity, {css:{opacity:1},ease:Circ.easeIn});
 
                 _timeLineTitle.to($(".title:eq("  + mActiveIndex + ")"), mTweenDurationTitle, {css:{opacity:0},ease:Circ.easeIn});
-
-                //mTimeLineStoryContent = TweenMax.to($(".story:eq("  + mActiveIndex + ")"), mTweenStoryContent, {css:{left:"-300px", opacity:0},ease: Expo.easeInOut});
-                mTimeLineStoryContent = TweenMax.to($(".content"), mTweenStoryContent, {css:{left:"-300px", opacity:0},ease: Expo.easeInOut});
+                mTimeLineStoryContent = TweenMax.to($(".content"), mTweenStoryContent, {css:{left:"-400px", opacity:0},ease: Expo.easeInOut});
                 TweenLite.delayedCall(0.3, reverseStoryContentTween);
 
                 mActiveIndex++;
@@ -113,10 +111,7 @@ $(document).ready(
                     .to(_nextItem, mTweenDurationImgOpacity, {css:{opacity:1},ease:Circ.easeIn});
 
                 _timeLineTitle.to($(".title:eq("  + (mActiveIndex-2) + ")"), mTweenDurationTitle, {css:{opacity:0},ease:Circ.easeIn});
-
-                //mTimeLineStoryContent = TweenMax.to($(".story:eq("  + mActiveIndex + ")"), mTweenStoryContent, {css:{left:"-300px", opacity:0},ease: Expo.easeOut});
-
-                mTimeLineStoryContent = TweenMax.to($(".content"), mTweenStoryContent, {css:{left:"-300px", opacity:0},ease: Expo.easeOut});
+                mTimeLineStoryContent = TweenMax.to($(".content"), mTweenStoryContent, {css:{left:"-400px", opacity:0},ease: Expo.easeOut});
                 TweenLite.delayedCall(0.3, reverseStoryContentTween);
 
                 mActiveIndex--;
@@ -275,7 +270,7 @@ function splitLetters(word) {
 
 function reverseStoryContentTween()
 {
-     
+
     if (mSlideDirection == "next") {
         $(".story:eq(" + mActiveIndex + ")").removeClass("hide");
         $(".story:eq(" + (mActiveIndex - 1) + ")").addClass("hide");

@@ -1524,7 +1524,7 @@ a
 	bottom:0;
 	position:absolute;
 	text-align:center;
-	font-size:1.6vw;
+	font-size:24px;
 	color:#fff;
 }
 
@@ -1539,14 +1539,14 @@ a
 	position:absolute;
 	left:0;
 	top:30%;
-	width:300px;
+	width:400px;
 }
 
 .featuredContainer .content .useCap
 {
 	font-family: 'Merriweather', serif;
-	font-size:150px;
-	margin:5px 0 5px 0;
+	font-size:120px;
+	margin:5px 0 10px 0;
 	padding:0 .1em 0 0;
 	height:.7em;
 	line-height:.85em;
