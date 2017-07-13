@@ -15,6 +15,7 @@ var words = document.getElementsByClassName("title");
 var currentWord =  (mActiveIndex > 0) ? mActiveIndex -1 : 0;
 var mSlideDirection = "";
 var mTimeLineStoryContent = null;
+var mContentNoramlStateHeight = 0;
 
 $(document).ready(
     function()
@@ -174,11 +175,34 @@ function windowOnResized()
             $(".featuredList").css("left", _diff + "px");
             $(".story:eq(" + mActiveIndex + ")").removeClass("hide");
 
+            //Set it init step only! We'll use this value for responsiveness!
+            if (!mContentNoramlStateHeight)
+            {
+                mContentNoramlStateHeight = $(".content").outerHeight() + ($(".content").outerHeight() * 0.5);
+            }
+
         }
 
         _accumulatedWidth += _currentWidth;
 
     });
+
+    if (mContentNoramlStateHeight > $(window).height())
+    {
+        $(".content").css("position", "relative");
+        $(".content").css("top", "0");
+        $(".content").css("width", "100%");
+        $("html").css("overflow-y", "auto");
+    }
+    else
+    {
+        $(".content").css("position", "absolute");
+        $(".content").css("top", "30%");
+        $(".content").css("width", "400px");
+        $("html").css("overflow-y", "hidden");
+    }
+
+
 }
 
 function onSlideComplete()
@@ -280,5 +304,8 @@ function reverseStoryContentTween()
         $(".story:eq(" + mActiveIndex + ")").removeClass("hide");
         $(".story:eq(" + (mActiveIndex + 1) + ")").addClass("hide");
     }
+
+    mContentNoramlStateHeight = $(".content").outerHeight() + ($(".content").outerHeight() * 0.5);
+
     mTimeLineStoryContent.reverse();
 }

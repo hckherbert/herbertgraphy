@@ -1476,16 +1476,17 @@ a
 	opacity:0.3;
 }
 
-.navigator
+.featuredContainer .navigator
 {
 	position: absolute;
 	width: 100px;
 	bottom: 100px;
 	left: 50%;
 	margin-left: -50px;
+	z-index:1;
 }
 
-.navigator a
+.featuredContainer .navigator a
 {
 	color:#fff;
 	background:#000;
@@ -1499,7 +1500,7 @@ a
 	cursor:pointer;
 }
 
-.navigator a span {
+.featuredContainer .navigator a span {
 	height: 30px;
 	display: inline-block;
 	vertical-align: middle;
@@ -1508,7 +1509,7 @@ a
 	font-size: 30px;
 }
 
-.navigator a.disable
+.featuredContainer .navigator a.disable
 {
 	opacity:0.4 !important;
 	cursor:default !important;
