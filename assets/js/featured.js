@@ -25,11 +25,6 @@ $(document).ready(
         if ($("body").hasClass("sDesktop"))
         {
 
-            $(".navigator .btn_prev").on("click", function(pEvent)
-            {
-               pEvent.preventDefault();
-            });
-
             $(".navigator .btn_next").on("click", function(pEvent)
             {
                 pEvent.preventDefault();
@@ -48,14 +43,20 @@ $(document).ready(
 
                 var _currentItem = $(".featuredList .imgItem:eq(" + (mActiveIndex -1 ) + ")");
                 var _nextItem = $(".featuredList .imgItem:eq(" + mActiveIndex + ")");
-                var _currentLeft = $(".featuredList").position().left;
+                var _accumulatedWidth = 0;
 
-                //shift half the currentItem width first
-                var _nextItemToLeft = _currentLeft  - Math.round(_currentItem.width()* 0.5);
-                //The shift half the targetItem width
-                var _targetLeftPos = _nextItemToLeft - Math.round(_nextItem.width()* 0.5);
+                $(".featuredList .imgItem").each(function (i, e)
+                {
+                    if (i < mActiveIndex)
+                    {
+                        _accumulatedWidth += Math.round($(window).height() * parseInt($(e).find("img").data("width")) / parseInt($(e).find("img").data("height")));
+                    }
+                });
 
-                _timeLineCarousel.to($(".featuredList"), mTweenDurationSliding,{css:{left:  _targetLeftPos + "px"},ease:Circ.easeOut, onComplete: onSlideComplete});
+                var _expectedActiveLeftPos = mWinWidthMidPoint - Math.round(_nextItem.width() * 0.5);
+                var _diff = _expectedActiveLeftPos - _accumulatedWidth;
+
+                _timeLineCarousel.to($(".featuredList"), mTweenDurationSliding,{css:{left:  _diff + "px"},ease:Circ.easeOut, onComplete: onSlideComplete});
                 _timeLineImageOpacity.to(_currentItem, mTweenDurationImgOpacity, {css:{opacity:0.3},ease:Circ.easeOut})
                          .to(_nextItem, mTweenDurationImgOpacity, {css:{opacity:1},ease:Circ.easeIn});
 
@@ -99,12 +100,20 @@ $(document).ready(
                 var _nextItem = $(".featuredList .imgItem:eq(" + (mActiveIndex -2) + ")");
                 var _currentLeft = $(".featuredList").position().left;
 
-                //shift half the currentItem width first
-                var _prevItemToLeft = _currentLeft  + _currentItem.width()* 0.5;
-                //The shift half the targetItem width
-                var _targetLeftPos = _prevItemToLeft + _nextItem.width()* 0.5;
+                var _accumulatedWidth = 0;
 
-                _timeLineCarousel.to($(".featuredList"),mTweenDurationSliding,{css:{left:  _targetLeftPos + "px"},ease:Circ.easeOut, onComplete: onSlideComplete});
+                $(".featuredList .imgItem").each(function (i, e)
+                {
+                    if (i < mActiveIndex)
+                    {
+                        _accumulatedWidth += Math.round($(window).height() * parseInt($(e).find("img").data("width")) / parseInt($(e).find("img").data("height")));
+                    }
+                });
+
+                var _expectedActiveLeftPos = mWinWidthMidPoint - Math.round(_nextItem.width() * 0.5);
+                var _diff = _expectedActiveLeftPos - _accumulatedWidth;
+
+                _timeLineCarousel.to($(".featuredList"),mTweenDurationSliding,{css:{left:  _diff + "px"},ease:Circ.easeOut, onComplete: onSlideComplete});
                 _timeLineImageOpacity.to(_currentItem, mTweenDurationImgOpacity, {css:{opacity:0.3},ease:Circ.easeOut})
                     .to(_nextItem, mTweenDurationImgOpacity, {css:{opacity:1},ease:Circ.easeIn});
 
