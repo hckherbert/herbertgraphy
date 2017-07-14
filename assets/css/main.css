@@ -1484,6 +1484,7 @@ a
 	left: 50%;
 	margin-left: -50px;
 	z-index:1;
+	text-align:center;
 }
 
 .featuredContainer .navigator a
@@ -1525,8 +1526,9 @@ a
 	bottom:0;
 	position:absolute;
 	text-align:center;
-	font-size:24px;
+	font-size:1.2rem;
 	color:#fff;
+	word-break:keep-all;
 }
 
 .featuredContainer .content

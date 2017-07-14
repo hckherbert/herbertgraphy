@@ -2,7 +2,7 @@
  * Created by herbert on 7/2/2017.
  */
 
-var mActiveIndex = 11; //Note now mActiveIndex is ONE based, not ZERO based for text animation
+var mActiveIndex = 4; //Note now mActiveIndex is ONE based, not ZERO based for text animation
 var mTweenDurationSliding = 0.6;
 var mTweenDurationImgOpacity = 0.2;
 var mTweenDurationTitle = 0.2;
@@ -15,7 +15,7 @@ var words = document.getElementsByClassName("title");
 var currentWord =  (mActiveIndex > 0) ? mActiveIndex -1 : 0;
 var mSlideDirection = "";
 var mTimeLineStoryContent = null;
-var mContentNoramlStateHeight = 0;
+var mContentHeightAtAbsolutePos = 0;
 
 $(document).ready(
     function()
@@ -176,9 +176,9 @@ function windowOnResized()
             $(".story:eq(" + mActiveIndex + ")").removeClass("hide");
 
             //Set it init step only! We'll use this value for responsiveness!
-            if (!mContentNoramlStateHeight)
+            if (!mContentHeightAtAbsolutePos)
             {
-                mContentNoramlStateHeight = $(".content").outerHeight() + ($(".content").outerHeight() * 0.5);
+                mContentHeightAtAbsolutePos = $(".content").outerHeight() + ($(".content").outerHeight() * 0.5);
             }
 
         }
@@ -187,21 +187,7 @@ function windowOnResized()
 
     });
 
-    if (mContentNoramlStateHeight > $(window).height())
-    {
-        $(".content").css("position", "relative");
-        $(".content").css("top", "0");
-        $(".content").css("width", "100%");
-        $("html").css("overflow-y", "auto");
-    }
-    else
-    {
-        $(".content").css("position", "absolute");
-        $(".content").css("top", "30%");
-        $(".content").css("width", "400px");
-        $("html").css("overflow-y", "hidden");
-    }
-
+    adjustContentPosition();
 
 }
 
@@ -305,7 +291,37 @@ function reverseStoryContentTween()
         $(".story:eq(" + (mActiveIndex + 1) + ")").addClass("hide");
     }
 
-    mContentNoramlStateHeight = $(".content").outerHeight() + ($(".content").outerHeight() * 0.5);
+    $(".content").css("position", "absolute");
+    $(".content").css("top", "30%");
+    $(".content").css("width", "400px");
+    $(".content").css("margin-bottom", "0");
+    $("html").css("overflow-y", "hidden");
+
+    //We need the content Height at ABSOLUTE position so the result can be obtained correctly when window is being resized.
+    mContentHeightAtAbsolutePos = $(".content").outerHeight() + ($(".content").outerHeight() * 0.5);
+
+    adjustContentPosition();
 
     mTimeLineStoryContent.reverse();
+}
+
+function adjustContentPosition()
+{
+
+    if ( mContentHeightAtAbsolutePos > $(window).height())
+    {
+        $(".content").css("position", "relative");
+        $(".content").css("top", "0");
+        $(".content").css("width", "100%");
+        $(".content").css("margin-bottom", "24px"); //prevent footer from hiding some parts of the last line
+        $("html").css("overflow-y", "auto");
+    }
+    else
+    {
+        $(".content").css("position", "absolute");
+        $(".content").css("top", "30%");
+        $(".content").css("width", "400px");
+        $(".content").css("margin-bottom", "0");
+        $("html").css("overflow-y", "hidden");
+    }
 }
