@@ -2,7 +2,7 @@
  * Created by herbert on 7/2/2017.
  */
 
-var mActiveIndex = 4; //Note now mActiveIndex is ONE based, not ZERO based for text animation
+var mActiveIndex = 6; //Note now mActiveIndex is ONE based, not ZERO based for text animation
 var mTweenDurationSliding = 0.6;
 var mTweenDurationImgOpacity = 0.2;
 var mTweenDurationTitle = 0.2;
@@ -16,6 +16,7 @@ var currentWord =  (mActiveIndex > 0) ? mActiveIndex -1 : 0;
 var mSlideDirection = "";
 var mTimeLineStoryContent = null;
 var mContentHeightAtAbsolutePos = 0;
+var mFeaturedListHeightOnMobile = 0;
 
 $(document).ready(
     function()
@@ -23,10 +24,6 @@ $(document).ready(
         //desktop mode
         if ($("body").hasClass("sDesktop"))
         {
-            mTotalSlide = $(".featuredList img").length;
-            windowOnResized();
-            $(window).on("resize", windowOnResized);
-            animateText();
 
             $(".navigator .btn_prev").on("click", function(pEvent)
             {
@@ -49,8 +46,8 @@ $(document).ready(
                 var _timeLineImageOpacity = new TimelineLite();
                 var _timeLineTitle = new TimelineLite();
 
-                var _currentItem = $(".featuredList img:eq(" + (mActiveIndex -1 ) + ")");
-                var _nextItem = $(".featuredList img:eq(" + mActiveIndex + ")");
+                var _currentItem = $(".featuredList .imgItem:eq(" + (mActiveIndex -1 ) + ")");
+                var _nextItem = $(".featuredList .imgItem:eq(" + mActiveIndex + ")");
                 var _currentLeft = $(".featuredList").position().left;
 
                 //shift half the currentItem width first
@@ -98,8 +95,8 @@ $(document).ready(
                 var _timeLineImageOpacity = new TimelineLite();
                 var _timeLineTitle = new TimelineLite();
 
-                var _currentItem = $(".featuredList img:eq(" + (mActiveIndex -1) + ")");
-                var _nextItem = $(".featuredList img:eq(" + (mActiveIndex -2) + ")");
+                var _currentItem = $(".featuredList .imgItem:eq(" + (mActiveIndex -1) + ")");
+                var _nextItem = $(".featuredList .imgItem:eq(" + (mActiveIndex -2) + ")");
                 var _currentLeft = $(".featuredList").position().left;
 
                 //shift half the currentItem width first
@@ -139,6 +136,18 @@ $(document).ready(
                 $(".navigator .btn_prev").addClass("disable");
             }
         }
+        //Mobile mode
+        else
+        {
+            $(".featuredList").css("height", $(window).height()*0.7);
+        }
+
+        mTotalSlide = $(".featuredList .imgItem").length;
+        windowOnResized();
+        $(window).on("resize", windowOnResized);
+        animateText();
+
+
     }
 )
 
@@ -149,43 +158,97 @@ function windowOnResized()
 
     mWinWidthMidPoint = $(window).width() * 0.5;
 
-    $(".featuredList img").each(function (i, e)
+    if ($("body").hasClass("sDesktop"))
     {
-        if (i == 0)
+        $(".featuredList .imgItem").each(function (i, e)
         {
-            $(e).css("left", "0");
-            $(".title:eq(" + (i+1) + ")").css("left", "0");
-        }
-        else
-        {
-            $(e).css("left", _accumulatedWidth + "px");
-            $(".title:eq(" + (i+1)+ ")").css("left", _accumulatedWidth + "px");
-        }
-
-        var _currentWidth = Math.round(_winHeight * parseInt($(e).data("width")) / parseInt($(e).data("height")));
-
-        $(".title:eq(" + (i+1) + ")").css("width", _currentWidth + "px");
-
-        if (i == mActiveIndex-1)
-        {
-            $(e).css("opacity", "1");
-            TweenMax.to( $(".title:eq(" + i + ")", mTweenDurationTitle, {css:{opacity:1},ease:Circ.easeIn, onComplete: animateText}));
-            var _expectedActiveLeftPos = mWinWidthMidPoint - Math.round(_currentWidth * 0.5);
-            var _diff = _expectedActiveLeftPos - _accumulatedWidth;
-            $(".featuredList").css("left", _diff + "px");
-            $(".story:eq(" + mActiveIndex + ")").removeClass("hide");
-
-            //Set it init step only! We'll use this value for responsiveness!
-            if (!mContentHeightAtAbsolutePos)
+            if (i == 0)
             {
-                mContentHeightAtAbsolutePos = $(".content").outerHeight() + ($(".content").outerHeight() * 0.5);
+                $(e).css("left", "0");
+                $(".title:eq(" + (i + 1) + ")").css("left", "0");
+            }
+            else
+            {
+                $(e).css("left", _accumulatedWidth + "px");
+                $(".title:eq(" + (i + 1) + ")").css("left", _accumulatedWidth + "px");
             }
 
-        }
+            var _currentWidth = Math.round(_winHeight * parseInt($(e).find("img").data("width")) / parseInt($(e).find("img").data("height")));
 
-        _accumulatedWidth += _currentWidth;
+            $(".title:eq(" + (i + 1) + ")").css("width", _currentWidth + "px");
 
-    });
+            if (i == mActiveIndex - 1)
+            {
+                $(e).css("opacity", "1");
+                TweenMax.to($(".title:eq(" + i + ")", mTweenDurationTitle, {
+                    css: {opacity: 1},
+                    ease: Circ.easeIn,
+                    onComplete: animateText
+                }));
+                var _expectedActiveLeftPos = mWinWidthMidPoint - Math.round(_currentWidth * 0.5);
+                var _diff = _expectedActiveLeftPos - _accumulatedWidth;
+                $(".featuredList").css("left", _diff + "px");
+                $(".story:eq(" + mActiveIndex + ")").removeClass("hide");
+
+                //Set it init step only! We'll use this value for responsiveness!
+                if (!mContentHeightAtAbsolutePos)
+                {
+                    mContentHeightAtAbsolutePos = $(".content").outerHeight() + ($(".content").outerHeight() * 0.5);
+                }
+
+            }
+
+            _accumulatedWidth += _currentWidth;
+
+        });
+    }
+    else
+    {
+        mFeaturedListHeightOnMobile = $(window).height();
+
+        $(".featuredList .imgItem").each(function (i, e)
+        {
+            if (i == 0)
+            {
+                $(e).css("left", "0");
+                $(".title:eq(" + (i + 1) + ")").css("left", "0");
+            }
+            else
+            {
+                $(e).css("left", _accumulatedWidth + "px");
+                $(".title:eq(" + (i + 1) + ")").css("left", _accumulatedWidth + "px");
+            }
+
+            //var _currentWidth = Math.round(mFeaturedListHeightOnMobile * parseInt($(e).data("width")) / parseInt($(e).data("height")));
+            var _currentWidth = $(window).width();
+
+            $(".title:eq(" + (i + 1) + ")").css("width", _currentWidth + "px");
+
+            if (i == mActiveIndex - 1)
+            {
+                $(e).css("opacity", "1");
+                TweenMax.to($(".title:eq(" + i + ")", mTweenDurationTitle, {
+                    css: {opacity: 1},
+                    ease: Circ.easeIn,
+                    onComplete: animateText
+                }));
+                var _expectedActiveLeftPos = mWinWidthMidPoint - Math.round(_currentWidth * 0.5);
+                var _diff = _expectedActiveLeftPos - _accumulatedWidth;
+                $(".featuredList").css("left", _diff + "px");
+                $(".story:eq(" + mActiveIndex + ")").removeClass("hide");
+
+                //Set it init step only! We'll use this value for responsiveness!
+                if (!mContentHeightAtAbsolutePos)
+                {
+                    mContentHeightAtAbsolutePos = $(".content").outerHeight() + ($(".content").outerHeight() * 0.5);
+                }
+
+            }
+
+            _accumulatedWidth += _currentWidth;
+
+        });
+    }
 
     adjustContentPosition();
 

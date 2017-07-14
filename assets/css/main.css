@@ -1447,13 +1447,13 @@ a
 }
 
 /*********** FEATURED *************/
-.featuredContainer
+.sDesktop .featuredContainer
 {
 	width:100%;
 	height:100%;
 }
 
-.featuredContainer + .footer
+.sDesktop .featuredContainer + .footer
 {
 	opacity:1;
 }
@@ -1463,20 +1463,33 @@ a
 	background:#100c08;
 }
 
-.featuredContainer .featuredList
+.sDesktop .featuredContainer .featuredList
 {
 	height:100%;
 	position:relative;
 }
 
-.featuredList img
+.sMobile .featuredContainer .featuredList
+{
+	height:70%;
+	position:relative;
+}
+
+.featuredList .imgItem
 {
 	height:100%;
 	position:absolute;
 	opacity:0.3;
 }
 
-.featuredContainer .navigator
+.featuredList .imgItem img
+{
+	display:block;
+	text-align:center;
+	height:100%;
+}
+
+.sDesktop .featuredContainer .navigator
 {
 	position: absolute;
 	width: 100px;
@@ -1487,7 +1500,7 @@ a
 	text-align:center;
 }
 
-.featuredContainer .navigator a
+.sDesktop .featuredContainer .navigator a
 {
 	color:#fff;
 	background:#000;
@@ -1501,7 +1514,7 @@ a
 	cursor:pointer;
 }
 
-.featuredContainer .navigator a span {
+.sDesktop .featuredContainer .navigator a span {
 	height: 30px;
 	display: inline-block;
 	vertical-align: middle;
@@ -1517,7 +1530,7 @@ a
 }
 
 
-.featuredContainer .title
+.sDesktop .featuredContainer .title
 {
 	opacity:0;
 	background: rgba(0, 0, 0, 0.8);
@@ -1526,12 +1539,12 @@ a
 	bottom:0;
 	position:absolute;
 	text-align:center;
-	font-size:1.2rem;
+	font-size:1.5rem;
 	color:#fff;
 	word-break:keep-all;
 }
 
-.featuredContainer .content
+.sDesktop .featuredContainer .content
 {
 	background: rgba(0, 0, 0, 0.6);
 	box-sizing:border-box;
@@ -1545,7 +1558,7 @@ a
 	width:400px;
 }
 
-.featuredContainer .content .useCap
+.sDesktop .featuredContainer .content .useCap
 {
 	font-family: 'Merriweather', serif;
 	font-size:120px;
