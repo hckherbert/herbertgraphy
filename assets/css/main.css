@@ -1547,13 +1547,23 @@ a
 	opacity:0;
 	background: rgba(0, 0, 0, 0.8);
 	box-sizing:border-box;
-	padding:12px 12px 36px 12px;
 	bottom:0;
 	position:absolute;
 	text-align:center;
-	font-size:1.5rem;
 	color:#fff;
 	word-break:keep-all;
+}
+
+.sDesktop .featuredContainer .title
+{
+	padding:12px 12px 36px 12px;
+	font-size:1.5rem;
+}
+
+.sMobile .featuredContainer .title
+{
+	padding:12px;
+	font-size:1.2rem;
 }
 
 .sDesktop .featuredContainer .content

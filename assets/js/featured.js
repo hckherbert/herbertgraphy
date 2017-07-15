@@ -127,6 +127,12 @@ function slidePrev()
         .to(_nextItem, mTweenDurationImgOpacity, {css:{opacity:1},ease:Circ.easeIn});
 
     _timeLineTitle.to($(".title:eq("  + mActiveIndex + ")"), mTweenDurationTitle, {css:{opacity:0},ease:Circ.easeIn});
+
+    if ($("body").hasClass("sMobile"))
+    {
+        _timeLineTitle.to($(".title:eq("  + (mActiveIndex-1) + ")"), mTweenDurationTitle, {css:{opacity:0.7},ease:Circ.easeIn});
+    }
+
     mTimeLineStoryContent = TweenMax.to($(".content"), mTweenStoryContent, {css:{left:"-400px", opacity:0},ease: Expo.easeOut});
     TweenLite.delayedCall(0.3, reverseStoryContentTween);
 
@@ -195,6 +201,12 @@ function slideNext()
         .to(_nextItem, mTweenDurationImgOpacity, {css:{opacity:1},ease:Circ.easeIn});
 
     _timeLineTitle.to($(".title:eq("  + mActiveIndex + ")"), mTweenDurationTitle, {css:{opacity:0},ease:Circ.easeIn});
+
+    if ($("body").hasClass("sMobile"))
+    {
+        _timeLineTitle.to($(".title:eq("  + (mActiveIndex+1) + ")"), mTweenDurationTitle, {css:{opacity:0.7},ease:Circ.easeIn});
+    }
+
     mTimeLineStoryContent = TweenMax.to($(".content"), mTweenStoryContent, {css:{left:"-400px", opacity:0},ease: Expo.easeInOut});
     TweenLite.delayedCall(0.3, reverseStoryContentTween);
 
