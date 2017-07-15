@@ -24,7 +24,7 @@
         <a class="btn_prev"><span><</span></a>
         <a class="btn_next"><span>></span></a>
     </div>
-    <div class="content">
+    <div class="content noSwipe">
 
         <div class="story"><!--NOTE: MUST LEAVE THIS BLANK! --></div>
         <div class="story hide">

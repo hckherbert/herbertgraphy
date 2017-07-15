@@ -53,10 +53,7 @@ $(document).ready(
         //Mobile mode
         else
         {
-            $(".featuredList").css("height", $(window).height()*0.7 + "px");
-            $("html, body").addClass("hScrollOff") ;
-
-            $(".featuredList").swipe( {
+            $(".featuredContainer").swipe( {
                 swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
                     if (direction == "left")
                     {
@@ -66,7 +63,8 @@ $(document).ready(
                     {
                         slidePrev();
                     }
-                }
+                },
+                threshold: 50
             });
         }
 
@@ -146,9 +144,9 @@ function slidePrev()
         else {
             $(this).removeClass("disable");
         }
-    }
 
-    $(".navigator .btn_next").removeClass("disable");
+        $(".navigator .btn_next").removeClass("disable");
+    }
 }
 
 function slideNext()
@@ -220,10 +218,9 @@ function slideNext()
         else {
             $(this).removeClass("disable");
         }
+
+        $(".navigator .btn_prev").removeClass("disable");
     }
-
-    $(".navigator .btn_prev").removeClass("disable");
-
 }
 
 function windowOnResized()
@@ -235,6 +232,12 @@ function windowOnResized()
 
     if ($("body").hasClass("sDesktop"))
     {
+        $("html, body").removeClass("hScrollOff");
+        $(".story").css("padding", 0);
+        $(".story").css("width", "auto");
+        $(".featuredList").css("height", "100%");
+        $("html").css("overflow-y", "hidden");
+
         $(".featuredList .imgItem").each(function (i, e)
         {
             if (i == 0)
@@ -284,7 +287,10 @@ function windowOnResized()
     }
     else
     {
+        $("html,body").addClass("hScrollOff");
         mFeaturedListHeightOnMobile = $(window).height()*0.7;
+        $(".featuredList").css("height", mFeaturedListHeightOnMobile + "px");
+        $("html").css("overflow-y", "auto");
 
         $(".featuredList .imgItem").each(function (i, e)
         {
@@ -481,11 +487,23 @@ function adjustContentPosition()
 
 function updateStoryDisplay()
 {
-    var _activeItemImg = $(".featuredList .imgItem:eq(" + (mActiveIndex-1) + ")").find("img");
-    var _storyPadding = Math.round(($(window).width() -  Math.round(mFeaturedListHeightOnMobile * parseInt(_activeItemImg.data("width")) / parseInt(_activeItemImg.data("height")))) * 0.5);
 
+    $(".content").css("position", "relative");
+    $(".content").css("top", "0");
+    $(".content").css("width", "100%");
 
-    $(".story:eq(" + mActiveIndex + ")").css("padding-left", _storyPadding + "px");
-    $(".story:eq(" + mActiveIndex + ")").css("padding-right", _storyPadding + "px");
-    $(".story:eq(" + mActiveIndex + ")").css("width", $(window).width() - _storyPadding*2 + "px");
+    if ($(window).width() <=400)
+    {
+        var _activeItemImg = $(".featuredList .imgItem:eq(" + (mActiveIndex - 1) + ")").find("img");
+        var _storyPadding = Math.round(($(window).width() - Math.round(mFeaturedListHeightOnMobile * parseInt(_activeItemImg.data("width")) / parseInt(_activeItemImg.data("height")))) * 0.5);
+
+        $(".story:eq(" + mActiveIndex + ")").css("padding-left", _storyPadding + "px");
+        $(".story:eq(" + mActiveIndex + ")").css("padding-right", _storyPadding + "px");
+        $(".story:eq(" + mActiveIndex + ")").css("width", $(window).width() - _storyPadding * 2 + "px");
+    }
+    else
+    {
+        $(".story:eq(" + mActiveIndex + ")").css("padding", "15px");
+        $(".story:eq(" + mActiveIndex + ")").css("width", "auto");
+    }
 }

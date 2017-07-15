@@ -1473,7 +1473,6 @@ a
 {
 	height:100%;
 	position:relative;
-
 }
 
 .sMobile .featuredContainer .featuredList
@@ -1566,14 +1565,18 @@ a
 	font-size:1.2rem;
 }
 
+.featuredContainer .content
+{
+	color:#fdf6f1;
+	box-sizing:border-box;
+}
+
 .sDesktop .featuredContainer .content
 {
-	background: rgba(0, 0, 0, 0.6);
-	box-sizing:border-box;
-	padding:20px;
-	color:#fdf6f1;
 	font-size:14px;
 	line-height:1.4em;
+	background: rgba(0, 0, 0, 0.6);
+	padding:20px;
 	position:absolute;
 	left:0;
 	top:30%;
@@ -1583,12 +1586,22 @@ a
 .sMobile .featuredContainer .content
 {
 	padding:10px 0;
+	line-height:1.2em;
 }
 
 .sMobile .featuredContainer .story
 {
 	color:#fdf6f1;
+	font-size:16px;
 	text-align:justify;
+}
+
+@media (min-width: 500px)
+{
+	.sMobile .featuredContainer .story
+	{
+		font-size:14px;
+	}
 
 }
 
@@ -1603,16 +1616,27 @@ a
 	float:left;
 	color:#c3aba6;
 }
+
 .sMobile .featuredContainer .content .useCap
 {
 	font-family: 'Merriweather', serif;
-	font-size:60px;
-	margin:0 0 18px 0;
+	font-size: 4rem;
+	margin:0 0 .2em 0;
 	padding:0 .1em 0 0;
-	height:.5em;
-	line-height:.85em;
+	height:.6em;
+	line-height:1em;
 	float:left;
 	color:#c3aba6;
+}
+
+
+@media (min-width: 500px)
+{
+	.sMobile .featuredContainer .content .useCap
+	{
+		font-size: 4.4rem;
+	}
+
 }
 
 
