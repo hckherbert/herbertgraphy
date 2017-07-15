@@ -6,7 +6,6 @@
             <div class="imgItem"><img data-width="<?php echo $image_data["width"]; ?>" data-height="<?php echo $image_data["height"]; ?>" src="<?php echo base_url("assets/images/featured/".$key.".jpg"); ?>"></div>
         <?php } ?>
 
-        <?php foreach ($image_list_data as $key=>$image_data) { ?>
         <div class="title"><!--NOTE: MUST LEAVE THIS BLANK! --></div>
         <div class="title">The Stare</div>
         <div class="title">Sopot Molo</div>
@@ -20,7 +19,6 @@
         <div class="title">Palanga</div>
         <div class="title">Alice</div>
         <div class="title">Gisela</div>
-        <?php } ?>
     </div>
     <div class="navigator">
         <a class="btn_prev"><span><</span></a>

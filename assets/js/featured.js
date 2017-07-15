@@ -70,7 +70,6 @@ $(document).ready(
             });
         }
 
-
         mTotalSlide = $(".featuredList .imgItem").length;
         windowOnResized();
         $(window).on("resize", windowOnResized);
@@ -244,11 +243,13 @@ function windowOnResized()
             if (i == mActiveIndex - 1)
             {
                 $(e).css("opacity", "1");
+                /*
                 TweenMax.to($(".title:eq(" + i + ")", mTweenDurationTitle, {
                     css: {opacity: 1},
                     ease: Circ.easeIn,
                     onComplete: animateText
                 }));
+                */
                 var _expectedActiveLeftPos = mWinWidthMidPoint - Math.round(_currentWidth * 0.5);
                 var _diff = _expectedActiveLeftPos - _accumulatedWidth;
                 $(".featuredList").css("left", _diff + "px");
@@ -293,11 +294,14 @@ function windowOnResized()
             if (i == mActiveIndex - 1)
             {
                 $(e).css("opacity", "1");
+                $(".title:eq(" + mActiveIndex + ")").css("opacity", 0.7);
+
+                /*
                 TweenMax.to($(".title:eq(" + i + ")", mTweenDurationTitle, {
                     css: {opacity: 1},
-                    ease: Circ.easeIn,
-                    onComplete: animateText
+                    ease: Circ.easeIn
                 }));
+                */
                 var _expectedActiveLeftPos = mWinWidthMidPoint - Math.round(_currentWidth * 0.5);
                 var _diff = _expectedActiveLeftPos - _accumulatedWidth;
                 $(".featuredList").css("left", _diff + "px");
@@ -344,7 +348,6 @@ function animateText()
 {
    //words[currentWord+1].style.opacity = 1;
 
-     
     for (var i = 0; i < words.length; i++) {
         splitLetters(words[i]);
     }
@@ -365,7 +368,7 @@ function changeWord()
     for (var i = 0; i < nw.length; i++) {
         nw[i].className = 'letter behind';
         //nw[0].parentElement.style.opacity = 1;
-        TweenMax.to(nw[0].parentElement, 0.3, {css:{opacity:1},ease:Circ.easeIn});
+        TweenMax.to(nw[0].parentElement, 0.3, {css:{opacity:0.7},ease:Circ.easeIn});
         animateLetterIn(nw, i);
     }
 
