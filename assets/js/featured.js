@@ -58,7 +58,14 @@ $(document).ready(
 
             $(".featuredList").swipe( {
                 swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
-                    alert(direction);
+                    if (direction == "left")
+                    {
+                        slideNext();
+                    }
+                    else if (direction == "right")
+                    {
+                        slidePrev();
+                    }
                 }
             });
         }
@@ -132,7 +139,6 @@ function slidePrev()
 
 function slideNext()
 {
-
     if (mTotalSlide == mActiveIndex || mIsSliding)
     {
         return;
@@ -149,7 +155,16 @@ function slideNext()
     var _nextItem = $(".featuredList .imgItem:eq(" + mActiveIndex + ")");
 
     var _accumulatedWidth = 0;
-    var _winHeight = $(window).height();
+    var _winHeight = 0;
+
+    if ($("body").hasClass("sMobile"))
+    {
+        _winHeight = $(window).height() * 0.7;
+    }
+    else
+    {
+        _winHeight = $(window).height();
+    }
     var _diff = 0;
 
     $(".featuredList .imgItem").each(function (i, e)
@@ -177,13 +192,14 @@ function slideNext()
 
     mActiveIndex++;
 
-    if (mTotalSlide == mActiveIndex)
+    if ($("body").hasClass("sDesktop"))
     {
-        $(this).addClass("disable");
-    }
-    else
-    {
-        $(this).removeClass("disable");
+        if (mTotalSlide == mActiveIndex) {
+            $(this).addClass("disable");
+        }
+        else {
+            $(this).removeClass("disable");
+        }
     }
 
     $(".navigator .btn_prev").removeClass("disable");
@@ -290,10 +306,7 @@ function windowOnResized()
 
         });
 
-        var _activeItemImg = $(".featuredList .imgItem:eq(" + mActiveIndex + ")").find("img");
-        var _storyPadding = Math.round(($(window).width() -  Math.round(mFeaturedListHeightOnMobile * parseInt(_activeItemImg.data("width")) / parseInt(_activeItemImg.data("height")))) * 0.5);
-        $(".story:eq(" + mActiveIndex + ")").css("padding-left", _storyPadding + "px");
-        $(".story:eq(" + mActiveIndex + ")").css("padding-right", _storyPadding + "px");
+        updateStoryDisplay();
     }
 
 }
@@ -303,16 +316,17 @@ function onSlideComplete()
 
     mIsSliding = false;
 
-    if (mSlideDirection == "prev")
+    if ($("body").hasClass("sDesktop"))
     {
-        currentWord--;
-    }
-    else if (mSlideDirection == "next")
-    {
-        currentWord++;
-    }
+        if (mSlideDirection == "prev") {
+            currentWord--;
+        }
+        else if (mSlideDirection == "next") {
+            currentWord++;
+        }
 
-    changeWord();
+        changeWord();
+    }
     mSlideDirection = "";
 }
 
@@ -399,16 +413,23 @@ function reverseStoryContentTween()
         $(".story:eq(" + (mActiveIndex + 1) + ")").addClass("hide");
     }
 
-    $(".content").css("position", "absolute");
-    $(".content").css("top", "30%");
-    $(".content").css("width", "400px");
-    $(".content").css("margin-bottom", "0");
-    $("html").css("overflow-y", "hidden");
+    if ($("body").hasClass("sDesktop"))
+    {
+        $(".content").css("position", "absolute");
+        $(".content").css("top", "30%");
+        $(".content").css("width", "400px");
+        $(".content").css("margin-bottom", "0");
+        $("html").css("overflow-y", "hidden");
 
-    //We need the content Height at ABSOLUTE position so the result can be obtained correctly when window is being resized.
-    mContentHeightAtAbsolutePos = $(".content").outerHeight() + ($(".content").outerHeight() * 0.5);
+        //We need the content Height at ABSOLUTE position so the result can be obtained correctly when window is being resized.
+        mContentHeightAtAbsolutePos = $(".content").outerHeight() + ($(".content").outerHeight() * 0.5);
 
-    adjustContentPosition();
+        adjustContentPosition();
+    }
+    else
+    {
+        updateStoryDisplay();
+    }
 
     mTimeLineStoryContent.reverse();
 }
@@ -432,4 +453,15 @@ function adjustContentPosition()
         $(".content").css("margin-bottom", "0");
         $("html").css("overflow-y", "hidden");
     }
+}
+
+function updateStoryDisplay()
+{
+    var _activeItemImg = $(".featuredList .imgItem:eq(" + (mActiveIndex-1) + ")").find("img");
+    var _storyPadding = Math.round(($(window).width() -  Math.round(mFeaturedListHeightOnMobile * parseInt(_activeItemImg.data("width")) / parseInt(_activeItemImg.data("height")))) * 0.5);
+
+
+    $(".story:eq(" + mActiveIndex + ")").css("padding-left", _storyPadding + "px");
+    $(".story:eq(" + mActiveIndex + ")").css("padding-right", _storyPadding + "px");
+    $(".story:eq(" + mActiveIndex + ")").css("width", $(window).width() - _storyPadding*2 + "px");
 }
