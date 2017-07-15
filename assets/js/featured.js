@@ -28,124 +28,14 @@ $(document).ready(
             $(".navigator .btn_next").on("click", function(pEvent)
             {
                 pEvent.preventDefault();
-
-                if (mTotalSlide == mActiveIndex || mIsSliding)
-                {
-                    return;
-                }
-
-                mIsSliding = true;
-                mSlideDirection = "next";
-
-                var _timeLineCarousel = new TimelineLite();
-                var _timeLineImageOpacity = new TimelineLite();
-                var _timeLineTitle = new TimelineLite();
-
-                var _currentItem = $(".featuredList .imgItem:eq(" + (mActiveIndex -1 ) + ")");
-                var _nextItem = $(".featuredList .imgItem:eq(" + mActiveIndex + ")");
-
-                var _accumulatedWidth = 0;
-                var _winHeight = $(window).height();
-                var _diff = 0;
-
-                $(".featuredList .imgItem").each(function (i, e)
-                {
-                    var _currentWidth = Math.round(_winHeight * parseInt($(e).find("img").data("width")) / parseInt($(e).find("img").data("height")));
-
-                    if (i == mActiveIndex)
-                    {
-                        var _expectedActiveLeftPos = mWinWidthMidPoint - Math.round(_currentWidth * 0.5);
-                        _diff = _expectedActiveLeftPos - _accumulatedWidth;
-                        return;
-                    }
-
-                    _accumulatedWidth += _currentWidth;
-
-                });
-
-                _timeLineCarousel.to($(".featuredList"), mTweenDurationSliding,{css:{left:  _diff + "px"},ease:Circ.easeOut, onComplete: onSlideComplete});
-                _timeLineImageOpacity.to(_currentItem, mTweenDurationImgOpacity, {css:{opacity:0.3},ease:Circ.easeOut})
-                         .to(_nextItem, mTweenDurationImgOpacity, {css:{opacity:1},ease:Circ.easeIn});
-
-                _timeLineTitle.to($(".title:eq("  + mActiveIndex + ")"), mTweenDurationTitle, {css:{opacity:0},ease:Circ.easeIn});
-                mTimeLineStoryContent = TweenMax.to($(".content"), mTweenStoryContent, {css:{left:"-400px", opacity:0},ease: Expo.easeInOut});
-                TweenLite.delayedCall(0.3, reverseStoryContentTween);
-
-                mActiveIndex++;
-
-                if (mTotalSlide == mActiveIndex)
-                {
-                    $(this).addClass("disable");
-                }
-                else
-                {
-                    $(this).removeClass("disable");
-                }
-
-                $(".navigator .btn_prev").removeClass("disable");
-
+                slideNext();
             });
 
 
             $(".navigator .btn_prev").on("click", function(pEvent)
             {
                 pEvent.preventDefault();
-
-                if (mActiveIndex == 1 || mIsSliding)
-                {
-                    return;
-                }
-
-                mIsSliding = true;
-                mSlideDirection = "prev";
-
-                var _timeLineCarousel = new TimelineLite();
-                var _timeLineImageOpacity = new TimelineLite();
-                var _timeLineTitle = new TimelineLite();
-
-                var _currentItem = $(".featuredList .imgItem:eq(" + (mActiveIndex -1) + ")");
-                var _nextItem = $(".featuredList .imgItem:eq(" + (mActiveIndex -2) + ")");
-
-                var _accumulatedWidth = 0;
-                var _winHeight = $(window).height();
-                var _diff = 0;
-
-                $(".featuredList .imgItem").each(function (i, e)
-                {
-                    var _currentWidth = Math.round(_winHeight * parseInt($(e).find("img").data("width")) / parseInt($(e).find("img").data("height")));
-
-                    if (i == mActiveIndex-2)
-                    {
-                        var _expectedActiveLeftPos = mWinWidthMidPoint - Math.round(_currentWidth * 0.5);
-                        _diff = _expectedActiveLeftPos - _accumulatedWidth;
-                        return;
-                    }
-
-                    _accumulatedWidth += _currentWidth;
-
-                });
-
-                _timeLineCarousel.to($(".featuredList"),mTweenDurationSliding,{css:{left:  _diff + "px"},ease:Circ.easeOut, onComplete: onSlideComplete});
-                _timeLineImageOpacity.to(_currentItem, mTweenDurationImgOpacity, {css:{opacity:0.3},ease:Circ.easeOut})
-                    .to(_nextItem, mTweenDurationImgOpacity, {css:{opacity:1},ease:Circ.easeIn});
-
-                _timeLineTitle.to($(".title:eq("  + mActiveIndex + ")"), mTweenDurationTitle, {css:{opacity:0},ease:Circ.easeIn});
-                mTimeLineStoryContent = TweenMax.to($(".content"), mTweenStoryContent, {css:{left:"-400px", opacity:0},ease: Expo.easeOut});
-                TweenLite.delayedCall(0.3, reverseStoryContentTween);
-
-                mActiveIndex--;
-
-                if (mActiveIndex == 1)
-                {
-                    $(this).addClass("disable");
-                }
-                else
-                {
-                    $(this).removeClass("disable");
-                }
-
-                $(".navigator .btn_next").removeClass("disable");
-
+                slidePrev();
             });
 
             if (mActiveIndex == mTotalSlide)
@@ -168,7 +58,7 @@ $(document).ready(
 
             $(".featuredList").swipe( {
                 swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
-                    alert('x');
+                    alert(direction);
                 }
             });
         }
@@ -181,6 +71,124 @@ $(document).ready(
 
     }
 )
+
+function slidePrev()
+{
+    if (mActiveIndex == 1 || mIsSliding)
+    {
+        return;
+    }
+
+    mIsSliding = true;
+    mSlideDirection = "prev";
+
+    var _timeLineCarousel = new TimelineLite();
+    var _timeLineImageOpacity = new TimelineLite();
+    var _timeLineTitle = new TimelineLite();
+
+    var _currentItem = $(".featuredList .imgItem:eq(" + (mActiveIndex -1) + ")");
+    var _nextItem = $(".featuredList .imgItem:eq(" + (mActiveIndex -2) + ")");
+
+    var _accumulatedWidth = 0;
+    var _winHeight = $(window).height();
+    var _diff = 0;
+
+    $(".featuredList .imgItem").each(function (i, e)
+    {
+        var _currentWidth = Math.round(_winHeight * parseInt($(e).find("img").data("width")) / parseInt($(e).find("img").data("height")));
+
+        if (i == mActiveIndex-2)
+        {
+            var _expectedActiveLeftPos = mWinWidthMidPoint - Math.round(_currentWidth * 0.5);
+            _diff = _expectedActiveLeftPos - _accumulatedWidth;
+            return;
+        }
+
+        _accumulatedWidth += _currentWidth;
+
+    });
+
+    _timeLineCarousel.to($(".featuredList"),mTweenDurationSliding,{css:{left:  _diff + "px"},ease:Circ.easeOut, onComplete: onSlideComplete});
+    _timeLineImageOpacity.to(_currentItem, mTweenDurationImgOpacity, {css:{opacity:0.3},ease:Circ.easeOut})
+        .to(_nextItem, mTweenDurationImgOpacity, {css:{opacity:1},ease:Circ.easeIn});
+
+    _timeLineTitle.to($(".title:eq("  + mActiveIndex + ")"), mTweenDurationTitle, {css:{opacity:0},ease:Circ.easeIn});
+    mTimeLineStoryContent = TweenMax.to($(".content"), mTweenStoryContent, {css:{left:"-400px", opacity:0},ease: Expo.easeOut});
+    TweenLite.delayedCall(0.3, reverseStoryContentTween);
+
+    mActiveIndex--;
+
+    if (mActiveIndex == 1)
+    {
+        $(this).addClass("disable");
+    }
+    else
+    {
+        $(this).removeClass("disable");
+    }
+
+    $(".navigator .btn_next").removeClass("disable");
+}
+
+function slideNext()
+{
+
+    if (mTotalSlide == mActiveIndex || mIsSliding)
+    {
+        return;
+    }
+
+    mIsSliding = true;
+    mSlideDirection = "next";
+
+    var _timeLineCarousel = new TimelineLite();
+    var _timeLineImageOpacity = new TimelineLite();
+    var _timeLineTitle = new TimelineLite();
+
+    var _currentItem = $(".featuredList .imgItem:eq(" + (mActiveIndex -1 ) + ")");
+    var _nextItem = $(".featuredList .imgItem:eq(" + mActiveIndex + ")");
+
+    var _accumulatedWidth = 0;
+    var _winHeight = $(window).height();
+    var _diff = 0;
+
+    $(".featuredList .imgItem").each(function (i, e)
+    {
+        var _currentWidth = Math.round(_winHeight * parseInt($(e).find("img").data("width")) / parseInt($(e).find("img").data("height")));
+
+        if (i == mActiveIndex)
+        {
+            var _expectedActiveLeftPos = mWinWidthMidPoint - Math.round(_currentWidth * 0.5);
+            _diff = _expectedActiveLeftPos - _accumulatedWidth;
+            return;
+        }
+
+        _accumulatedWidth += _currentWidth;
+
+    });
+
+    _timeLineCarousel.to($(".featuredList"), mTweenDurationSliding,{css:{left:  _diff + "px"},ease:Circ.easeOut, onComplete: onSlideComplete});
+    _timeLineImageOpacity.to(_currentItem, mTweenDurationImgOpacity, {css:{opacity:0.3},ease:Circ.easeOut})
+        .to(_nextItem, mTweenDurationImgOpacity, {css:{opacity:1},ease:Circ.easeIn});
+
+    _timeLineTitle.to($(".title:eq("  + mActiveIndex + ")"), mTweenDurationTitle, {css:{opacity:0},ease:Circ.easeIn});
+    mTimeLineStoryContent = TweenMax.to($(".content"), mTweenStoryContent, {css:{left:"-400px", opacity:0},ease: Expo.easeInOut});
+    TweenLite.delayedCall(0.3, reverseStoryContentTween);
+
+    mActiveIndex++;
+
+    if (mTotalSlide == mActiveIndex)
+    {
+        $(this).addClass("disable");
+    }
+    else
+    {
+        $(this).removeClass("disable");
+    }
+
+    $(".navigator .btn_prev").removeClass("disable");
+
+}
 
 function windowOnResized()
 {
