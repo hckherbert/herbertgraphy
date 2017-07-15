@@ -15,6 +15,12 @@ html
 	overflow-y: auto;
 }
 
+.hScrollOff
+{
+	overflow-x:hidden;
+	width:100%;
+}
+
 html, body
 {
 	font-family: 'Catamaran', sans-serif;
@@ -1501,6 +1507,11 @@ a
 	text-align:center;
 }
 
+.sMobile .navigator
+{
+	display:none;
+}
+
 .sDesktop .featuredContainer .navigator a
 {
 	color:#fff;
@@ -1559,6 +1570,17 @@ a
 	width:400px;
 }
 
+.sMobile .featuredContainer .content
+{
+	padding:10px 0;
+}
+
+.sMobile .featuredContainer .story
+{
+	color:#fdf6f1;
+
+}
+
 .sDesktop .featuredContainer .content .useCap
 {
 	font-family: 'Merriweather', serif;
@@ -1570,6 +1592,18 @@ a
 	float:left;
 	color:#c3aba6;
 }
+.sMobile .featuredContainer .content .useCap
+{
+	font-family: 'Merriweather', serif;
+	font-size:60px;
+	margin:5px 0 15px 0;
+	padding:0 .1em 0 0;
+	height:.7em;
+	line-height:.85em;
+	float:left;
+	color:#c3aba6;
+}
+
 
 .letter {
 	display: inline-block;

@@ -156,17 +156,27 @@ $(document).ready(
             {
                 $(".navigator .btn_prev").addClass("disable");
             }
+
+            animateText();
+
         }
         //Mobile mode
         else
         {
-            $(".featuredList").css("height", $(window).height()*0.7);
+            $(".featuredList").css("height", $(window).height()*0.7 + "px");
+            $("html, body").addClass("hScrollOff") ;
+
+            $(".featuredList").swipe( {
+                swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
+                    alert('x');
+                }
+            });
         }
+
 
         mTotalSlide = $(".featuredList .imgItem").length;
         windowOnResized();
         $(window).on("resize", windowOnResized);
-        animateText();
 
 
     }
@@ -222,10 +232,13 @@ function windowOnResized()
             _accumulatedWidth += _currentWidth;
 
         });
+
+        adjustContentPosition();
+
     }
     else
     {
-        mFeaturedListHeightOnMobile = $(window).height();
+        mFeaturedListHeightOnMobile = $(window).height()*0.7;
 
         $(".featuredList .imgItem").each(function (i, e)
         {
@@ -240,8 +253,7 @@ function windowOnResized()
                 $(".title:eq(" + (i + 1) + ")").css("left", _accumulatedWidth + "px");
             }
 
-            //var _currentWidth = Math.round(mFeaturedListHeightOnMobile * parseInt($(e).data("width")) / parseInt($(e).data("height")));
-            var _currentWidth = $(window).width();
+            var _currentWidth = Math.round(mFeaturedListHeightOnMobile * parseInt($(e).find("img").data("width")) / parseInt($(e).find("img").data("height")));
 
             $(".title:eq(" + (i + 1) + ")").css("width", _currentWidth + "px");
 
@@ -269,9 +281,12 @@ function windowOnResized()
             _accumulatedWidth += _currentWidth;
 
         });
-    }
 
-    adjustContentPosition();
+        var _activeItemImg = $(".featuredList .imgItem:eq(" + mActiveIndex + ")").find("img");
+        var _storyPadding = Math.round(($(window).width() -  Math.round(mFeaturedListHeightOnMobile * parseInt(_activeItemImg.data("width")) / parseInt(_activeItemImg.data("height")))) * 0.5);
+        $(".story:eq(" + mActiveIndex + ")").css("padding-left", _storyPadding + "px");
+        $(".story:eq(" + mActiveIndex + ")").css("padding-right", _storyPadding + "px");
+    }
 
 }
 
