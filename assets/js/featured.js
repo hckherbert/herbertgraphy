@@ -97,7 +97,15 @@ function slidePrev()
     var _nextItem = $(".featuredList .imgItem:eq(" + (mActiveIndex -2) + ")");
 
     var _accumulatedWidth = 0;
-    var _winHeight = $(window).height();
+    var _winHeight = 0;
+    if ($("body").hasClass("sMobile"))
+    {
+        _winHeight = $(window).height() * 0.7;
+    }
+    else
+    {
+        _winHeight = $(window).height();
+    }
     var _diff = 0;
 
     $(".featuredList .imgItem").each(function (i, e)
@@ -125,13 +133,14 @@ function slidePrev()
 
     mActiveIndex--;
 
-    if (mActiveIndex == 1)
+    if ($("body").hasClass("sDesktop"))
     {
-        $(this).addClass("disable");
-    }
-    else
-    {
-        $(this).removeClass("disable");
+        if (mActiveIndex == 1) {
+            $(this).addClass("disable");
+        }
+        else {
+            $(this).removeClass("disable");
+        }
     }
 
     $(".navigator .btn_next").removeClass("disable");
