@@ -269,7 +269,8 @@ function windowOnResized()
                 //Set it init step only! We'll use this value for responsiveness!
                 if (!mContentHeightAtAbsolutePos)
                 {
-                    mContentHeightAtAbsolutePos = $(".content").outerHeight() + ($(".content").outerHeight() * 0.8);
+                    //make the height large enough
+                    mContentHeightAtAbsolutePos = $(".content").outerHeight() * 2;
                 }
 
             }
@@ -326,9 +327,9 @@ function windowOnResized()
                 //Set it init step only! We'll use this value for responsiveness!
                 if (!mContentHeightAtAbsolutePos)
                 {
-                    mContentHeightAtAbsolutePos = $(".content").outerHeight() + ($(".content").outerHeight() * 0.5);
+                    //make the height large enough
+                    mContentHeightAtAbsolutePos = $(".content").outerHeight() * 2;
                 }
-
             }
 
             _accumulatedWidth += _currentWidth;
@@ -450,7 +451,7 @@ function reverseStoryContentTween()
         $("html").css("overflow-y", "hidden");
 
         //We need the content Height at ABSOLUTE position so the result can be obtained correctly when window is being resized.
-        mContentHeightAtAbsolutePos = $(".content").outerHeight() + ($(".content").outerHeight() * 0.5);
+        mContentHeightAtAbsolutePos = $(".content").outerHeight() + ($(".content").outerHeight() * 0.2);
 
         adjustContentPosition();
     }
@@ -469,6 +470,7 @@ function adjustContentPosition()
         $(".content").css("margin-bottom", "24px"); //prevent footer from hiding some parts of the last line
         $("html").css("overflow-y", "auto");
         $(".story").addClass("storyDimmer");
+
     }
     else
     {
@@ -478,5 +480,15 @@ function adjustContentPosition()
         $(".content").css("margin-bottom", "0");
         $("html").css("overflow-y", "hidden");
         $(".story").removeClass("storyDimmer");
+
+    }
+
+    if ($("body").hasClass("sDesktop"))
+    {
+        $(".title").css("bottom", "0");
+    }
+    else
+    {
+        $(".title").css("bottom", "40px");
     }
 }
