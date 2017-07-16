@@ -21,8 +21,8 @@
         <div class="title">Gisela</div>
     </div>
     <div class="navigator">
-        <a class="btn_prev"><span><</span></a>
-        <a class="btn_next"><span>></span></a>
+        <a class="btn_prev hvr-fade"><span><</span></a>
+        <a class="btn_next hvr-fade"><span>></span></a>
     </div>
     <div class="content noSwipe">
 

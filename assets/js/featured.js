@@ -136,13 +136,13 @@ function slidePrev()
 
     mActiveIndex--;
 
-    if ($("body").hasClass("sDesktop"))
+    if ($(".navigator").css("display") == "block")
     {
         if (mActiveIndex == 1) {
-            $(this).addClass("disable");
+            $(".navigator .btn_prev").addClass("disable");
         }
         else {
-            $(this).removeClass("disable");
+            $(".navigator .btn_prev").removeClass("disable");
         }
 
         $(".navigator .btn_next").removeClass("disable");
@@ -210,17 +210,17 @@ function slideNext()
 
     mActiveIndex++;
 
-    if ($("body").hasClass("sDesktop"))
+    if ($(".navigator").css("display") == "block")
     {
         if (mTotalSlide == mActiveIndex) {
-            $(this).addClass("disable");
+            $(".navigator .btn_next").addClass("disable");
         }
         else {
-            $(this).removeClass("disable");
+            $(".navigator .btn_next").removeClass("disable");
         }
 
         $(".navigator .btn_prev").removeClass("disable");
-    }
+     }
 }
 
 function windowOnResized()
