@@ -37,6 +37,8 @@ $(document).ready(
                 },
                 threshold: 50
             });
+
+            $(".story").addClass("storyDimmer");
         }
         //desktop mode
         else
@@ -276,9 +278,20 @@ function windowOnResized()
     }
     else
     {
+        if ($(window).width() <900 && $(window).height() <640)
+        {
+            $(".navigator").css("top", "10px");
+            $(".navigator").css("bottom", "auto");
+        }
+        else
+        {
+            $(".navigator").css("top", "auto");
+            $(".navigator").css("bottom", "100px");
+        }
+
         $(".navigator").show();
         $("html, body").removeClass("hScrollOff");
-        $(".content").css("padding", "20px");
+        $(".content").css("padding", "15px");
         $(".story").css("width", "auto");
         $(".featuredList").css("height", "100%");
         $("html").css("overflow-y", "hidden");
@@ -453,6 +466,7 @@ function adjustContentPosition()
         $(".content").css("width", "100%");
         $(".content").css("margin-bottom", "24px"); //prevent footer from hiding some parts of the last line
         $("html").css("overflow-y", "auto");
+        $(".story").addClass("storyDimmer");
     }
     else
     {
@@ -461,5 +475,6 @@ function adjustContentPosition()
         $(".content").css("width", "400px");
         $(".content").css("margin-bottom", "0");
         $("html").css("overflow-y", "hidden");
+        $(".story").removeClass("storyDimmer");
     }
 }
