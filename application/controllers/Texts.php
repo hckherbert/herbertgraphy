@@ -1,6 +1,6 @@
 <?php
 
-class Featured extends MY_Common
+class Texts extends MY_Common
 {
     public function __construct()
     {
