@@ -131,10 +131,20 @@ function slidePrev()
     if ($("body").hasClass("sMobile") && screen.width <= 1024)
     {
         _timeLineTitle.to($(".title:eq("  + (mActiveIndex-1) + ")"), mTweenDurationTitle, {css:{opacity:0.7},ease:Circ.easeIn});
-    }
 
-    mTimeLineStoryContent = TweenMax.to($(".content"), mTweenStoryContent, {css:{left:"-400px", opacity:0},ease: Expo.easeOut});
-    TweenLite.delayedCall(0.3, reverseStoryContentTween);
+        var _timeLineStory = new TimelineLite();
+
+        $(".story:eq(" + (mActiveIndex) + ")").css("opacity", 1);
+        $(".story:eq(" + (mActiveIndex-1) + ")").removeClass("hide").css("opacity", 0);
+        _timeLineTitle.to($(".story:eq(" + (mActiveIndex) + ")"), 0.1, {css:{opacity:0},ease:Circ.easeIn, onComplete: $(".story:eq(" + (mActiveIndex) + ")").addClass("hide")})
+        .to( $(".story:eq(" + (mActiveIndex-1)  + ")"), 0.1, {css:{opacity:1},ease:Circ.easeIn});
+
+    }
+    else
+    {
+        TweenLite.delayedCall(0.3, reverseStoryContentTween);
+        mTimeLineStoryContent = TweenMax.to($(".content"), mTweenStoryContent, {css:{left:"-400px", opacity:0},ease: Expo.easeOut});
+    }
 
     mActiveIndex--;
 
@@ -164,6 +174,7 @@ function slideNext()
     var _timeLineCarousel = new TimelineLite();
     var _timeLineImageOpacity = new TimelineLite();
     var _timeLineTitle = new TimelineLite();
+
 
     var _currentItem = $(".featuredList .imgItem:eq(" + (mActiveIndex -1 ) + ")");
     var _nextItem = $(".featuredList .imgItem:eq(" + mActiveIndex + ")");
@@ -205,10 +216,22 @@ function slideNext()
     if ($("body").hasClass("sMobile") && screen.width <= 1024)
     {
         _timeLineTitle.to($(".title:eq("  + (mActiveIndex+1) + ")"), mTweenDurationTitle, {css:{opacity:0.7},ease:Circ.easeIn});
+
+        var _timeLineStory = new TimelineLite();
+
+        $(".story:eq(" + (mActiveIndex) + ")").css("opacity", 1);
+        $(".story:eq(" + (mActiveIndex+1)  + ")").removeClass("hide").css("opacity", 0);
+        _timeLineStory.to($(".story:eq(" + (mActiveIndex) + ")"), 0.1, {css:{opacity:0},ease:Circ.easeIn, onComplete: $(".story:eq(" + (mActiveIndex) + ")").addClass("hide")})
+        .to( $(".story:eq(" + (mActiveIndex+1)  + ")"), 0.1, {css:{opacity:1},ease:Circ.easeIn});
+
+    }
+    else
+    {
+        TweenLite.delayedCall(0.3, reverseStoryContentTween);
+        mTimeLineStoryContent = TweenMax.to($(".content"), mTweenStoryContent, {css:{left:"-400px", opacity:0},ease: Expo.easeInOut});
+
     }
 
-    mTimeLineStoryContent = TweenMax.to($(".content"), mTweenStoryContent, {css:{left:"-400px", opacity:0},ease: Expo.easeInOut});
-    TweenLite.delayedCall(0.3, reverseStoryContentTween);
 
     mActiveIndex++;
 
@@ -451,7 +474,7 @@ function reverseStoryContentTween()
         $("html").css("overflow-y", "hidden");
 
         //We need the content Height at ABSOLUTE position so the result can be obtained correctly when window is being resized.
-        mContentHeightAtAbsolutePos = $(".content").outerHeight() + ($(".content").outerHeight() * 0.2);
+        mContentHeightAtAbsolutePos = $(".content").outerHeight() * 2;
 
         adjustContentPosition();
     }
@@ -482,5 +505,5 @@ function adjustContentPosition()
         $(".story").removeClass("storyDimmer");
 
     }
- 
+
 }
