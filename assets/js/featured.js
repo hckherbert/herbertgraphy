@@ -21,6 +21,8 @@ var mFeaturedListHeightOnMobile = 0;
 $(document).ready(
     function()
     {
+        $(".featuredContainer").addClass("show");
+
         //Mobile mode
         if ($("body").hasClass("sMobile") && screen.width <=1024)
         {
@@ -267,7 +269,7 @@ function windowOnResized()
                 //Set it init step only! We'll use this value for responsiveness!
                 if (!mContentHeightAtAbsolutePos)
                 {
-                    mContentHeightAtAbsolutePos = $(".content").outerHeight() + ($(".content").outerHeight() * 0.5);
+                    mContentHeightAtAbsolutePos = $(".content").outerHeight() + ($(".content").outerHeight() * 0.8);
                 }
 
             }
@@ -280,7 +282,7 @@ function windowOnResized()
     {
         if ($(window).width() <900 && $(window).height() <640)
         {
-            $(".navigator").css("top", "10px");
+            $(".navigator").css("top", "50px");
             $(".navigator").css("bottom", "auto");
         }
         else

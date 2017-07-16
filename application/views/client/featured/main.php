@@ -1,6 +1,7 @@
 <html>
 <body class="<?php echo $class_main_color; ?>">
 <div class="featuredContainer <?php echo $class_main_color; ?>">
+    <div class="header"><h1>HerbertGraphy Texts</h1></div>
     <div class="featuredList">
         <?php foreach ($image_list_data as $key=>$image_data) { ?>
             <div class="imgItem"><img data-width="<?php echo $image_data["width"]; ?>" data-height="<?php echo $image_data["height"]; ?>" src="<?php echo base_url("assets/images/featured/".$key.".jpg"); ?>"></div>
@@ -46,7 +47,7 @@
             <span class="useCap">P</span>orvoo is like the heaven, you can enjoy the peace and tranquility there. It was in early spring by the <em>Maari Lake</em>, the town was still tinted with a slight blue tone. When I caught a glimpse of a lady riding a bicycle, I perceived some great moment would come. I was inspired by the big canvas of falling leaves under my feet, and I quickly turned on the multi-exposure mode to produce this oil-painting-like effect, without any retouching.
         </div>
         <div class="story hide">
-            <span class="useCap">I</span> like imagining extending one space to another. A piano on the sea, A lamp inside a room... or whatever. It's a boiling summer day, I took a white dining chair to the grassland. I asked Charlina to pose on the chair; she looked well when she dressed in white and exposed her legs on the chair, surrounded by great portions of forest green.
+            <span class="useCap">I</span> like imagining extending one space to another. A piano on the sea, a lamp inside a room... or whatever. It's a boiling summer day, I took a white dining chair to the grassland. I asked Charlina to pose on the chair; she looked well when she dressed in white and exposed her legs on the chair, surrounded by great portions of forest green.
         </div>
         <div class="story hide">
             <span class="useCap">I</span>t was a chilly morning. Snow was falling on the charming <em>Mariacka Street</em>. Shops and restaurants were mostly close,there were nothing to capture but waiting to see if something would happen. Then an old man in drak grey jacket passed the street; the trolley that he was taking with suggested that he was probably an old man in limited financial condition. While he was taking a glance at the camera, with the snow making a perfect color contrast with his jacket, I didn't hesitate to capture the frame, with a f/1.4 aperture to further enhance the snowy sight.
