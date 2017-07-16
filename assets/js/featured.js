@@ -482,13 +482,5 @@ function adjustContentPosition()
         $(".story").removeClass("storyDimmer");
 
     }
-
-    if ($("body").hasClass("sDesktop"))
-    {
-        $(".title").css("bottom", "0");
-    }
-    else
-    {
-        $(".title").css("bottom", "40px");
-    }
+ 
 }
