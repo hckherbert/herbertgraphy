@@ -21,10 +21,26 @@ var mFeaturedListHeightOnMobile = 0;
 $(document).ready(
     function()
     {
-        //desktop mode
-        if ($("body").hasClass("sDesktop"))
+        //Mobile mode
+        if ($("body").hasClass("sMobile") && screen.width <=1024)
         {
-
+            $(".featuredContainer").swipe( {
+                swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
+                    if (direction == "left")
+                    {
+                        slideNext();
+                    }
+                    else if (direction == "right")
+                    {
+                        slidePrev();
+                    }
+                },
+                threshold: 50
+            });
+        }
+        //desktop mode
+        else
+        {
             $(".navigator .btn_next").on("click", function(pEvent)
             {
                 pEvent.preventDefault();
@@ -48,24 +64,6 @@ $(document).ready(
             }
 
             animateText();
-
-        }
-        //Mobile mode
-        else
-        {
-            $(".featuredContainer").swipe( {
-                swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
-                    if (direction == "left")
-                    {
-                        slideNext();
-                    }
-                    else if (direction == "right")
-                    {
-                        slidePrev();
-                    }
-                },
-                threshold: 50
-            });
         }
 
         mTotalSlide = $(".featuredList .imgItem").length;
@@ -95,7 +93,7 @@ function slidePrev()
 
     var _accumulatedWidth = 0;
     var _winHeight = 0;
-    if ($("body").hasClass("sMobile"))
+    if ($("body").hasClass("sMobile") && screen.width <= 1024)
     {
         _winHeight = $(window).height() * 0.7;
     }
@@ -126,7 +124,7 @@ function slidePrev()
 
     _timeLineTitle.to($(".title:eq("  + mActiveIndex + ")"), mTweenDurationTitle, {css:{opacity:0},ease:Circ.easeIn});
 
-    if ($("body").hasClass("sMobile"))
+    if ($("body").hasClass("sMobile") && screen.width <= 1024)
     {
         _timeLineTitle.to($(".title:eq("  + (mActiveIndex-1) + ")"), mTweenDurationTitle, {css:{opacity:0.7},ease:Circ.easeIn});
     }
@@ -169,7 +167,7 @@ function slideNext()
     var _accumulatedWidth = 0;
     var _winHeight = 0;
 
-    if ($("body").hasClass("sMobile"))
+    if ($("body").hasClass("sMobile") && screen.width <= 1024)
     {
         _winHeight = $(window).height() * 0.7;
     }
@@ -200,7 +198,7 @@ function slideNext()
 
     _timeLineTitle.to($(".title:eq("  + mActiveIndex + ")"), mTweenDurationTitle, {css:{opacity:0},ease:Circ.easeIn});
 
-    if ($("body").hasClass("sMobile"))
+    if ($("body").hasClass("sMobile") && screen.width <= 1024)
     {
         _timeLineTitle.to($(".title:eq("  + (mActiveIndex+1) + ")"), mTweenDurationTitle, {css:{opacity:0.7},ease:Circ.easeIn});
     }
@@ -230,62 +228,7 @@ function windowOnResized()
 
     mWinWidthMidPoint = $(window).width() * 0.5;
 
-    if ($("body").hasClass("sDesktop"))
-    {
-        $("html, body").removeClass("hScrollOff");
-        $(".story").css("padding", 0);
-        $(".story").css("width", "auto");
-        $(".featuredList").css("height", "100%");
-        $("html").css("overflow-y", "hidden");
-
-        $(".featuredList .imgItem").each(function (i, e)
-        {
-            if (i == 0)
-            {
-                $(e).css("left", "0");
-                $(".title:eq(" + (i + 1) + ")").css("left", "0");
-            }
-            else
-            {
-                $(e).css("left", _accumulatedWidth + "px");
-                $(".title:eq(" + (i + 1) + ")").css("left", _accumulatedWidth + "px");
-            }
-
-            var _currentWidth = Math.round(_winHeight * parseInt($(e).find("img").data("width")) / parseInt($(e).find("img").data("height")));
-
-            $(".title:eq(" + (i + 1) + ")").css("width", _currentWidth + "px");
-
-            if (i == mActiveIndex - 1)
-            {
-                $(e).css("opacity", "1");
-                /*
-                TweenMax.to($(".title:eq(" + i + ")", mTweenDurationTitle, {
-                    css: {opacity: 1},
-                    ease: Circ.easeIn,
-                    onComplete: animateText
-                }));
-                */
-                var _expectedActiveLeftPos = mWinWidthMidPoint - Math.round(_currentWidth * 0.5);
-                var _diff = _expectedActiveLeftPos - _accumulatedWidth;
-                $(".featuredList").css("left", _diff + "px");
-                $(".story:eq(" + mActiveIndex + ")").removeClass("hide");
-
-                //Set it init step only! We'll use this value for responsiveness!
-                if (!mContentHeightAtAbsolutePos)
-                {
-                    mContentHeightAtAbsolutePos = $(".content").outerHeight() + ($(".content").outerHeight() * 0.5);
-                }
-
-            }
-
-            _accumulatedWidth += _currentWidth;
-
-        });
-
-        adjustContentPosition();
-
-    }
-    else
+    if ($("body").hasClass("sMobile") && screen.width <= 1024)
     {
         $("html,body").addClass("hScrollOff");
         mFeaturedListHeightOnMobile = $(window).height()*0.7;
@@ -313,13 +256,6 @@ function windowOnResized()
             {
                 $(e).css("opacity", "1");
                 $(".title:eq(" + mActiveIndex + ")").css("opacity", 0.7);
-
-                /*
-                TweenMax.to($(".title:eq(" + i + ")", mTweenDurationTitle, {
-                    css: {opacity: 1},
-                    ease: Circ.easeIn
-                }));
-                */
                 var _expectedActiveLeftPos = mWinWidthMidPoint - Math.round(_currentWidth * 0.5);
                 var _diff = _expectedActiveLeftPos - _accumulatedWidth;
                 $(".featuredList").css("left", _diff + "px");
@@ -339,6 +275,53 @@ function windowOnResized()
 
         updateStoryDisplay();
     }
+    else
+    {
+        $("html, body").removeClass("hScrollOff");
+        $(".content").css("padding", "20px");
+        $(".story").css("width", "auto");
+        $(".featuredList").css("height", "100%");
+        $("html").css("overflow-y", "hidden");
+
+        $(".featuredList .imgItem").each(function (i, e)
+        {
+            if (i == 0)
+            {
+                $(e).css("left", "0");
+                $(".title:eq(" + (i + 1) + ")").css("left", "0");
+            }
+            else
+            {
+                $(e).css("left", _accumulatedWidth + "px");
+                $(".title:eq(" + (i + 1) + ")").css("left", _accumulatedWidth + "px");
+            }
+
+            var _currentWidth = Math.round(_winHeight * parseInt($(e).find("img").data("width")) / parseInt($(e).find("img").data("height")));
+
+            $(".title:eq(" + (i + 1) + ")").css("width", _currentWidth + "px");
+
+            if (i == mActiveIndex - 1)
+            {
+                $(e).css("opacity", "1");
+                var _expectedActiveLeftPos = mWinWidthMidPoint - Math.round(_currentWidth * 0.5);
+                var _diff = _expectedActiveLeftPos - _accumulatedWidth;
+                $(".featuredList").css("left", _diff + "px");
+                $(".story:eq(" + mActiveIndex + ")").removeClass("hide");
+
+                //Set it init step only! We'll use this value for responsiveness!
+                if (!mContentHeightAtAbsolutePos)
+                {
+                    mContentHeightAtAbsolutePos = $(".content").outerHeight() + ($(".content").outerHeight() * 0.5);
+                }
+
+            }
+
+            _accumulatedWidth += _currentWidth;
+
+        });
+
+        adjustContentPosition();
+    }
 
 }
 
@@ -347,7 +330,7 @@ function onSlideComplete()
 
     mIsSliding = false;
 
-    if ($("body").hasClass("sDesktop"))
+    if ($("body").hasClass("sDesktop") || screen.width > 1024)
     {
         if (mSlideDirection == "prev") {
             currentWord--;
