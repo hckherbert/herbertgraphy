@@ -134,9 +134,9 @@ function slidePrev()
 
         var _timeLineStory = new TimelineLite();
 
-        $(".story:eq(" + (mActiveIndex) + ")").css("opacity", 1);
+        $(".story:eq(" + (mActiveIndex-2) + ")").css("opacity", 1);
         $(".story:eq(" + (mActiveIndex-1) + ")").removeClass("hide").css("opacity", 0);
-        _timeLineTitle.to($(".story:eq(" + (mActiveIndex) + ")"), 0.1, {css:{opacity:0},ease:Circ.easeIn, onComplete: $(".story:eq(" + (mActiveIndex) + ")").addClass("hide")})
+        _timeLineTitle.to($(".story:eq(" + (mActiveIndex-2) + ")"), 0.1, {css:{opacity:0},ease:Circ.easeIn, onComplete: $(".story:eq(" + (mActiveIndex) + ")").addClass("hide")})
         .to( $(".story:eq(" + (mActiveIndex-1)  + ")"), 0.1, {css:{opacity:1},ease:Circ.easeIn});
 
     }
