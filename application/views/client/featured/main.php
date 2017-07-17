@@ -20,6 +20,8 @@
         <div class="title">Palanga</div>
         <div class="title">Alice</div>
         <div class="title">Gisela</div>
+        <div class="swipeLeftHint">< swipe</div>
+        <div class="swipeRightHint">swipe ></div>
     </div>
     <div class="navigator">
         <a class="btn_prev hvr-fade"><span><</span></a>

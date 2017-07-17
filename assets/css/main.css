@@ -1594,6 +1594,32 @@ a
 	font-size:1.5rem;
 }
 
+.sMobile .featuredContainer .swipeLeftHint
+{
+	font-style:italic;
+	font-size:10px;
+	color:#fff;
+	bottom:0px;
+	position:absolute;
+	left: 10px;
+}
+
+.sMobile .featuredContainer .swipeRightHint
+{
+	font-style:italic;
+	font-size:10px;
+	color:#fff;
+	bottom:0px;
+	position:absolute;
+	right: 10px;
+}
+
+.sDesktop .featuredContainer .swipeLeftHint,
+.sDesktop .featuredContainer .swipeRightHint
+{
+	display:none;
+}
+
 .featuredContainer .content
 {
 	color:#fdf6f1;
