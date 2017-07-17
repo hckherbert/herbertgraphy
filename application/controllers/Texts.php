@@ -24,6 +24,15 @@ class Texts extends MY_Common
         }
 
         $data["image_list_data"] = $image_list_data;
+
+        if (ENVIRONMENT == "dev_cp")
+        {
+            $data["main_title"] = "Test Texts";
+        }
+        else
+        {
+            $data["main_title"] = "Herbertgraphy Texts";
+        }
         
         $this->load->template_client("featured", "horizontal", $data);
     }

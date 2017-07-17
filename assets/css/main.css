@@ -1498,7 +1498,7 @@ a
 
 }
 
-.sDesktop .featuredContainer + .footer
+.featuredContainer + .footer
 {
 	opacity:1;
 	-webkit-transition: none;

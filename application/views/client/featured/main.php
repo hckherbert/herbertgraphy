@@ -1,7 +1,7 @@
 <html>
 <body class="<?php echo $class_main_color; ?>">
 <div class="featuredContainer <?php echo $class_main_color; ?>">
-    <div class="header"><h1>HerbertGraphy Texts</h1></div>
+    <div class="header"><h1><?php echo $main_title; ?></h1></div>
     <div class="featuredList">
         <?php foreach ($image_list_data as $key=>$image_data) { ?>
             <div class="imgItem"><img data-width="<?php echo $image_data["width"]; ?>" data-height="<?php echo $image_data["height"]; ?>" src="<?php echo base_url("assets/images/featured/".$key.".jpg"); ?>"></div>

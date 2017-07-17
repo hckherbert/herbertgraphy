@@ -304,16 +304,7 @@ function windowOnResized()
     }
     else
     {
-        if ($(window).width() <900 && $(window).height() <640)
-        {
-            $(".navigator").css("top", "50px");
-            $(".navigator").css("bottom", "auto");
-        }
-        else
-        {
-            $(".navigator").css("top", "auto");
-            $(".navigator").css("bottom", "100px");
-        }
+
 
         $(".navigator").show();
         $("html, body").removeClass("hScrollOff");
@@ -493,6 +484,7 @@ function adjustContentPosition()
         $(".content").css("margin-bottom", "24px"); //prevent footer from hiding some parts of the last line
         $("html").css("overflow-y", "auto");
         $(".story").addClass("storyDimmer");
+        $(".content").css("max-width", "auto");
 
     }
     else
@@ -500,10 +492,21 @@ function adjustContentPosition()
         $(".content").css("position", "absolute");
         $(".content").css("top", "30%");
         $(".content").css("width", "400px");
+        $(".content").css("max-width", "100%");
         $(".content").css("margin-bottom", "0");
         $("html").css("overflow-y", "hidden");
         $(".story").removeClass("storyDimmer");
+    }
 
+    if ($(window).width() <900 && $(window).height() <640)
+    {
+        $(".navigator").css("top", "50px");
+        $(".navigator").css("bottom", "auto");
+    }
+    else
+    {
+        $(".navigator").css("top", "auto");
+        $(".navigator").css("bottom", "100px");
     }
 
 }
