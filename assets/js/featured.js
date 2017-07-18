@@ -475,26 +475,35 @@ function reverseStoryContentTween()
 
 function adjustContentPosition()
 {
+    if($("body").hasClass("sMobile"))
+    {
+        $(".title").css("bottom", "64px");
+    }
+    else
+    {
+        $(".title").css("bottom", "0");
+    }
 
     if ( mContentHeightAtAbsolutePos > $(window).height())
     {
+        $("html").css("overflow-y", "auto");
         $(".content").css("position", "relative");
         $(".content").css("top", "0");
         $(".content").css("width", "100%");
         $(".content").css("margin-bottom", "24px"); //prevent footer from hiding some parts of the last line
-        $("html").css("overflow-y", "auto");
         $(".story").addClass("storyDimmer");
         $(".content").css("max-width", "auto");
+        $('.title').css("bottom", "0");
 
     }
     else
     {
+        $("html").css("overflow-y", "hidden");
         $(".content").css("position", "absolute");
         $(".content").css("top", "30%");
         $(".content").css("width", "400px");
         $(".content").css("max-width", "100%");
         $(".content").css("margin-bottom", "0");
-        $("html").css("overflow-y", "hidden");
         $(".story").removeClass("storyDimmer");
     }
 
