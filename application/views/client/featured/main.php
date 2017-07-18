@@ -4,9 +4,10 @@
     <div class="header"><h1><?php echo $main_title; ?></h1></div>
     <div class="featuredList">
         <?php foreach ($image_list_data as $key=>$image_data) { ?>
-            <div class="imgItem"><img data-width="<?php echo $image_data["width"]; ?>" data-height="<?php echo $image_data["height"]; ?>" src="<?php echo base_url("assets/images/featured/".$key.".jpg"); ?>"></div>
+            <div class="imgItem <?php echo $key; ?>">
+                <img data-width="<?php echo $image_data["width"]; ?>" data-height="<?php echo $image_data["height"]; ?>" src="<?php echo base_url("assets/images/featured/".$key.".jpg"); ?>">
+            </div>
         <?php } ?>
-
         <div class="title"><!--NOTE: MUST LEAVE THIS BLANK! --></div>
         <div class="title">The Stare</div>
         <div class="title">Sopot Molo</div>
