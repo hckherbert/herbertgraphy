@@ -710,7 +710,7 @@ a
 
 .footer .footerMenuWrapper
 {
-	left: 2%;
+	left: 8px;
 	position: relative;
 	bottom: 30%;
 	z-index: 1;
@@ -730,21 +730,9 @@ a
 	transition: all 0.3s ease-in-out;
 }
 
-.footer .footerMenuWrapper #btn_ask_her
+.footer .footerMenuWrapper #btn_texts
 {
-	background:url(../images/icon-message.png) 0 0 no-repeat;
-	background-size:100%;
-}
-
-.footer .footerMenuWrapper #btn_update_her
-{
-	background:url(../images/icon-news.png) 0 0 no-repeat;
-	background-size:100%;
-}
-
-.footer .footerMenuWrapper #btn_share_her
-{
-	background:url(../images/icon-share.png) 0 0 no-repeat;
+	background:url(../images/icon-texts.png) 0 0 no-repeat;
 	background-size:100%;
 }
 
@@ -1614,13 +1602,11 @@ a
 	right:10px;
 }
 
-/*
 .sDesktop .featuredContainer .swipeLeftHint,
 .sDesktop .featuredContainer .swipeRightHint
 {
 	display:none;
 }
-*/
 
 .featuredContainer .content
 {

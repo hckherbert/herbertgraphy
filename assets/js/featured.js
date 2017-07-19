@@ -49,6 +49,9 @@ $(document).ready(
         //desktop mode
         else
         {
+            $(".sMobile .featuredContainer .swipeLeftHint").hide()
+            $(".sMobile .featuredContainer .swipeRightHint").hide()
+
             $(".navigator .btn_next").on("click", function(pEvent)
             {
                 pEvent.preventDefault();
@@ -77,8 +80,6 @@ $(document).ready(
         mTotalSlide = $(".featuredList .imgItem").length;
         windowOnResized();
         $(window).on("resize", windowOnResized);
-
-
     }
 )
 
