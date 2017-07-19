@@ -23,6 +23,7 @@
     "magnific-popup": "^1.1.0",
     "jquery-touchswipe":"^1.6.17",
     "jScrollPane": "~2.0.23",
-    "jquery-mousewheel":"https://github.com/jquery/jquery-mousewheel.git#3.1.13"
+    "jquery-mousewheel":"https://github.com/jquery/jquery-mousewheel.git#3.1.13",
+    "jquery-touchswipe":"git://github.com/mattbryson/TouchSwipe-Jquery-Plugin.git"
   }
 }

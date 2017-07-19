@@ -14,7 +14,8 @@ var urlAdjuster = require('gulp-css-url-adjuster');
 var vendor = {
     jquery: "assets/components/jquery/",
     jquery_ui: "assets/components/jquery-ui/",
-    "gsap": "assets/components/gsap/"
+    "gsap": "assets/components/gsap/",
+    "touch_swipe": "assets/components/jquery-touchswipe/"
 };
 
 //note that files css_sub_group and js_sub_group should be placed in expected orders
@@ -69,6 +70,11 @@ var src = {
         "album.js":
         [
             "assets/js/album.js"
+        ],
+        "featured.js":
+        [
+            vendor.touch_swipe + "jquery.touchSwipe.js",
+            "assets/js/featured.js"
         ],
         "admin_main.js":
         [

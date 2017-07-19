@@ -1,0 +1,1 @@
+<meta property="og:image" content="<?php echo assets_image("cover.jpg"); ?>" />

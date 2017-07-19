@@ -44,7 +44,6 @@ class MY_Loader extends CI_Loader
                 $data["main_content_path"] = "client/coming_soon/main";
                 $data["section"] = "section_coming_soon";
             }
-
             $data["js_includes"] = $js_includes;
             $data["class_main_color"] = "bgBase";
 
@@ -65,6 +64,23 @@ class MY_Loader extends CI_Loader
             $this->view("client/templates/partials/album_include", $data);
             $this->view("client/album", $data);
             $this->view("client/templates/footer", $data);
+        }
+        else if ($template_name == "horizontal")
+        {
+            if ($main_view_name  === "featured")
+            {
+                $data["class_main_color"] = "bgBlack";
+
+                $data["js_includes"] = array(
+                    "featured.js"
+                );
+
+                $data["meta_tags"] = "client/" . $main_view_name . "/meta_tags";
+
+                $this->view("client/templates/common_include", $data);
+                $this->view("client/featured/main", $data);
+                $this->view("client/templates/footer", $data);
+            }
         }
 
     }

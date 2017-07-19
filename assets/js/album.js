@@ -32,6 +32,8 @@ $(document).ready
             }
         }
 
+        mGridControl.initGrid();
+
         $(window).on("resize", windowOnResized);
     }
 );
