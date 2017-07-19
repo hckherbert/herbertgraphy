@@ -40,10 +40,20 @@ $(document).ready(
                 threshold: 50
             });
 
+            $("html, body").scroll(function()
+            {
+               if ($(window).scrollTop() == 0)
+               {
+                   $(".swipeLeftHint, .swipeRightHint").show();
+               }
+                else
+               {
+                   $(".swipeLeftHint, .swipeRightHint").hide();
+               }
+            });
+
             mFeaturedListHeightOnMobile = $(window).height() * 0.7;
-
             $(".swipeLeftHint, .swipeRightHint").css("top",mFeaturedListHeightOnMobile + 14 +  "px");
-
             $(".story").addClass("storyDimmer");
         }
         //desktop mode
