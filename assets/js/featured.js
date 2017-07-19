@@ -291,14 +291,6 @@ function windowOnResized()
                 var _diff = _expectedActiveLeftPos - _accumulatedWidth;
                 $(".featuredList").css("left", _diff + "px");
                 $(".story:eq(" + mActiveIndex + ")").removeClass("hide");
-
-                //Set it init step only! We'll use this value for responsiveness!
-                if (!mContentHeightAtAbsolutePos)
-                {
-                    //make the height large enough
-                    mContentHeightAtAbsolutePos = $(".content").outerHeight() * 2;
-                }
-
             }
 
             _accumulatedWidth += _currentWidth;
@@ -343,7 +335,7 @@ function windowOnResized()
                 if (!mContentHeightAtAbsolutePos)
                 {
                     //make the height large enough
-                    mContentHeightAtAbsolutePos = $(".content").outerHeight() * 2;
+                    mContentHeightAtAbsolutePos = $(".content").outerHeight() * 2.4;
                 }
             }
 
@@ -485,7 +477,7 @@ function reverseStoryContentTween()
         $("html").css("overflow-y", "hidden");
 
         //We need the content Height at ABSOLUTE position so the result can be obtained correctly when window is being resized.
-        mContentHeightAtAbsolutePos = $(".content").outerHeight() * 2;
+        mContentHeightAtAbsolutePos = $(".content").outerHeight() * 2.4;
 
         adjustContentPosition();
     }
