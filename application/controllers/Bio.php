@@ -1,6 +1,6 @@
 <?php
 
-class About extends MY_Common
+class Bio extends MY_Common
 {
     public function __construct()
     {
@@ -10,7 +10,7 @@ class About extends MY_Common
     public function index()
     {
         $data = $this->getInfoPanelBaseData();
-        $data["main_title"] = "About HerbertGraphy";
+        $data["main_title"] = "Bio";
         $this->load->template_client("about", "base", $data);
     }
 }
