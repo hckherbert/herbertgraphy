@@ -1576,10 +1576,10 @@ a
 	word-break:keep-all;
 }
 
-.featuredContainer .title
+.sDesktop .featuredContainer .title
 {
 	padding:12px 12px 36px 12px;
-	font-size:1.5rem;
+	font-size:1.3rem;
 }
 
 .sMobile .featuredContainer .swipeLeftHint,

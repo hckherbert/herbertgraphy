@@ -55,8 +55,20 @@ $(document).ready(
             });
 
             mFeaturedListHeightOnMobile = $(window).height() * 0.7;
-            $(".swipeLeftHint, .swipeRightHint").css("top",mFeaturedListHeightOnMobile + 14 +  "px");
-            $(".story").addClass("storyDimmer");
+
+            if (isTouchDevice())
+            {
+                $(".swipeLeftHint, .swipeRightHint").css("top", mFeaturedListHeightOnMobile + 14 + "px");
+                $(".story").addClass("storyDimmer");
+                $(".content").css("position", "relative");
+                $(".content").css("top", "0");
+                $(".content").css("width", "100%");
+                $(".content").css("margin-bottom", "24px"); //prevent footer from hiding some parts of the last line
+                $(".story").addClass("storyDimmer");
+                $('.title').css("bottom", "0");
+                $('.title').css("padding-bottom", "12px");
+            }
+
         }
         //desktop mode
         else
@@ -269,7 +281,6 @@ function windowOnResized()
 {
     var _winHeight = $(window).height();
     var _accumulatedWidth = 0;
-    
     mFeaturedListHeightOnMobile = $(window).height() * 0.7;
     mWinWidthMidPoint = $(window).width() * 0.5;
 
@@ -367,7 +378,7 @@ function onSlideComplete()
 
     mIsSliding = false;
 
-    if (($("body").hasClass("sMobile") || screen.width > mIsMobileDeviceWidth) || isTouchDevice())
+    if ( isTouchDevice())
     {
         if (mActiveIndex == 1)
         {
