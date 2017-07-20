@@ -44,13 +44,11 @@ $(document).ready(
 
             $("html, body").scroll(function()
             {
-               if ($(window).scrollTop() == 0)
-               {
-                   $(".swipeLeftHint, .swipeRightHint").show();
-               }
-                else
+               if ($(".featuredContainer").position().top != 0)
                {
                    $(".swipeLeftHint, .swipeRightHint").hide();
+               }else {
+                   $(".swipeLeftHint, .swipeRightHint").show();
                }
             });
 
@@ -73,6 +71,8 @@ $(document).ready(
         //desktop mode
         else
         {
+
+
             $(".sMobile .featuredContainer .swipeLeftHint").hide()
             $(".sMobile .featuredContainer .swipeRightHint").hide()
 
