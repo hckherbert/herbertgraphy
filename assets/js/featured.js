@@ -17,14 +17,16 @@ var mSlideDirection = "";
 var mTimeLineStoryContent = null;
 var mContentHeightAtAbsolutePos = 0;
 var mFeaturedListHeightOnMobile = 0;
+var mIsMobileDeviceWidth = 1024;
 
 $(document).ready(
     function()
     {
+
         $(".featuredContainer").addClass("show");
 
         //Mobile mode
-        if ($("body").hasClass("sMobile") && screen.width <=1024)
+        if (($("body").hasClass("sMobile") && screen.width <= mIsMobileDeviceWidth) || isTouchDevice())
         {
             $(".featuredContainer").swipe( {
                 swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
@@ -112,7 +114,7 @@ function slidePrev()
 
     var _accumulatedWidth = 0;
     var _winHeight = 0;
-    if ($("body").hasClass("sMobile") && screen.width <= 1024)
+    if (($("body").hasClass("sMobile") && screen.width <= mIsMobileDeviceWidth) || isTouchDevice())
     {
         _winHeight = $(window).height() * 0.7;
     }
@@ -143,7 +145,7 @@ function slidePrev()
 
     _timeLineTitle.to($(".title:eq("  + mActiveIndex + ")"), mTweenDurationTitle, {css:{opacity:0},ease:Circ.easeIn});
 
-    if ($("body").hasClass("sMobile") && screen.width <= 1024)
+    if (($("body").hasClass("sMobile") && screen.width <= mIsMobileDeviceWidth) || isTouchDevice())
     {
         _timeLineTitle.to($(".title:eq("  + (mActiveIndex-1) + ")"), mTweenDurationTitle, {css:{opacity:0.7},ease:Circ.easeIn});
 
@@ -196,7 +198,7 @@ function slideNext()
     var _accumulatedWidth = 0;
     var _winHeight = 0;
 
-    if ($("body").hasClass("sMobile") && screen.width <= 1024)
+    if (($("body").hasClass("sMobile") && screen.width <= mIsMobileDeviceWidth) || isTouchDevice())
     {
         _winHeight = $(window).height() * 0.7;
     }
@@ -227,7 +229,7 @@ function slideNext()
 
     _timeLineTitle.to($(".title:eq("  + mActiveIndex + ")"), mTweenDurationTitle, {css:{opacity:0},ease:Circ.easeIn});
 
-    if ($("body").hasClass("sMobile") && screen.width <= 1024)
+    if (($("body").hasClass("sMobile") && screen.width <= mIsMobileDeviceWidth) || isTouchDevice())
     {
         _timeLineTitle.to($(".title:eq("  + (mActiveIndex+1) + ")"), mTweenDurationTitle, {css:{opacity:0.7},ease:Circ.easeIn});
 
@@ -262,14 +264,16 @@ function slideNext()
      }
 }
 
+
 function windowOnResized()
 {
     var _winHeight = $(window).height();
     var _accumulatedWidth = 0;
-
+    
+    mFeaturedListHeightOnMobile = $(window).height() * 0.7;
     mWinWidthMidPoint = $(window).width() * 0.5;
 
-    if ($("body").hasClass("sMobile") && screen.width <= 1024)
+    if (($("body").hasClass("sMobile") && screen.width <= mIsMobileDeviceWidth) || isTouchDevice())
     {
         $(".navigator").hide();
         $("html,body").addClass("hScrollOff");
@@ -363,18 +367,7 @@ function onSlideComplete()
 
     mIsSliding = false;
 
-    if ($("body").hasClass("sDesktop") || screen.width > 1024)
-    {
-        if (mSlideDirection == "prev") {
-            currentWord--;
-        }
-        else if (mSlideDirection == "next") {
-            currentWord++;
-        }
-
-        changeWord();
-    }
-    else
+    if (($("body").hasClass("sMobile") || screen.width > mIsMobileDeviceWidth) || isTouchDevice())
     {
         if (mActiveIndex == 1)
         {
@@ -393,6 +386,17 @@ function onSlideComplete()
         }
 
         window.scrollTo(0,0);
+    }
+    else
+    {
+        if (mSlideDirection == "prev") {
+            currentWord--;
+        }
+        else if (mSlideDirection == "next") {
+            currentWord++;
+        }
+
+        changeWord();
     }
 }
 
