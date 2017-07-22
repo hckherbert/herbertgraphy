@@ -428,6 +428,19 @@ class Album_control extends CI_Controller
 			}
 			else if ($key == "original_filename")
 			{
+				$thumb_long_size = $this->config->item("photo_long_side")[0];
+
+				$value = array_map(function($row) use ($thumb_long_size)
+				{
+					$thumb_longsize_suffix = "_".$thumb_long_size;
+					$pos = strpos($row, $thumb_longsize_suffix);
+					if ($pos>=0)
+					{
+						$row = substr($row, 0, $pos).".jpg";
+					}
+					return $row;
+				}, $value);
+
 				array_push($update_data["original_filename"], $value);
 			}
 			else if ($key == "original_slug")
@@ -435,7 +448,6 @@ class Album_control extends CI_Controller
 				array_push($update_data["original_slug"], $value);
 			}
 		}
-
 
 		if (count($del_data))
 		{

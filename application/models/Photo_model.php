@@ -79,7 +79,7 @@ class Photo_model extends CI_Model
                 }
                 else
                 {
-                    //if non-featured, use 640
+                    //if non-featured, use 320
                     if (file_exists($photo_base_dir . $album_label . "/" . $file_name_without_ext . "_" . $this->config->item("photo_long_side")[0] . ".jpg"))
                     {
                         $result[$key]["file_thumb_path"] = $file_name_without_ext . "_" . $this->config->item("photo_long_side")[0] . ".jpg";
@@ -135,7 +135,21 @@ class Photo_model extends CI_Model
 		}
 		else
 		{
-			return $query->result_array();
+            $result = $query->result_array();
+            $thumb_long_size = $this->config->item("photo_long_side")[0];
+            $result = array_map(function($row) use ($thumb_long_size, $photo_base_dir, $album_label)
+            {
+
+                $last_dot_pos = strrpos($row["hash_filename"], ".");
+                $file_name_without_ext = substr($row["hash_filename"],0, $last_dot_pos);
+
+                if (file_exists($photo_base_dir . $album_label . "/" . $file_name_without_ext . "_" . $thumb_long_size . ".jpg")) {
+                    $row["hash_filename"] = $file_name_without_ext . "_" .$thumb_long_size . ".jpg";
+                }
+                return $row;
+            }, $result);
+
+			return $result;
 		}
 		 
     }
