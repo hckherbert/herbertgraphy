@@ -21,15 +21,17 @@ GridControl.prototype.mHistState_obj = null;
 GridControl.prototype.mGridTween  = null;
 GridControl.prototype.mStaggerTimeout = 0;
 GridControl.prototype.mCheckLoadTimer = null;
-GridControl.prototype.mSthNotLoaded = false;
+GridControl.prototype.mImagePath_array= null;
+GridControl.prototype.mIsImageLoaded_array = null;
 
 function GridControl(pGridControl, pPhotoOverlay)
 {
 	var _self = this;
 	this.mGrid_array = [];
+	this.mIsImageLoaded_array = [];
+	this.mImagePath_array = [];
 	this.mIsOccupied_array = [];
 	this.mHistState_obj = {};
-	this.mImgPath_array = [];
 	this.mGridControl = pGridControl;
 	this.mPhotoOverlay = pPhotoOverlay;
 	this.mPhotoOverlay.setOnHideStart(function(){_self.photoOverlayOnHideStart();});
@@ -96,6 +98,13 @@ GridControl.prototype.initGrid = function()
 	this.keepImageLoad();
 	this.mWinWidthBeforeStaggered_num = $(window).width();
 	this.positionGrids();
+
+	//Force clear timeout after 20 sec... after that images are expected to have loaded.
+	setTimeout(function()
+	{
+		clearTimeout(_self.mCheckLoadTimer);
+		return;
+	}, 20000);
 
 }
 
@@ -986,31 +995,32 @@ GridControl.prototype.keepImageLoad = function()
 {
 	var _self = this;
 
-	$(".grid").each(function(i,e)
-	{
-		if (!$(this).find("img").width())
-		{
-			var _img = new Image();
-			_img.src = $(this).find("img").attr("src");
-			_self.mSthNotLoaded = true;
-		}
-	});
-
-	this.checkImageLoadTimer();
-
+	this.mCheckLoadTimer  = setTimeout(function () {
+		_self.ajaxLoadImg();
+	}, 500);
 }
 
-GridControl.prototype.checkImageLoadTimer = function()
+GridControl.prototype.ajaxLoadImg = function()
 {
 	var _self = this;
-	this.mCheckLoadTimer = setTimeout(function () {
-		if (_self.mSthNotLoaded)
-		{
-			_self.keepImageLoad();
-		}
-		else
-		{
-			clearTimeout(_self.mCheckLoadTimer);
-		}
-	}, 2000);
+
+	for (var _i=0; _i< this.mGridCount_num; _i++)
+	{
+		var _url =  $(".grid:eq(" + _i + ")").find("img").attr("src");
+		this.mImagePath_array[_i] = _url;
+
+		$.ajax({
+			type: "GET",
+			url: _url,
+			complete: function (data)
+			{
+				_self.mIsImageLoaded_array[_i] = true;
+				for (var _j=0; _j < _self.mGridCount_num; _j++)
+				{
+					$(".grid:eq(" + _j + ")").find("img").attr("src", _self.mImagePath_array[_j]);
+				}
+			}
+		});
+	}
+	this.keepImageLoad();
 }
