@@ -6,9 +6,17 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'phpseclib\\' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
+    'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
+    'Psr\\Cache\\' => array($vendorDir . '/psr/cache/src'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
     'Kenjis\\CodeIgniter_Cli\\_Config\\' => array($vendorDir . '/kenjis/codeigniter-cli/config'),
     'Kenjis\\CodeIgniter_Cli\\' => array($vendorDir . '/kenjis/codeigniter-cli/src'),
+    'GuzzleHttp\\Psr7\\' => array($vendorDir . '/guzzlehttp/psr7/src'),
+    'GuzzleHttp\\Promise\\' => array($vendorDir . '/guzzlehttp/promises/src'),
+    'GuzzleHttp\\' => array($vendorDir . '/guzzlehttp/guzzle/src'),
+    'Google\\Auth\\' => array($vendorDir . '/google/auth/src'),
+    'Firebase\\JWT\\' => array($vendorDir . '/firebase/php-jwt/src'),
     'Aura\\Project_Kernel\\_Config\\' => array($vendorDir . '/aura/project-kernel/config'),
     'Aura\\Project_Kernel\\' => array($vendorDir . '/aura/project-kernel/src'),
     'Aura\\Dispatcher\\' => array($vendorDir . '/aura/dispatcher/src'),
