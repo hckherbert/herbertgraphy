@@ -33,6 +33,7 @@ class Album_control extends CI_Controller
 		$client = new Google_Client();
 		$client->setClientId($client_id);
 		$client->setAccessType('offline');
+		$client->setApprovalPrompt('force');
 		$client->setClientSecret($client_secret);
 		$client->setRedirectUri($redirect_uri);
 		$client->setScopes('email');
