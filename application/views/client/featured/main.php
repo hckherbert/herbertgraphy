@@ -5,11 +5,11 @@
     <div class="featuredList">
         <?php foreach ($image_list_data as $key=>$image_data) { ?>
             <div class="imgItem <?php echo $key; ?>">
-                <img data-width="<?php echo $image_data["width"]; ?>" data-height="<?php echo $image_data["height"]; ?>" src="<?php echo base_url("assets/images/featured/".$key.".jpg"); ?>">
+                <img data-width="<?php echo $image_data["width"]; ?>" data-height="<?php echo $image_data["height"]; ?>" src="<?php echo base_url("assets/images/featured/".($key+1).".jpg"); ?>">
             </div>
         <?php } ?>
         <div class="title"><!--NOTE: MUST LEAVE THIS BLANK! --></div>
-        <div class="title">The Stare</div>
+        <!--<div class="title">The Stare</div>-->
         <div class="title">Sopot Molo</div>
         <div class="title">Dance in the Rain</div>
         <div class="title">Happy and Healthy</div>
@@ -31,9 +31,9 @@
     <div class="content noSwipe">
 
         <div class="story"><!--NOTE: MUST LEAVE THIS BLANK! --></div>
-        <div class="story hide">
+        <!--<div class="story hide">
             <span class="useCap">I</span>t was a winter afternoon in <em>Wellington Street</em>, right in the middle of all hustle and bustle was this stare. What was he thinking? Waiting someone? Or he used to mediate at the corner of the restaurant? It could be self-portrait, if you name it. I turned the picture into sepia to further focus the object.
-        </div>
+        </div>-->
         <div class="story hide">
             <span class="useCap">I</span> love wooden pier, I visited Gdańsk simply to explore the wooden pier. I spent hours wandering. I caught this pair of old couples with the Samyang 85 mm f/1.4 if lens; the sun casted clear line lights around their bodies, and the glare veiled perfectly at the couples
         </div>

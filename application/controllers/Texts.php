@@ -14,7 +14,7 @@ class Texts extends MY_Common
         $photo_base_dir = FCPATH."/assets/images/featured/";
         $image_list_data = array();
 
-        for ($i=0; $i<=11; $i++)
+        for ($i=1; $i<=11; $i++)
         {
             list($width, $height) = getimagesize($photo_base_dir.$i.".jpg");
             $image_data = array();
