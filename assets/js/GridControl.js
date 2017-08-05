@@ -857,7 +857,7 @@ GridControl.prototype.onClick = function(pObj)
 {
 	$("html").css("overflow-y", "hidden");
 
-	var _history_state_href = $("body").data("album_path") + "/" + pObj.getSlug();
+	//var _history_state_href = $("body").data("album_path") + "/" + pObj.getSlug();
 	var _scrollTop = $(window).scrollTop();
 	var _fromX_num = 0;
 	var _fromY_num = 0;
@@ -931,7 +931,7 @@ GridControl.prototype.onClick = function(pObj)
 	this.mPhotoOverlay.setSizeData(pObj.getOrientation(), this.mAspectRatio_num);
 	this.mPhotoOverlay.show(this.mOverlayPopSpeed_num*1000, pObj.getFileName(), pObj.getFileZoomSize(), pObj.getDesc(), pObj.getTitle());
 
-	history.pushState(this.mHistState_obj, $(".albumTitle h1").text(), _history_state_href);
+	//history.pushState(this.mHistState_obj, $(".albumTitle h1").text(), _history_state_href);
 }
 
 
@@ -987,7 +987,7 @@ GridControl.prototype.onPhotoOverlayHidden = function(pActiveGridTop_num)
 
 	}
 
-	history.pushState(this.mHistState_obj, $(".albumTitle h1").text(), $("body").data("album_path"));
+	//history.pushState(this.mHistState_obj, $(".albumTitle h1").text(), $("body").data("album_path"));
 	$("html").css("overflow-y", "auto");
 }
 
